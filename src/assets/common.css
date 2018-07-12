@@ -103,8 +103,11 @@ align-items: center;
 .bgShenHui{
 	background:#D7D7D7;
 }
+.bgHui{
+	background:#EBF0F4;
+}
 .tncolor{
-	background:#2EB961;
+	background:#3E8EB7;
 }
 .fontColor{
 	color:#868686;
@@ -116,9 +119,17 @@ align-items: center;
 	margin:10px 0;
 }
 .btnReset{
-	background:#2EB961;
+	background:#3E8EB7;
+	color:#fff;
+	border-color: transparent;
+	padding:4px 10px;
+	border-radius:4px;
+}
+.btnReset:active{
+	background:#3980A4;
+	color:#fff;
 	border-color: transparent;
 }
 .btnReset:hover{
-	background:#058936;
+	color:#fff;
 }

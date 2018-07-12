@@ -1,44 +1,50 @@
 <template>
-	
-<div class="main">
-	<div v-if="isLogin" class="login">
-		<Sign v-on:loginSuccess="login"></Sign>
+
+	<div class="main">
+		<div v-if="isLogin" class="login">
+			<Sign v-on:loginSuccess="login"></Sign>
+		</div>
+		<div v-else class="mainContent">
+			<Head/>
+			<div class="flex-wrap flex-horizontal mainBox">
+				<Aside></Aside>
+				<div class="flex-con">
+					<Navbar></Navbar>
+					<router-view class="mainview"></router-view>
+				</div>				
+			</div>
+		</div>
+		
 	</div>
-	<div v-else>
-		<Head></Head>		
-	</div>	
-	<router-view></router-view>
-</div>
 </template>
 <script>
-	
-import Sign from '@/components/Sign'	
-import Head from '@/components/Head'
-	
+	import Sign from '@/components/Sign'
+	import Head from '@/components/Head'
+	import Aside from '@/components/aside/Aside'
+	import Navbar from '@/components/common/Navbar'
 	export default {
-		data(){
-			return{
-				isLogin:true
+		data() {
+			return {
+				isLogin: true
 			}
 		},
-		methods:{
-			login(){
+		methods: {
+			login() {
 				this.isLogin = false;
-				
+
 			}
 		},
-		components:{
-			Head,			
-			Sign
-		
-			
+		components: {
+			Head,
+			Sign,
+			Aside,
+			Navbar
+
 		}
 	}
-
 </script>
 <style>
-.main,.login{
-	height:100%;
-	
-}
+	.main,.login,.mainContent {	height: 100%;}
+	.mainBox{width:100%;}
+	.mainview{height:862px;box-sizing: border-box;padding-left:14px;padding-top:14px;}
 </style>

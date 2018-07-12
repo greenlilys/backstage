@@ -49,7 +49,7 @@
 									</div>
 								</template>
 								<el-row type="flex" justify="center" class="mt-10">									
-									 <button type="button" class="btn btn-primary btnReset" @click="find">查&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;询</button>
+									 <button type="button" class="btnReset" @click="find">查&nbsp;&nbsp;询</button>									
 								</el-row>
 								<p class="font-14 mt-20">押金查询结果：</p>
 							</div>
@@ -72,7 +72,7 @@
 									</div>
 								</template>
 								<el-row type="flex" justify="center" class="mt-10">
-									<button type="button" class="btn btn-primary btnReset" @click="find">查&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;询</button>
+									<button type="button" class="btnReset" @click="find">查&nbsp;&nbsp;&nbsp;询</button>
 								</el-row>
 								<p class="font-14 mt-20">租金查询结果：</p>
 							</div>

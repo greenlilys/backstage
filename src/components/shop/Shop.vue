@@ -2,9 +2,9 @@
 	<div class="aside flex-wrap flex-horizontal flex-justify-between">
 		<div class="box ">
 			<ul class="bgZhongHui tncolor ">
-				<li class="item font-16 "><router-link to='/Shop/Joinshop'>加盟网点</router-link></li>
+				<li class="item font-16 "><router-link to='/Shop/Shoplist'>网点列表</router-link></li>
 				<li class="item font-16"><router-link to='/Joinplase'>加盟申请</router-link></li>
-				<li class="item font-16"><router-link to='/Zoneactive'>平台活动</router-link></li>
+				<li class="item font-16"><router-link to='/Zoneactive'>网点活动</router-link></li>
 				<li class="item font-16"><router-link to='/Zonenotice'>平台公告</router-link></li>
 			</ul>
 		</div>
