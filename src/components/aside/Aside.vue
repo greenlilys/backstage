@@ -1,6 +1,6 @@
 <template>
 	<div class="aside">	
-		<div class="worktable">工作台</div>
+		<div class="worktable"><router-link to='/Worktable'>工作台</router-link></div>
 		<el-collapse accordion >
 			
 			<el-collapse-item>
@@ -8,8 +8,8 @@
 							<span class="oneTitle pl20"><i class="header-icon el-icon-info iconWidth"></i>网点</span>
 						</template>
 						<div class="item font-14 subitem pl40"><router-link to='/Shoplist'>网点列表</router-link></div>
-						<div class="item font-14 subitem pl40">加盟申请</div>
-						<div class="item font-14 subitem pl40">网点活动</div>
+						<div class="item font-14 subitem pl40"><router-link to='/Joinapply'>加盟申请</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Shopactive'>网点活动</router-link></div>
 						<div class="item font-14 subitem pl40">平台公告</div>
 			</el-collapse-item>
 						
@@ -18,16 +18,16 @@
 							<span class="oneTitle pl20"><i class="header-icon el-icon-info iconWidth"></i>用户</span>
 						</template>
 						
-						<div class="item font-14 subitem pl40">用户列表</div>
-						<div class="item font-14 subitem pl40">天牛币记录</div>
+						<div class="item font-14 subitem pl40"><router-link to='/Userlist'>用户列表</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Totalcoin'>天牛币记录</router-link></div>
 			</el-collapse-item>
 			
 			<el-collapse-item>
 						<template slot="title">
 							<span class="oneTitle pl20"><i class="header-icon el-icon-info iconWidth"></i>运营商</span>
 						</template>
-						<div class="item font-14 subitem pl40">运营商列表</div>
-						<div class="item font-14 subitem pl40">运营商设置</div>
+						<div class="item font-14 subitem pl40"><router-link to='/Businesslist'>运营商列表</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Shopactive'>运营商设置</router-link></div>
 			</el-collapse-item>
 			
 			<el-collapse-item>
@@ -112,7 +112,8 @@
 	}
 </script>
 <style scope>
-		.aside {width: 13%;box-sizing: border-box;height:900px;background:#273135;}
+		.aside {width: 13%;box-sizing: border-box;height:890px;background:#273135;}
+		.aside a{display:inline-block;width:100%;color:#B7C6CC;}
 		.box {width: 10%;}		
 		.worktable{height:38px;line-height: 38px;background:#273135;color:#B7C6CC;padding-left:20px;}
 		.iconWidth{width:20px;}

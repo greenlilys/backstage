@@ -7,10 +7,9 @@
           <h3 class="text-left fontColor">天牛网管理后台</h3>
                     
               <el-input v-model="userName" placeholder="请输入用户名" class="marginV-10"></el-input>
-              <el-input v-model="passWord" placeholder="请输入密码" ></el-input>  
-              <el-radio v-model="radio" label=true class="marginV-10">记住用户名</el-radio> 
-							<button type="button" class="btn btnReset mt-10" @click="signBtn">确&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;定</button>		
-             
+              <el-input v-model="passWord" placeholder="请输入密码" ></el-input> 
+              <el-checkbox v-model="checked" class="marginV-10">记住用户名</el-checkbox>
+							<button type="button" class="btn btnStyle mt-10" @click="signBtn">确&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;定</button>		             
         </div>
 
       </div>
@@ -27,7 +26,7 @@
       return{
           userName:"",
           passWord:"",
-          radio:false
+          checked:false
       }
     },
     methods:{

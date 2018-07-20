@@ -10,11 +10,10 @@
 				<Aside></Aside>
 				<div class="flex-con">
 					<Navbar></Navbar>
-					<router-view class="mainview"></router-view>
+					<router-view class="mainview bgHui"></router-view>
 				</div>				
 			</div>
 		</div>
-		
 	</div>
 </template>
 <script>
@@ -46,5 +45,5 @@
 <style>
 	.main,.login,.mainContent {	height: 100%;}
 	.mainBox{width:100%;}
-	.mainview{height:862px;box-sizing: border-box;padding-left:14px;padding-top:14px;}
+	.mainview{height:852px;box-sizing: border-box;padding-top: 10px;padding-left: 10px;padding-right: 10px;}
 </style>

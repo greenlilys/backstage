@@ -6,6 +6,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/common.css'
 import Vue from 'vue'
+
 import Main from '@/components/Main'
 import router from './router'
 

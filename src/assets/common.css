@@ -71,9 +71,14 @@ body{
 .flex-justify-center{
 	justify-content: center;
 }
+
 .flex-align-center{
 align-items: center;
 }
+.flex-justify-end{
+	justify-content: flex-end;
+}
+
 .font-14{
 	font-size:14px;
 }
@@ -81,55 +86,51 @@ align-items: center;
 	font-size:16px;
 }
 .font-18{
-	font-size:18px;
-	font-weight:600;
+	font-size:18px;	
 }
 .font-20{
 	font-size:20px;
 }
-
+.fw6{font-weight:600;}
+.tc{text-align: center;}
 .mt-10{
 	margin-top:10px;
 }
 .mt-20{
 	margin-top:20px;
 }
-.bgQianHui{
-	background:#F2F2F2;
+.mt-30{
+	margin-top:30px;
 }
-.bgZhongHui{
-	background:#E4E4E4;
+
+.mr-20{
+	margin-right:20px;
 }
-.bgShenHui{
-	background:#D7D7D7;
-}
+
 .bgHui{
 	background:#EBF0F4;
 }
-.tncolor{
+.headbg{
 	background:#3E8EB7;
 }
-.fontColor{
-	color:#868686;
+
+.fontYellow{
+	color:#FF6600;
 }
-.yesBtnColor{
-	background:#3399CC;
-}
+
 .marginV-10{
 	margin:10px 0;
 }
-.btnReset{
-	background:#3E8EB7;
-	color:#fff;
-	border-color: transparent;
-	padding:4px 10px;
-	border-radius:4px;
-}
-.btnReset:active{
-	background:#3980A4;
-	color:#fff;
-	border-color: transparent;
-}
-.btnReset:hover{
-	color:#fff;
-}
+
+.btnStyle{background:#FF9900;outline:none;border:none;color:#fff;}
+.btnStyle:hover{background-color:#DE8303;cursor: pointer;color:#fff;}
+.el-button:hover{background-color:#DE8303;cursor: pointer;color:#fff;}
+.el-button:active{border-color:none;outline:none;background:#FF9900;}
+
+.page{position:absolute;right:0;bottom:20px;}
+
+.el-table td{padding:3px 0;}
+.el-table th{padding:8px 0;}
+.el-table thead{font-size:14px;color:#2E2E2E;}
+.el-table th{border-top:1px solid #E9EEF3;}	
+

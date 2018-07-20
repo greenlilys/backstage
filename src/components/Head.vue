@@ -2,7 +2,7 @@
 	<el-row class="head font-14">
 		<el-col :span="24">
 
-			<ul class="clear head tncolor">
+			<ul class="clear head headbg">
 				<li class="fl logoBox"><img src="../assets/logo.png" class="logo"><span>天牛网平台管理</span></li>
 			
 					<li class="fl"><span class="glyphicon glyphicon-menu-hamburger iconbar" aria-hidden="true" style="font-size:20px;"></span></li>
@@ -39,7 +39,7 @@
 .tablast{width:10%;}
 .logoBox{	width:13%;height:50px;background:#3980A4;}
 .logo{width:30%;height:auto;}
-.iconbar{font-size:18px;line-height: 47px;padding-left:14px;}
+.iconbar{font-size:18px;line-height: 47px;padding-left:10px;}
 
 
 
