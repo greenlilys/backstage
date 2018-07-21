@@ -27,7 +27,7 @@
 							<span class="oneTitle pl20"><i class="header-icon el-icon-info iconWidth"></i>运营商</span>
 						</template>
 						<div class="item font-14 subitem pl40"><router-link to='/Businesslist'>运营商列表</router-link></div>
-						<div class="item font-14 subitem pl40"><router-link to='/Shopactive'>运营商设置</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Businesssetting'>运营商设置</router-link></div>
 			</el-collapse-item>
 			
 			<el-collapse-item>

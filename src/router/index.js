@@ -24,6 +24,7 @@ import Totalcoin from '@/components/user/Totalcoin'
 import Businesslist from '@/components/business/Businesslist'
 import Addbusiness from '@/components/business/Addbusiness'
 import Businessdetail from '@/components/business/Businessdetail'
+import Businesssetting from '@/components/business/Businesssetting'
 
 Vue.use(Router)
 
@@ -100,6 +101,10 @@ export default new Router({
 	{
 			path: '/Businesslist/Businessdetail',
 			component: Businessdetail
+	},
+	{
+			path: '/Businesssetting',
+			component: Businesssetting
 	}
 	
 	

@@ -114,9 +114,7 @@
 					</el-form-item>
 
 					<el-form-item>
-						<el-row>
-							<el-button type="primary" class="btnStyle" @click="submitForm('ruleForm2')">提交</el-button>
-						</el-row>
+							<el-button type="primary" class="btnStyle" @click="submitForm('ruleForm2')">保存</el-button>
 					</el-form-item>
 				</el-form>
 			</el-col>

@@ -2,7 +2,7 @@
 	<div class="flex-wrap flex-vertical businessDetail">
 		<div class="flex-wrap flex-horizontal topBox">
 			<div class="flex-wrap flex-vertical infoBox">
-				<div class="nameBox font-18">天牛网开封城区运营部（TNC0001）</div>
+				<div class="nameBox font-20">天牛网开封城区运营部（TNC0001）</div>
 					<div class="rightInfo">
 						<p>联系人：张三</p>								
 						<p>代理商级别：二级代理</p>
@@ -43,26 +43,28 @@
 			<div class="tabCard flex-wrap flex-horizontal">				
 					<div v-for="(v,i) in tabItem" @click="changeItem(v,i)" v-bind:class="{actived : i == currentI}">{{v}}</div>
 			</div>	
+			
 			<component v-bind:is="current"></component>
 		</div>
 	</div>
 </template>
 
 <script>
-	import Orders from '@/components/user/Orders'
-	import Rent from '@/components/user/Rent'
-	import Deposit from '@/components/user/Deposit'
-	import Purse from '@/components/user/Purse'
-	import Coin from '@/components/user/Coin'
-	import Members from '@/components/user/Members'
+	import Developarea from '@/components/business/Developarea'
+	import Serviceprice from '@/components/business/Serviceprice'
+	import Recordprofits from '@/components/business/Recordprofits'
+	import Information from '@/components/business/Information'
+	import Operatorsetting from '@/components/business/Operatorsetting'
+
 	
 	export default {
 		data(){
 			return{
-				tabItem:['预约记录','租期记录','押金记录','钱包记录','天牛币记录','会员'],
-	        	tabComponents:['Orders','Rent','Deposit','Purse','Coin','Members'],
-	        	current:'Orders',
-	        	currentI:'0'
+				tabItem:['运营区域/网点','服务定价','分润记录','信息管理','运营设置'],
+	        	tabComponents:['Developarea','Serviceprice','Recordprofits','Information','Operatorsetting'],
+	        	current:'Developarea',
+	        	currentI:'0',	        
+		        find:''
 			}
 			
 		},
@@ -74,12 +76,11 @@
 	    
 		},
 		components:{
-			Orders,
-			Rent,
-			Deposit,
-			Purse,
-			Coin,
-			Members
+			Developarea,
+			Serviceprice,
+			Recordprofits,
+			Information,
+			Operatorsetting
 		}
 	}
 </script>
@@ -98,4 +99,5 @@
 	.businessDetail .tabCard{background:#fff;border-top:2px solid #FF9900;border-bottom:1px solid #EBF0F4;}
 	.businessDetail .tabCard div{font-size:16px;line-height: 26px;padding:10px 20px;background:#fff;cursor: pointer;}
 	.businessDetail .tabCard .actived{background:#FF9900;color:#fff;}
+	
 </style>
