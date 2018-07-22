@@ -1,24 +1,24 @@
 <template>
-	<div class="">
+	<div class="mt-10">
 		<template>
 								<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="date" label="预约编号" width="120" align="center">
+									<el-table-column prop="date" label="预约编号" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="预约类型" width="160" align="center">
+									<el-table-column prop="name" label="预约类型" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="预约时间" width="150" align="center">
+									<el-table-column prop="name" label="预约时间" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="address" label="支付金额（积分）" align="center">
+									<el-table-column prop="address" label="支付金额（积分）"width="230" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="支付方式" width="130" align="center">
+									<el-table-column prop="name" label="支付方式" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="支付订单号" width="130" align="center">
+									<el-table-column prop="name" label="支付订单号" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="完成时间" width="100" align="center">
+									<el-table-column prop="name" label="完成时间" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="网点编号" width="130" align="center">
+									<el-table-column prop="name" label="网点编号" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="网点名称" width="150" align="center">
+									<el-table-column prop="name" label="网点名称" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="action" label="操作" align="center">
 									    <template slot-scope="scope">										
@@ -97,6 +97,6 @@
 	}
 </script>
 
-<style scoped>
+<style>
 
 </style>

@@ -5,8 +5,8 @@
 			
 		
 		<el-row>
-			<el-form ref="form" :model="form" label-width="150px">
-			<el-col :span="10">				
+			<el-form ref="form" :model="form" label-width="140px">
+			<el-col :span="11">				
 					<el-form-item label="运营商名称：">
 						<el-input v-model="form.name"></el-input>
 					</el-form-item>
@@ -372,7 +372,7 @@
 	.addBusiness .mainContent{background:#fff;padding:10px 20px 0;}
 	.addBusiness .el-upload--picture-card{height:100px;width:100px;line-height: 100px;}
 	.addBusiness .el-upload-list--picture-card .el-upload-list__item{height:100px;width:100px;}
-	
+	 .distpicker-address-wrapper select{width:28%;}
 	.el-tag + .el-tag {
     margin-left: 10px;
   }

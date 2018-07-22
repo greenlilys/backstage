@@ -2,7 +2,7 @@
 <template>
 	<div class="bgHui changeInfo">
 		<el-row>
-			<el-col :span="9">
+			<el-col :span="12">
 				<el-form ref="form" :model="form" label-width="120px">
 					<el-form-item label="店主姓名：">
 						<el-input v-model="form.name"></el-input>

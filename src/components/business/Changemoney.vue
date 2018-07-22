@@ -2,23 +2,23 @@
 	<div>
 			<template>
 			<el-table :data="tableData" style="width: 100%;">
-				<el-table-column prop="date" label="分润时间" width="150" align="center">
+				<el-table-column prop="date" label="分润时间" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="预约单号" width="160" align="center">
+				<el-table-column prop="name" label="预约单号" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="服务网点" width="130" align="center">
+				<el-table-column prop="name" label="服务网点" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="用户" width="100" align="center">
+				<el-table-column prop="name" label="用户" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="address" label="支付方式" width="" align="center">
+				<el-table-column prop="name" label="支付方式" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="金额/天牛币" width="120" align="center">
+				<el-table-column prop="name" label="金额/天牛币" width="" align="center">
 				</el-table-column>
 				<el-table-column prop="name" label="平台利润（扣减换电成本后）" width="300" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="运营商获取分润" width="130" align="center">
+				<el-table-column prop="name" label="运营商获取分润" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="分润进度" width="130" align="center">
+				<el-table-column prop="name" label="分润进度" width="" align="center">
 				</el-table-column>
 				
 			</el-table>

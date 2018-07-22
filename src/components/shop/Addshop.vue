@@ -2,7 +2,7 @@
 <template>
 	<div class="bgHui changeInfo">
 		<el-row>
-			<el-col :span="9">
+			<el-col :span="12">
 				<el-form ref="form" :model="form" label-width="120px">
 					<el-form-item label="店主姓名：">
 						<el-input v-model="form.name"></el-input>
@@ -30,13 +30,13 @@
 					<el-form-item label="店铺位置坐标：">
 						<el-row>
 							<el-col :span="11">
-								<el-form-item label="X" label-width="20px">
+								<el-form-item label="X：" label-width="20px">
 									<el-input v-model="input" placeholder="请输入内容："></el-input>
 								</el-form-item>
 							</el-col>
 
 							<el-col :span="11" :offset="2">
-								<el-form-item label="Y" label-width="20px">
+								<el-form-item label="Y：" label-width="20px">
 									<el-input v-model="input" placeholder="请输入内容："></el-input>
 								</el-form-item>
 							</el-col>
@@ -218,4 +218,5 @@
 	.changeInfo .el-table td{padding:4px 0;}
 	.changeInfo .el-table th{padding:0;background:#ADB4B9;color:#252C30;}	
 	.changeInfo .el-table{font-size:14px;}
+	.changeInfo .el-col-offset-2{margin-left:10px;}
 </style>

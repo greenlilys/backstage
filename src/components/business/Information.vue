@@ -59,7 +59,11 @@
 						</el-dialog>
 					</el-form-item>
 					
-					<el-form-item label="营业执照照片：">
+								
+					
+			</el-col>
+			<el-col :span="10" :offset="1">
+				<el-form-item label="营业执照照片：">
 							<el-upload
 						 class="uploadBox"
 						  action="https://jsonplaceholder.typicode.com/posts/"
@@ -77,10 +81,7 @@
 						<el-dialog :visible.sync="dialogVisible">
 						  <img width="100%" :src="dialogImageUrl" alt="">
 						</el-dialog>
-					</el-form-item>					
-					
-			</el-col>
-			<el-col :span="10" :offset="1">
+					</el-form-item>	
 						<el-form-item label="收款账户类型：">
 						<template>
 							<el-radio v-model="radio" label="1">银行卡</el-radio>
@@ -228,38 +229,19 @@
 </script>
 
 <style>
-	
-	.battery {background: #F4F6F9;color: #58595D;border: #D8DBE3 1px solid;	padding: 11px;}
 	.el-form-item {	margin-bottom: 10px;}
-	.el-select {width: 100%;}
-	.el-date-editor--daterange.el-input__inner {width: 100%;}
-	.el-input-number {width: 120px;}
 	.distpicker-address-wrapper select {width: 32.8%;}	
 	.infomation .el-table td{padding:4px 0;}
 	.infomation .el-table th{padding:0;background:#ADB4B9;color:#252C30;}	
 	.infomation .el-table{font-size:14px;}
 	.shopPhoto img{display:block;width:58%;margin-top:10px;}
 	.infomation input.el-upload__input{display:none;}
-	.uploadBox{line-height:0;}
+	
 	.infomation .el-upload-list--picture-card .el-upload-list__item{margin-right:10px;margin-bottom:0;}
 
 	.infomation .mainContent{background:#fff;padding:10px 20px 0;}
 	.infomation .el-upload--picture-card{height:100px;width:100px;line-height: 100px;}
 	.infomation .el-upload-list--picture-card .el-upload-list__item{height:100px;width:100px;}
+	 .distpicker-address-wrapper select{width:28%;}
 	
-	.el-tag + .el-tag {
-    margin-left: 10px;
-  }
-  .button-new-tag {
-    margin-left: 10px;
-    height: 32px;
-    line-height: 30px;
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-  .input-new-tag {
-    width: 90px;
-    margin-left: 10px;
-    vertical-align: bottom;
-  }
 </style>
