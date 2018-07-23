@@ -2,25 +2,25 @@
 	<div>
 			<template>
 			<el-table :data="tableData" style="width: 100%;">
-				<el-table-column prop="date" label="租金开始时间" width="150" align="center">
+				<el-table-column prop="date" label="租金开始时间" width="" align="center">
 				</el-table-column>
 				<el-table-column prop="name" label="租金类型" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="安装/续约" width="130" align="center">
+				<el-table-column prop="name" label="安装/续约" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="服务网点" width="100" align="center">
+				<el-table-column prop="name" label="服务网点" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="用户" width="150" align="center">
+				<el-table-column prop="name" label="用户" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="支付方式" width="130" align="center">
+				<el-table-column prop="name" label="支付方式" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="支付金额" width="300" align="center">
+				<el-table-column prop="name" label="支付金额" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="平台利润（扣减安装成本后）" width="220" align="center">
+				<el-table-column prop="name" label="平台利润（扣减安装成本后）" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="运营商分润" width="130" align="center">
+				<el-table-column prop="name" label="运营商分润" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="分润进度" width="150" align="center">
+				<el-table-column prop="name" label="分润进度" width="" align="center">
 				</el-table-column>
 			</el-table>
 		</template>

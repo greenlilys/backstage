@@ -1,6 +1,6 @@
 
 <template>
-	<div>
+	<div class="mt-10">
 		<el-row class="row joinshop" type="flex" align="middle">
 			<el-col :span="6">				
 				<template>
@@ -20,27 +20,27 @@
 			</el-col>
 
 		</el-row>
-		<template>
+		<template >
 			<el-table :data="tableData" style="width: 100%;">
-				<el-table-column prop="date" label="网点编号" width="100" align="center">
+				<el-table-column prop="date" label="网点编号" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="网点名称" width="160" align="center">
+				<el-table-column prop="name" label="网点名称" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="店铺账号" width="130" align="center">
+				<el-table-column prop="name" label="店铺账号" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="账号状态" width="100" align="center">
+				<el-table-column prop="name" label="账号状态" width="" align="center">
 				</el-table-column>
 				<el-table-column prop="address" label="网点地址" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="联系人" width="100" align="center">
+				<el-table-column prop="name" label="联系人" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="库存/配货" width="100" align="center">
+				<el-table-column prop="name" label="库存/配货" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="保证金" width="130" align="center">
+				<el-table-column prop="name" label="保证金" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="上线状态" width="130" align="center">
+				<el-table-column prop="name" label="上线状态" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="action" label="操作" width="150" align="center">
+				<el-table-column prop="action" label="操作" width="" align="center">
 					<template slot-scope="scope">
 						<el-button type="primary" size="mini" class="btnStyle" @click="navShopdetail">详情</el-button>
 					</template>
@@ -125,7 +125,7 @@
 </script>
 <style scoped>
 	.shopList {width: 100%;box-sizing: border-box;}	
-	.joinshop {	margin:10px 0;}	
+	.joinshop {	margin:0 0;padding-bottom:10px;}	
 	.joinshop .btnReset{color:#fff;}
 	.listDetail{background:#fff;position:relative;}
 	

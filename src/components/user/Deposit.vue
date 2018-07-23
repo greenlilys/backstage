@@ -1,5 +1,5 @@
 <template>
-	<div class="">
+	<div class="mt-10">
 		<template>
 								<el-table :data="tableData" style="width: 100%;">
 									<el-table-column prop="date" label="押金变动时间" width="" align="center">

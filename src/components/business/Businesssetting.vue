@@ -3,15 +3,15 @@
 		<div class="businessSetting">
 							<div class="headTitle font-18 fontYellow">运营商等级设置</div>
 							<template>
-								<el-table :data="tableData" style="width: 40%;">
-									<el-table-column prop="leval" label="运营商等级" width='130' align="center">
+								<el-table :data="tableData" style="width: 50%;">
+									<el-table-column prop="leval" label="运营商等级" width='' align="center">
 									</el-table-column>
-									<el-table-column prop="money" label="代理费用" width="140" align="center">
+									<el-table-column prop="money" label="代理费用" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="money" label="网点营收分润" width="150" align="center">
+									<el-table-column prop="money" label="网点营收分润" width="" align="center">
 									</el-table-column>
 									
-									<el-table-column prop="action" label="操作" width="220" align="center">
+									<el-table-column prop="action" label="操作" width="" align="center">
 										
 									    <template slot-scope="scope">										
 											<el-button type="primary" size="mini" class="btnStyle">编辑</el-button>	

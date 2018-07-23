@@ -27,23 +27,23 @@
 		<div class="listDetail mt-10 flex-con">					
 							<template>
 								<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="date" label="店铺编号" width="100" align="center">
+									<el-table-column prop="date" label="店铺编号" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="店铺名称" width="160" align="center">
+									<el-table-column prop="name" label="店铺名称" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="店铺账号" width="130" align="center">
+									<el-table-column prop="name" label="店铺账号" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="address" label="店铺地址" align="center">
+									<el-table-column prop="address" label="店铺地址" width="300" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="所属运营商" width="130" align="center">
+									<el-table-column prop="name" label="所属运营商" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="库存/配货" width="100" align="center">
+									<el-table-column prop="name" label="库存/配货" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="保证金" width="100" align="center">
+									<el-table-column prop="name" label="保证金" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="上线状态" width="130" align="center">
+									<el-table-column prop="name" label="上线状态" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="action" label="操作" align="center">
+									<el-table-column prop="action" label="操作" width="250" align="center">
 										
 									    <template slot-scope="scope">										
 											<el-button type="primary" size="mini" class="btnStyle" @click="navShopdetail">详情</el-button>							    								         
@@ -128,5 +128,5 @@
 	.row {margin: 0;}
 	.joinshop .btnReset{color:#fff;}
 	.listDetail{background:#fff;position:relative;}
-	
+	.shopList .el-table .cell,.shopList .el-table th div{padding-left:0;padding-right:0;}
 </style>

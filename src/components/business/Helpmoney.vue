@@ -2,26 +2,26 @@
 	<div>
 			<template>
 			<el-table :data="tableData" style="width: 100%;">
-				<el-table-column prop="date" label="救援完成时间" width="150" align="center">
+				<el-table-column prop="date" label="救援完成时间" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="救援单号" width="120" align="center">
+				<el-table-column prop="name" label="救援单号" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="救援网点" width="130" align="center">
+				<el-table-column prop="name" label="救援网点" width="" align="center">
 				</el-table-column>
 				
-				<el-table-column prop="name" label="用户" width="150" align="center">
+				<el-table-column prop="name" label="用户" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="救援类型" width="130" align="center">
+				<el-table-column prop="name" label="救援类型" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="支付方式" width="100" align="center">
+				<el-table-column prop="name" label="支付方式" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="救援费用" width="220" align="center">
+				<el-table-column prop="name" label="救援费用" width="" align="center">
 				</el-table-column>
 				<el-table-column prop="name" label="平台利润（扣减网点补贴后）" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="运营商获取分润" width="150" align="center">
+				<el-table-column prop="name" label="运营商获取分润" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="分润进度" width="120" align="center">
+				<el-table-column prop="name" label="分润进度" width="" align="center">
 				</el-table-column>
 			</el-table>
 		</template>

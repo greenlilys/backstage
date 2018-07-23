@@ -15,19 +15,19 @@
 							<template>
 								<el-table :data="tableData" style="width: 100%;">
 								
-									<el-table-column prop="name" label="店铺名称" width="160" align="center">
+									<el-table-column prop="name" label="店铺名称" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="店铺账号" width="130" align="center">
+									<el-table-column prop="name" label="店铺账号" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="address" label="店铺地址" align="center">
+									<el-table-column prop="address" label="店铺地址" width="300" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="联系人" width="160" align="center">
+									<el-table-column prop="name" label="联系人" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="申请加盟时间" width="160" align="center">
+									<el-table-column prop="name" label="申请加盟时间" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="审核状态" width="160" align="center">
+									<el-table-column prop="name" label="审核状态" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="保证金支付状态" width="200" align="center">
+									<el-table-column prop="name" label="保证金支付状态" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="action" label="操作" align="center">
 									    <template slot-scope="scope">										

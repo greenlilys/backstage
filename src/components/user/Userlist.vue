@@ -12,7 +12,7 @@
 				
 				
 				
-				<el-col :span="8" :offset="10" style="text-align:right;">
+				<el-col :span="12" :offset="6" style="text-align:right;">
 					<el-button type="success" size="medium" class="btnStyle">增加租期</el-button>
 					<el-button type="success" size="medium" class="btnStyle">扣减租期</el-button>
 					<el-button type="success" size="medium" class="btnStyle">批量增加租期</el-button>
@@ -21,7 +21,7 @@
 			</el-row>
 			
 			<el-row type="flex" align="middle" class="rowHead mt-10" >
-					<el-col :span="4">
+					<el-col :span="5">
 					押金状态：
 					<template>
 						<el-radio v-model="radio1" label="1">未缴</el-radio>
@@ -29,14 +29,14 @@
 					</template>
 				</el-col>
 				
-				<el-col :span="4">
+				<el-col :span="5">
 					租期状态：
 					<template>
 						<el-radio v-model="radio2" label="1">租期中</el-radio>
 						<el-radio v-model="radio2" label="2">已逾期</el-radio>					
 					</template>
 				</el-col>
-				<el-col :span="4" :offset="12" style="text-align:right;">
+				<el-col :span="4" :offset="10" style="text-align:right;">
 					<el-button type="info" size="small">导出excel</el-button>				
 				</el-col>
 			</el-row>
@@ -47,29 +47,29 @@
 								<el-table :data="tableData" style="width: 100%;">
 									<el-table-column prop="number" label="用户账号" width="110" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="用户昵称" width="90" align="center">
+									<el-table-column prop="name" label="用户昵称" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="time" label="注册时间" width="150" align="center">
+									<el-table-column prop="time" label="注册时间" width="120" align="center">
 									</el-table-column>
-									<el-table-column prop="address" label="所在区域" width="240" align="center">
+									<el-table-column prop="address" label="所在区域" width="200" align="center">
 									</el-table-column>
-									<el-table-column prop="state" label="押金状态" width="80" align="center">
+									<el-table-column prop="state" label="押金状态" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="money" label="押金金额" width="100" align="center">
+									<el-table-column prop="money" label="押金金额" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="xinghao" label="电池型号" width="100" align="center">
+									<el-table-column prop="xinghao" label="电池型号" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="安装状态" width="80" align="center">
+									<el-table-column prop="name" label="安装状态" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="time" label="租期" width="150" align="center">
+									<el-table-column prop="time" label="租期" width="120" align="center">
 									</el-table-column>
-									<el-table-column prop="money" label="钱包余额" width="100" align="center">
+									<el-table-column prop="money" label="钱包余额" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="money" label="天牛币余额" width="100" align="center">
+									<el-table-column prop="money" label="天牛币余额" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="账户状态" width="80" align="center">
+									<el-table-column prop="name" label="账户状态" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="action" label="操作" align="center">
+									<el-table-column prop="action" label="操作" width="130" align="center">
 									    <template slot-scope="scope">										
 											<el-button type="primary" size="mini" class="btnStyle" @click="navUserdetail">详情</el-button>	
 											<el-button type="primary" size="mini" class="btnStyle">禁用</el-button>		         

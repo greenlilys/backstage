@@ -129,8 +129,12 @@ align-items: center;
 
 .page{position:absolute;right:0;bottom:20px;}
 
+/*列表样式重置*/
 .el-table td{padding:3px 0;}
 .el-table th{padding:8px 0;}
 .el-table thead{font-size:14px;color:#2E2E2E;}
 .el-table th{border-top:1px solid #E9EEF3;}	
+
+/*省市县选择器样式重置*/
+.el-form-item__content .distpicker-address-wrapper .distpicker-address-wrapper select{width:28%;}
 
