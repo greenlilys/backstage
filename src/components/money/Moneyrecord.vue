@@ -1,0 +1,63 @@
+<template>
+	<div>
+		<div class="flex-wrap flex-vertical outsideBox1">
+			<div class="flex-wrap flex-horizontal headBox">
+				<div class="contentBox flex-con">
+					<h1 class="font-18 tc mt-10">网点钱包余额总计</h1>
+					<p class="font-20 fontYellow tc mt-10">￥<span>86502.20</span></p>
+				</div>
+				<div class="contentBox flex-con">
+					<h1 class="font-18 tc mt-10">用户钱包余额总计</h1>
+					<p class="font-20 fontYellow tc mt-10">￥<span>86502.20</span></p>
+				</div>
+				<div class="contentBox flex-con">
+					<h1 class="font-18 tc mt-10">用户天牛币总计</h1>
+					<p class="font-20 fontYellow tc mt-10">￥<span>86502</span></p>
+				</div>
+			</div>
+			
+			<div class="conBottom mt-10 flex-con">						
+				<div class="tabCard flex-wrap flex-horizontal">				
+					<div v-for="(v,i) in tabItem" @click="changeItem(v,i)" v-bind:class="{actived : i == currentI}">{{v}}</div>
+				</div>				
+				
+				<component v-bind:is="current"></component>
+		</div>
+		
+		</div>
+	</div>
+</template>
+
+<script>
+	import Shopmoney from '@/components/money/moneys/Shopmoney'
+	import Usermoney from '@/components/money/moneys/Usermoney'
+	
+	export default {
+      data() {
+        return {
+        	tabItem:['网点钱包','用户钱包'],
+        	tabComponents:['Shopmoney','Usermoney'],
+        	current:'Shopmoney',
+        	currentI:'0'
+        	
+         
+        }
+      },
+      methods:{	    	
+	        
+	      changeItem(v,i){
+	      	this.currentI = i;
+	      	this.current = this.tabComponents[i];
+	      }
+      },
+      components:{
+      	Shopmoney,
+      	Usermoney
+      }
+    }
+</script>
+
+<style scoped>
+	.headBox>div:nth-child(1){margin-right:10px;}
+	.headBox>div:nth-child(2){border-right:#EBF0F4 1px solid;}
+</style>

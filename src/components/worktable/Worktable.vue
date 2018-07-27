@@ -7,14 +7,13 @@
 						<li class="flex-wrap flex-vertical  flex-align-center"><span>今日换电</span><span>55</span></li>
 						<li class="flex-wrap flex-vertical  flex-align-center"><span>今日退租</span><span>52</span></li>					
 				</ul>	
-			
 			<div class="tabCard clear mt-10">					
 					<div v-for="(v,i) in tabItem" @click="changeItem(v,i)" v-bind:class="{actived : i == currentI}">{{v}}</div>					
 					<el-button type="primary" size="small" class="btnStyle mt-10">本周</el-button>		
 					<el-button type="primary" size="small" class="btnStyle mt-10">本月</el-button>		
 			</div>
+			<div id="main" class="flex-con"></div>
 			
-			<component v-bind:is="current"></component>		
 		
 
 	</div>
@@ -29,8 +28,6 @@
 		data() {
 			return {
 				tabItem:['注册','安装','换电','退租'],
-				tabComponents:['Register','Install','Change','Cancel'],
-				current:'Register',
 				currentI:'0'
 			}
 		},
@@ -38,7 +35,6 @@
 		methods: {
 			changeItem(v,i){
 				this.currentI = i;
-	      		this.current = this.tabComponents[i];
 			}
 
 		},
@@ -49,7 +45,40 @@
 			Cancel
 		},
 		mounted() {
-			
+			var echarts = require('echarts');
+			var myChart = echarts.init(document.getElementById('main'));
+			console.log(myChart)
+			var option = {
+				//	        	title:{
+				//	        		show:true,
+				//	        		text:'安装数据折线图',
+				//	        		left:0,
+				//	        		textStyle:{
+				//	        			color:'#293C55',
+				//	        			fontSize:16
+				//	        		}
+				//	        	},        	
+				xAxis: {
+					type: 'category',
+					data: ['10月1号', '10月2号', '10月3号', '10月4号', '10月5号', '10月6号', '10月7号']
+				},
+				yAxis: {
+					type: 'value'
+				},
+				series: [{
+					data: [10, 30, 20, 50, 10, 24, 26],
+					//	        		data: (function(){
+					//	        			var list = [];
+					//	        			for(var i =0;i<10; i++){
+					//	        				list.push(i + 10 + '');
+					//	        			}
+					//	        			return list;
+					//	        		})(),
+					type: 'line'
+				}]
+			};
+
+			myChart.setOption(option)
 		}
 	}
 </script>

@@ -1,55 +1,45 @@
 <template>
-	<div>
-		<div class="shopList flex-wrap flex-vertical">
-			
+	<div >
+		<div class="shopList flex-wrap flex-vertical">	
 		
 		<el-row class="row" type="flex" align="middle">
-			<el-col :span="6">
-				账号状态：
-				<template>
-					<el-radio v-model="radio" label="1">启用</el-radio>
-					<el-radio v-model="radio" label="2">禁用</el-radio>					
-				</template>
+			<el-col :span="1.5">
+				<div>处理结果：</div>
+				
 			</el-col>
-
-			<el-col :span="6">
-				<div>
-					<el-input placeholder="请输入内容" v-model="find" class="input-with-select">
-						<el-button slot="append" icon="el-icon-search">筛选</el-button>
-					</el-input>
-				</div>
-			</el-col>
-
-			<el-col :span="6" :offset="6" style="text-align:right;">				
-				<button type="button" class="btn btnStyle" @click="navAddbusiness">
-				  <span class="glyphicon glyphicon-plus"></span>  &nbsp;添加运营商
-				</button>
+			<el-col :span="7">
+				<el-checkbox-group v-model="checkList">
+			    <el-checkbox label="等待审查"></el-checkbox>
+			    <el-checkbox label="确认损坏"></el-checkbox>
+			    <el-checkbox label="未损坏"></el-checkbox>			   
+			  </el-checkbox-group>
+				
 			</el-col>
 		</el-row>
-		
 		<div class="listDetail mt-10 flex-con">					
 							<template>
 								<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="date" label="运营商编号" width="" align="center">
+									<el-table-column prop="date" label="预约编号" width="" align="center">
+									</el-table-column>									
+									<el-table-column prop="name" label="预约类型" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="运营商名称" width="" align="center">
+									<el-table-column prop="name" label="预约用户" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="运营商等级" width="" align="center">
+									<el-table-column prop="name" label="报损网点" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="运营商账号" width="" align="center">
+									<el-table-column prop="name" label="报损时间" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="联系人/联系电话" width="" align="center">
+									<el-table-column prop="name" label="报损照片" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="运营网点" width="" align="center">
+									<el-table-column prop="name" label="审查结果" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="合约经营周期" width="" align="center">
+									<el-table-column prop="name" label="审查时间" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="账户状态" width="" align="center">
+									<el-table-column prop="name" label="审查人" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="action" label="操作" align="center">
+									<el-table-column prop="" label="操作" align="center">
 									    <template slot-scope="scope">										
-											<el-button type="primary" size="mini" class="btnStyle" @click="navBusinessdetail">详情</el-button>	
-											<el-button type="primary" size="mini" class="btnStyle">禁用</el-button>	        
+											<el-button type="primary" size="mini" class="btnStyle" @click="openConfirm">提交审查结果</el-button>
 									    </template>
 									</el-table-column>
 								</el-table>
@@ -99,10 +89,10 @@
             address: '上海市普陀区金沙江路 1516 弄',
             money:50.00,
             action:'查看详情'
-          }],
-				radio: '1',
-				find: '',
-				 currentPage1:1,
+          }],	
+		currentPage1:1,
+		checkList:['等待审查']
+			
 			};
 		},
 		methods: {
@@ -112,13 +102,26 @@
 	      handleCurrentChange(val) {
 	        console.log(`当前页: ${val}`);
 	      },
-	      navAddbusiness(){
-	      	this.$router.push('/Businesslist/Addbusiness');
+	   
+	      handleChange(value){
 	      },
-	      navBusinessdetail(){
-	      	this.$router.push('/Businesslist/Businessdetail')
-	      }
-	     
+	      openConfirm(){
+		      this.$confirm('请根据报损照片确定电池是否损坏！', '提示', {
+	          confirmButtonText: '确定损坏',
+	          cancelButtonText: '未损坏',
+	          type: 'warning'
+	        }).then(() => {
+	          this.$message({
+	            type: 'success',
+	            message: '当前用户电池押金将被扣除，电池按售卖给该用户处理，该用户所有平台服务终止。'
+	          });
+	        }).catch(() => {
+	          this.$message({
+	            type: 'info',
+	            message: '该用户可继续租用当前电池，各网点可接受进行换电、退租等服务。'
+	          });          
+	        });
+	      }	
 		}
 	}
 </script>
@@ -126,8 +129,8 @@
 <style scoped>
 	.shopList {width: 100%;box-sizing: border-box;height:100%;}	
 	.row {margin: 0;}
-	.listDetail,.row {background: #fff;padding: 10px;}
-	.listDetail .btnReset{color:#fff;}
+	.row,.listDetail{background: #fff;padding: 10px;}
+	.shopList .btnReset{color:#fff;}
 	.listDetail{background:#fff;position:relative;}
 	
 </style>

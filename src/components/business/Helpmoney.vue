@@ -17,7 +17,7 @@
 				</el-table-column>
 				<el-table-column prop="name" label="救援费用" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="平台利润（扣减网点补贴后）" align="center">
+				<el-table-column prop="name" label="平台利润（扣减网点补贴后）" width="230" align="center">
 				</el-table-column>
 				<el-table-column prop="name" label="运营商获取分润" width="" align="center">
 				</el-table-column>

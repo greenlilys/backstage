@@ -51,19 +51,17 @@
 								</el-date-picker>
 							</div>
 						</template>
-
 					</el-form-item>
 					<el-form-item label="手机账号：">
 						<el-input v-model="form.name"></el-input>
 					</el-form-item>
 					<el-form-item label="账号状态：">
-						
 						<template>
 						  <el-radio v-model="radio" label="1">启用</el-radio>
 						  <el-radio v-model="radio" label="2">禁用</el-radio>
 						</template>
 					</el-form-item>
-				
+					
 					<el-form-item label="配货数量：">
 						<el-row>
 							<!--<el-col :span="11">
@@ -72,7 +70,7 @@
 									<el-input-number v-model="num1" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
 								</template>
 							</el-col>
-
+							
 							<el-col :span="11" :offset="2">
 								<span class="btnStyle battery">7020锂电池</span>
 								<template>
@@ -209,7 +207,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	
 	.battery {background: #F4F6F9;color: #58595D;border: #D8DBE3 1px solid;	padding: 11px;}
 	.el-form-item {	margin-bottom: 10px;}

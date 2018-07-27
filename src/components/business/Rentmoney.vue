@@ -16,7 +16,7 @@
 				</el-table-column>
 				<el-table-column prop="name" label="支付金额" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="name" label="平台利润（扣减安装成本后）" width="" align="center">
+				<el-table-column prop="name" label="平台利润（扣减安装成本后）" width="230" align="center">
 				</el-table-column>
 				<el-table-column prop="name" label="运营商分润" width="" align="center">
 				</el-table-column>

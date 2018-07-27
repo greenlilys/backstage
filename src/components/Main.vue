@@ -1,10 +1,10 @@
 <template>
 
 	<div class="main">
-		<div v-if="isLogin" class="login">
+		<!--<div v-if="isLogin" class="login">
 			<Sign v-on:loginSuccess="login"></Sign>
-		</div>
-		<div v-else class="mainContent">
+		</div>-->
+		<div class="mainContent">
 			<Head/>
 			<div class="flex-wrap flex-horizontal mainBox">
 				<Aside></Aside>
@@ -45,5 +45,5 @@
 <style>
 	.main,.login,.mainContent {	height: 100%;}
 	.mainBox{width:100%;}
-	.mainview{height:852px;box-sizing: border-box;padding-top: 10px;padding-left: 10px;padding-right: 10px;}
+	.mainview{height:852px;width:100%;box-sizing: border-box;padding-top: 10px;padding-left: 10px;padding-right: 10px;}
 </style>

@@ -119,9 +119,4 @@
 	.numInfo>div{background:#fff;margin-right:10px;flex:1;margin-top:10px;padding:10px 0px;}
 	.numInfo div:nth-child(5){margin-right:0;}
 	
-	.conBottom{width:100%;padding:10px;background:#fff;position:relative;}
-	.tabCard{background:#fff;border-top:2px solid #FF9900;border-bottom:1px solid #EBF0F4;}
-	.tabCard div{font-size:16px;line-height: 26px;padding:10px 20px;background:#fff;cursor: pointer;}
-	.tabCard .actived{background:#FF9900;color:#fff;}	
-	
 </style>

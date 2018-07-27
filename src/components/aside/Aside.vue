@@ -34,41 +34,42 @@
 						<template slot="title">
 							<span class="oneTitle pl20"><i class="header-icon el-icon-info iconWidth"></i>团购账号</span>
 						</template>
-						<div class="item font-14 subitem pl40">流程</div>
-						<div class="item font-14 subitem pl40">团购项目</div>
-						<div class="item font-14 subitem pl40">账号管理</div>
+				
+						<div class="item font-14 subitem pl40"><router-link to='/Groupproject'>团购项目</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Accountmanage'>账号管理</router-link></div>
 			</el-collapse-item>
 			
 			<el-collapse-item>
 						<template slot="title">
 							<span class="oneTitle pl20"><i class="header-icon el-icon-info iconWidth"></i>预约</span>
 						</template>
-						<div class="item font-14 subitem pl40">预约列表</div>
+						<div class="item font-14 subitem pl40"><router-link to='/Meetlist'>预约列表</router-link></div>
 						<div class="item font-14 subitem pl40">救援订单</div>
-						<div class="item font-14 subitem pl40">电池报损</div>
+						<div class="item font-14 subitem pl40"><router-link to='/Batterydamage'>电池报损</router-link></div>
 			</el-collapse-item>
 			
 			<el-collapse-item>
 						<template slot="title">
 							<span class="oneTitle pl20"><i class="header-icon el-icon-info iconWidth"></i>电池</span>
 						</template>						
-						<div class="item font-14 subitem pl40">运营商配货记录</div>
-						<div class="item font-14 subitem pl40">运营商增配订单</div>
-						<div class="item font-14 subitem pl40">运营商减配订单</div>
+						<div class="item font-14 subitem pl40"><router-link to='/Pikingrecord'>运营商配货记录</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Addorder'>运营商增配订单</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Subtractorder'>运营商减配订单</router-link></div>
 			</el-collapse-item>
 			
 			<el-collapse-item>
 						<template slot="title">
 							<span class="oneTitle pl20"><i class="header-icon el-icon-info iconWidth"></i>资金</span>
 						</template>
-						<div class="item font-14 subitem pl40">押金-缴纳记录</div>
-						<div class="item font-14 subitem pl40">租金-租金纪录</div>
-						<div class="item font-14 subitem pl40">钱包/天牛币纪录-网点钱包</div>
-						<div class="item font-14 subitem pl40">保证金</div>
-						<div class="item font-14 subitem pl40">提现申请</div>
-						<div class="item font-14 subitem pl40">提现记录</div>
-						<div class="item font-14 subitem pl40">微信/支付宝记录</div>
-						<div class="item font-14 subitem pl40">平台操作记录</div>
+						<div class="item font-14 subitem pl40"><router-link to='/Deposit'>押金-缴纳记录</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Rent'>租金-租金纪录</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Moneyrecord'>钱包/天牛币纪录-网点钱包</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Ensure'>保证金</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Getapply'>提现申请</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Getapplyrecord'>提现记录</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Rebate'>运营商返利结算</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Weixinrecord'>微信/支付宝记录</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Tablerecord'>平台操作记录</router-link></div>
 			</el-collapse-item>
 			
 			<el-collapse-item>
@@ -76,20 +77,20 @@
 							<span class="oneTitle pl20"><i class="header-icon el-icon-info iconWidth"></i>统计</span>
 						</template>
 						
-						<div class="item font-14 subitem pl40">用户统计</div>
-						<div class="item font-14 subitem pl40">网点业绩</div>
-						<div class="item font-14 subitem pl40">运营商业绩</div>
-						<div class="item font-14 subitem pl40">推荐用户</div>
+						<div class="item font-14 subitem pl40"><router-link to='/Useramount'>用户统计</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Shopscore'>网点业绩</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Businessscore'>运营商业绩</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Pushuser'>推荐用户</router-link></div>
 			</el-collapse-item>
 			
 			<el-collapse-item>
 						<template slot="title">
 							<span class="oneTitle pl20"><i class="header-icon el-icon-info iconWidth"></i>设置</span>
 						</template>
-						<div class="item font-14 subitem pl40">业务设置-服务设置</div>
-						<div class="item font-14 subitem pl40">电池管理</div>
-						<div class="item font-14 subitem pl40">员工账号管理</div>
-						<div class="item font-14 subitem pl40">常见问题</div>
+						<div class="item font-14 subitem pl40"><router-link to='/Seting'>业务设置-服务设置</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Batterymanage'>电池管理</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Personaccount'>员工账号管理</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Problorm'>常见问题</router-link></div>
 			</el-collapse-item>
 		</el-collapse>
 	</div>

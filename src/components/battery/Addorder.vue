@@ -1,56 +1,49 @@
 <template>
-	<div>
-		<div class="shopList flex-wrap flex-vertical">
-			
+	<div >
+		<div class="shopList flex-wrap flex-vertical">	
 		
 		<el-row class="row" type="flex" align="middle">
-			<el-col :span="6">
-				账号状态：
-				<template>
-					<el-radio v-model="radio" label="1">启用</el-radio>
-					<el-radio v-model="radio" label="2">禁用</el-radio>					
-				</template>
+			<el-col :span="7">
+				订单状态：
+					 <el-radio-group v-model="radio" @change="handleChange">
+						<el-radio  label="1">待配货</el-radio>
+						<el-radio  label="2">已完成</el-radio>
+					</el-radio-group>
+				
 			</el-col>
-
-			<el-col :span="6">
+			
+			<el-col :span="6" :offset="1">
 				<div>
 					<el-input placeholder="请输入内容" v-model="find" class="input-with-select">
 						<el-button slot="append" icon="el-icon-search">筛选</el-button>
 					</el-input>
 				</div>
 			</el-col>
-
-			<el-col :span="6" :offset="6" style="text-align:right;">				
-				<button type="button" class="btn btnStyle" @click="navAddbusiness">
-				  <span class="glyphicon glyphicon-plus"></span>  &nbsp;添加运营商
-				</button>
-			</el-col>
 		</el-row>
-		
 		<div class="listDetail mt-10 flex-con">					
 							<template>
 								<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="date" label="运营商编号" width="" align="center">
+									<el-table-column prop="date" label="增配订单号" width="" align="center">
+									</el-table-column>									
+									<el-table-column prop="name" label="下单时间" width="" align="center">
+									</el-table-column>
+									<el-table-column prop="name" label="运营商编号" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="name" label="运营商名称" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="运营商等级" width="" align="center">
+									<el-table-column prop="name" label="店铺地址" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="运营商账号" width="" align="center">
+									<el-table-column prop="name" label="配货内荣" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="联系人/联系电话" width="" align="center">
+									<el-table-column prop="name" label="配货金额" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="运营网点" width="" align="center">
+									<el-table-column prop="name" label="支付流水" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="合约经营周期" width="" align="center">
+									<el-table-column prop="name" label="订单状态" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="账户状态" width="" align="center">
+									<el-table-column prop="name" label="经办人" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="action" label="操作" align="center">
-									    <template slot-scope="scope">										
-											<el-button type="primary" size="mini" class="btnStyle" @click="navBusinessdetail">详情</el-button>	
-											<el-button type="primary" size="mini" class="btnStyle">禁用</el-button>	        
-									    </template>
+									<el-table-column prop="name" label="操作" width="" align="center">
 									</el-table-column>
 								</el-table>
 							</template>
@@ -101,8 +94,11 @@
             action:'查看详情'
           }],
 				radio: '1',
+				radio1: '1',
 				find: '',
 				 currentPage1:1,
+				 checkList:['已完成']
+			
 			};
 		},
 		methods: {
@@ -112,11 +108,22 @@
 	      handleCurrentChange(val) {
 	        console.log(`当前页: ${val}`);
 	      },
-	      navAddbusiness(){
-	      	this.$router.push('/Businesslist/Addbusiness');
+	     
+	  
+	      navdetail(){
+	      	if(this.radio == 1){
+	      		this.$router.push('/Meetlist/Installdetail')
+	      	}else if(this.radio == 2){
+	      		this.$router.push('/Meetlist/Changedetail')
+	      	}else{
+	      		this.$router.push('/Meetlist/Throwdetail')
+	      	}
+	      	
 	      },
-	      navBusinessdetail(){
-	      	this.$router.push('/Businesslist/Businessdetail')
+	      handleChange(value){
+	      },
+	      handleChange1(value){
+	      	console.log(value)
 	      }
 	     
 		}
@@ -126,8 +133,8 @@
 <style scoped>
 	.shopList {width: 100%;box-sizing: border-box;height:100%;}	
 	.row {margin: 0;}
-	.listDetail,.row {background: #fff;padding: 10px;}
-	.listDetail .btnReset{color:#fff;}
+	.row,.listDetail{background: #fff;padding: 10px;}
+	.shopList .btnReset{color:#fff;}
 	.listDetail{background:#fff;position:relative;}
 	
 </style>

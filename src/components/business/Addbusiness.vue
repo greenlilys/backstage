@@ -237,22 +237,7 @@
         		upLoadData:{
         			//图片上传的参数
         		},
-				options: [{
-					value: '选项1',
-					label: '黄金糕'
-				}, {
-					value: '选项2',
-					label: '双皮奶'
-				}, {
-					value: '选项3',
-					label: '蚵仔煎'
-				}, {
-					value: '选项4',
-					label: '龙须面'
-				}, {
-					value: '选项5',
-					label: '北京烤鸭'
-				}],
+				
 				tableData: [{
 		            date: '2016-05-02',
 		            name: '王小虎',
@@ -271,8 +256,7 @@
 					city: '郑州市',
 					area: '管城区'
 				},
-				radio: '1',
-				value: '',
+				radio: '1',			
 				value7: '',
 				num1: 5,
 				num2: 5,				
@@ -353,39 +337,21 @@
 	}
 </script>
 
-<style>
-	
-	.battery {background: #F4F6F9;color: #58595D;border: #D8DBE3 1px solid;	padding: 11px;}
+<style>	
+	.addBusiness .mainContent{background:#fff;padding:10px 20px 0;}
+/*输入框下间距样式重置*/
 	.el-form-item {	margin-bottom: 10px;}
-	.el-select {width: 100%;}
+/*日期选择组件宽度*/
 	.el-date-editor--daterange.el-input__inner {width: 100%;}
-	.el-input-number {width: 120px;}
-	.distpicker-address-wrapper select {width: 32.8%;}	
-	.addBusiness .el-table td{padding:4px 0;}
-	.addBusiness .el-table th{padding:0;background:#ADB4B9;color:#252C30;}	
-	.addBusiness .el-table{font-size:14px;}
-	.shopPhoto img{display:block;width:58%;margin-top:10px;}
+/*图片上床选择组件样式重置*/
 	.addBusiness input.el-upload__input{display:none;}
 	.uploadBox{line-height:0;}
-	.addBusiness .el-upload-list--picture-card .el-upload-list__item{margin-right:10px;margin-bottom:0;}
-	/*.addBusiness .el-form-item__content{line-height:0;}*/
-	.addBusiness .mainContent{background:#fff;padding:10px 20px 0;}
+	.addBusiness .el-upload-list--picture-card .el-upload-list__item{margin-right:10px;margin-bottom:0;height:100px;width:100px;}
 	.addBusiness .el-upload--picture-card{height:100px;width:100px;line-height: 100px;}
-	.addBusiness .el-upload-list--picture-card .el-upload-list__item{height:100px;width:100px;}
-	 .distpicker-address-wrapper select{width:28%;}
-	.el-tag + .el-tag {
-    margin-left: 10px;
-  }
-  .button-new-tag {
-    margin-left: 10px;
-    height: 32px;
-    line-height: 30px;
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-  .input-new-tag {
-    width: 90px;
-    margin-left: 10px;
-    vertical-align: bottom;
-  }
+/*省市县组件样式重置*/	
+	.distpicker-address-wrapper select{width:28%;}
+	
+	.el-tag + .el-tag { margin-left: 10px;}  
+	.button-new-tag { margin-left: 10px; height: 32px;line-height: 30px;padding-top: 0;padding-bottom: 0;}
+  	.input-new-tag {width: 90px; margin-left: 10px;vertical-align: bottom;}
 </style>
