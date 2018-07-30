@@ -1,16 +1,15 @@
 <template>
-
 	<div class="main">
-		<!--<div v-if="isLogin" class="login">
+		<div v-if="isLogin" class="login">
 			<Sign v-on:loginSuccess="login"></Sign>
-		</div>-->
-		<div class="mainContent">
-			<Head/>
-			<div class="flex-wrap flex-horizontal mainBox">
+		</div>
+		<div v-else class="mainContent flex-wrap flex-vertical">
+			<Head class="headHeight"></Head>
+			<div class="flex-wrap flex-horizontal mainBox flex-con">
 				<Aside></Aside>
-				<div class="flex-con">
+				<div class="flex-con contentBoxs flex-wrap flex-vertical">
 					<Navbar></Navbar>
-					<router-view class="mainview bgHui"></router-view>
+					<router-view class="mainview bgHui flex-con"></router-view>
 				</div>				
 			</div>
 		</div>
@@ -21,16 +20,16 @@
 	import Head from '@/components/Head'
 	import Aside from '@/components/aside/Aside'
 	import Navbar from '@/components/common/Navbar'
+	
 	export default {
 		data() {
 			return {
-				isLogin: true
+				isLogin:true
 			}
 		},
 		methods: {
 			login() {
 				this.isLogin = false;
-
 			}
 		},
 		components: {
@@ -38,12 +37,14 @@
 			Sign,
 			Aside,
 			Navbar
-
 		}
 	}
 </script>
 <style>
 	.main,.login,.mainContent {	height: 100%;}
 	.mainBox{width:100%;}
-	.mainview{height:852px;width:100%;box-sizing: border-box;padding-top: 10px;padding-left: 10px;padding-right: 10px;}
+	.contentBoxs{height:100%;}
+	.headHeight{height:50px}
+	.mainview{height:100%;width:100%;box-sizing: border-box;padding-top: 10px;padding-left: 10px;padding-right: 10px;}
+
 </style>

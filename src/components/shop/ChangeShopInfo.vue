@@ -51,33 +51,33 @@
 								</el-date-picker>
 							</div>
 						</template>
+
 					</el-form-item>
 					<el-form-item label="手机账号：">
 						<el-input v-model="form.name"></el-input>
 					</el-form-item>
-					<el-form-item label="账号状态：">
+					<el-form-item label="账号状态：">						
 						<template>
 						  <el-radio v-model="radio" label="1">启用</el-radio>
 						  <el-radio v-model="radio" label="2">禁用</el-radio>
 						</template>
 					</el-form-item>
-					
+				
 					<el-form-item label="配货数量：">
-						<el-row>
+						
 							<!--<el-col :span="11">
 								<span class="btnStyle battery">6020锂电池</span>
 								<template>
 									<el-input-number v-model="num1" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
 								</template>
 							</el-col>
-							
+
 							<el-col :span="11" :offset="2">
 								<span class="btnStyle battery">7020锂电池</span>
 								<template>
 									<el-input-number v-model="num2" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
 								</template>
-							</el-col>-->
-							<template>
+							</el-col>-->							
 								<el-table :data="tableData" border style="width: 100%;">
 									<el-table-column prop="date" label="电池套餐名称" width="120" align="center">
 									</el-table-column>
@@ -87,9 +87,8 @@
 									</el-table-column>
 									<el-table-column prop="money" label="配货数量" align="center">
 									</el-table-column>									
-								</el-table>
-							</template>
-						</el-row>
+								</el-table>							
+						
 					</el-form-item>
 
 					<el-form-item label="已缴保证金：">
@@ -215,7 +214,5 @@
 	.el-date-editor--daterange.el-input__inner {width: 100%;}
 	.el-input-number {width: 120px;}
 	.distpicker-address-wrapper select {width: 32.8%;}	
-	.changeInfo .el-table td{padding:4px 0;}
-	.changeInfo .el-table th{padding:0;background:#ADB4B9;color:#252C30;}	
-	.changeInfo .el-table{font-size:14px;}
+		
 </style>

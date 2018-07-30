@@ -26,16 +26,10 @@
 			</div>
 			
 			<div class="conBottom mt-10 flex-con">						
-				<div class="tabCard">		
-					<el-row class="row clear">
-						<el-col :span="12">
-							<div class="fl" v-for="(v,i) in tabItem" @click="changeItem(v,i)" :class="{actived : i == currentI}">{{v}}</div>
-						</el-col>
-						<el-col :span="12" class="flex-wrap flex-horizontal flex-justify-end flex-align-center colright">
-							<el-button type="primary" class="btnStyle" size="small" @click="" >+&nbsp;添加子帐号</el-button>
-							<el-button type="primary" class="btnStyle" size="small" @click="" >关闭项目</el-button>
-						</el-col>
-					</el-row>
+				<div class="tabCard clear">
+						<div class="fl" v-for="(v,i) in tabItem" @click="changeItem(v,i)" :class="{actived : i == currentI}">{{v}}</div>						
+						<el-button type="primary" class="btnStyle fr mt-10" size="small" @click="" >+&nbsp;添加子帐号</el-button>
+						<el-button type="primary" class="btnStyle fr mt-10 mr-10" size="small" @click="" >关闭项目</el-button>					
 				</div>
 				<el-row class="searchBox" type="flex" align="middle">
 					<el-col :span="6" :offset="18">
@@ -62,7 +56,8 @@
 				tabItem:['项目子帐号','支付记录'],
 	        	tabComponents:['Subaccount','Payrecord'],
 	        	current:'Subaccount',
-	        	currentI:'0'
+	        	currentI:'0',
+	        	find:''
 			}
 			
 		},
@@ -84,13 +79,6 @@
 	.headItem>div{margin-right:10px;flex:1;height:160px;background:#fff;padding:10px 20px;}
 	.headItem>div:nth-child(3){margin-right:0;}
 	.headItem h1{line-height: 30px;}
-	.headItem p{line-height: 24px;}
-	
-	.conBottom{width:100%;padding:10px;background:#fff;position:relative;}
-	.tabCard {background:#fff;border-top:2px solid #FF9900;border-bottom:1px solid #EBF0F4;}	
-	.tabCard .row{font-size:16px;background:#fff;margin:0;}
-	.tabCard .row .fl{cursor: pointer;padding:10px 20px;line-height: 26px;}
-	.tabCard .colright{height: 46px;}
-	.tabCard .actived{background:#FF9900;color:#fff;}
+	.headItem p{line-height: 24px;}		
 	.searchBox{padding:10px 0;}
 </style>

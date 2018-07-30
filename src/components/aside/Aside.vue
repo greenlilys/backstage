@@ -113,7 +113,7 @@
 	}
 </script>
 <style scope>
-		.aside {width: 13%;box-sizing: border-box;height:890px;background:#273135;}
+		.aside {width: 13%;box-sizing: border-box;height:100%;background:#273135;}
 		.aside a{display:inline-block;width:100%;color:#B7C6CC;}
 		.box {width: 10%;}		
 		.worktable{height:38px;line-height: 38px;background:#273135;color:#B7C6CC;padding-left:20px;}

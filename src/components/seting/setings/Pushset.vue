@@ -13,7 +13,7 @@
 							</el-form-item>
 							<el-form-item label="输入验证码：">
 								<el-input v-model="form.name" placeholder="555">
-									 <template slot="append">获取验证码</template>
+									<el-button slot="append" @click="getCode">获取验证码</el-button>									
 								</el-input>						
 							</el-form-item>
 							<el-form-item label="">
@@ -60,7 +60,9 @@
       }
     },
     methods: {
-     
+     getCode(){//点击获得验证码
+     	console.log("获得验证码")
+     }
     }
   }
 </script>

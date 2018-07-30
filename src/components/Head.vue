@@ -1,21 +1,16 @@
 <template>
-	<el-row class="head font-14">
-		<el-col :span="24">
-
-			<ul class="clear head headbg">
-				<li class="fl logoBox"><img src="../assets/logo.png" class="logo"><span>天牛网平台管理</span></li>
-			
-					<li class="fl"><span class="glyphicon glyphicon-menu-hamburger iconbar" aria-hidden="true" style="font-size:20px;"></span></li>
-					<li class="fr tab">退出</li>
-					<li class="fr tablast">欢迎使用</li>
-				
-
-				
-			</ul>
-
-		</el-col>
-	</el-row>
-
+	<div>
+		<el-row class="head font-14">
+			<el-col :span="24">
+				<ul class="clear head headbg">
+					<li class="fl logoBox"><img src="../assets/images/logo.png" class="logo"><span>天牛网平台管理</span></li>
+						<li class="fl"><span class="glyphicon glyphicon-menu-hamburger iconbar" aria-hidden="true" style="font-size:20px;"></span></li>
+						<li class="fr tab">退出</li>
+						<li class="fr tablast">欢迎使用</li>
+				</ul>
+			</el-col>
+		</el-row>
+	</div>
 </template>
 <script>
 	 export default {

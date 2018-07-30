@@ -25,9 +25,9 @@
 							</el-form-item>
 							<el-form-item label="">
 								<el-table :data="tableData" border style="width: 100%;">
-										<el-table-column prop="date" label="电池套餐名称" width="120" align="center">
+										<el-table-column prop="date" label="电池套餐名称" width="" align="center">
 										</el-table-column>
-										<el-table-column prop="name" label="电池型号" width="100" align="center">
+										<el-table-column prop="name" label="电池型号" width="" align="center">
 										</el-table-column>
 										<el-table-column prop="address" label="套餐电池数量" align="center">
 										</el-table-column>

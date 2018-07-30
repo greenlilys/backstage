@@ -2,7 +2,7 @@
 	<div>
 		<div class="contentBox">
 			
-			<div class="mt-10 mb-10">
+			<div class="mb-10">
 				<span>预约可选周期：</span>
 				<el-tag
 				  :key="tag"

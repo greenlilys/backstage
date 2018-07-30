@@ -2,8 +2,6 @@
 <template>
 	<div class="addBusiness">
 		<div class="mainContent">
-			
-		
 		<el-row>
 			<el-form ref="form" :model="form" label-width="140px">
 			<el-col :span="11">				

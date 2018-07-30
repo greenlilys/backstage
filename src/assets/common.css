@@ -139,10 +139,14 @@ align-items: center;
 .page{position:absolute;right:0;bottom:20px;}
 
 /*列表样式重置*/
-.el-table td{padding:3px 0;}
-.el-table th{padding:8px 0;}
+.el-table td{padding:8px 0;}
+.el-table th, .el-table tr{background:transparent;}
+.el-table th{padding:10px 0;}
 .el-table thead{font-size:14px;color:#2E2E2E;}
 .el-table th{border-top:1px solid #E9EEF3;}	
+
+ /*表单间距重置*/
+.el-form-item {	margin-bottom: 10px;}
 
 /*省市县选择器样式重置*/
 .distpicker-address-wrapper select{width:28%;}
@@ -156,7 +160,7 @@ align-items: center;
 /*选项卡样式*/
 .conBottom{width:100%;padding:10px;background:#fff;position:relative;box-sizing: border-box;}
 .tabCard{background:#fff;border-top:2px solid #FF9900;border-bottom:1px solid #EBF0F4;}
-.tabCard div{font-size:16px;line-height: 26px;padding:10px 20px;background:#fff;cursor: pointer;}
+.tabCard div{font-size:16px;line-height: 26px;padding:10px;background:#fff;cursor: pointer;}
 .tabCard .actived{background:#FF9900;color:#fff;}
 
 /*标签样式*/
@@ -164,5 +168,6 @@ align-items: center;
  .button-new-tag {margin-left: 10px;height: 32px;line-height: 30px;padding-top: 0;padding-bottom: 0;}
  .input-new-tag {width: 90px;margin-left: 10px;vertical-align: bottom;}
  
- /*表单间距重置*/
-.el-form-item {	margin-bottom: 10px;}
+ /*小标题样式*/
+ .subTitle{line-height: 30px;}
+ 

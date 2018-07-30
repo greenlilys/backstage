@@ -1,6 +1,9 @@
 <template>
-	<div class="shopList flex-wrap flex-vertical">
-		<el-row class="row joinshop" type="flex" align="middle">
+	<div>
+		
+	
+	<div class="outsideBox1 flex-wrap flex-vertical">
+		<el-row class="contentBox" type="flex" align="middle">
 			<el-col :span="6">
 				上线状态：
 				<template>
@@ -17,14 +20,13 @@
 				</div>
 			</el-col>
 
-			<el-col :span="6" :offset="6" style="text-align:right;">				
-				<button type="button" class="btn btnStyle" @click="navAddshop">
-				  <span class="glyphicon glyphicon-plus"></span>  &nbsp;添加网点
-				</button>
+			<el-col :span="6" :offset="6" style="text-align:right;">	
+				<el-button type="primary" size="medium" class="btnStyle" @click="navAddshop">+&nbsp;添加网点</el-button>
+				
 			</el-col>
 		</el-row>
 		
-		<div class="listDetail mt-10 flex-con">					
+		<div class="contentBox mt-10 flex-con">					
 							<template>
 								<el-table :data="tableData" style="width: 100%;">
 									<el-table-column prop="date" label="店铺编号" width="" align="center">
@@ -69,6 +71,7 @@
 							</template>								
 		</div>
 	</div>
+</div>
 </template>
 
 <script>
@@ -123,10 +126,5 @@
 </script>
 
 <style scoped>
-	.shopList {width: 100%;box-sizing: border-box;}	
-	.joinshop {	background: #fff;padding: 10px 20px;}	
-	.row {margin: 0;}
-	.joinshop .btnReset{color:#fff;}
-	.listDetail{background:#fff;position:relative;}
-	.shopList .el-table .cell,.shopList .el-table th div{padding-left:0;padding-right:0;}
+	.contentBox{position:relative;}
 </style>
