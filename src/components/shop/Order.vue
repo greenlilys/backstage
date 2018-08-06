@@ -2,17 +2,17 @@
 	<div>					
 							<template>
 								<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="date" label="预约编号" width="200" align="center">
+									<el-table-column prop="no" label="预约编号" width="200" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="预约类型" width="200" align="center">
+									<el-table-column prop="types" label="预约类型" width="200" align="center">
 									</el-table-column>
-									<el-table-column prop="address" label="完成时间" align="center">
+									<el-table-column prop="finishtime" label="完成时间" align="center">
 									</el-table-column>
-									<el-table-column prop="money" label="预约服务分润" align="center">
+									<el-table-column prop="costs" label="预约服务分润" align="center">
 									</el-table-column>
 									<el-table-column prop="action" label="操作" align="center">
 										<template slot-scope="scope">										
-											<el-button type="primary" size="small" class="btnStyle">编辑</el-button>										    								         
+											<el-button type="primary" size="small" class="btnStyle">详情</el-button>										    								         
 									    </template>
 									</el-table-column>
 								</el-table>
@@ -23,9 +23,9 @@
 							      @size-change="handleSizeChange"
 							      @current-change="handleCurrentChange"
 							      :current-page.sync="currentPage1"
-							      :page-size="8"							    
+							      :page-size="10"							    
 							      layout="total, prev, pager, next"
-							      :total="100">
+							      :total="total">
 							    </el-pagination>
 							 	 </div>
 							</template>								
@@ -36,44 +36,49 @@
 	export default {
       data() {
         return {
-          tableData: [{
-            date: '2016-05-02',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄',
-            money:50.00,
-            action:'查看详情'
-          }, {
-            date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄',
-            money:50.00,
-            action:'查看详情'
-          }, {
-            date: '2016-05-01',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄',
-            money:50.00,
-            action:'查看详情'
-          }, {
-            date: '2016-05-03',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄',
-            money:50.00,
-            action:'查看详情'
-          }],
-          currentPage1:1,
-          activeName2: 'first'
-        }
+          tableData: [],
+					currentPage1:1,
+					total:0,
+      }
       },
       methods:{
-	      	 handleSizeChange(val) {
+	      handleSizeChange(val) {
 	        console.log(`每页 ${val} 条`);
 	      },
 	      handleCurrentChange(val) {
-	        console.log(`当前页: ${val}`);
-	      }
-      }
-    }
+					this.getShopServiceList(val,this.id)
+	        //console.log(`当前页: ${val}`);
+				},
+				getShopServiceList(pageNo,id){
+					var id=this.id;
+		      this.$get('shopLog/serviceList',{
+						pageNo:pageNo,
+						id:id
+					}).then(data=>{
+					var arr = data.datas;
+	    		for(var i = 0,len=arr.length;i<len;i++){
+						//预约状态
+	    			if(arr[i].type == 0){
+	    				arr[i].types = "安装"
+	    			}else if(arr[i].type == 1){
+	    				arr[i].types = "更换"
+						}else{
+							arr[i].types = "退租"
+						}
+						arr[i].costs = "¥"+arr[i].cost
+	    		}
+	    		this.tableData = arr;
+	    		this.total= Number(data.totalCount);
+	    		})
+	      },
+			},
+			props:['id'],
+			ceeated(){
+    	},
+    	mounted(){
+    	this.getShopServiceList(1,this.id)
+   	 },
+  }
 </script>
 
 <style>

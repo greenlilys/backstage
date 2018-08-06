@@ -19,10 +19,11 @@
 				</div>
 			</el-col>
 
-			<el-col :span="6" :offset="6" style="text-align:right;">				
-				<button type="button" class="btn btnStyle" @click="navAddgroupproject">
-				  <span class="glyphicon glyphicon-plus"></span>  &nbsp;添加团购项目
-				</button>
+			<el-col :span="6" :offset="6" style="text-align:right;">
+				<router-link to='/Main/Addgroupproject'>
+					<el-button type="primary" class="btnStyle" size="small">+&nbsp;添加团购项目</el-button>
+				</router-link>			
+				
 			</el-col>
 		</el-row>
 		
@@ -46,8 +47,11 @@
 									<el-table-column prop="name" label="项目状态" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="action" label="操作" align="center">
-									    <template slot-scope="scope">										
-											<el-button type="primary" size="mini" class="btnStyle" @click="navGroupprojectdetail">详情</el-button>	
+									    <template slot-scope="scope">	
+									    	<router-link to='/Main/Groupprojectdetail'>
+												<el-button type="primary" class="btnStyle" size="mini">详情</el-button>
+											</router-link>	
+												
 										      
 									    </template>
 									</el-table-column>

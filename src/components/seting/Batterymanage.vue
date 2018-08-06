@@ -2,10 +2,10 @@
 	<div>
 		<div class="outsideBox1 flex-wrap flex-vertical">
 			<el-row class="contentBox" type="flex" align="middle">
-				<el-col :span="6" :offset="18" class="tr">				
-					<button type="button" class="btn btnStyle" @click="navAddbattery">
-					  <span class="glyphicon glyphicon-plus"></span>  &nbsp;添加新电池
-					</button>
+				<el-col :span="6" :offset="18" class="tr">
+					<router-link to='/Main/Addbattery'>
+						<el-button type="primary" size="small" class="btnStyle">+&nbsp;添加新电池</el-button>	
+					</router-link>	
 				</el-col>
 			</el-row>
 		

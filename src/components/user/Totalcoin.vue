@@ -1,23 +1,23 @@
 <template>
 	<div>
-		<div class="totalCoin">
+		<div class="contentBox hf bw pr">
 			
 		
 		<template>
 								<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="date" label="用户账号" width="" align="center">
+									<el-table-column prop="username" label="用户账号" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="天牛币余额" width="" align="center">
+									<el-table-column prop="margin" label="天牛币余额" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="天牛币充值金额" width="" align="center">
+									<el-table-column prop="integral" label="天牛币充值金额" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="类型" width="" align="center">
+									<el-table-column prop="categorys" label="类型" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="支付单号" width="" align="center">
+									<el-table-column prop="paymentno" label="支付单号" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="支付方式" width="" align="center">
+									<el-table-column prop="paymodes" label="支付方式" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="变动时间" width="" align="center">
+									<el-table-column prop="addTime" label="变动时间" width="" align="center">
 									</el-table-column>
 									
 								</el-table>
@@ -28,9 +28,9 @@
 							      @size-change="handleSizeChange"
 							      @current-change="handleCurrentChange"
 							      :current-page.sync="currentPage1"
-							      :page-size="8"							    
+							      :page-size="10"							    
 							      layout="total, prev, pager, next"
-							      :total="100">
+							      :total="totalCount">
 							    </el-pagination>
 							 	 </div>
 							</template>	
@@ -42,44 +42,9 @@
 	export default{
 		data(){
 			return {
-				tableData: [{
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1518 弄',
-		            money:'￥52220.00',
-		            xinghao:'6020锂电',
-		            state:'未缴',
-		            number:'13598096785',
-		            time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1517 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1519 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1516 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }],
-		          currentPage1:1
+				tableData: [],
+		         currentPage1:1,
+		         totalCount:10
 			}
 		},
 		methods:{
@@ -87,12 +52,87 @@
 	        console.log(`每页 ${val} 条`);
 	      },
 	      handleCurrentChange(val) {
-	        console.log(`当前页: ${val}`);
+	         this.getCustBeetleList(val);
+	      },
+	      getCustBeetleList(pageNo){
+	      	  this.$get('customer/custBeetleList',{
+				pageNo:pageNo
+			}).then(data=>{
+				var tableData = data.datas;				
+				this.tableData = tableData;
+				this.totalCount = data.totalCount;
+				for(var i = 0,len =tableData.length;i<len;i++ ){
+					switch (tableData[i].category){
+							case 0:
+							tableData[i].categorys = "租金退还"
+							break;
+							case 1:
+							tableData[i].categorys = "换电费退还"
+							break;
+							case 2:
+							tableData[i].categorys = "活动赠送"
+							break;
+							case 3:
+							tableData[i].categorys = "推荐会员"
+							break;
+							case 4:
+							tableData[i].categorys = "评价赠送"
+							break;
+							case 5:
+							tableData[i].categorys = "后台充值"
+							break;
+							case 8:
+							tableData[i].categorys = "用户充值"
+							break;
+							case 7:
+							tableData[i].categorys = "续租奖励"
+							break;
+							case 10:
+							tableData[i].categorys = "订单付款"
+							break;
+							case 11:
+							tableData[i].categorys = "租金支付"
+							break;
+							case 12:
+							tableData[i].categorys = "换电费支付"
+							break;
+							case 13:
+							tableData[i].categorys = "充值奖励"
+							break;
+							case 14:
+							tableData[i].categorys = "平台扣款"
+							break;
+							default:
+							tableData[i].categorys = "--"
+							
+						}
+					switch(tableData[i].paymode){
+							case 0:
+							tableData[i].paymodes = "支付宝"
+							break;
+							case 1:
+							tableData[i].paymodes = "微信"
+							break;
+							case 2:
+							tableData[i].paymodes = "钱包支付"
+							break;
+							case 3:
+							tableData[i].paymodes = "天牛币支付"
+							break;
+							default:
+							tableData[i].paymodes = "--"
+							
+						}
+				}
+			})
 	      }
+		},
+		mounted(){
+			this.getCustBeetleList(1);
 		}
 	}
 </script>
 
 <style scoped>
-.totalCoin{padding:10px 20px 0;background:#fff;height:100%;position:relative;}
+
 </style>

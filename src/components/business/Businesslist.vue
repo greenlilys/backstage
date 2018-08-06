@@ -20,10 +20,12 @@
 				</div>
 			</el-col>
 
-			<el-col :span="6" :offset="6" style="text-align:right;">				
-				<button type="button" class="btn btnStyle" @click="navAddbusiness">
-				  <span class="glyphicon glyphicon-plus"></span>  &nbsp;添加运营商
-				</button>
+			<el-col :span="6" :offset="6" style="text-align:right;">
+				<router-link to='/Main/Addbusiness'>
+					<el-button type="primary" size="small" class="btnStyle">+&nbsp;添加运营商</el-button>
+					
+				</router-link>
+				
 			</el-col>
 		</el-row>
 		
@@ -47,8 +49,10 @@
 									<el-table-column prop="name" label="账户状态" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="action" label="操作" align="center">
-									    <template slot-scope="scope">										
-											<el-button type="primary" size="mini" class="btnStyle" @click="navBusinessdetail">详情</el-button>	
+									    <template slot-scope="scope">	
+									    	<router-link to='/Main/Businessdetail'>
+												<el-button type="primary" size="mini" class="btnStyle">详情</el-button>												
+											</router-link>												
 											<el-button type="primary" size="mini" class="btnStyle">禁用</el-button>	        
 									    </template>
 									</el-table-column>
@@ -111,12 +115,6 @@
 	      },
 	      handleCurrentChange(val) {
 	        console.log(`当前页: ${val}`);
-	      },
-	      navAddbusiness(){
-	      	this.$router.push('/Businesslist/Addbusiness');
-	      },
-	      navBusinessdetail(){
-	      	this.$router.push('/Businesslist/Businessdetail')
 	      }
 	     
 		}

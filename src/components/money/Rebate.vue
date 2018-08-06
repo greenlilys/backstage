@@ -1,11 +1,13 @@
 <template>
 	<div>
-			<div class="outsideBox">						
+			<div class="contentBox flex-wrap flex-vertical hf">						
 				<div class="tabCard flex-wrap flex-horizontal">				
 					<div v-for="(v,i) in tabItem" @click="changeItem(v,i)" v-bind:class="{actived : i == currentI}">{{v}}</div>
 				</div>				
 				
-				<component v-bind:is="current"></component>
+				<component v-bind:is="current" class="flex-con"></component>
+				
+				
 			</div>
 	</div>
 </template>

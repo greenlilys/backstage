@@ -2,17 +2,17 @@
 	<div class="mt-10">
 		<template>
 								<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="date" label="起租/续租时间" width="" align="center">
+									<el-table-column prop="addTime" label="起租/续租时间" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="租期类型" width="" align="center">
+									<el-table-column prop="leaseterms" label="租期类型" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="租金" width="" align="center">
+									<el-table-column prop="amount" label="租金" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="支付方式" width="" align="center">
+									<el-table-column prop="paymodes" label="支付方式" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="支付订单号" width="" align="center">
+									<el-table-column prop="paymentno" label="支付订单号" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="租期" width="" align="center">
+									<el-table-column prop="rentDay" label="租期" width="" align="center">
 									</el-table-column>
 								</el-table>
 							</template>
@@ -22,9 +22,9 @@
 							      @size-change="handleSizeChange"
 							      @current-change="handleCurrentChange"
 							      :current-page.sync="currentPage1"
-							      :page-size="8"							    
+							      :page-size="10"							    
 							      layout="total, prev, pager, next"
-							      :total="100">
+							      :total="totalCount">
 							    </el-pagination>
 							 	 </div>
 							</template>		
@@ -35,53 +35,69 @@
 	export default{
 		data(){
 			return {
-				tableData: [{
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1518 弄',
-		            money:'￥52220.00',
-		            xinghao:'6020锂电',
-		            state:'未缴',
-		            number:'13598096785',
-		            time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1517 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1519 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1516 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }],
-		          currentPage1:1
+				tableData: [],
+		        currentPage1:1,
+		        totalCount:1
+		        
 			}
 		},
 		methods:{
-			 handleSizeChange(val) {
-	        console.log(`每页 ${val} 条`);
-	      },
-	      handleCurrentChange(val) {
-	        console.log(`当前页: ${val}`);
+			handleSizeChange(val) {
+		        console.log(`每页 ${val} 条`);
+		    },
+		    handleCurrentChange(val) {
+		    	var id = this.id;
+		      	this.getRenewList(id,val);
+		        console.log(`当前页: ${val}`);
+		    },
+	        getRenewList(id,pageNo){
+	            this.$get('customerLog/renewList',{
+					id:id,
+					pageNo:pageNo					
+			}).then(data=>{					
+					var tableData = data.datas;					
+					this.totalCount = data.totalCount;
+					for(var i = 0,len=tableData.length;i<len;i++){
+						tableData[i].rentDay = tableData[i].begintime + " 至  " +tableData[i].endtime;
+						switch (tableData[i].leaseterm){
+							case 0:
+							tableData[i].leaseterms = "月租"
+							break;
+							case 1:
+							tableData[i].leaseterms = "季租"
+							break;
+							case 2:
+							tableData[i].leaseterms = "年租"
+							break;
+							default:
+							tableData[i].leaseterms = "--";
+						}
+						
+						switch (tableData[i].paymode){
+							case 0:
+							tableData[i].paymodes = "支付宝"
+							break;
+							case 1:
+							tableData[i].paymodes = "微信"
+							break;
+							case 2:
+							tableData[i].paymodes = "钱包支付"
+							break;
+							default:
+							tableData[i].paymodes = "--";
+						}
+
+					}
+					this.tableData = tableData;
+			})
 	      }
+		},
+		props:['id'],
+		mounted(){					
+			this.getRenewList(this.id,1);
+		},
+		watch:{
+
 		}
 	}
 </script>

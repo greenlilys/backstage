@@ -3,7 +3,7 @@
 		<div class="contentBox">
 			
 			<div class="mb-10">
-				<span>预约可选周期：</span>
+				<span class="font-14">预约可选周期：</span>
 				<el-tag
 				  :key="tag"
 				  v-for="tag in dynamicTags"

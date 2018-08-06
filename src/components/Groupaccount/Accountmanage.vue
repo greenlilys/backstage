@@ -35,9 +35,9 @@
 									<el-table-column prop="name" label="账号状态" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="action" label="操作" align="center">
-									    <template slot-scope="scope">										
-											<el-button type="primary" size="mini" class="btnStyle" @click="navGroupprojectdetail">修改</el-button>	
-										     <el-button type="primary" size="mini" class="btnStyle" @click="navGroupprojectdetail">停用</el-button> 
+									    <template slot-scope="scope">	
+												<el-button type="primary" class="btnStyle" size="mini">修改</el-button>
+												<el-button type="primary" class="btnStyle" size="mini">停用</el-button>
 									    </template>
 									</el-table-column>
 								</el-table>
@@ -99,13 +99,6 @@
 	      },
 	      handleCurrentChange(val) {
 	        console.log(`当前页: ${val}`);
-	      },
-	      navAddgroupproject(){
-	      	this.$router.push('/Groupproject/Addgroupproject')
-	      },
-	  
-	      navGroupprojectdetail(){
-	      	this.$router.push('/Groupproject/Groupprojectdetail')
 	      }
 	     
 		}

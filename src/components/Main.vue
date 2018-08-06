@@ -1,9 +1,6 @@
 <template>
-	<div class="main">
-		<div v-if="isLogin" class="login">
-			<Sign v-on:loginSuccess="login"></Sign>
-		</div>
-		<div v-else class="mainContent flex-wrap flex-vertical">
+	<div class="main">		
+		<div class="mainContent flex-wrap flex-vertical">
 			<Head class="headHeight"></Head>
 			<div class="flex-wrap flex-horizontal mainBox flex-con">
 				<Aside></Aside>
@@ -16,7 +13,7 @@
 	</div>
 </template>
 <script>
-	import Sign from '@/components/Sign'
+
 	import Head from '@/components/Head'
 	import Aside from '@/components/aside/Aside'
 	import Navbar from '@/components/common/Navbar'
@@ -28,20 +25,17 @@
 			}
 		},
 		methods: {
-			login() {
-				this.isLogin = false;
-			}
+			
 		},
 		components: {
-			Head,
-			Sign,
+			Head,			
 			Aside,
 			Navbar
 		}
 	}
 </script>
 <style>
-	.main,.login,.mainContent {	height: 100%;}
+	.main,.mainContent {	height: 100%;}
 	.mainBox{width:100%;}
 	.contentBoxs{height:100%;}
 	.headHeight{height:50px}

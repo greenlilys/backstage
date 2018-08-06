@@ -2,11 +2,11 @@
 	<div>					
 							<template>
 								<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="date" label="回收记录事件" width="160" align="center">
+									<el-table-column prop="addtime" label="回收记录时间" width="160" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="回收内容" width="" align="center">
+									<el-table-column prop="Inventorydistribution" label="回收内容" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="address" label="经办人" align="center">
+									<el-table-column prop="nickname" label="经办人" align="center">
 									</el-table-column>
 								</el-table>
 							</template>
@@ -29,40 +29,48 @@
 	export default {
       data() {
         return {
-          tableData: [{
-            date: '2016-05-02',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄',
-            money:50.00
-          }, {
-            date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄',
-            money:50.00
-          }, {
-            date: '2016-05-01',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄',
-            money:50.00
-          }, {
-            date: '2016-05-03',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄',
-            money:50.00
-          }],
-          currentPage1:1,
-          activeName2: 'first'
-        }
+          tableData: [],
+					currentPage1:1,
+					total:0,
+      }
       },
       methods:{
-	      	 handleSizeChange(val) {
+	      handleSizeChange(val) {
 	        console.log(`每页 ${val} 条`);
 	      },
 	      handleCurrentChange(val) {
-	        console.log(`当前页: ${val}`);
-	      }
-      }
-    }
+					this.getShopServiceList(val,this.id)
+	        //console.log(`当前页: ${val}`);
+				},
+				getShopServiceList(pageNo,id){
+					var id=this.id;
+		      this.$get('shopLog/recoveryList',{
+						pageNo:pageNo,
+						id:id
+					}).then(data=>{
+					var arr = data.datas;
+					for(var i = 0,len=arr.length;i<len;i++){
+	    		
+						//电池库存/配货
+						var battery = arr[i].batteryList;
+						arr[i].Inventorydistribution="";
+						for(var j = 0,lens=battery.length;j<lens;j++){
+							arr[i].Inventorydistribution += '\n';
+							arr[i].Inventorydistribution+= battery[j].mode +"          "+ battery[j].groupnum+"组";
+						}
+	    		}
+	    		this.tableData = arr;
+	    		this.total= Number(data.totalCount);
+	    		})
+	      },
+			},
+			props:['id'],
+			ceeated(){
+    	},
+    	mounted(){
+    	this.getShopServiceList(1,this.id)
+   	 },
+  }
 </script>
 
 <style>

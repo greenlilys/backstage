@@ -50,8 +50,11 @@
 									<el-table-column prop="name" label="网点名称" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="" label="操作" align="center">
-									    <template slot-scope="scope">										
-											<el-button type="primary" size="mini" class="btnStyle" @click="navdetail">详情</el-button>
+									    <template slot-scope="scope">
+									    	<router-link to='/Main/Replacedetail'>
+												<el-button type="primary" class="btnStyle" size="mini">详情</el-button>
+											</router-link>
+											
 									    </template>
 									</el-table-column>
 								</el-table>

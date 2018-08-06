@@ -7,66 +7,66 @@
 		<el-row>
 			<el-form ref="form" :model="form" label-width="140px">
 			<el-col :span="11">	
-				<h2 class="fontYellow font-18 subTitle">ÉÌÆ·±êÇ©</h2>
-					<el-form-item label="Ì×²ÍÃû³Æ£º">
+				<h2 class="fontYellow font-18 subTitle">å•†å“æ ‡ç­¾</h2>
+					<el-form-item label="å¥—é¤åç§°ï¼š">
 						<el-input v-model="form.name"></el-input>
 					</el-form-item>
-					<el-form-item label="µç³ØĞÍºÅ£º">
+					<el-form-item label="ç”µæ± å‹å·ï¼š">
 						<el-input v-model="form.name"></el-input>
 					</el-form-item>
-					<el-form-item label="µç³ØÊıÁ¿£¨×é£©£º">
+					<el-form-item label="ç”µæ± æ•°é‡ï¼ˆç»„ï¼‰ï¼š">
 						<el-row>
 							<el-col :span="11">								
 								<template>
-									<el-input-number v-model="num1" @change="handleChange" :min="1" :max="10" label="ÃèÊöÎÄ×Ö"></el-input-number>
+									<el-input-number v-model="num1" @change="handleChange" :min="1" :max="10" label="æè¿°æ–‡å­—"></el-input-number>
 								</template>
 							</el-col>
 					</el-row>
 					</el-form-item>
 					
-					<el-form-item label="µç³ØËµÃ÷£º">
+					<el-form-item label="ç”µæ± è¯´æ˜ï¼š">
 						<el-input
 						  type="textarea"
 						  :rows="2"
-						  placeholder="ÇëÊäÈëÄÚÈİ"
+						  placeholder="è¯·è¾“å…¥å†…å®¹"
 						  v-model="textarea">
 						</el-input>
 					</el-form-item>
-					<h2 class="fontYellow font-18 subTitle">µç³Ø¼Û¸ñ</h2>
-					<el-form-item label="Åä»õ³É±¾£¨£¤£©£º">
+					<h2 class="fontYellow font-18 subTitle">ç”µæ± ä»·æ ¼</h2>
+					<el-form-item label="é…è´§æˆæœ¬ï¼ˆï¿¥ï¼‰ï¼š">
 						<el-input v-model="form.name"></el-input>
 					</el-form-item>
 						
-					<el-form-item label="Ñº½ğ½ğ¶î£¨£¤£©£º">
+					<el-form-item label="æŠ¼é‡‘é‡‘é¢ï¼ˆï¿¥ï¼‰ï¼š">
 						<el-input v-model="form.name"></el-input>
 					</el-form-item>
-					<el-form-item label="ÊĞ³¡ÊÛ¼Û£¨£¤£©£º">
+					<el-form-item label="å¸‚åœºå”®ä»·ï¼ˆï¿¥ï¼‰ï¼š">
 						<el-input v-model="form.name"></el-input>
 					</el-form-item>
-					<h2 class="fontYellow font-18 subTitle">»»µç·Ñ</h2>
-					<el-form-item label="»»µç·Ñ£¨£¤£©/´Î£º">
+					<h2 class="fontYellow font-18 subTitle">æ¢ç”µè´¹</h2>
+					<el-form-item label="æ¢ç”µè´¹ï¼ˆï¿¥ï¼‰/æ¬¡ï¼š">
 						<el-input v-model="form.name"></el-input>
 					</el-form-item>
-					<h2 class="fontYellow font-18 subTitle">×â½ğ¼Û¸ñ</h2>
-					<el-form-item label="ÔÂ×â£¨£¤£©£º">
+					<h2 class="fontYellow font-18 subTitle">ç§Ÿé‡‘ä»·æ ¼</h2>
+					<el-form-item label="æœˆç§Ÿï¼ˆï¿¥ï¼‰ï¼š">
 						<el-input v-model="form.name"></el-input>
 					</el-form-item>
-					<el-form-item label="¼¾×â£¨£¤£©£º">
+					<el-form-item label="å­£ç§Ÿï¼ˆï¿¥ï¼‰ï¼š">
 						<el-input v-model="form.name"></el-input>
 					</el-form-item>	
-					<el-form-item label="Äê×â£¨£¤£©£º">
+					<el-form-item label="å¹´ç§Ÿï¼ˆï¿¥ï¼‰ï¼š">
 						<el-input v-model="form.name"></el-input>
 					</el-form-item>	
-					<h2 class="fontYellow font-18 subTitle">ÉÏ¼Ü×´Ì¬</h2>
-					<el-form-item label="ÉÏ¼Ü×´Ì¬£º">
+					<h2 class="fontYellow font-18 subTitle">ä¸Šæ¶çŠ¶æ€</h2>
+					<el-form-item label="ä¸Šæ¶çŠ¶æ€ï¼š">
 						<template>
-							<el-radio v-model="radio" label="1">ÉÏ¼Ü</el-radio>
-							<el-radio v-model="radio" label="2">ÏÂ¼Ü</el-radio>					
+							<el-radio v-model="radio" label="1">ä¸Šæ¶</el-radio>
+							<el-radio v-model="radio" label="2">ä¸‹æ¶</el-radio>					
 						</template>
 					</el-form-item>	
 					<el-form-item>
 						<el-row>
-							<el-button type="primary" class="btnStyle" @click="submitForm('ruleForm2')">±£´æ</el-button>
+							<el-button type="primary" class="btnStyle" @click="submitForm('ruleForm2')">ä¿å­˜</el-button>
 						</el-row>
 					</el-form-item>
 			</el-col>
@@ -122,7 +122,7 @@
 <style scoped>	
 	.itemTitle{font-size:18px;line-height: 26px;background:}
 	.addBusiness .mainContent{background:#fff;padding:10px 20px 0;}
-/*ÊäÈë¿òÏÂ¼ä¾àÑùÊ½ÖØÖÃ*/
+/*è¾“å…¥æ¡†ä¸‹é—´è·æ ·å¼é‡ç½®*/
 	.el-form-item {	margin-bottom: 10px;}
 	
 </style>

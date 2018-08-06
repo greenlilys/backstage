@@ -1,20 +1,23 @@
 <template>
-	<div class="bg bgHui">		
+	<div>	
+		<div class="flex-wrap flex-vertical hf">
 		
 			  	<ul class="tabItem flex-wrap flex-horizontal flex-justify-between">
-						<li class="flex-wrap flex-vertical  flex-align-center"><span>今日注册</span><span>{{registerNum}}</span></li>
-						<li class="flex-wrap flex-vertical  flex-align-center"><span>今日安装</span><span>{{installNum}}</span></li>
-						<li class="flex-wrap flex-vertical  flex-align-center"><span>今日换电</span><span>{{replaceNum}}</span></li>
-						<li class="flex-wrap flex-vertical  flex-align-center"><span>今日退租</span><span>{{retireNum}}</span></li>					
+						<li class="flex-wrap flex-vertical  flex-align-center flex-con"><span>今日注册</span><span>{{registerNum}}</span></li>
+						<li class="flex-wrap flex-vertical  flex-align-center flex-con"><span>今日安装</span><span>{{installNum}}</span></li>
+						<li class="flex-wrap flex-vertical  flex-align-center flex-con"><span>今日换电</span><span>{{replaceNum}}</span></li>
+						<li class="flex-wrap flex-vertical  flex-align-center flex-con"><span>今日退租</span><span>{{retireNum}}</span></li>					
 				</ul>	
-			<div class="tabCard clear mt-10">					
-					<div v-for="(item,dataType) in tabItem" @click="changeItem(dataType,timeType)" :class="[currentI == dataType?'actived':'']">{{item}}</div>
-					<ul class="btnStyle mt-10">
-						<li v-for="(item,timeType) in buttonList" :class="[buttonInx == timeType?'actived':'']" @click="isActive(timeType)">{{item}}</li>
-					</ul>
-			</div>
+				<div class="contentBox mt-10">
+					<div class="tabCard clear ">					
+							<div v-for="(item,dataType) in tabItem" @click="changeItem(dataType,timeType)" :class="[currentI == dataType?'actived':'']">{{item}}</div>
+							<ul class="btnStyle mt-10">
+								<li v-for="(item,timeType) in buttonList" :class="[buttonInx == timeType?'actived':'']" @click="isActive(timeType)">{{item}}</li>
+							</ul>
+					</div>
+				</div>
 			<div id="main" class="flex-con"></div>
-
+		</div>
 	</div>
 </template>
 <script>
@@ -33,7 +36,8 @@
 				registerNum:0,
 				installNum:0,
 				replaceNum:0,
-				retireNum:0,				
+				retireNum:0,
+				
 				dateValue:[],
 				foldLineValue:[],
 				dataType:0,//0：注册，1：安装，2：换电，3：退租
@@ -56,10 +60,11 @@
 				}else{
 					this.dataType = 2;
 				}
-				this.$fetch('main/info',{
+				this.$get('main/info',{
 				dataType:this.dataType,
 				timeType:this.timeType,
-				},(data)=>{
+				}).then((data)=>{
+
 					this.registerNum  = data.registerToday;
 					this.installNum = data.today.installCount;
 					this.replaceNum = data.today.replaceCount;
@@ -123,7 +128,7 @@
 						}]
 					};
 					myChart.setOption(option)
-				},this.$router);
+				})
 			},
 			isActive(timeType){
 				this.buttonInx = timeType;
@@ -142,19 +147,20 @@
 	}
 </script>
 <style scoped>
-.bg{width:100%;padding-top:10px;padding-left:10px;padding-right:10px;box-sizing: border-box;}
-.tabItem{width:90%;margin:0 auto;}
-.tabItem li{width:23%;height:140px;background:#fff;}
+
+.tabItem{width:100%;margin:0 auto;}
+.tabItem li{;height:140px;background:#fff;margin-right:10px;}
+.tabItem li:nth-child(4){margin-right:0;}
 .tabItem li span:nth-child(2){font-size:38px;color:#FF6600;margin-top:20px;}
 .tabItem li span:nth-child(1){	font-size:16px;	font-weight:bold;margin-top:10px;}
 .tabItem span{	display:block;}
 
-.tabCard{background:#fff;border-top:2px solid #FF9900;width:90%;line-height: 26px;margin:10px auto 0;}
+.tabCard{background:#fff;border-top:2px solid #FF9900;width:100%;line-height: 26px;}
 .tabCard div{float:left;font-size:16px;padding:10px 20px;background:#fff;cursor: pointer;}
 .tabCard .actived{background:#FF9900;color:#fff;}
 .tabCard .btnStyle{float:right;margin-right:10px;}
 
-#main{width:90%;margin:10px auto 0;height:600px;background:#fff;}
+#main{width:100%;margin:0 auto 0;background:#fff;}
 .tabCard ul{background: #fff; border: 1px solid #ebf0f4;}
 .tabCard ul li{list-style: none;float: left;text-align: center;color: #000;width: 60px;}
 </style>

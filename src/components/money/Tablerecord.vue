@@ -1,17 +1,20 @@
 <template>
 	<div>
-			<div class="outsideBox">						
+			<div class="contentBox flex-wrap flex-vertical hf">						
 				<div class="tabCard flex-wrap flex-horizontal">				
 					<div v-for="(v,i) in tabItem" @click="changeItem(v,i)" v-bind:class="{actived : i == currentI}">{{v}}</div>
 				</div>				
 				
 				<el-row  class="contentBox" type="flex" align="middle">
-				<el-col :span="6" :offset="18">
-					<el-input placeholder="请输入内容" v-model="find" class="input-with-select">
-						<el-button slot="append" icon="el-icon-search">筛选</el-button>
-					</el-input>
-				</el-col>				
+					<el-col :span="6" :offset="18">
+						<el-input placeholder="请输入内容" v-model="find" class="input-with-select">
+							<el-button slot="append" icon="el-icon-search">筛选</el-button>
+						</el-input>
+					</el-col>				
 				</el-row>
+				<div class="flex-con pr">
+					
+				
 						
 								<el-table :data="tableData" style="width: 100%;">
 									<el-table-column prop="date" label="用户账户" width="" align="center">
@@ -39,6 +42,7 @@
 							      :total="100">
 							    </el-pagination>
 							 	 </div>
+					</div>
 						
 			</div>
 	</div>

@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<div class="flex-wrap flex-vertical outsideBox1">
-			<el-row class="contentBox" type="flex" align="middle">
+		<div class="flex-wrap flex-vertical hf">
+			<el-row class="headBox" type="flex" align="middle">
 				<el-col :span="8">
 					 <div class="block">
 					    <span class="demonstration">选择时段：&nbsp;</span>
@@ -21,30 +21,30 @@
 			</el-row>
 			
 			<div class="flex-wrap flex-horizontal mt-10 numBox">
-				<div class="contentBox flex-con">
+				<div class="flex-con headBox">
 					<h1 class="font-20 tc fontYellow">545</h1>
 					<p class="font-16 tc mt-10">安装预约合计</p>
 				</div>
-				<div class="contentBox flex-con">
+				<div class="headBox flex-con">
 					<h1 class="font-20 tc fontYellow">21450</h1>
 					<p class="font-16 tc mt-10">换电预约合计</p>
 				</div>
-				<div class="contentBox flex-con">
+				<div class="headBox flex-con">
 					<h1 class="font-20 tc fontYellow">168</h1>
 					<p class="font-16 tc mt-10">退电预约合计</p>
 				</div>
 			</div>
 			
-			<el-row type="flex" align="middle" class="contentBox mt-10"> 
+			<el-row type="flex" align="middle" class="headBox mt-10"> 
 				<el-col :span="6">
-					<div class="font-14">数据明细：（2017-03-01至2017-03-08）</div>
+					<div class="font-16">数据明细：（2017-03-01至2017-03-08）</div>
 				</el-col>
 				<el-col :span="6" :offset="12" class="tr">
-					<el-button type="primary" size="mini" class="btnStyle">导出当前数据</el-button>
+					<el-button type="primary" size="small" class="btnStyle">导出当前数据</el-button>
 				</el-col>
 			</el-row>
 			
-			<div class="botBox flex-con contentBox">
+			<div class="pr flex-con contentBox">
 				<el-table :data="tableData" style="width: 100%;">
 									<el-table-column prop="date" label="运营商编号" width="" align="center">
 									</el-table-column>
@@ -130,7 +130,7 @@
 </script>
 
 <style scoped>
-	.numBox>div{padding:20px;}
+	
 	.numBox>div:nth-child(1),.numBox>div:nth-child(2){margin-right:10px;}
-	.botBox{position:relative;}
+	
 </style>

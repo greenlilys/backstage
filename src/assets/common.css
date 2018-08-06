@@ -78,7 +78,9 @@ align-items: center;
 .flex-justify-end{
 	justify-content: flex-end;
 }
-
+.font-12{
+	font-size:12px;
+}
 .font-14{
 	font-size:14px;
 }
@@ -131,11 +133,12 @@ align-items: center;
 	margin:10px 0;
 }
 
-.btnStyle{background:#FF9900;outline:none;border:none;color:#fff;}
-.btnStyle:hover{background-color:#DE8303;cursor: pointer;color:#fff;}
-.el-button:hover{background-color:#DE8303;cursor: pointer;color:#fff;}
-.el-button:active{border-color:none;outline:none;background:#FF9900;}
+/*.btnStyle{background:#FF9900;outline:none;border:none;color:#fff;}
+.btnStyle:hover{background-color:#DE8303;cursor: pointer;color:#fff;}*/
+/*.el-button:hover{background-color:#DE8303;cursor: pointer;color:#fff;}
+.el-button:active{border-color:none;outline:none;background:#FF9900;}*/
 
+.btnStyle{background:#E48700;}
 .page{position:absolute;right:0;bottom:20px;}
 
 /*列表样式重置*/
@@ -152,7 +155,13 @@ align-items: center;
 .distpicker-address-wrapper select{width:28%;}
 
 .outsideBox{background:#fff;height:100%;padding:10px;}
+
+.outsideBox2{background:#fff;padding:10px 20px;}
+.headBox{background:#fff;padding:10px 20px;}
+
 .outsideBox1{height:100%;}
+.hf{height:100%;}
+
 .bw{background:#fff;}
 .contentBox{padding:10px;background:#fff;box-sizing: border-box;}
 .pr{position:relative;}
@@ -160,8 +169,8 @@ align-items: center;
 /*选项卡样式*/
 .conBottom{width:100%;padding:10px;background:#fff;position:relative;box-sizing: border-box;}
 .tabCard{background:#fff;border-top:2px solid #FF9900;border-bottom:1px solid #EBF0F4;}
-.tabCard div{font-size:16px;line-height: 26px;padding:10px;background:#fff;cursor: pointer;}
-.tabCard .actived{background:#FF9900;color:#fff;}
+.tabCard div{font-size:16px;line-height: 26px;padding:10px 20px;background:#fff;cursor: pointer;}
+.tabCard .actived{background:#F29000;color:#fff;}
 
 /*标签样式*/
  .el-tag + .el-tag {margin-left: 10px;}
@@ -170,4 +179,6 @@ align-items: center;
  
  /*小标题样式*/
  .subTitle{line-height: 30px;}
+ 
+ .row {margin: 0;}
  

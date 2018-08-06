@@ -4,25 +4,25 @@
 			<el-row class="">
 				<el-col :span="10">
 					<el-form ref="form" :model="form" label-width="80px">
-						<el-form-item label="Œ Ã‚£∫">
+						<el-form-item label="ÈóÆÈ¢òÔºö">
 							<el-input
 							  type="textarea"
 							  :rows="2"
-							  placeholder="«Î ‰»Îƒ⁄»›"
+							  placeholder="ËØ∑ËæìÂÖ•ÂÜÖÂÆπ"
 							  v-model="textarea1">
 							</el-input>
 						</el-form-item>
-						<el-form-item label="ªÿ¥£∫">
+						<el-form-item label="ÂõûÁ≠îÔºö">
 							<el-input
 							  type="textarea"
 							  :rows="2"
-							  placeholder="«Î ‰»Îƒ⁄»›"
+							  placeholder="ËØ∑ËæìÂÖ•ÂÜÖÂÆπ"
 							  v-model="textarea2">
 							</el-input>
 						</el-form-item>
 						<el-form-item>
 						<el-row>
-							<el-button type="primary" class="btnStyle" @click="submitForm('ruleForm2')">±£¥Ê</el-button>
+							<el-button type="primary" class="btnStyle" @click="submitForm('ruleForm2')">‰øùÂ≠ò</el-button>
 						</el-row>
 					</el-form-item>
 					</el-form>

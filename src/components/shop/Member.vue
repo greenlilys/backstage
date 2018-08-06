@@ -2,13 +2,13 @@
 	<div>					
 							<template>
 								<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="date" label="会员名称" width="160" align="center">
+									<el-table-column prop="nickname" label="会员名称" width="160" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="会员账号" width="" align="center">
+									<el-table-column prop="username" label="会员账号" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="address" label="下单时间" align="center">
+									<el-table-column prop="addtime" label="下单时间" align="center">
 									</el-table-column>
-									<el-table-column prop="money" label="获得返利" align="center">
+									<el-table-column prop="refereeinte" label="获得返利" align="center">
 									</el-table-column>							
 									
 								</el-table>
@@ -19,9 +19,9 @@
 							      @size-change="handleSizeChange"
 							      @current-change="handleCurrentChange"
 							      :current-page.sync="currentPage1"
-							      :page-size="8"							    
+							      :page-size="10"							    
 							      layout="total, prev, pager, next"
-							      :total="100">
+							      :total="total">
 							    </el-pagination>
 							 	 </div>
 							</template>								
@@ -32,40 +32,38 @@
 	export default {
       data() {
         return {
-          tableData: [{
-            date: '2016-05-02',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄',
-            money:50.00
-          }, {
-            date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄',
-            money:50.00
-          }, {
-            date: '2016-05-01',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄',
-            money:50.00
-          }, {
-            date: '2016-05-03',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄',
-            money:50.00
-          }],
-          currentPage1:1,
-          activeName2: 'first'
-        }
+          tableData: [],
+					currentPage1:1,
+					total:0,
+      }
       },
       methods:{
-	      	 handleSizeChange(val) {
+	      handleSizeChange(val) {
 	        console.log(`每页 ${val} 条`);
 	      },
 	      handleCurrentChange(val) {
-	        console.log(`当前页: ${val}`);
-	      }
-	     }
-    }
+					this.getShopServiceList(val,this.id)
+	        //console.log(`当前页: ${val}`);
+				},
+				getShopServiceList(pageNo,id){
+					var id=this.id;
+		      this.$get('shopLog/memberList',{
+						pageNo:pageNo,
+						id:id
+					}).then(data=>{
+					var arr = data.datas;
+	    		this.tableData = arr;
+	    		this.total= Number(data.totalCount);
+	    		})
+	      },
+			},
+			props:['id'],
+			ceeated(){
+    	},
+    	mounted(){
+    	this.getShopServiceList(1,this.id)
+   	 },
+  }
 </script>
 
 <style>

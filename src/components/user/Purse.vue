@@ -2,13 +2,13 @@
 	<div class="mt-10">
 		<template>
 								<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="date" label="钱包变动时间" width="" align="center">
+									<el-table-column prop="addtime" label="钱包变动时间" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="变动类型" width="" align="center">
+									<el-table-column prop="categorys" label="变动类型" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="金额" width="" align="center">
+									<el-table-column prop="amount" label="金额（元）" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="钱包余额" width="" align="center">
+									<el-table-column prop="balance" label="钱包余额（元）" width="" align="center">
 									</el-table-column>
 									
 								</el-table>
@@ -19,9 +19,9 @@
 							      @size-change="handleSizeChange"
 							      @current-change="handleCurrentChange"
 							      :current-page.sync="currentPage1"
-							      :page-size="8"							    
+							      :page-size="10"							    
 							      layout="total, prev, pager, next"
-							      :total="100">
+							      :total="totalCount">
 							    </el-pagination>
 							 	 </div>
 							</template>		
@@ -32,44 +32,9 @@
 	export default{
 		data(){
 			return {
-				tableData: [{
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1518 弄',
-		            money:'￥52220.00',
-		            xinghao:'6020锂电',
-		            state:'未缴',
-		            number:'13598096785',
-		            time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1517 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1519 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1516 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }],
-		          currentPage1:1
+				tableData: [],
+		        currentPage1:1,
+		        totalCount:10
 			}
 		},
 		methods:{
@@ -77,8 +42,122 @@
 	        console.log(`每页 ${val} 条`);
 	      },
 	      handleCurrentChange(val) {
-	        console.log(`当前页: ${val}`);
+	      	let id = this.id;
+	      	this.getWalletList(id,val);
+	      },
+	      getWalletList(id,pageNo){
+	      	  this.$get('customerLog/walletList',{
+					id:id,
+					pageNo:	pageNo				
+				}).then(data=>{
+					let tableData = data.datas;
+					this.tableData = data.datas;
+					this.totalCount = data.totalCount;
+					for(let i = 0,len=tableData.length;i<len;i++){
+						switch(tableData[i].category){
+							case 0:
+							tableData[i].categorys = "租金退款"
+							break;
+							case 1:
+							tableData[i].categorys = "换电预约取消"
+							break;
+							case 2:
+							tableData[i].categorys = "押金赎回"
+							break;
+							case 3:
+							tableData[i].categorys = "店铺推荐好友"
+							break;
+							case 4:
+							tableData[i].categorys = "店铺完成安装预约"
+							break;
+							case 5:
+							tableData[i].categorys = "店铺完成换电预约"
+							break;
+							case 6:
+							tableData[i].categorys = "店铺完成退电预约"
+							break;
+							case 7:
+							tableData[i].categorys = "店铺排名奖励"
+							break;
+							case 8:
+							tableData[i].categorys = "充值"
+							break;
+							case 9:
+							tableData[i].categorys = "店铺减配电池"
+							break;
+							case 10:
+							tableData[i].categorys = "预约过期"
+							break;
+							case 11:
+							tableData[i].categorys = "增配订单取消"
+							break;
+							case 12:
+							tableData[i].categorys = "救援交通费分润"
+							break;
+							case 13:
+							tableData[i].categorys = "切换电池型号退还租金"
+							break;
+							case 14:
+							tableData[i].categorys = "切换电池分润"
+							break;
+							case 15:
+							tableData[i].categorys = "平台保证金退款"
+							break;
+							case 16:
+							tableData[i].categorys = "用户续租分润"
+							break;
+							case 17:
+							tableData[i].categorys = "用户安装分润"
+							break;
+							case 50:
+							tableData[i].categorys = "订单付款"
+							break;
+							case 51:
+							tableData[i].categorys = "租金支付"
+							break;
+							case 52:
+							tableData[i].categorys = "换电费支付"
+							break;
+							case 53:
+							tableData[i].categorys = "押金支付"
+							break;
+							case 54:
+							tableData[i].categorys = "配货订单支付"
+							break;
+							case 55:
+							tableData[i].categorys = "提现"
+							break;
+							case 56:
+							tableData[i].categorys = "退租违约金支付"
+							break;
+							case 57:
+							tableData[i].categorys = "平台扣款"
+							break;
+							case 58:
+							tableData[i].categorys = "救援交通费支付"
+							break;
+							case 59:
+							tableData[i].categorys = "充值天牛币支付"
+							break;
+							case 60:
+							tableData[i].categorys = "补缴保证金"
+							break;
+							case 61:
+							tableData[i].categorys = "支付切换电池型号"
+							break;
+							case 62:
+							tableData[i].categorys = "缴纳滞纳金"
+							break;
+							default:
+							tableData[i].categorys = "--"
+						}
+					}
+				})
 	      }
+		},
+		props:['id'],
+		mounted(){
+			this.getWalletList(this.id,1)
 		}
 	}
 </script>

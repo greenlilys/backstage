@@ -2,19 +2,17 @@
 	<div class="mt-10">
 		<template>
 								<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="date" label="押金变动时间" width="" align="center">
+									<el-table-column prop="addTime" label="押金变动时间" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="变动类型" width="" align="center">
+									<el-table-column prop="categorys" label="变动类型" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="金额" width="" align="center">
+									<el-table-column prop="balance" label="金额" width="" align="center">
+									</el-table-column>								
+									<el-table-column prop="balance" label="押金余额" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="押金状态" width="" align="center">
+									<el-table-column prop="paymodes" label="支付方式" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="押金余额" width="" align="center">
-									</el-table-column>
-									<el-table-column prop="name" label="支付方式" width="" align="center">
-									</el-table-column>
-									<el-table-column prop="name" label="支付订单号" width="" align="center">
+									<el-table-column prop="paymentno" label="支付订单号" width="" align="center">
 									</el-table-column>
 									
 								</el-table>
@@ -25,9 +23,9 @@
 							      @size-change="handleSizeChange"
 							      @current-change="handleCurrentChange"
 							      :current-page.sync="currentPage1"
-							      :page-size="8"							    
+							      :page-size="10"							    
 							      layout="total, prev, pager, next"
-							      :total="100">
+							      :total="totalCount">
 							    </el-pagination>
 							 	 </div>
 							</template>		
@@ -38,44 +36,9 @@
 	export default{
 		data(){
 			return {
-				tableData: [{
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1518 弄',
-		            money:'￥52220.00',
-		            xinghao:'6020锂电',
-		            state:'未缴',
-		            number:'13598096785',
-		            time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1517 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1519 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1516 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }],
-		          currentPage1:1
+				tableData: [],
+		        currentPage1:1,
+		        totalCount:10
 			}
 		},
 		methods:{
@@ -84,7 +47,60 @@
 	      },
 	      handleCurrentChange(val) {
 	        console.log(`当前页: ${val}`);
+	      },
+	      getDepositList(id,pageNo){
+	      	  this.$get('customerLog/depositList',{
+					id:id,
+					pageNo:pageNo				
+				}).then(data=>{
+					let tableData = data.datas; 
+					this.totalCount = data.totalCount;
+					for(let i = 0,len=tableData.length;i<len;i++){
+						switch (tableData[i].paymode){
+							case 0:
+							tableData[i].paymodes = "支付宝"
+							break;
+							case 1:
+							tableData[i].paymodes = "微信"
+							break;
+							case 2:
+							tableData[i].paymodes = "钱包支付"
+							break;
+							default:
+							tableData[i].paymodes = "--";
+						}
+						
+						switch (tableData[i].category){
+							case 0:
+							tableData[i].categorys = "押金缴纳"
+							break;
+							case 1:
+							tableData[i].categorys = "滞纳金补足"
+							break;
+							case 10:
+							tableData[i].categorys = "电池损毁"
+							break;
+							case 11:
+							tableData[i].categorys = "押金提现"
+							break;
+							case 12:
+							tableData[i].categorys = "逾期扣款"
+							break;
+							default:
+							tableData[i].categorys = "--";
+						}
+						
+					}
+					this.tableData = tableData;
+				})
 	      }
+		},
+		props:['id'],
+		mounted(){					
+			this.getDepositList(this.id,1);			
+		},
+		watch:{
+			
 		}
 	}
 </script>

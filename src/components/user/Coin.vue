@@ -2,13 +2,13 @@
 	<div class="mt-10">
 		<template>
 								<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="date" label="积分变动时间" width="" align="center">
+									<el-table-column prop="addTime" label="积分变动时间" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="变动类型" width="" align="center">
+									<el-table-column prop="categorys" label="变动类型" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="天牛币" width="" align="center">
+									<el-table-column prop="integral" label="天牛币变动" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="天牛币余额" width="" align="center">
+									<el-table-column prop="margin" label="天牛币余额" width="" align="center">
 									</el-table-column>
 									
 								</el-table>
@@ -19,7 +19,7 @@
 							      @size-change="handleSizeChange"
 							      @current-change="handleCurrentChange"
 							      :current-page.sync="currentPage1"
-							      :page-size="8"							    
+							      :page-size="10"							    
 							      layout="total, prev, pager, next"
 							      :total="100">
 							    </el-pagination>
@@ -32,44 +32,9 @@
 	export default{
 		data(){
 			return {
-				tableData: [{
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1518 弄',
-		            money:'￥52220.00',
-		            xinghao:'6020锂电',
-		            state:'未缴',
-		            number:'13598096785',
-		            time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1517 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1519 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1516 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }],
-		          currentPage1:1
+				tableData: [],
+		        currentPage1:1,
+		        totalCount:10
 			}
 		},
 		methods:{
@@ -77,8 +42,69 @@
 	        console.log(`每页 ${val} 条`);
 	      },
 	      handleCurrentChange(val) {
-	        console.log(`当前页: ${val}`);
+	      	let id = this.id;
+	        this.getIntegralList(id,val);
+	      },
+	      getIntegralList(id,pageNo){
+	      	  this.$get('customerLog/integralList',{
+					id:id,
+					pageNo:pageNo					
+				}).then(data=>{
+					let tableData = data.datas;
+					this.tableData = tableData;
+					this.totalCount = data.totalCount;
+					for(let i = 0,len = tableData.length;i<len;i++){
+						switch (tableData[i].category){
+							case 0:
+							tableData[i].categorys = "租金退还"
+							break;
+							case 1:
+							tableData[i].categorys = "换电费退还"
+							break;
+							case 2:
+							tableData[i].categorys = "活动赠送"
+							break;
+							case 3:
+							tableData[i].categorys = "推荐会员"
+							break;
+							case 4:
+							tableData[i].categorys = "评价赠送"
+							break;
+							case 5:
+							tableData[i].categorys = "后台充值"
+							break;
+							case 8:
+							tableData[i].categorys = "用户充值"
+							break;
+							case 7:
+							tableData[i].categorys = "续租奖励"
+							break;
+							case 10:
+							tableData[i].categorys = "订单付款"
+							break;
+							case 11:
+							tableData[i].categorys = "租金支付"
+							break;
+							case 12:
+							tableData[i].categorys = "换电费支付"
+							break;
+							case 13:
+							tableData[i].categorys = "充值奖励"
+							break;
+							case 14:
+							tableData[i].categorys = "平台扣款"
+							break;
+							default:
+							tableData[i].categorys = "--"
+							
+						}
+					}
+				})
 	      }
+		},
+		props:['id'],
+		mounted(){
+			this.getIntegralList(this.id,1);
 		}
 	}
 </script>

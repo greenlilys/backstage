@@ -2,32 +2,32 @@
 	<div>
 		<div class="outsideBox1 flex-wrap flex-vertical">
 			<el-row class="contentBox" type="flex" align="middle">
-				<el-col :span="6" :offset="18" class="tr">				
-					<button type="button" class="btn btnStyle" @click="navCreataccount">
-					  <span class="glyphicon glyphicon-plus"></span>  &nbsp;´´½¨Ô±¹¤ÕËºÅ
-					</button>
+				<el-col :span="6" :offset="18" class="tr">	
+					<router-link to='/Main/Creataccount'>
+						<el-button type="primary" size="small" class="btnStyle">+&nbsp;åˆ›å»ºå‘˜å·¥è´¦å·</el-button>	
+					</router-link>
 				</el-col>
 			</el-row>
 		
-			<div class="contentBox mt-10 flex-con bw">	
+			<div class="contentBox mt-10 flex-con bw pr">	
 								<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="date" label="ÓÃ»§ÕËºÅ" width="" align="center">
+									<el-table-column prop="date" label="ç”¨æˆ·è´¦å·" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="ÕËºÅ×´Ì¬" width="" align="center">
+									<el-table-column prop="name" label="è´¦å·çŠ¶æ€" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="ĞÕÃû" width="" align="center">
+									<el-table-column prop="name" label="å§“å" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="address" label="ÊÖ»ú" width="300" align="center">
+									<el-table-column prop="address" label="æ‰‹æœº" width="300" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="Ö°Îñ" width="" align="center">
+									<el-table-column prop="name" label="èŒåŠ¡" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="È¨ÏŞ" width="" align="center">
+									<el-table-column prop="name" label="æƒé™" width="" align="center">
 									</el-table-column>
 								
-									<el-table-column prop="action" label="¹ÜÀí" width="250" align="center">
+									<el-table-column prop="action" label="ç®¡ç†" width="250" align="center">
 									    <template slot-scope="scope">										
-											<el-button type="primary" size="mini" class="btnStyle" @click="navShopdetail">¹ÜÀí</el-button>
-											<el-button type="primary" size="mini" class="btnStyle">½ûÓÃ</el-button>		         
+											<el-button type="primary" size="mini" class="btnStyle" @click="navShopdetail">ç®¡ç†</el-button>
+											<el-button type="primary" size="mini" class="btnStyle">ç¦ç”¨</el-button>		         
 									    </template>
 									</el-table-column>
 								</el-table>
@@ -54,28 +54,28 @@
 			return {
 				 tableData: [{
             date: '2016',
-            name: 'ÍõĞ¡»¢',
-            address: 'ÉÏº£ÊĞÆÕÍÓÇø½ğÉ³½­Â· 1518 Åª',
+            name: 'ç‹å°è™',
+            address: 'ä¸Šæµ·å¸‚æ™®é™€åŒºé‡‘æ²™æ±Ÿè·¯ 1518 å¼„',
             money:50.00,
-            action:'²é¿´ÏêÇé'
+            action:'æŸ¥çœ‹è¯¦æƒ…'
           }, {
             date: '2016',
-            name: 'ÍõĞ¡»¢',
-            address: 'ÉÏº£ÊĞÆÕÍÓÇø½ğÉ³½­Â· 1517 Åª',
+            name: 'ç‹å°è™',
+            address: 'ä¸Šæµ·å¸‚æ™®é™€åŒºé‡‘æ²™æ±Ÿè·¯ 1517 å¼„',
             money:50.00,
-            action:'²é¿´ÏêÇé'
+            action:'æŸ¥çœ‹è¯¦æƒ…'
           }, {
             date: '2016',
-            name: 'ÍõĞ¡»¢',
-            address: 'ÉÏº£ÊĞÆÕÍÓÇø½ğÉ³½­Â· 1519 Åª',
+            name: 'ç‹å°è™',
+            address: 'ä¸Šæµ·å¸‚æ™®é™€åŒºé‡‘æ²™æ±Ÿè·¯ 1519 å¼„',
             money:50.00,
-            action:'²é¿´ÏêÇé'
+            action:'æŸ¥çœ‹è¯¦æƒ…'
           }, {
             date: '2016',
-            name: 'ÍõĞ¡»¢',
-            address: 'ÉÏº£ÊĞÆÕÍÓÇø½ğÉ³½­Â· 1516 Åª',
+            name: 'ç‹å°è™',
+            address: 'ä¸Šæµ·å¸‚æ™®é™€åŒºé‡‘æ²™æ±Ÿè·¯ 1516 å¼„',
             money:50.00,
-            action:'²é¿´ÏêÇé'
+            action:'æŸ¥çœ‹è¯¦æƒ…'
           }],
 				radio: '1',
 				find: '',
@@ -84,10 +84,10 @@
 		},
 		methods: {
 		handleSizeChange(val) {
-	        console.log(`Ã¿Ò³ ${val} Ìõ`);
+	        console.log(`æ¯é¡µ ${val} æ¡`);
 	      },
 	      handleCurrentChange(val) {
-	        console.log(`µ±Ç°Ò³: ${val}`);
+	        console.log(`å½“å‰é¡µ: ${val}`);
 	      },
 	      navCreataccount(){
 	      	this.$router.push('/Personaccount/Creataccount');
@@ -98,5 +98,5 @@
 </script>
 
 <style scoped>
-	.contentBox{position:relative;}	
+	
 </style>

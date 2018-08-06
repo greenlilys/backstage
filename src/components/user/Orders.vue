@@ -2,27 +2,27 @@
 	<div class="mt-10">
 		<template>
 								<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="date" label="预约编号" width="" align="center">
+									<el-table-column prop="no" label="预约编号" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="预约类型" width="" align="center">
+									<el-table-column prop="types" label="预约类型" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="预约时间" width="" align="center">
+									<el-table-column prop="addtime" label="预约时间" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="address" label="支付金额（积分）"width="230" align="center">
+									<el-table-column prop="cost" label="支付金额（积分）"width="230" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="支付方式" width="" align="center">
+									<el-table-column prop="paymodes" label="支付方式" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="支付订单号" width="" align="center">
+									<el-table-column prop="paymentnos" label="支付订单号" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="完成时间" width="" align="center">
+									<el-table-column prop="finishtime" label="完成时间" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="网点编号" width="" align="center">
+									<el-table-column prop="shopNo" label="网点编号" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="name" label="网点名称" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="action" label="操作" align="center">
+									<el-table-column prop="" label="操作" align="center">
 									    <template slot-scope="scope">										
-											<el-button type="primary" size="mini" class="btnStyle">详情</el-button>	      
+											<el-button type="warning" size="mini" class="btnStyle">详情</el-button>	      
 									    </template>
 									</el-table-column>
 								</el-table>
@@ -33,9 +33,9 @@
 							      @size-change="handleSizeChange"
 							      @current-change="handleCurrentChange"
 							      :current-page.sync="currentPage1"
-							      :page-size="8"							    
+							      :page-size="10"							    
 							      layout="total, prev, pager, next"
-							      :total="100">
+							      :total="totalCount">
 							    </el-pagination>
 							 	 </div>
 							</template>		
@@ -46,53 +46,94 @@
 	export default{
 		data(){
 			return {
-				tableData: [{
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1518 弄',
-		            money:'￥52220.00',
-		            xinghao:'6020锂电',
-		            state:'未缴',
-		            number:'13598096785',
-		            time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1517 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1519 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1516 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }],
-		          currentPage1:1
+				tableData: [],
+		        currentPage1:1,
+		        totalCount:100,//总条目
+		        
 			}
 		},
 		methods:{
-			 handleSizeChange(val) {
-	        console.log(`每页 ${val} 条`);
-	      },
-	      handleCurrentChange(val) {
-	        console.log(`当前页: ${val}`);
+			handleSizeChange(val) {
+		        console.log(`每页 ${val} 条`);
+		    },
+		    handleCurrentChange(val) {
+		    	var id = this.id;
+		      	this.getServiceList(id,val);
+		    },
+	        getServiceList(id,pageNo){	      	
+	      	this.$get('customerLog/serviceList',{
+					id:id,
+					pageNo:pageNo					
+				}).then(data=>{
+					var tableData = data.datas;
+					this.tableData = tableData;
+					this.totalCount = data.totalCount;
+					for(var i = 0,len=tableData.length;i<len;i++){
+						switch(tableData[i].type){
+							case 0:
+							tableData[i].types = "安装"
+							break;
+							case 1:
+							tableData[i].types = "更换"
+							break;
+							case 2:
+							tableData[i].types = "退租"
+							break;
+							default:
+							tableData[i].types = "--"
+							
+						}
+						switch(tableData[i].paymode){
+							case 0:
+							tableData[i].paymodes = "支付宝"
+							break;
+							case 1:
+							tableData[i].paymodes = "微信"
+							break;
+							case 2:
+							tableData[i].paymodes = "钱包支付"
+							break;
+							case 3:
+							tableData[i].paymodes = "天牛币支付"
+							break;
+							default:
+							tableData[i].paymodes = "--"
+							
+						}
+						
+						if(!tableData[i].paymentno){
+							tableData[i].paymentnos = "--"
+						}else{
+							tableData[i].paymentnos = tableData[i].paymentno;
+						}
+					}
+				})
 	      }
+		},
+		props:['id'],
+		created(){
+			
+		},
+		beforeMount(){
+			
+		},
+		watch:{
+			id:function(newVal,oldVal){			
+				if(newVal){this.getServiceList(newVal,1);}else{
+					this.$message({
+						type:'error',
+						message:'id没有获取'
+					})
+				}
+			}
+		},
+		mounted(){			
+			if(this.id){
+				this.getServiceList(this.id,1);
+			}
+		},
+		beforeUpdate(){
+			
 		}
 	}
 </script>

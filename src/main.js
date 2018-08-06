@@ -6,23 +6,25 @@ import 'element-ui/lib/theme-chalk/index.css'
 import './assets/common.css'
 import Vue from 'vue'
 
-import Main from '@/components/Main'
+//import Main from '@/components/Main'
+import App from '@/App'
 import router from './router'
 import axios from 'axios'
-import {post,fetch} from './assets/js/common'
+import {httpPost,httpGet,ye} from './assets/js/common'
 
 Vue.use(ElementUI);
 
 Vue.config.productionTip = false;
-Vue.prototype.$post=post;
-Vue.prototype.$fetch=fetch;
+Vue.prototype.$post=httpPost;
+Vue.prototype.$get=httpGet;
+Vue.prototype.$ye=ye;
 /* eslint-disable no-new */
 
 new Vue({
 	el: '#app',
 	router,
-	components: { Main },
-	template: '<Main/>'
+	components: { App },
+	template: '<App/>'
 })
 
 

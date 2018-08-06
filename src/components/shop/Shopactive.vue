@@ -1,15 +1,15 @@
 <template>
 	<div class="flex-wrap flex-vertical">
 		
-			<el-row class="activeRow">
-				<el-col :span="6" :offset="18" style="text-align:right;">				
-					<button type="button" class="btn btnStyle" @click="Editactive">
-					  <span class="glyphicon glyphicon-plus" ></span>  &nbsp;新建活动
-					</button>
+			<el-row class="contentBox">
+				<el-col :span="6" :offset="18" style="text-align:right;">
+					<router-link to='/Main/Editactive'>
+							<el-button type="primary" size="small" class="btnStyle">+&nbsp;新建活动</el-button>
+					</router-link>				
 				</el-col>
 			</el-row>
 		
-		<div class="flex-con activeList">
+		<div class="flex-con contentBox mt-10 pr">
 				<template>
 								<el-table :data="tableData" style="width: 100%;">
 								
@@ -88,7 +88,6 @@
 </script>
 
 <style scoped>
-	.activeRow{}
-	.activeRow,.activeList{background:#fff;padding:10px 20px;}
-	.activeList{position:relative;}
+	
+	
 </style>

@@ -1,5 +1,5 @@
 <template>
-	<div class="">
+	<div class="flex-wrap flex-vertical">
 		<el-row  class="contentBox" type="flex" align="middle">
 				<el-col :span="6" :offset="18">
 					<el-input placeholder="请输入内容" v-model="find" class="input-with-select">
@@ -7,7 +7,7 @@
 					</el-input>
 				</el-col>				
 		</el-row>
-		<template>
+		<div class="pr flex-con">
 								<el-table :data="tableData" style="width: 100%;">
 									<el-table-column prop="date" label="结算时间" width="" align="center">
 									</el-table-column>
@@ -28,8 +28,7 @@
 									<el-table-column prop="name" label="经办人" width="" align="center">
 									</el-table-column>	
 								</el-table>
-							</template>
-							<template>
+							
 								<div class="block page">							    
 							    <el-pagination
 							      @size-change="handleSizeChange"
@@ -40,7 +39,8 @@
 							      :total="100">
 							    </el-pagination>
 							 	 </div>
-							</template>		
+		</div>
+								
 	</div>
 </template>
 
