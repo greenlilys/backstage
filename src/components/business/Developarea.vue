@@ -42,7 +42,7 @@
 				</el-table-column>
 				<el-table-column prop="action" label="操作" width="" align="center">
 					<template slot-scope="scope">
-						<el-button type="primary" size="mini" class="btnStyle" @click="navShopdetail">详情</el-button>
+						<el-button type="warning" size="mini" class="btnStyle" @click="navShopdetail">详情</el-button>
 					</template>
 				</el-table-column>
 			</el-table>
@@ -60,31 +60,7 @@
 	export default {
 		data() {
 			return {
-				tableData: [{
-					date: '2016',
-					name: '王小虎',
-					address: '上海市普陀区金沙江路 1518 弄',
-					money: 50.00,
-					action: '查看详情'
-				}, {
-					date: '2016',
-					name: '王小虎',
-					address: '上海市普陀区金沙江路 1517 弄',
-					money: 50.00,
-					action: '查看详情'
-				}, {
-					date: '2016',
-					name: '王小虎',
-					address: '上海市普陀区金沙江路 1519 弄',
-					money: 50.00,
-					action: '查看详情'
-				}, {
-					date: '2016',
-					name: '王小虎',
-					address: '上海市普陀区金沙江路 1516 弄',
-					money: 50.00,
-					action: '查看详情'
-				}],
+				tableData: [],
 				radio: '1',
 				find: '',
 				currentPage1: 1,
@@ -114,13 +90,33 @@
 			handleCurrentChange(val) {
 				console.log(`当前页: ${val}`);
 			},
-			navAddshop() {
-				this.$router.push('/Shoplist/Addshop');
+			getShopareaList() {
+				this.$get('operRegion/getAll',{
+					id:this.id
+				}).then(data=>{
+					
+				})
 			},
 			navShopdetail() {
 				this.$router.push('/Shoplist/Shopdetail');
 			}
-		}
+		},
+		mounted(){
+			if(this.id){
+				this.getShopareaList();
+			}			
+		},
+		props:['id'],
+		watch:{
+			id:function(newVal,oldVal){			
+				if(newVal){this.getShopareaList();}else{
+					this.$message({
+						type:'error',
+						message:'id没有获取'
+					})
+				}
+			}
+		},
 	}
 </script>
 <style scoped>

@@ -17,7 +17,7 @@
 			
 			<el-row type="flex" align="middle" class="contentBox mt-10 bw" >
 					<el-col :span="6">
-					押金状态：
+					<span class="font-14">押金状态：</span>
 					<template>
 						<el-radio-group v-model="radio1"  @change = "handleRadio1">
 							<el-radio  :label="2">全部</el-radio>
@@ -28,7 +28,7 @@
 				</el-col>
 				
 				<el-col :span="6">
-					租期状态：
+					<span class="font-14">租期状态：</span>
 					<template>
 						<el-radio-group v-model="radio2"  @change = "handleRadio2">
 							<el-radio  :label="2">全部</el-radio>
@@ -50,7 +50,7 @@
 									</el-table-column>
 									<el-table-column prop="nicknames" label="用户昵称" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="addTime" label="注册时间" width="120" align="center">
+									<el-table-column prop="addTime" label="注册时间" width="140" align="center">
 									</el-table-column>
 									<el-table-column prop="address" label="所在区域" width="200" align="center">
 									</el-table-column>
@@ -64,15 +64,15 @@
 									</el-table-column>
 									<el-table-column prop="rentstates" label="租期状态" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="rent" label="租期" width="160" align="center">
+									<el-table-column prop="rent" label="租期" width="180" align="center">
 									</el-table-column>
 									<el-table-column prop="wallet" label="钱包余额" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="integral" label="天牛币余额" width="" align="center">
+									<el-table-column prop="integral" label="天牛币余额" width="100" align="center">
 									</el-table-column>
 									<el-table-column prop="statusd" label="账户状态" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="" label="操作" width="130" align="center">
+									<el-table-column prop="" label="操作" width="150" align="center">
 									    <template slot-scope="scope">
 									    	<router-link :to="{path:'/Main/Userdetail',query:{id:scope.row.id,isdeposit:scope.row.isdeposit}}">
 													<el-button type="warning" size="mini" class="btnStyle">详情</el-button>
@@ -350,6 +350,5 @@
 
 </script>
 <style scope>
- 
-.pr .el-table .cell, .pr .el-table th div, .pr .el-table--border td:first-child .cell, .pr .el-table--border th:first-child .cell{padding:0;}
+.el-table div.cell{padding:0;}
 </style>

@@ -3,11 +3,14 @@
 		<div class="shopList flex-wrap flex-vertical">	
 		
 		<el-row class="row" type="flex" align="middle">
-			<el-col :span="6">
-				账号状态：
+			<el-col :span="7">
+				 <span class="font-14">账号状态：</span>
 				<template>
-					<el-radio v-model="radio" label="1">正在使用</el-radio>
-					<el-radio v-model="radio" label="2">已停用</el-radio>					
+					<el-radio-group v-model="radio1"  @change = "handleRadio1">
+						<el-radio  label="1">全部</el-radio>
+						<el-radio  label="1">正在使用</el-radio>
+						<el-radio  label="2">已停用</el-radio>	
+					</el-radio-group>
 				</template>
 			</el-col>
 
@@ -19,9 +22,9 @@
 				</div>
 			</el-col>
 
-			<el-col :span="6" :offset="6" style="text-align:right;">
+			<el-col :span="6" :offset="5" style="text-align:right;">
 				<router-link to='/Main/Addgroupproject'>
-					<el-button type="primary" class="btnStyle" size="small">+&nbsp;添加团购项目</el-button>
+					<el-button type="success" size="small">+&nbsp;添加团购项目</el-button>
 				</router-link>			
 				
 			</el-col>
@@ -49,7 +52,7 @@
 									<el-table-column prop="action" label="操作" align="center">
 									    <template slot-scope="scope">	
 									    	<router-link to='/Main/Groupprojectdetail'>
-												<el-button type="primary" class="btnStyle" size="mini">详情</el-button>
+												<el-button type="warning" class="btnStyle" size="mini">详情</el-button>
 											</router-link>	
 												
 										      

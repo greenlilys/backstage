@@ -1,20 +1,19 @@
 <template>
 	<div >
-		<div class="shopList flex-wrap flex-vertical">	
+		<div class="hf flex-wrap flex-vertical">	
 		
-		<el-row class="row" type="flex" align="middle">
-			<el-col :span="1.5">
-				<div>处理结果：</div>
-				
+		<el-row class="headBoxself bw" type="flex" align="middle">
+			<el-col :span="8">
+					<span class="font-14">处理结果：</span>				
+						 <el-radio-group v-model="radio1" @change="handleChange">
+						 	<el-radio  label="">全部</el-radio>
+						 	<el-radio  label="0">默认状态</el-radio>
+							<el-radio  label="1">待审查</el-radio>
+							<el-radio  label="2">确认损坏</el-radio>
+							<el-radio  label="3">未损坏</el-radio>
+						</el-radio-group>				
 			</el-col>
-			<el-col :span="7">
-				<el-checkbox-group v-model="checkList">
-			    <el-checkbox label="等待审查"></el-checkbox>
-			    <el-checkbox label="确认损坏"></el-checkbox>
-			    <el-checkbox label="未损坏"></el-checkbox>			   
-			  </el-checkbox-group>
-				
-			</el-col>
+			
 		</el-row>
 		<div class="listDetail mt-10 flex-con">					
 							<template>
@@ -39,7 +38,7 @@
 									</el-table-column>
 									<el-table-column prop="" label="操作" align="center">
 									    <template slot-scope="scope">										
-											<el-button type="primary" size="mini" class="btnStyle" @click="openConfirm">提交审查结果</el-button>
+											<el-button type="warning" size="mini" class="btnStyle" @click="openConfirm">提交审查结果</el-button>
 									    </template>
 									</el-table-column>
 								</el-table>
@@ -65,38 +64,15 @@
 	export default {
 		data() {
 			return {
-				 tableData: [{
-            date: '2016',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄',
-            money:50.00,
-            action:'查看详情'
-          }, {
-            date: '2016',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄',
-            money:50.00,
-            action:'查看详情'
-          }, {
-            date: '2016',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄',
-            money:50.00,
-            action:'查看详情'
-          }, {
-            date: '2016',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄',
-            money:50.00,
-            action:'查看详情'
-          }],	
-		currentPage1:1,
-		checkList:['等待审查']
+				radio1:'',
+				tableData: [],	
+				currentPage1:1
+				 
 			
 			};
 		},
 		methods: {
-			 handleSizeChange(val) {
+		  handleSizeChange(val) {
 	        console.log(`每页 ${val} 条`);
 	      },
 	      handleCurrentChange(val) {
@@ -104,6 +80,15 @@
 	      },
 	   
 	      handleChange(value){
+	      },
+	      getDamageList(pageNo,reviewstate){
+	      	  reviewstate = reviewstate== ''? '' : reviewstate;
+	      	  this.$get('appointOrder/selectDamageList',{
+	      	  	pageNo:pageNo,
+	      	  	reviewstate:reviewstate
+	      	  }).then(data=>{
+	      	  	
+	      	  })
 	      },
 	      openConfirm(){
 		      this.$confirm('请根据报损照片确定电池是否损坏！', '提示', {
@@ -122,14 +107,17 @@
 	          });          
 	        });
 	      }	
+		},
+		mounted(){
+			this.getDamageList(1,this.radio1);
 		}
 	}
 </script>
 
 <style scoped>
-	.shopList {width: 100%;box-sizing: border-box;height:100%;}	
-	.row {margin: 0;}
-	.row,.listDetail{background: #fff;padding: 10px;}
+	
+	.headBoxself {padding:20px 10px;}
+	.listDetail{background: #fff;padding: 10px;}
 	.shopList .btnReset{color:#fff;}
 	.listDetail{background:#fff;position:relative;}
 	

@@ -1,5 +1,5 @@
 <template>
-	<div>					
+	<div class="mt-10">					
 							<template>
 								<el-table :data="tableData" style="width: 100%;">
 									<el-table-column prop="date" label="救援用户" width="200" align="center">
@@ -25,8 +25,8 @@
 							    <el-pagination
 							      @size-change="handleSizeChange"
 							      @current-change="handleCurrentChange"
-							      :current-page.sync="currentPage1"
-							      :page-size="8"							    
+							      :current-page.sync="currentPage"
+							      :page-size="10"							    
 							      layout="total, prev, pager, next"
 							      :total="100">
 							    </el-pagination>
@@ -39,32 +39,8 @@
 	export default {
       data() {
         return {
-          tableData: [{
-            date: '2016-05-02',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄',
-            money:50.00,
-            action:'查看详情'
-          }, {
-            date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄',
-            money:50.00,
-            action:'查看详情'
-          }, {
-            date: '2016-05-01',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄',
-            money:50.00,
-            action:'查看详情'
-          }, {
-            date: '2016-05-03',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄',
-            money:50.00,
-            action:'查看详情'
-          }],
-          currentPage1:1,
+          tableData: [],
+          currentPage:1,
           activeName2: 'first'
         }
       },

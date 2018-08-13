@@ -2,11 +2,11 @@
 	<div class="mt-10">
 		<template>
 								<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="date" label="用户账号" width="" align="center">
+									<el-table-column prop="username" label="用户账号" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="赎回时间" width="" align="center">
+									<el-table-column prop="addTime" label="赎回时间" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="赎回金额" width="" align="center">
+									<el-table-column prop="deposit" label="赎回金额" width="" align="center">
 									</el-table-column>
 									
 								</el-table>
@@ -16,10 +16,10 @@
 							    <el-pagination
 							      @size-change="handleSizeChange"
 							      @current-change="handleCurrentChange"
-							      :current-page.sync="currentPage1"
-							      :page-size="8"							    
+							      :current-page.sync="currentPage"
+							      :page-size="10"							    
 							      layout="total, prev, pager, next"
-							      :total="100">
+							      :total="total">
 							    </el-pagination>
 							 	 </div>
 							</template>		
@@ -30,54 +30,46 @@
 	export default{
 		data(){
 			return {
-				tableData: [{
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1518 弄',
-		            money:'￥52220.00',
-		            xinghao:'6020锂电',
-		            state:'未缴',
-		            number:'13598096785',
-		            time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1517 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1519 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1516 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }],
-		          currentPage1:1
+				tableData: [],
+				currentPage:1,
+				total:0
 			}
 		},
 		methods:{
-			 handleSizeChange(val) {
+		  handleSizeChange(val) {
 	        console.log(`每页 ${val} 条`);
 	      },
-	      handleCurrentChange(val) {
-	        console.log(`当前页: ${val}`);
-	      }
-		}
+	    handleCurrentChange(val) {
+			this.depositList(val,11,this.begin,this.end);
+		  },
+	  	  depositList(pageNo){
+			var pageNo = pageNo || "";
+			this.$get('capital/depositPay',{
+				pageNo: pageNo,
+				category : 11,
+				begin:this.begin,
+				end:this.end
+			}).then(data=>{
+				var arr = data.datas;
+				for(var i = 0, len = arr.length; i < len; i++) {
+					//支付方式
+					if(arr[i].paymode == 0) {
+						arr[i].paymodes = "支付宝"
+					} else if(arr[i].paymode == 1){
+						arr[i].paymodes = "微信"
+					} else{
+						arr[i].paymodes = "钱包支付"
+					}
+				}
+				this.tableData=arr;
+				this.total = Number(data.totalCount);
+			});
+		  }
+		},
+		props:['begin','end'],
+		mounted(){
+		this.depositList(1,11,this.begin,this.end);
+	  	}
 	}
 </script>
 

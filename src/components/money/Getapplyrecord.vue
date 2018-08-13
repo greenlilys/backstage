@@ -5,59 +5,59 @@
 				<el-col :span="6">
 				提现状态：
 				<template>
-					<el-radio v-model="radio" label="1">提现成功</el-radio>
-					<el-radio v-model="radio" label="2">提现失败</el-radio>					
+					<el-radio-group v-model="radio" @change="handleRedio">
+					<el-radio  label="">全部</el-radio>
+					<el-radio  label="1">提现成功</el-radio>
+					<el-radio  label="2">提现失败</el-radio>		
+					</el-radio-group>			
 				</template>
 			</el-col>
 				<el-col :span="6">
-					<el-input placeholder="请输入内容" v-model="find" class="input-with-select">
-						<el-button slot="append" icon="el-icon-search">筛选</el-button>
+					<el-input placeholder="请输入内容" v-model="find" class="input-with-select" clearable>
+						<el-button slot="append" icon="el-icon-search" @click="search">筛选</el-button>
 					</el-input>
 				</el-col>				
 			</el-row>
 			<div class="mainlist flex-con mt-10 bw contentBox">
-								<template>
-									<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
-										<el-table-column prop="date" label="申请编号" width="" align="center">
-										</el-table-column>
-										<el-table-column prop="name" label="提现代理商" width="" align="center">
-										</el-table-column>
-										
-										<el-table-column prop="name" label="钱包余额" width="" align="center">
-										</el-table-column>
-										<el-table-column prop="name" label="申请提现时间" width="" align="center">
-										</el-table-column>
-										<el-table-column prop="name" label="申请提现金额" width="" align="center">
-										</el-table-column>
-										<el-table-column prop="name" label="提现方式" width="" align="center">
-										</el-table-column>	
-										<el-table-column prop="name" label="处理时间" width="" align="center">
-										</el-table-column>
-										<el-table-column prop="name" label="处理人" width="" align="center">
-										</el-table-column>	
-										<el-table-column prop="name" label="提现状态" width="" align="center">
-										</el-table-column>	
-										<el-table-column prop="name" label="备注" width="" align="center">
-										</el-table-column>
-																			
-									</el-table>
-								</template>
-								<template>
-									<div class="block page">							    
-								    <el-pagination
-								      @size-change="handleSizeChange"
-								      @current-change="handleCurrentChange"
-								      :current-page.sync="currentPage1"
-								      :page-size="8"							    
-								      layout="total, prev, pager, next"
-								      :total="100">
-								    </el-pagination>
-								 	 </div>
-								</template>
+				<template>
+					<el-table :data="tableData" style="width: 100%;" >
+						<el-table-column prop="no" label="申请编号" width="" align="center">
+						</el-table-column>
+						<el-table-column prop="onames" label="提现代理商" width="" align="center">
+						</el-table-column>
+						<el-table-column prop="balance" label="钱包余额" width="" align="center">
+						</el-table-column>
+						<el-table-column prop="addtime" label="申请提现时间" width="" align="center">
+						</el-table-column>
+						<el-table-column prop="amount" label="申请提现金额" width="" align="center">
+						</el-table-column>
+						<el-table-column prop="types" label="提现方式" width="" align="center">
+						</el-table-column>
+						<el-table-column prop="realname" label="用户姓名" width="" align="center">
+						</el-table-column>		
+						<el-table-column prop="handletime" label="处理时间" width="" align="center">
+						</el-table-column>
+						<el-table-column prop="nickname" label="处理人" width="" align="center">
+						</el-table-column>	
+						<el-table-column prop="results" label="提现状态" width="" align="center">
+						</el-table-column>	
+						<el-table-column prop="remark" label="备注" width="" align="center">
+						</el-table-column>									
+					</el-table>
+				</template>
+				<template>
+					<div class="block page">							    
+					<el-pagination
+						@size-change="handleSizeChange"
+						@current-change="handleCurrentChange"
+						:current-page.sync="currentPage"
+						:page-size="10"							    
+						layout="total, prev, pager, next"
+						:total="total">
+					</el-pagination>
+						</div>
+				</template>
 			</div>
-		
-		
-		
 		</div>
 	</div>
 </template>
@@ -68,59 +68,69 @@
 	export default {
       data(){
 			return {
-				tableData: [{
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1518 弄',
-		            money:'￥52220.00',
-		            xinghao:'6020锂电',
-		            state:'未缴',
-		            number:'13598096785',
-		            time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1517 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1519 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1516 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }],
-		          currentPage1:1,
-		          radio:'1'
+				tableData: [],
+		        currentPage:1,
+				radio:'',
+				total:0,
+				find:''
 		        }
 			},
-      methods:{	    	
-	    
-	      cellStyle({row, column, rowIndex, columnIndex}){
-			    if(columnIndex === 4){ //指定坐标
-			        return 'color:#FF6600'
-			    }else if(columnIndex === 8){
-			        return 'color:#FF6600'
-			    }else{
-			    	return ''
-			    }
-			}
-      },
+      	methods:{
+			handleRedio(v) {//筛选上线状态
+				this.cashList(this.currentPage, this.find, this.radio)
+			},
+			handleSizeChange(val) {
+				console.log(`每页 ${val} 条`);
+			},
+			handleCurrentChange(v) {
+				this.cashList(v, this.find,this.radio)
+			},	    	
+	    	cashList(pageNo,find){
+				var pageNo = pageNo || "";
+				var find = this.find || "";
+				this.$get('capital/cashList',{
+					pageNo: pageNo,
+					no: find,
+					result:this.radio
+				}).then(data=>{
+					var arr = data.datas;
+					for(var i = 0, len = arr.length; i < len; i++) {
+						if(arr[i].type==0){
+							arr[i].types="支付宝"
+						}else{
+							arr[i].types="微信"
+						}
+						arr[i].typea=arr[i].types+":"+arr[i].accounts
+
+						if(arr[i].result==0){
+							arr[i].results="处理中"
+						}else if(arr[i].result==1) {
+							arr[i].results="提现成功"
+						}else{
+							arr[i].results="提现失败"
+						}
+						if(arr[i].customerid!=null){
+							arr[i].usertype="用户"
+						}else if(arr[i].shopid!=null){
+							arr[i].usertype="加盟网点"
+						}
+						if(arr[i].customerid!=null){
+							arr[i].onames=	arr[i].ooname
+						}else if(arr[i].shopid!=null){
+							arr[i].onames=	arr[i].oname
+						}
+					}
+					this.tableData=arr;
+					this.total = Number(data.totalCount);
+				});
+			},
+			search(v) {
+			this.cashList(this.currentPage,this.find,this.radio)
+			},	
+	  },
+	  mounted(){
+		this.cashList(1,this.find,"");
+	  },
       components:{
       
       }

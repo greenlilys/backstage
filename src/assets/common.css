@@ -133,20 +133,18 @@ align-items: center;
 	margin:10px 0;
 }
 
-/*.btnStyle{background:#FF9900;outline:none;border:none;color:#fff;}
-.btnStyle:hover{background-color:#DE8303;cursor: pointer;color:#fff;}*/
-/*.el-button:hover{background-color:#DE8303;cursor: pointer;color:#fff;}
-.el-button:active{border-color:none;outline:none;background:#FF9900;}*/
+
 
 .btnStyle{background:#E48700;}
 .page{position:absolute;right:0;bottom:20px;}
 
 /*列表样式重置*/
-.el-table td{padding:8px 0;}
+.el-table td{padding:6px 0;}
 .el-table th, .el-table tr{background:transparent;}
 .el-table th{padding:10px 0;}
-.el-table thead{font-size:14px;color:#2E2E2E;}
+.el-table thead{font-size:16px;color:#2E2E2E;}
 .el-table th{border-top:1px solid #E9EEF3;}	
+.el-table .cell{line-height:20px;}
 
  /*表单间距重置*/
 .el-form-item {	margin-bottom: 10px;}
@@ -156,8 +154,8 @@ align-items: center;
 
 .outsideBox{background:#fff;height:100%;padding:10px;}
 
-.outsideBox2{background:#fff;padding:10px 20px;}
-.headBox{background:#fff;padding:10px 20px;}
+.outsideBox2{background:#fff;padding:10px;}
+.headBox{background:#fff;padding:10px;}
 
 .outsideBox1{height:100%;}
 .hf{height:100%;}
@@ -172,11 +170,6 @@ align-items: center;
 .tabCard div{font-size:16px;line-height: 26px;padding:10px 20px;background:#fff;cursor: pointer;}
 .tabCard .actived{background:#F29000;color:#fff;}
 
-/*标签样式*/
- .el-tag + .el-tag {margin-left: 10px;}
- .button-new-tag {margin-left: 10px;height: 32px;line-height: 30px;padding-top: 0;padding-bottom: 0;}
- .input-new-tag {width: 90px;margin-left: 10px;vertical-align: bottom;}
- 
  /*小标题样式*/
  .subTitle{line-height: 30px;}
  

@@ -1,60 +1,58 @@
 <template>
 	<div >
-		<div class="shopList flex-wrap flex-vertical">	
-		
-		<el-row class="row" type="flex" align="middle">
-			<el-col :span="7">
-				预约类型：
-				
-					 <el-radio-group v-model="radio" @change="handleChange">
-						<el-radio  label="1">安装预约</el-radio>
-						<el-radio  label="2">换电预约</el-radio>
-						<el-radio  label="3">退电预约</el-radio>
+		<div class="shopList flex-wrap flex-vertical">		
+			<el-row class="row" type="flex" align="middle">
+				<el-col :span="8">
+					<span class="font-14">预约类型：</span>				
+						 <el-radio-group v-model="radio1" @change="handleChange">
+						 	<el-radio  label="">全部</el-radio>
+							<el-radio  label="0">安装预约</el-radio>
+							<el-radio  label="1">换电预约</el-radio>
+							<el-radio  label="2">退电预约</el-radio>
+						</el-radio-group>				
+				</el-col>
+				<el-col :span="6">	
+					<span class="font-14">预约状态：</span>
+					<el-radio-group v-model="radio2" @change="handleChange1">
+						<el-radio  label="">全部</el-radio>
+						<el-radio  label="1">已完成</el-radio>
+						<el-radio  label="3">已取消</el-radio>
 					</el-radio-group>
-				
-			</el-col>
-			<el-col :span="6">	
-				商品状态：
-				<el-radio-group v-model="radio1" @change="handleChange1">
-					<el-radio  label="1">已完成</el-radio>
-					<el-radio  label="2">已取消</el-radio>
-				</el-radio-group>
-			</el-col>
-			<el-col :span="6" :offset="5">
-				<div>
-					<el-input placeholder="请输入内容" v-model="find" class="input-with-select">
-						<el-button slot="append" icon="el-icon-search">筛选</el-button>
-					</el-input>
-				</div>
-			</el-col>
-		</el-row>
+				</el-col>
+				<el-col :span="6" :offset="5">
+					<div>
+						<el-input placeholder="请输入内容" v-model="find" class="input-with-select" clearable>
+							<el-button slot="append" icon="el-icon-search" @click="search">筛选</el-button>
+						</el-input>
+					</div>
+				</el-col>
+			</el-row>
 		<div class="listDetail mt-10 flex-con">					
 							<template>
 								<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="date" label="预约编号" width="" align="center">
+									<el-table-column prop="no" label="预约编号" width="" align="center">
 									</el-table-column>									
-									<el-table-column prop="name" label="预约类型" width="" align="center">
+									<el-table-column prop="types" label="预约类型" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="预约用户" width="" align="center">
+									<el-table-column prop="username" label="预约用户" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="支付方式" width="" align="center">
+									<el-table-column prop="paymodes" label="支付方式" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="支付金额（积分）" width="" align="center">
+									<el-table-column prop="cost" label="支付金额（积分）" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="预约状态" width="" align="center">
+									<el-table-column prop="states" label="预约状态" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="完成/撤销时间" width="" align="center">
+									<el-table-column prop="finishtime" label="完成/撤销时间" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="网点编号" width="" align="center">
+									<el-table-column prop="shopno" label="网点编号" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="name" label="网点名称" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="" label="操作" align="center">
 									    <template slot-scope="scope">
-									    	<router-link to='/Main/Replacedetail'>
-												<el-button type="primary" class="btnStyle" size="mini">详情</el-button>
-											</router-link>
-											
+									    	<router-link :to="{path:'/Main/Meetdetail',query:{id:scope.row.id}}">
+												<el-button type="warning" class="btnStyle" size="mini">详情</el-button>
+											</router-link>											
 									    </template>
 									</el-table-column>
 								</el-table>
@@ -64,10 +62,10 @@
 							    <el-pagination
 							      @size-change="handleSizeChange"
 							      @current-change="handleCurrentChange"
-							      :current-page.sync="currentPage1"
-							      :page-size="8"							    
+							      :current-page.sync="currentPage"
+							      :page-size="10"							    
 							      layout="total, prev, pager, next"
-							      :total="100">
+							      :total="totalCount">
 							    </el-pagination>
 							 	 </div>
 							</template>								
@@ -80,64 +78,121 @@
 	export default {
 		data() {
 			return {
-				 tableData: [{
-            date: '2016',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄',
-            money:50.00,
-            action:'查看详情'
-          }, {
-            date: '2016',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄',
-            money:50.00,
-            action:'查看详情'
-          }, {
-            date: '2016',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄',
-            money:50.00,
-            action:'查看详情'
-          }, {
-            date: '2016',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄',
-            money:50.00,
-            action:'查看详情'
-          }],
-				radio: '1',
-				radio1: '1',
+				tableData: [],
+				totalCount: 10,
+				radio1: "",
+				radio2: "",
 				find: '',
-				 currentPage1:1,
-				 checkList:['已完成']
-			
+				currentPage: 1
+				
+
 			};
 		},
 		methods: {
-			 handleSizeChange(val) {
-	        console.log(`每页 ${val} 条`);
-	      },
-	      handleCurrentChange(val) {
-	        console.log(`当前页: ${val}`);
-	      },
-	     
-	  
-	      navdetail(){
-	      	if(this.radio == 1){
-	      		this.$router.push('/Meetlist/Installdetail')
-	      	}else if(this.radio == 2){
-	      		this.$router.push('/Meetlist/Changedetail')
-	      	}else{
-	      		this.$router.push('/Meetlist/Throwdetail')
-	      	}
-	      	
-	      },
-	      handleChange(value){
-	      },
-	      handleChange1(value){
-	      	console.log(value)
-	      }
-	     
+			handleSizeChange(val) {
+				console.log(`每页 ${val} 条`);
+			},
+			handleCurrentChange(val) {
+				this.getSelectList(this.find,this.radio1,this.radio2,val);
+			},
+
+			navdetail() {
+				if(this.radio == 1) {
+					this.$router.push('/Meetlist/Installdetail')
+				} else if(this.radio == 2) {
+					this.$router.push('/Meetlist/Changedetail')
+				} else {
+					this.$router.push('/Meetlist/Throwdetail')
+				}
+
+			},
+			handleChange(value) {//预约类型查询				
+				this.getSelectList(this.find,value,this.radio2,1);
+			},
+			handleChange1(value) {//预约状态查询
+				this.getSelectList(this.find,this.radio1,value,1);
+			},
+			getSelectList(nickName,type,state,pageNo){
+				this.$get('appointOrder/selectList',{
+					nickName:nickName,
+					type:type,
+					state:state,
+					pageNo:pageNo
+				}).then(data=>{
+					var tableData = data.datas;
+					this.totalCount = data.totalCount;
+					this.tableData = tableData;
+					for(var i = 0,len=tableData.length;i<len;i++){
+						switch(tableData[i].type){
+							case 0:
+							tableData[i].types = "安装"
+							break;
+							case 1:
+							tableData[i].types = "更换"
+							break;
+							case 2:
+							tableData[i].types = "退租"
+							break;
+							default:
+							tableData[i].types = "--"
+							
+						}
+						switch(tableData[i].paymode){
+							case 0:
+							tableData[i].paymodes = "支付宝"
+							break;
+							case 1:
+							tableData[i].paymodes = "微信"
+							break;
+							case 2:
+							tableData[i].paymodes = "钱包支付"
+							break;
+							case 3:
+							tableData[i].paymodes = "天牛币支付"
+							break;
+							default:
+							tableData[i].paymodes = "--"
+							
+						}
+						switch(tableData[i].state){
+							case 0:
+							tableData[i].states = "预约中"
+							break;
+							case 1:
+							tableData[i].states = "处理成功"
+							break;
+							case 2:
+							tableData[i].states = "过期"
+							break;
+							case 3:
+							tableData[i].states = "已取消"
+							break;
+							case 4:
+							tableData[i].states = "型号不符"
+							break;
+							case 5:
+							tableData[i].states = "电池报损处理中"
+							break;
+							case 6:
+							tableData[i].states = "电池已损坏"
+							break;
+							case 99:
+							tableData[i].states = "支付中"
+							break;
+							default:
+							tableData[i].states = "--"
+							
+						}
+					}
+				})
+			},
+			search(){
+				this.getSelectList(this.find,this.radio1,this.radio2,1);
+			}
+
+		},
+		mounted(){
+			this.getSelectList(this.find,this.radio1,this.radio2,1);
 		}
 	}
 </script>

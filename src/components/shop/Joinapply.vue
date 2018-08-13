@@ -44,7 +44,7 @@
 							    <el-pagination
 							      @size-change="handleSizeChange"
 							      @current-change="handleCurrentChange"
-							      :current-page.sync="currentPage1"
+							      :current-page.sync="currentPage"
 							      :page-size="10"							    
 							      layout="total, prev, pager, next"
 							      :total="total"> 
@@ -62,7 +62,7 @@
       return{
         nickName:'',
 		tableData: [],
-		currentPage1:1,
+		currentPage:1,
 		total:0 
       }
     },

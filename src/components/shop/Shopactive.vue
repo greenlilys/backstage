@@ -4,7 +4,7 @@
 			<el-row class="contentBox">
 				<el-col :span="6" :offset="18" style="text-align:right;">
 					<router-link to='/Main/Editactive'>
-							<el-button type="primary" size="small" class="btnStyle">+&nbsp;新建活动</el-button>
+							<el-button type="success" size="small">+&nbsp;新建活动</el-button>
 					</router-link>				
 				</el-col>
 			</el-row>
@@ -19,8 +19,8 @@
 									</el-table-column>									
 									<el-table-column prop="action" label="备注" align="center">
 									    <template slot-scope="scope">										
-											<el-button type="primary" size="mini" class="btnStyle">修改</el-button>
-											<el-button type="primary" size="mini" class="btnStyle">取消活动</el-button>
+											<el-button type="warning" size="mini" class="btnStyle">修改</el-button>
+											<el-button type="warning" size="mini" class="btnStyle">取消活动</el-button>
 									    </template>
 									</el-table-column>
 								</el-table>
@@ -30,7 +30,7 @@
 							    <el-pagination
 							      @size-change="handleSizeChange"
 							      @current-change="handleCurrentChange"
-							      :current-page.sync="currentPage1"
+							      :current-page.sync="currentPage"
 							      :page-size="8"							    
 							      layout="total, prev, pager, next"
 							      :total="100">
@@ -70,7 +70,7 @@
             money:50.00,
             action:'查看详情'
           }],
-          currentPage1:1
+          currentPage:1
 			}
 		},
 		methods:{

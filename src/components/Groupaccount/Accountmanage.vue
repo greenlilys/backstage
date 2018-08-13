@@ -4,7 +4,7 @@
 		
 		<el-row class="row" type="flex" align="middle">
 			<el-col :span="6">
-				账号状态：
+				 <span class="font-14">账号状态：</span>
 				<template>
 					<el-radio v-model="radio" label="1">启用</el-radio>
 					<el-radio v-model="radio" label="2">禁用</el-radio>					
@@ -36,8 +36,8 @@
 									</el-table-column>
 									<el-table-column prop="action" label="操作" align="center">
 									    <template slot-scope="scope">	
-												<el-button type="primary" class="btnStyle" size="mini">修改</el-button>
-												<el-button type="primary" class="btnStyle" size="mini">停用</el-button>
+											<el-button type="warning" class="btnStyle" size="mini">修改</el-button>
+											<el-button type="warning" class="btnStyle" size="mini">停用</el-button>
 									    </template>
 									</el-table-column>
 								</el-table>

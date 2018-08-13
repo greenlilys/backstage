@@ -2,7 +2,7 @@
 	<div class="hf flex-wrap flex-vertical">
 		<el-row class="contentBox" type="flex" align="middle">
 			<el-col :span="6">
-				上线状态：
+				<span class="font-14">上线状态：</span>
 				<template>
 					<el-radio-group v-model="radio1" @change="handleRedio1">
 						<el-radio label="">全部</el-radio>
@@ -37,17 +37,17 @@
 									</el-table-column>
 									<el-table-column prop="name" label="店铺名称" width="130" align="center">
 									</el-table-column>
-									<el-table-column prop="username" label="店铺账号" width="" align="center">
+									<el-table-column prop="username" label="店铺账号" width="160" align="center">
 									</el-table-column>
 									<el-table-column prop="statuss" label="账号状态" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="address" label="店铺地址" width="300" align="center">
+									<el-table-column prop="addresss" label="店铺地址" width="300" align="center">
 									</el-table-column>
 									<el-table-column prop="contactnameiphone" label="联系人"  width="170" align="center">
 									</el-table-column>
 									<el-table-column prop="operatorNo" label="所属运营商" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="Inventorydistribution" label="库存/配货" width="" align="center">
+									<el-table-column prop="Inventorydistribution" label="库存/配货" width="110" align="center">
 									</el-table-column>
 									<el-table-column prop="platbond" label="保证金" width="" align="center">
 									</el-table-column>
@@ -107,6 +107,7 @@ export default {
 			canuse: "启用",
 			goonline: '网点上线',
 			downline: '网点下线'
+			
 		}
 	},
 	methods: {
@@ -128,7 +129,7 @@ export default {
 				var arr = data.datas;
 				for(var i = 0, len = arr.length; i < len; i++) {
 					//店铺地址
-					arr[i].address = arr[i].provincename + arr[i].cityname + arr[i].countyname;
+					arr[i].addresss = arr[i].provincename + arr[i].cityname + arr[i].countyname + arr[i].address;
 					//联系人
 					arr[i].contactnameiphone = arr[i].contactname + arr[i].contactcellphone;
 
@@ -142,8 +143,11 @@ export default {
 					var battery = arr[i].batteryList;
 					arr[i].Inventorydistribution = "";
 					for(var j = 0, lens = battery.length; j < lens; j++) {
-						arr[i].Inventorydistribution += '\n';
-						arr[i].Inventorydistribution += battery[j].mode + "          " + battery[j].stocknum + "/" + battery[j].distrinum;
+						if(battery[j].stocknum >=10){	
+							arr[i].Inventorydistribution += battery[j].mode+ battery[j].stocknum + "/" + battery[j].distrinum;
+						}else{
+							arr[i].Inventorydistribution += battery[j].mode + "        "+ battery[j].stocknum + " / " + battery[j].distrinum;
+						}
 					}
 					//电池库存
 					if(arr[i].batteryList.length == 0) {
@@ -178,7 +182,7 @@ export default {
 		},
 		handle(index, row) { //禁用启用按钮	      	
 			this.currentStatus = row.status;
-			this.currentId = row.id;
+			this.currentId = row.userid;
 			this.dialogVisible = true;
 			this.textContent = row.status == 0 ? "确认禁用该网点吗？" : "确认启用该网点吗？"
 		},
@@ -186,7 +190,7 @@ export default {
 			this.currentOnline = row.isonline;
 			this.currentId = row.id;
 			this.dialogVisibles = true;
-			this.textContent = row.isonline == 0 ? "确认下线该网点吗？" : "确认上线该网点吗？"
+			this.textContent = row.isonline == 0 ? "确认上线该网点吗？" : "确认下线该网点吗？"
 
 		},
 		confirmIsuse() { //确认禁用或者启用
@@ -210,24 +214,28 @@ export default {
 			}).then(data => {
 				this.dialogVisibles = false;
 				this.$ye();
-				this.getShopList(1, this.radio1, this.nickName)
+				this.getShopList(1, this.radio1, this.nickName);
 			})
 		},
 		canceluse() { //取消或者关闭
 			this.dialogVisible = false;
+			this.dialogVisibles = false;
 		}
-	},
-	ceeated() {
+		},
+		ceeated() {
+			
+		},
+		mounted() {
+			this.getShopList(1, this.radio1, this.nickName)
+		},
+		components: {
+			Dialogue
+		}
+}
+</script>
 
-	},
-	mounted() {
-		this.getShopList(1, this.radio1, this.nickName)
-	},
-	components: {
-		Dialogue
-	}
-}</script>
-
-<style scoped>
-	.contentBox{position:relative;}
+<style scoped>	
+	.contentBox{position:relative;}	
+	.el-table div.cell{padding:0;}
+	.el-button+.el-button{margin-left:0;}
 </style>

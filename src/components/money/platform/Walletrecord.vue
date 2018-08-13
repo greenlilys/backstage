@@ -9,20 +9,19 @@
 		</el-row>
 		<div class="flex-con pr">
 			<el-table :data="tableData" style="width: 100%;">
-				<el-table-column prop="scusername" label="用户账户" width="" align="center">
-				</el-table-column>
-				<el-table-column prop="outtradeno" label="支付订单号" width="" align="center">
-				</el-table-column>
-				<el-table-column prop="total_fee" label="支付金额" width="" align="center">
-				</el-table-column>
-				<el-table-column prop="body" label="订单类型" width="" align="center">
-				</el-table-column>
-				<el-table-column prop="statuss" label="支付状态" width="" align="center">
-				</el-table-column>
-				<el-table-column prop="adddate" label="支付时间" width="" align="center">
-				</el-table-column>
-													
-			</el-table>
+					<el-table-column prop="scusername" label="用户账户" width="" align="center">
+					</el-table-column>
+					<el-table-column prop="types" label="操作类型" width="" align="center">
+					</el-table-column>
+					<el-table-column prop="amount" label="支付金额" width="" align="center">
+					</el-table-column>
+					<el-table-column prop="remark" label="操作备注" width="" align="center">
+					</el-table-column>
+					<el-table-column prop="addtime" label="操作时间" width="" align="center">
+					</el-table-column>
+					<el-table-column prop="nickname" label="操作人" width="" align="center">
+					</el-table-column>				
+				</el-table>
 		
 			<div class="block page">							    
 				<el-pagination
@@ -53,24 +52,20 @@
 	        console.log(`每页 ${val} 条`);
 	      },
 	    handleCurrentChange(val) {
-			this.selectWxPay(val,this.find);
+			this.shopWalletList(val,this.find);
 		  },
-	  	selectWxPay(pageNo,find){
+	  	shopWalletList(pageNo,find){
 			var pageNo = pageNo || "";
-			this.$get('capital/selectWxPay',{
+			this.$get('capital/shopRechargeList',{
 				pageNo: pageNo,
-				no:this.find
+				name:this.find
 			}).then(data=>{
 				var arr = data.datas;
 					for(var i = 0, len = arr.length; i < len; i++) {
-						if(arr[i].status==0){
-							arr[i].statuss="生成订单"
-						}else if(arr[i].status==1){
-							arr[i].statuss="支付成功"
-						}else if(arr[i].status==1){
-							arr[i].statuss="支付失败"
-						}else{
-							arr[i].statuss="支付中"
+						if(arr[i].type==0){
+							arr[i].types= "充值"
+						}else if(arr[i].type==1){
+							arr[i].types= "扣款"
 						}
 						if(arr[i].susername!=""){
 							arr[i].scusername= arr[i].susername
@@ -83,11 +78,11 @@
 			});
 		  },
 		  search(v) {
-			this.selectWxPay(this.currentPage,this.find)
+			this.shopWalletList(this.currentPage,this.find)
 		  }
 		},
 		mounted(){
-		this.selectWxPay(1,this.find);
+		this.shopWalletList(1,this.find);
 	  }
 	}
 </script>

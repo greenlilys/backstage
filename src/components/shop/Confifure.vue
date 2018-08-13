@@ -1,5 +1,5 @@
 <template>
-	<div>					
+	<div class="mt-10">					
 							<template>
 								<el-table :data="tableData" style="width: 100%;">
 									<el-table-column prop="addtime" label="时间" width="160" align="center">
@@ -30,7 +30,7 @@
 							    <el-pagination
 							      @size-change="handleSizeChange"
 							      @current-change="handleCurrentChange"
-							      :current-page.sync="currentPage1"
+							      :current-page.sync="currentPage"
 							      :page-size="10"							    
 							      layout="total, prev, pager, next"
 							      :total="total">
@@ -45,7 +45,7 @@
       data() {
         return {
           tableData: [],
-					currentPage1:1,
+					currentPage:1,
 					total:0,
       }
       },

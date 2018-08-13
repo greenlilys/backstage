@@ -9,7 +9,7 @@
 						<li class="flex-wrap flex-vertical  flex-align-center flex-con"><span>今日退租</span><span>{{retireNum}}</span></li>					
 				</ul>	
 				<div class="contentBox mt-10">
-					<div class="tabCard clear ">					
+					<div class="tabCard clear">					
 							<div v-for="(item,dataType) in tabItem" @click="changeItem(dataType,timeType)" :class="[currentI == dataType?'actived':'']">{{item}}</div>
 							<ul class="btnStyle mt-10">
 								<li v-for="(item,timeType) in buttonList" :class="[buttonInx == timeType?'actived':'']" @click="isActive(timeType)">{{item}}</li>
@@ -71,7 +71,7 @@
 					this.retireNum = data.today.returnCount;
 					for(var key in data.foldlineDiagram){
 						var date = new Date(data.foldlineDiagram[key].dateValue);
-						console.log((date.getMonth()+1) + "-" + date.getDate());
+//						console.log((date.getMonth()+1) + "-" + date.getDate());
 						var dateScale = (date.getMonth()+1) + "-" + date.getDate();
 						this.dateValue.push(dateScale);
 						if (this.dataType == 3) {
@@ -135,12 +135,9 @@
 				this.changeItem(this.currentI,this.buttonInx);
 			}
 		},
-		/*components: {
-			Register,
-			Install,
-			Change,
-			Cancel
-		},*/
+		components: {
+			
+		},
 		mounted() {
 			this.changeItem(0,0);
 		}

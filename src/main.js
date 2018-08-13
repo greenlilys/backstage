@@ -10,7 +10,7 @@ import Vue from 'vue'
 import App from '@/App'
 import router from './router'
 import axios from 'axios'
-import {httpPost,httpGet,ye} from './assets/js/common'
+import {httpPost,httpGet,ye,fail,GLOBALconfig} from './assets/js/common'
 
 Vue.use(ElementUI);
 
@@ -18,6 +18,8 @@ Vue.config.productionTip = false;
 Vue.prototype.$post=httpPost;
 Vue.prototype.$get=httpGet;
 Vue.prototype.$ye=ye;
+Vue.prototype.$fail=fail;
+Vue.prototype.$GLOBALconfig=GLOBALconfig;
 /* eslint-disable no-new */
 
 new Vue({

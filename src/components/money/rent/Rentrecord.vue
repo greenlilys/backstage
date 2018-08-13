@@ -2,19 +2,19 @@
 	<div class="mt-10">
 		<template>
 								<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="date" label="租金支付时间" width="" align="center">
+									<el-table-column prop="addTime" label="租金支付时间" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="交租用户" width="" align="center">
+									<el-table-column prop="username" label="交租用户" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="租用电池类型" width="" align="center">
+									<el-table-column prop="names" label="租用电池类型" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="租期类型" width="" align="center">
+									<el-table-column prop="leaseterms" label="租期类型" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="租金/积分金额" width="" align="center">
+									<el-table-column prop="amount" label="租金/积分金额" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="支付方式" width="" align="center">
+									<el-table-column prop="paymodes" label="支付方式" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="name" label="支付订单号" width="" align="center">
+									<el-table-column prop="paymentno" label="支付订单号" width="" align="center">
 									</el-table-column>
 									
 								</el-table>
@@ -24,10 +24,10 @@
 							    <el-pagination
 							      @size-change="handleSizeChange"
 							      @current-change="handleCurrentChange"
-							      :current-page.sync="currentPage1"
-							      :page-size="8"							    
+							      :current-page.sync="currentPage"
+							      :page-size="10"							    
 							      layout="total, prev, pager, next"
-							      :total="100">
+							      :total="total">
 							    </el-pagination>
 							 	 </div>
 							</template>		
@@ -38,56 +38,58 @@
 	export default{
 		data(){
 			return {
-				tableData: [{
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1518 弄',
-		            money:'￥52220.00',
-		            xinghao:'6020锂电',
-		            state:'未缴',
-		            number:'13598096785',
-		            time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1517 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1519 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1516 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }],
-		          currentPage1:1
+				tableData: [],
+				currentPage:1,
+				total:0
 			}
 		},
 		methods:{
-			 handleSizeChange(val) {
-	        console.log(`每页 ${val} 条`);
-	      },
-	      handleCurrentChange(val) {
-	        console.log(`当前页: ${val}`);
-	      }
+			handleSizeChange(val) {
+				console.log(`每页 ${val} 条`);
+			},
+			handleCurrentChange(val) {
+			this.rentList(val,"",this.begin,this.end);
+			},
+			rentList(pageNo){
+			var pageNo = pageNo || "";
+			this.$get('capital/rentList',{
+				pageNo: pageNo,
+				isrent :"",
+				begin:this.begin,
+				end:this.end
+			}).then(data=>{
+				var arr = data.datas;
+				for(var i = 0, len = arr.length; i < len; i++) {
+					arr[i].names=arr[i].name+"   "+arr[i].groupnum+"组"
+					//支付方式
+					if(arr[i].paymode == 0) {
+						arr[i].paymodes = "支付宝"
+					} else if(arr[i].paymode == 1){
+						arr[i].paymodes = "微信"
+					} else{
+						arr[i].paymodes = "钱包支付"
+					}
+					//租期方式
+					if(arr[i].leaseterm == 0) {
+						arr[i].leaseterms = "月租"
+					} else if(arr[i].leaseterm == 1){
+						arr[i].leaseterms = "季租"
+					} else{
+						arr[i].leaseterms = "年租"
+					}
+				}
+				this.tableData=arr;
+				this.total = Number(data.totalCount);
+			});
+			}
+		},
+		props:['begin','end'],
+		mounted(){
+		this.rentList(1,"",this.begin,this.end);
 		}
 	}
 </script>
+
 
 <style scoped>
 

@@ -20,10 +20,12 @@
 									</el-table-column>
 									<el-table-column prop="name" label="网点名称" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="" label="操作" align="center">
-									    <template slot-scope="scope">										
-											<el-button type="warning" size="mini" class="btnStyle">详情</el-button>	      
-									    </template>
+									<el-table-column prop="" label="操作" align="center">										
+										    <template slot-scope="scope">
+										    	<router-link :to="{path:'/Main/Meetdetail',query:{id:scope.row.id}}">
+													<el-button type="warning" size="mini" class="btnStyle">详情</el-button>
+												</router-link>
+										    </template>										
 									</el-table-column>
 								</el-table>
 							</template>

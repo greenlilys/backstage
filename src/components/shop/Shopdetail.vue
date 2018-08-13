@@ -14,9 +14,9 @@
 				</div>
 				<div class=" flex-wrap flex-horizontal flex-align-center flex-justify-end baseRight font-14">
 					<div class="stage"><span>网点状态：</span><span>{{shopInfo.isonline == 1? "已下线" : "上线中"}}</span></div>
-					<el-button type="warning" size="small" class="btnStyle mr-10" @click="handles(shopInfo.isonline)" >{{shopInfo.isonline == 0 ? goonline : downline}}</el-button>
-					<router-link to='/Main/ChangeShopInfo'>
-						<el-button type="warning" size="small" class="btnStyle">查看/修改网点信息</el-button>
+					<el-button type="success" size="small" class="mr-10" @click="handles(shopInfo.isonline)" >{{shopInfo.isonline == 0 ? goonline : downline}}</el-button>
+					<router-link :to="{path:'/Main/ChangeShopInfo',query:{id:id}}">
+						<el-button type="success" size="small">查看/修改网点信息</el-button>
 					</router-link>
 						
 				</div>
@@ -26,12 +26,14 @@
 				<div class="account tc">
 					<h1 class="font-16 colorYellow">账号管理</h1>
 					<div class="font-14 mt-10">账号：{{shopInfo.username}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{shopInfo.status == 0? "启用中" : "已禁用"}}</div>
-					<el-button type="warning" size="small" class="btnStyle mt-10" @click="handle(shopInfo.status)" >{{shopInfo.status == 0 ? nouse : canuse}}</el-button>	
+
+					<el-button type="success" size="small" class="mt-10" @click="handle(shopInfo.status,shopInfo.userid)" >{{shopInfo.status == 0 ? nouse : canuse}}</el-button>	
+
 				</div>
 				<div class="tc ">
 					<h1 class="font-16 colorYellow">电池库存</h1>
 					<div class="font-14 mt-10"><span v-for="item in shopInfo.batteryList" :key="item.value">{{item.mode}}&nbsp;&nbsp;{{item.stocknum}}/{{item.distrinum}}&nbsp;&nbsp;&nbsp;</span></div>
-					<el-button type="warning" size="small" class="btnStyle mt-10">+&nbsp;补货记录</el-button>	
+					<el-button type="success" size="small" class="mt-10" @click="repleniShment">+&nbsp;补货记录</el-button>	
 				</div>
 				<div class="tc">
 					<h1 class="font-16 colorYellow">配货成本</h1>
@@ -40,13 +42,13 @@
 				<div class="tc">
 					<h1 class="font-16 colorYellow">钱包余额</h1>
 					<div class="font-14 mt-10">￥{{shopInfo.wallet}}</div>
-					<el-button type="warning" size="small" class="btnStyle mt-10" @click="recharge">充&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;值</el-button>
-					<el-button type="warning" size="small" class="btnStyle mt-10" @click="walletDebit">扣&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;款</el-button>
+					<el-button type="success" size="small" class="mt-10" @click="recharge">充&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;值</el-button>
+					<el-button type="success" size="small" class="mt-10" @click="walletDebit">扣&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;款</el-button>
 				</div>
 				<div class="tc">
 					<h1 class="font-16 colorYellow">退换回收电池</h1>
-					<div class="font-14 mt-10"><span v-for="item in shopInfo.batteryList" :key="item.value">{{item.mode}}&nbsp;&nbsp;{{item.returnnum}}/{{item.recoverynum}}&nbsp;&nbsp;&nbsp;</span></div>
-					<el-button type="warning" size="small" class="btnStyle mt-10">+&nbsp;回收记录</el-button>	
+					<div class="font-14 mt-10"><span v-for="item in shopInfo.batteryList" :key="item.value"><label v-if="item.returnnum>0">{{item.mode}}&nbsp;&nbsp;{{item.returnnum}}&nbsp;&nbsp;&nbsp;</label></span></div>
+					<el-button type="success" size="small" class="mt-10" @click="recovery">+&nbsp;回收记录</el-button>	
 				</div>
 			</div>
 			
@@ -86,14 +88,70 @@
 					<el-button type="primary" @click="confirmDebit">确 定</el-button>
 				</div>
 			</el-dialog>
+
+			<el-dialog title="添加补货记录" :visible.sync="dialogFormVisible2" width="30%">
+				<el-form :model="form2">
+					<el-form-item label="补货时间：" :label-width="formLabelWidths">
+						 <el-date-picker v-model="form2.replenitime" type="datetime" placeholder="选择日期时间" default-time="12:00:00" value-format="yyyy-MM-dd HH:mm:ss" @keyup.enter.native="repleniShment()" >
+						</el-date-picker>
+					</el-form-item>
+					<el-form-item label="补货数量：" :label-width="formLabelWidths">
+						<el-row v-model="form2.batterylist">
+							<span v-if="repleni.list==null || repleni.list==''">暂时不需要补货</span>
+							<el-col :span="20" class="mt-10" v-for="item in repleni.list" :key="item.value">
+								<span>{{item.mode}}</span>
+								<template>
+									<el-input v-show="false" v-model="item.batteryid"></el-input>
+									<el-input v-show="false" v-model="item.id"></el-input>
+									<el-input v-show="false" v-model="item.returnnum"></el-input> 
+									<el-input-number v-model="item.replenilist"  @change="handleChange" :min="1" :max="10" label="电池"></el-input-number>
+								</template>
+							</el-col>
+						</el-row>
+					</el-form-item>
+				</el-form>
+				<div slot="footer" class="dialog-footer">
+					<el-button @click="dialogFormVisible2 = false">取 消</el-button>
+					<el-button type="primary" @click="confirmRepleni">确 定</el-button>
+				</div>
+			</el-dialog>
+			
+			<el-dialog title="添加回收记录" :visible.sync="dialogFormVisible3" width="30%">
+				<el-form :model="form3">
+					<el-form-item label="回收时间：" :label-width="formLabelWidths">
+						 <el-date-picker v-model="form3.recoverytime" type="datetime" placeholder="选择日期时间" value-format="yyyy-MM-dd HH:mm:ss" default-time="12:00:00" @keyup.enter.native="recovery()" >
+						</el-date-picker>
+					</el-form-item>
+					<el-form-item label="回收数量：" :label-width="formLabelWidths">
+						<el-row v-model="form3.batterylist">
+							<span v-if="recover.list==null || recover.list==''">暂时不需要回收</span>
+							<el-col :span="20" class="mt-10" v-for="item in recover.list" :key="item.value">
+								<span>{{item.mode}}</span>
+								<template>
+									<el-input v-show="false" v-model="item.batteryid"></el-input>
+									<el-input v-show="false" v-model="item.id"></el-input>
+									<el-input v-show="false" v-model="item.returnnum"></el-input>
+									<el-input-number v-model="item.returnnum"  @change="handleChange" :min="1" :max="10" label="电池"></el-input-number>
+								</template>
+							</el-col>
+						</el-row>
+					</el-form-item>
+				</el-form>
+				<div slot="footer" class="dialog-footer">
+					<el-button @click="dialogFormVisible3 = false">取 消</el-button>
+					<el-button type="primary" @click="confirmRecovery">确 定</el-button>
+				</div>
+			</el-dialog>
+			
 			<Dialogue :textContent="textContent" :dialogVisible="dialogVisible" v-on:confirm="confirmIsuse" v-on:cancel="canceluse"></Dialogue>
-			<Dialogue :textContent="textContent" :dialogVisible="dialogVisibles" v-on:confirm="confirmIsonline" v-on:cancel="canceluse"></Dialogue>
+			<Dialogue :textContent="textContent" :dialogVisible="dialogVisibles" v-on:confirm="confirmIsonline" v-on:cancel="canceluses"></Dialogue>
 			
 	</div>
 	
 </template>
 
 <script>
+	import axios from 'axios'
 	import Dialogue from '@/components/common/Dialogue'
 	import Order from '@/components/shop/Order'
 	import Stock from '@/components/shop/Stock'
@@ -103,25 +161,29 @@
 	import Member from '@/components/shop/Member'
 	import Exchange from '@/components/shop/Exchange'
 	import Help from '@/components/shop/Help'
-
 	import {exp} from '@/assets/js/common'
 	
 	export default {
       data() {
         return {
+			formLabelWidth: '120px',
+			formLabelWidths: '90px',
         	tabItem:['预约服务记录','补货记录','配货记录','钱包记录','钱包充值记录','会员','退还电池回收记录','救援服务记录'],
         	tabComponents:['Order','Stock','Confifure','Money','Recharge','Member','Exchange','Help'],
         	current:'Order',
 			currentI:'0',
 			shopInfo:{},
 			id:'',//用户id
+			userid:'',
 			scores:'',
 			nouse:'禁用',
 			canuse:"启用",
 			dialogVisible:false,//禁用启用提示框
-			dialogVisibless:false,//上线提示框   
+			dialogVisibles:false,//上线提示框   
 			dialogFormVisible:false,
-	        dialogFormVisible1:false,    	       
+			dialogFormVisible1:false,
+			dialogFormVisible2:false,   
+			dialogFormVisible3:false,        
 			textContent:'',//提示框文本
 			currentStatus:'',//当前禁用启用状态 0 或 1
 			currentOnline:'',//当前上线下线状态 0 或 1
@@ -135,54 +197,92 @@
 	        form1:{//钱包扣款金额
 				walletDebit:'',
 				remark:''
-	        },
+			},
+			form2:{//补货数据
+				replenitime:'',
+				batterylist:[]
+			},
+			form3:{//回收数据
+				recoverytime:'',
+				batterylist:[]
+			},
+			repleni:{},
+			recover:{},
+			pickerOptions: {
+				shortcuts: [{
+					text: '今天',
+					onClick(picker) {
+					picker.$emit('pick', new Date());
+					}
+				}, {
+					text: '昨天',
+					onClick(picker) {
+					const date = new Date();
+					date.setTime(date.getTime() - 3600 * 1000 * 24);
+					picker.$emit('pick', date);
+					}
+				}, {
+					text: '一周前',
+					onClick(picker) {
+					const date = new Date();
+					date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+					picker.$emit('pick', date);
+					}
+				}]
+			},
+			value: ''
         }
       },
       methods:{	   	
-	      changeItem(v,i){
+	    changeItem(v,i){
 	      	this.currentI = i;
 	      	this.current = this.tabComponents[i];
-		  },
-		  handle(status){//禁用启用按钮	      	
-	      	this.currentStatus = status;
+		},
+		handleChange(value) {
+			console.log(value);
+		},
+		handle(status,userid){//禁用启用按钮	      	
+			this.currentStatus = status;
+			this.userid=userid;
 	      	this.dialogVisible = true;
 	      	this.textContent = status == 0? "确认禁用该网点吗？" :"确认启用该网点吗？"
-		  },
-		  handles(isonline){//上下线按钮	      	
+		},
+		handles(isonline){//上下线按钮	      	
 			this.currentOnline = isonline;
-	      	this.dialogVisible = true;
+	      	this.dialogVisibles = true;
 	      	this.textContent = isonline == 0? "确认下线该网点吗？" :"确认上线该网点吗？"
-
-	      },
-		  confirmIsuse(){//确认禁用或者启用
+	    },
+		confirmIsuse(){//确认禁用或者启用
 	       var status = this.currentStatus == 0 ? 1 : 0;
 	       this.$post('shop/updateShopUser',{
-	      		userId:this.id,
+	      		userId:this.userid,
 	      		state:status
 	      	}).then(data=>{
 	      		this.dialogVisible = false;
 				this.$ye();
 				this.joinShopDetail(this.id)
 	      	})
-		  },
-		  confirmIsonline(){//确认上下线
+		},
+		confirmIsonline(){//确认上下线
 	       var online = this.currentOnline == 0 ? 1 : 0;
 	       this.$post('shop/updateShopOnline',{
 	      		id:this.id,
 	      		isonline:online
 	      	}).then(data=>{
-	      		this.dialogVisible = false;
+	      		this.dialogVisibles = false;
 				this.$ye();
 				this.joinShopDetail(this.id)
 	      	})
-	      },
-		  canceluse(){//取消或者关闭
-	      	this.dialogVisible = false;
-		  },
-		  joinShopDetail(id){
-		  this.id = this.$route.query.id;				
+	    },
+		canceluse(){//取消或者关闭
+			this.dialogVisible = false;
+		},
+		canceluses(){//取消或者关闭
+			this.dialogVisibles = false;
+		},
+		joinShopDetail(id){			
 			this.$get('shop/joinShopDetail',{
-				id:this.id
+				id:id
 			}).then(data=>{
 				this.shopInfo = data;
 				if((this.shopInfo.score %2) ==0){
@@ -193,10 +293,18 @@
 			})
 		},
 		recharge(){
-		this.dialogFormVisible = true;
+			this.dialogFormVisible = true;
 		},
 		walletDebit(){
-		this.dialogFormVisible1 = true;
+			this.dialogFormVisible1 = true;
+		},
+		repleniShment(){
+			this.pendReplenish(this.id);
+			this.dialogFormVisible2 = true;
+		},
+		recovery(){
+			this.recoverylenish(this.id);
+			this.dialogFormVisible3 = true;
 		},
 		confirmRecharge(){
 		     	var id = this.id;
@@ -219,27 +327,101 @@
 					
 		     	}
 		     	
-		     },
-		     confirmDebit(){//钱包扣款
-		     	var id = this.id;
-		     	var amount = Number(this.form1.walletDebit);
-		     	var remark = this.form.remark;
-		     	if(!exp.test(amount)){
-		     		this.$message.info("请输入有效数字，小数点后最多保留两位");
-		     		return false;
-		     	}else{
-		     		this.$post('shop/debit',{
-		     		id:id,
-		     		amount:amount,
-		     		remark:remark
-			     	}).then(data=>{
-			     		this.dialogFormVisible1 = false;			     				     		
-			     		this.joinShopDetail(this.id)
-			     		this.$ye('扣款成功');	
-			     	})
-					
-		     	}
-		     }
+		    },
+		confirmDebit(){//钱包扣款
+		var id = this.id;
+		var amount = Number(this.form1.walletDebit);
+		var remark = this.form.remark;
+		if(!exp.test(amount)){
+			this.$message.info("请输入有效数字，小数点后最多保留两位");
+			return false;
+		}else{
+			this.$post('shop/debit',{
+			id:id,
+			amount:amount,
+			remark:remark
+			}).then(data=>{
+				this.dialogFormVisible1 = false;			     				     		
+				this.joinShopDetail(this.id)
+				this.$ye('扣款成功');	
+			})
+			
+			}
+		},
+		pendReplenish(id){			
+			this.$get('battery/pendReplenish',{
+				shopid:this.id
+			}).then(data=>{
+				this.repleni = data;
+			})
+		},
+		recoverylenish(id){
+			this.$get('battery/pendRecovery',{
+				shopid:this.id
+			}).then(data=>{
+				this.recover = data;
+			})
+		},
+		confirmRepleni(){
+		var shopid = this.id;
+		var supplyTime =this.form2.replenitime;
+		var batterylist = this.repleni.list;
+		var battery = [];
+		for(var j = 0, lens = batterylist.length; j < lens; j++) {
+			battery.push(batterylist[j].batteryid)
+			battery.push(batterylist[j].id)
+			battery.push(batterylist[j].replenilist)
+		}
+		Console.log(battery);
+		battery=JSON.stringfy(battery);
+		if(supplyTime==null || supplyTime==""){
+			this.$message.info("请输入补货时间");
+			return false;
+		}else{
+			this.$post('battery/putReplenish',{
+			shopid:shopid,
+			supplyTime:supplyTime,
+			battery:battery
+			}).then(data=>{
+				this.dialogFormVisible2 = false;			     				     		
+				this.joinShopDetail(this.id)
+				this.$ye('添加补货记录');	
+			})
+			
+			}
+		},
+		confirmRecovery(){
+		var shopid = this.id;
+		var supplyTime =this.form3.recoverytime;
+		var batterylist = this.recover.list;
+		var batteryIds = [];
+		var shopBatteryIds = [];
+		var batteryNums = [];
+		for(var j = 0, lens = batterylist.length; j < lens; j++) {
+			batteryIds.push(batterylist[j].batteryid)
+			shopBatteryIds.push(batterylist[j].id)
+			batteryNums.push(batterylist[j].returnnum)
+		}
+		if(supplyTime==null || supplyTime==""){
+			this.$message.info("请输入回收时间");
+			return false;
+		}else{
+			axios.post('battery/putRecovery',{
+			shopid:shopid,
+			supplyTime:supplyTime,
+			batteryId:batteryIds,
+			shopBatteryId:shopBatteryIds,
+			batteryNum:batteryNums
+			}).then(data=>{
+				this.dialogFormVisible3 = false;			     				     		
+				this.joinShopDetail(this.id)
+				this.$ye('添加回收记录');	
+			})
+		}
+		}
+	  },
+	  created(){	  	
+	  	this.id = this.$route.query.id;
 	  },
 	  mounted(){
 		this.joinShopDetail(this.id)

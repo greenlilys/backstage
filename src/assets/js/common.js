@@ -5,12 +5,12 @@ import { Loading } from 'element-ui'
 import qs from 'qs'
 import router from '../../router/index'
 // 全局配置对象
-var GLOBALconfig = {};
+export var GLOBALconfig = {};
 var serverconfig = {
   /*服务器后台地址*/
   // 'serviceIP': 'http://www.tianniu.net.cn/',
   /*测试服务器地址*/
-  'serviceIP': 'http://192.168.0.101:8080/',
+  'serviceIP': 'http://192.168.0.220:8080/',
 };
 // 接口请求地址、后缀
 var http_api = {
@@ -26,10 +26,10 @@ GLOBALconfig.agent_api = url_api.agent; //API 请求地址
 axios.defaults.withCredentials = true;//允许cookei跨域
 axios.defaults.timeout = 50000;//请求超时时间
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
-axios.defaults.baseURL=GLOBALconfig.agent_api;
+axios.defaults.baseURL = GLOBALconfig.agent_api;
 
-//http request 拦截器
-var loadingInstance;//loading加载
+
+var loadingInstance;
 axios.interceptors.request.use(
   config => { 
   	loadingInstance = Loading.service({});  
@@ -49,16 +49,14 @@ axios.interceptors.request.use(
   }
 );
 
-//http response 拦截器
 axios.interceptors.response.use(
   (res) => {
 	  	loadingInstance.close();
 	  	//控制台打印请求接口返回数据
 	  	console.log(res.config.url);
-	  	console.log(res.data);
-	  	//		console.log(res);
+	  	console.log(res.data);	 
 	  	
-	  	if(res.data.code == 1007){//登录超时
+	  	if(res.data.code == 1007){
 	  		console.log("登录超时");
 	  		
 			Message({
@@ -80,12 +78,7 @@ axios.interceptors.response.use(
     return res;
   },
   error => { 
-  	loadingInstance.close();	
-	
-//	for(var key in error){
-//		console.log(key + "-----" + error[key])
-//	}
-	
+  	loadingInstance.close();
 		if(error && error.response){
 			
 					switch(error.response.status){
@@ -99,7 +92,7 @@ axios.interceptors.response.use(
 				  error.message = '403：拒绝访问'
 				  break;
 				  case 404:
-				  error.message = `404:请求地址出错: ${error.response.config.url}`
+				  error.message = '404:请求地址出错'
 				  break;
 				  case 408:
 				  error.message = '408：请求超时'
@@ -131,6 +124,7 @@ axios.interceptors.response.use(
      return Promise.reject(error)
   }
 )
+
 
 /**
  * 封装get方法
@@ -186,6 +180,17 @@ export function httpGet(url,params){
   	var msg = msg || '操作成功';
   		  Message({
 	      			type:'success',
+	      			message:msg
+	      		})
+  }
+  
+   /**
+ * 失败提示
+ */
+
+  export function fail(msg){  	
+  		  Message({
+	      			type:'error',
 	      			message:msg
 	      		})
   }

@@ -30,9 +30,7 @@ import Groupprojectdetail from '@/components/Groupaccount/Groupprojectdetail'
 import Accountmanage from '@/components/Groupaccount/Accountmanage'
 
 import Meetlist from '@/components/meet/Meetlist'
-import Replacedetail from '@/components/meet/Replacedetail'
-import Installdetail from '@/components/meet/Installdetail'
-import Throwdetail from '@/components/meet/Throwdetail'
+import Meetdetail from '@/components/meet/Meetdetail'
 import Batterydamage from '@/components/meet/Batterydamage'
 
 import Pikingrecord from '@/components/battery/Pikingrecord'
@@ -177,17 +175,10 @@ export default new Router({
 					component: Meetlist
 				},
 				{
-					path: 'Replacedetail',
-					component: Replacedetail
+					path: 'Meetdetail',
+					component: Meetdetail
 				},
-				{
-					path: 'Installdetail',
-					component: Installdetail
-				},
-				{
-					path: 'Throwdetail',
-					component: Throwdetail
-				},
+
 				{
 					path: 'Batterydamage',
 					component: Batterydamage

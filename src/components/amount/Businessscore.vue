@@ -1,73 +1,49 @@
 <template>
 	<div>
-		<div class="flex-wrap flex-vertical hf">
-			<el-row class="headBox" type="flex" align="middle">
-				<el-col :span="8">
-					 <div class="block">
-					    <span class="demonstration">选择时段：&nbsp;</span>
-					    {{value6}}
-					    <el-date-picker
-					      v-model="value6"
-					      type="daterange"
-					      range-separator="至"
-					      start-placeholder="开始日期"
-					      end-placeholder="结束日期">
-					    </el-date-picker>
-					  </div>
-				</el-col>
-				<el-col :span="1">
-					<el-button type="primary" size="medium" class="btnStyle">查询</el-button>		
-				</el-col>
-			</el-row>
-			
+		<div class="flex-wrap flex-vertical hf">	
 			<div class="flex-wrap flex-horizontal mt-10 numBox">
-				<div class="flex-con headBox">
-					<h1 class="font-20 tc fontYellow">545</h1>
-					<p class="font-16 tc mt-10">安装预约合计</p>
+				<div class="contentBox flex-con">
+					<h1 class="font-20 tc fontYellow">{{tableDatas.oper}}</h1>
+					<p class="font-16 tc mt-10">运营商</p>
 				</div>
-				<div class="headBox flex-con">
-					<h1 class="font-20 tc fontYellow">21450</h1>
-					<p class="font-16 tc mt-10">换电预约合计</p>
+				<div class="contentBox flex-con">
+					<h1 class="font-20 tc fontYellow">{{this.shopnum}}</h1>
+					<p class="font-16 tc mt-10">运营网点</p>
 				</div>
-				<div class="headBox flex-con">
-					<h1 class="font-20 tc fontYellow">168</h1>
-					<p class="font-16 tc mt-10">退电预约合计</p>
+				<div class="contentBox flex-con">
+					<h1 class="font-20 tc fontYellow">{{tableDatas.totals}}</h1>
+					<p class="font-16 tc mt-10">分润合计</p>
 				</div>
 			</div>
-			
 			<el-row type="flex" align="middle" class="headBox mt-10"> 
-				<el-col :span="6">
-					<div class="font-16">数据明细：（2017-03-01至2017-03-08）</div>
-				</el-col>
 				<el-col :span="6" :offset="12" class="tr">
-					<el-button type="primary" size="small" class="btnStyle">导出当前数据</el-button>
+					<el-button type="warning" size="small" class="btnStyle">导出当前数据</el-button>
 				</el-col>
 			</el-row>
 			
 			<div class="pr flex-con contentBox">
 				<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="date" label="运营商编号" width="" align="center">
-									</el-table-column>
-									<el-table-column prop="name" label="运营商名称" width="" align="center">
-									</el-table-column>
-									<el-table-column prop="name" label="所属网点" width="" align="center">
-									</el-table-column>
-									<el-table-column prop="name" label="用户" width="" align="center">
-									</el-table-column>
-									<el-table-column prop="name" label="分润合计" width="" align="center">
-									</el-table-column>				
-								</el-table>
-							
-								<div class="block page">							    
-							    <el-pagination
-							      @size-change="handleSizeChange"
-							      @current-change="handleCurrentChange"
-							      :current-page.sync="currentPage1"
-							      :page-size="8"							    
-							      layout="total, prev, pager, next"
-							      :total="100">
-							    </el-pagination>
-							 	 </div>
+					<el-table-column prop="no" label="运营商编号" width="" align="center">
+					</el-table-column>
+					<el-table-column prop="name" label="运营商名称" width="" align="center">
+					</el-table-column>
+					<el-table-column prop="shops" label="所属网点" width="" align="center">
+					</el-table-column>
+					<el-table-column prop="customers" label="用户" width="" align="center">
+					</el-table-column>
+					<el-table-column prop="totals" label="分润合计" width="" align="center">
+					</el-table-column>			
+				</el-table>
+				<div class="block page">							    
+				<el-pagination
+					@size-change="handleSizeChange"
+					@current-change="handleCurrentChange"
+					:current-page.sync="currentPage"
+					:page-size="10"							    
+					layout="total, prev, pager, next"
+					:total="total">
+				</el-pagination>
+					</div>
 			</div>
 		</div>
 	</div>
@@ -77,45 +53,14 @@
 	export default{
 		data(){
 			return{
-				tableData: [{
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1518 弄',
-		            money:'￥52220.00',
-		            xinghao:'6020锂电',
-		            state:'未缴',
-		            number:'13598096785',
-		            time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1517 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1519 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }, {
-		            date: '2016',
-		            name: '王小虎',
-		            address: '上海市普陀区金沙江路 1516 弄',
-		            money:'￥52220.00',
-		             xinghao:'6020锂电',
-		             state:'未缴',
-		              number:'13598096785',
-		              time:'2016-12-05 14:30'
-		          }],
-		          currentPage1:1,
-		          value6:''
+				tableData: [],
+				tableDatas: {},
+				tablebegin:{},
+				tableend:{},
+		        currentPage:1,
+				valueTime:'',
+				total:0,
+				shopnum:0
 			}
 		},
 		methods:{
@@ -123,14 +68,30 @@
 	        console.log(`每页 ${val} 条`);
 	      },
 	      handleCurrentChange(val) {
-	        console.log(`当前页: ${val}`);
-	      }
-		}
+	      	this.serviceInfo(this.currentPage);
+		  },
+		  serviceInfo(pageNo){
+			var pageNo = pageNo || "";
+			this.$get('operStatistics/serviceInfo',{
+				pageNo: pageNo
+			}).then(data=>{
+				this.tableData=data.page.datas;
+				this.tableDatas=data.serviceCount;
+				var arr=data.page.datas;
+				for(var i = 0, len = arr.length; i < len; i++) {
+					this.shopnum+=arr[i].shops
+				}
+				this.total = Number(data.page.totalCount);
+			});
+		  },
+
+		},
+		mounted(){
+		this.serviceInfo(1);
+	  	}
 	}
 </script>
 
-<style scoped>
-	
+<style scoped>	
 	.numBox>div:nth-child(1),.numBox>div:nth-child(2){margin-right:10px;}
-	
 </style>

@@ -35,7 +35,7 @@
 	}
 </script>
 <style>
-	.main,.mainContent {	height: 100%;}
+	.main,.mainContent {height: 100%;}
 	.mainBox{width:100%;}
 	.contentBoxs{height:100%;}
 	.headHeight{height:50px}
