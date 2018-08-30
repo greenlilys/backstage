@@ -38,7 +38,7 @@
 					</template>
 				</el-col>
 				<el-col :span="4" :offset="8" style="text-align:right;">
-					<el-button type="info" size="small">导出excel</el-button>				
+					<el-button type="success" size="small">导出当前数据</el-button>				
 				</el-col>
 			</el-row>
 			

@@ -37,7 +37,7 @@
 			return {
 				tableData: [],
 				currentPage:1,
-				total:0,
+				total:10,
 				begin:'',
 				end:''
 			}
@@ -54,15 +54,14 @@
 					}
 		  },
 	      handleCurrentChange(val) {
-			this.depositList(val,0,this.begin,this.end);
+			this.depositList({pageNo:val});
 		  },
-	  	  depositList(pageNo){
-			var pageNo = pageNo || "";
+	  	  depositList({pageNo=1,category=0,begin=this.begin,end=this.end}={}){			
 			this.$get('capital/depositPay',{
-				pageNo: pageNo,
-				category : 0,
-				begin:this.begin,
-				end:this.end
+				pageNo:pageNo,
+				category:category,
+				begin:begin,
+				end:end
 			}).then(data=>{
 				var arr = data.datas;
 				for(var i = 0, len = arr.length; i < len; i++) {
@@ -84,15 +83,15 @@
 		},
 		props:['valueTime'],		
 		mounted(){
-		this.depositList(1,0,this.begin,this.end);
+			this.depositList();
 		},
 		watch:{
-			valueTime:function(newVal,oldVal){
-					console.log(newVal,oldVal)
-					if(newVal){
+			valueTime:function(newVal,oldVal){					
+					if(newVal){						
+						this.depositList({pageNo:1,begin:newVal[0],end:newVal[1]});
+						this.currentPage = 1;
 						this.begin = newVal[0];
 						this.end = newVal[1];
-						this.depositList(1,0,newVal[0],newVal[1]);
 					}
 			}
 		}

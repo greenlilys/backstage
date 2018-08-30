@@ -21,8 +21,7 @@
 							</template>
 							<template>
 								<div class="block page">							    
-							    <el-pagination
-							      @size-change="handleSizeChange"
+							    <el-pagination							    
 							      @current-change="handleCurrentChange"
 							      :current-page.sync="currentPage"
 							      :page-size="10"							    
@@ -40,13 +39,13 @@
 			return {
 				tableData: [],
 				currentPage:1,
-				total:0
+				total:0,
+				begin:'',
+				end:''
 			}
 		},
 		methods:{
-			handleSizeChange(val) {
-				console.log(`每页 ${val} 条`);
-			},
+			
 			 cellStyle({row, column, rowIndex, columnIndex}){
 					if(columnIndex === 6){ //指定坐标
 						return 'color:#FF6600'
@@ -55,15 +54,14 @@
 					}
 		    },
 			handleCurrentChange(val) {
-			this.rentList(val,1,this.begin,this.end);
+				this.rentList({pageNo:val});
 			},
-			rentList(pageNo){
-			var pageNo = pageNo || "";
+			rentList({pageNo=1,isrent=1,begin=this.begin,end=this.end}={}){			
 			this.$get('capital/rentList',{
 				pageNo: pageNo,
-				isrent : 1,
-				begin:this.begin,
-				end:this.end
+				isrent:isrent ,
+				begin:begin,
+				end:end
 			}).then(data=>{
 				var arr = data.datas;
 				for(var i = 0, len = arr.length; i < len; i++) {
@@ -91,9 +89,22 @@
 			});
 			}
 		},
-		props:['begin','end'],
+		props:['valueTime'],
 		mounted(){
-		this.rentList(1,1,this.begin,this.end);
+			this.rentList();
+		},
+		watch: {
+			valueTime(newVal, oldVal) {
+				if(newVal) {
+					this.rentList({
+						begin: newVal[0],
+						end: newVal[1]
+					});
+					this.currentPage = 1;
+					this.begin = newVal[0];
+					this.end = newVal[1];
+				}
+			}
 		}
 	}
 </script>

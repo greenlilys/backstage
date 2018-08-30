@@ -6,7 +6,7 @@
 					<div v-for="(v,i) in tabItem" @click="changeItem(v,i)" v-bind:class="{actived : i == currentI}">{{v}}</div>
 				</div>					
 			</div>
-			<component v-bind:is="current"></component>
+			<component v-bind:is="current" class="flex-con"></component>
 		</div>
 	</div>
 </template>

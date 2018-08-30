@@ -60,7 +60,7 @@
 					    </el-form-item>
 						<el-form-item>
 						<el-row>
-							<el-button type="warning" class="btnStyle" @click="updproblem()">保存</el-button>
+							<el-button type="success" @click="updproblem()">保存</el-button>
 						</el-row>
 					</el-form-item>
 					</el-form>
@@ -127,7 +127,6 @@
 				for(var i = 0,len=fileLists.length;i<len;i++){				
 					if(fileLists[i].url == str){						
 						fileLists.splice(i,1);
-						this.fileList = fileLists;
 						return;
 					}
 				}
@@ -137,8 +136,7 @@
 				var fileLists = this.fileList1;				
 				for(var i = 0,len=fileLists.length;i<len;i++){				
 					if(fileLists[i].url == str){						
-						fileLists.splice(i,1);
-						this.fileList1 = fileLists;
+						fileLists.splice(i,1);					
 						return;
 					}
 				}
@@ -170,10 +168,10 @@
         },
         mounted() {
             this.actionAddress = this.$GLOBALconfig.agent_api + 'n/attach/uploadFile;';
+            this.problemDetails(this.id);
         },
         created(){	  	
-          this.id = this.$route.query.id;
-          this.problemDetails(this.id);
+          this.id = this.$route.query.id;          
 	    },
 	}
 </script>

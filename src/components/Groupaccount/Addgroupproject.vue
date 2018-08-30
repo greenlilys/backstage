@@ -6,7 +6,7 @@
 		
 		<el-row>
 			<el-form ref="form" :model="form" label-width="140px">
-			<el-col :span="11">				
+			<el-col :span="9">				
 					<el-form-item label="项目名称：">
 						<el-input v-model="form.name"></el-input>
 					</el-form-item>
@@ -110,7 +110,7 @@
 					</el-form-item>
 					<el-form-item>
 						<el-row class="mt-20">
-							<el-button type="primary" class="btnStyle" @click="submitForm('ruleForm2')">创建</el-button>
+							<el-button type="success" @click="submitForm('ruleForm2')">创建</el-button>
 						</el-row>
 					</el-form-item>
 			

@@ -2,13 +2,13 @@
 	<div>
 		<div class="flex-wrap flex-vertical outsideBox1">
 			<el-row  class="contentBox" type="flex" align="middle">
-				<el-col :span="6">
-				提现状态：
+				<el-col :span="7">
+				<span class="font-14">提现状态：</span>
 				<template>
-					<el-radio-group v-model="radio" @change="handleRedio">
+					<el-radio-group v-model="radios" @change="handleRedio">
 					<el-radio  label="">全部</el-radio>
-					<el-radio  label="0">提现成功</el-radio>
-					<el-radio  label="1">提现失败</el-radio>		
+					<el-radio  label="1">提现成功</el-radio>
+					<el-radio  label="2">提现失败</el-radio>		
 					</el-radio-group>			
 				</template>
 			</el-col>
@@ -20,7 +20,7 @@
 			</el-row>
 			<div class="mainlist flex-con mt-10 bw contentBox">
 				<template>
-					<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle" >
+					<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
 						<el-table-column prop="no" label="申请编号" width="" align="center">
 						</el-table-column>
 						<el-table-column prop="onames" label="提现代理商" width="" align="center">
@@ -47,8 +47,7 @@
 				</template>
 				<template>
 					<div class="block page">							    
-					<el-pagination
-						@size-change="handleSizeChange"
+					<el-pagination						
 						@current-change="handleCurrentChange"
 						:current-page.sync="currentPage"
 						:page-size="10"							    
@@ -70,18 +69,17 @@
 			return {
 				tableData: [],
 		        currentPage:1,
-				radio:'',
-				total:0,
+				radios:'',
+				total:10,
 				find:''
 		        }
 			},
       	methods:{
 			handleRedio(v) {//筛选上线状态
-				this.cashList(this.currentPage, this.find, this.radio)
+				this.cashList({no:this.find,result:this.radios});
+				this.currentPage = 1;
 			},
-			handleSizeChange(val) {
-				console.log(`每页 ${val} 条`);
-			},
+			
 			cellStyle({row, column, rowIndex, columnIndex}){
 			    if(columnIndex === 2){ //指定坐标
 			        return 'color:#FF6600'
@@ -92,15 +90,17 @@
 			    }
 			},
 			handleCurrentChange(v) {
-				this.cashList(v, this.find,this.radio)
-			},	    	
-	    	cashList(pageNo,find){
-				var pageNo = pageNo || "";
-				var find = this.find || "";
+				this.cashList({pageNo:v,no:this.find,result:this.radios});				
+			},	 
+			search(v) {
+				this.cashList({no:this.find,result:this.radios});
+				this.currentPage = 1;
+			},
+	    	cashList({pageNo=1,no='',result=''}={}){
 				this.$get('capital/cashList',{
 					pageNo: pageNo,
-					no: find,
-					result:this.radio
+					no: no,
+					result:result
 				}).then(data=>{
 					var arr = data.datas;
 					for(var i = 0, len = arr.length; i < len; i++) {
@@ -135,13 +135,11 @@
 					this.tableData=arr;
 					this.total = Number(data.totalCount);
 				});
-			},
-			search(v) {
-			this.cashList(this.currentPage,this.find,this.radio)
-			},	
+			}
+				
 	  },
 	  mounted(){
-		this.cashList(1,this.find,"");
+		this.cashList();
 	  },
       components:{
       

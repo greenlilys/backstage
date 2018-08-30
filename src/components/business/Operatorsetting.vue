@@ -2,9 +2,10 @@
 <template>
 	<div class="operatorSetting">
 		<div class="mainContent">
-			<el-row>
-				<el-form ref="form" :model="form" label-width="110px">
-					<el-col :span="12">
+			<el-row>				
+					<el-col :span="9">						
+						<el-form ref="form" :model="form" label-width="110px">
+						<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">运营商级别</div><span class="flex-con"></span></h5>
 						<el-form-item label="运营商级别：">
 							<el-radio-group v-model="levelid.levelid" @change="handleRadio1">
 								<template v-for="item in operLevellist">
@@ -13,7 +14,7 @@
 							</el-radio-group>
 							<div v-if=" levelid.levelid != '' ">代理费用：{{form.agencyfee}}&nbsp;&nbsp;&nbsp;&nbsp;分润比例：{{form.ratio}}</div>
 						</el-form-item>
-
+						<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">运营区域</div><span class="flex-con"></span></h5>
 						<el-form-item label="运营区域：">
 							<el-tag :key="tag" v-for="tag in dynamicTags" closable :disable-transitions="false" @close="handleClose(tag)">
 								{{tag}}
@@ -22,6 +23,7 @@
 						<el-form-item label="添加运营区域：">
 							<v-distpicker @selected="onSelecteArea"></v-distpicker>
 						</el-form-item>
+						<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">运营商账号</div><span class="flex-con"></span></h5>
 						<el-form-item label="运营商账号：">
 							<el-row>
 								<el-col :span="12">
@@ -38,9 +40,9 @@
 								<el-button type="warning" @click="submitForm">保存</el-button>
 							</el-row>
 						</el-form-item>
-
+						</el-form>
 					</el-col>
-				</el-form>
+				
 			</el-row>
 		</div>
 		<el-dialog title="重置密码" :visible.sync="dialogFormVisible" width="30%">

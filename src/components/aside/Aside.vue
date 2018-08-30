@@ -80,7 +80,7 @@
 				
 						<div class="item font-14 subitem pl40"><router-link to='/Main/PlatformNoticeList'>平台公告</router-link></div>
 						<div class="item font-14 subitem pl40"><router-link to='/Main/Listactivity'>平台活动</router-link></div>
-						<div class="item font-14 subitem pl40"><router-link to='/Main/Businessscore'>运营商活动</router-link></div>
+						<!--<div class="item font-14 subitem pl40"><router-link to=''>运营商活动</router-link></div>-->
 			</el-collapse-item>
 
 			<el-collapse-item>

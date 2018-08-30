@@ -2,13 +2,14 @@
 	<div>
 		<div class="flex-wrap flex-vertical outsideBox1">
 		<el-row class="contentBox" type="flex" align="middle">
+			<el-col :span="9">
 					<div class="block mr-20">
 						<span class="font-14">选择时段：&nbsp;</span>
 						<el-date-picker v-model="valueTime" type="daterange"  range-separator="至" start-placeholder="开始日期" 
-							end-placeholder="结束日期" value-format="yyyy-MM-dd" @change="handleTime">
+							end-placeholder="结束日期" value-format="yyyy-MM-dd">
 						</el-date-picker>
 					</div>
-				<el-button type="success" size="medium" @click="search">查询</el-button>	
+			</el-col>
 		</el-row>
 		
 		<div class="flex-wrap flex-horizontal mt-10">
@@ -55,7 +56,9 @@
         	current:'Deposit',
         	currentI:'0',
         	valueTime:[],
-			deposit:{}			
+			deposit:{},
+			begin:'',
+			end:''
         }
       },
       methods:{   	
@@ -63,28 +66,27 @@
 	      	this.currentI = i;
 	      	this.current = this.tabComponents[i];
 		  },
-		  handleTime(v){//日期
-		  	
-		  },
-		  depositStatist(){
+		 
+		  depositStatist({begin=this.begin,end=this.end}={}){
 			this.$get('capital/depositStatistics',{
-				begin:this.begin,
-				end:this.end
+				begin:begin,
+				end:end
 			}).then(data=>{
 				this.deposit = data;	
 			})
-		  },
-		  
-		search(v) {
-			
-		},	  
+		 }
+	  
 	  },
+	  watch:{
+	  	valueTime(newVal,oldVal){
+	  		if(newVal){	
+	  			this.depositStatist({begin:newVal[0],end:newVal[1]});
+	  		}
+	  	}
+	  },	  
+	
 	  mounted(){
-		this.depositStatist(this.begin,this.end);
-	  },
-	  created(){
-		  this.begin = this.$route.query.begin;
-		this.end = this.$route.query.end;
+		this.depositStatist();
 	  },
       components:{
       	Deposit,

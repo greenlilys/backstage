@@ -3,9 +3,10 @@
 	<div>
 		<div class="hf bw">
 		<el-row class="changeInfo">
-			<el-col :span="12">
+			<el-col :span="9">
 				<el-form ref="form" :model="form" label-width="150px">
-					<h5 class="fonttitle">基本信息</h5>
+					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">基本信息</div><span class="flex-con"></span></h5>
+					
 					<el-form-item label="店主姓名：">
 						<el-input v-model="form.contactname" clearable></el-input>
 					</el-form-item>
@@ -15,7 +16,8 @@
 					<el-form-item label="身份证号码：">
 						<el-input v-model="form.contactno" clearable></el-input>
 					</el-form-item>
-					<h5 class="fonttitle">店铺信息</h5>
+					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">店铺信息</div><span class="flex-con"></span></h5>
+					
 					<el-form-item label="店铺名称：">
 						<el-input v-model="form.shopName" clearable></el-input>
 					</el-form-item>
@@ -55,7 +57,8 @@
 							</div>
 						</template>
 					</el-form-item>
-					<h5 class="fonttitle">店铺端账号</h5>
+					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">店铺端账号</div><span class="flex-con"></span></h5>
+					
 					<el-form-item label="账号：">
 						<el-input v-model="form.username" clearable></el-input>
 					</el-form-item>
@@ -65,25 +68,24 @@
 					<el-form-item label="确认密码：">
 						<el-input v-model="form.password2" @change="handleword2" clearable></el-input>
 					</el-form-item>
-					<h5 class="fonttitle">店铺配货</h5>				
-					<el-form-item label="配货数量：">
-						<el-row>
-							<el-col :span="24">
+					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">店铺配货</div><span class="flex-con"></span></h5>
+								
+					<el-form-item label="配货数量：">					
 								<template v-for="item in battery">
 									<div class="peinum">
 										<span class="battery" :key="item.id">{{item.mode}}</span>									
 										<el-input-number @change="handleChange1"
 										:min="0" label="描述文字" v-model="item.num"></el-input-number>
 									</div>									
-								</template>
-							</el-col>
-						</el-row>
+								</template>							
 					</el-form-item>
-					<h5 class="fonttitle">保证金/配货成本</h5>
+					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">保证金/配货成本</div><span class="flex-con"></span></h5>
+					
 					<el-form-item label="已缴保证金（￥）：">												
 							<el-input v-model="form.platbond" placeholder="请输入保证金" clearable></el-input>
 					</el-form-item>
-					<h5 class="fonttitle">归属运营商</h5>
+					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">归属运营商</div><span class="flex-con"></span></h5>
+					
 					<el-form-item label="所属运营商：">
 						<template>
 							<el-select v-model="operatorid" placeholder="请选择">
@@ -210,7 +212,7 @@
 
 <style scoped>
 	.changeInfo{box-sizing:border-box;padding:10px 0 0 10px;}
-	.el-input-number{margin-right:22px;}
+	.el-input-number{margin-right:10px;}
 	.battery {background: #F4F6F9;color: #58595D;border: #D8DBE3 1px solid;	padding: 11px;border-radius:4px;}	
 	.el-select {width: 100%;}
 	.el-date-editor--daterange.el-input__inner {width: 100%;}
@@ -219,8 +221,7 @@
 	.changeInfo .el-table td{padding:4px 0;}
 	.changeInfo .el-table th{padding:0;background:#ADB4B9;color:#252C30;}	
 	.changeInfo .el-table{font-size:14px;}
-	.changeInfo .el-col-offset-2{margin-left:10px;}
-	
-	.peinum{display:inline-block;padding-top:6px;}
+	.changeInfo .el-col-offset-2{margin-left:10px;}	
+	.peinum{padding-top:10px;}
 	.el-form-item{margin-bottom:8px;}
 </style>

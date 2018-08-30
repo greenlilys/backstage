@@ -4,7 +4,7 @@
 			<el-row class="contentBox" type="flex" align="middle">
 				<el-col :span="6" :offset="18" class="tr">
 					<router-link to='/Main/Addbattery'>
-						<el-button type="warning" size="small" class="btnStyle">+&nbsp;添加新电池</el-button>	
+						<el-button type="success" size="small">+&nbsp;添加新电池</el-button>	
 					</router-link>	
 				</el-col>
 			</el-row>

@@ -1,18 +1,13 @@
 <template>
 	<div>
 		<div class="flex-wrap flex-vertical hf">
-			<el-row class="headBox" type="flex" align="middle">
-				<el-col :span="8">
+			<el-row class="headBox" type="flex" align="middle">				
 					 <div class="block">
-						 <span class="demonstration">选择时段：&nbsp;</span>
+						 <span class="font-14">选择时段：&nbsp;</span>
 						<el-date-picker v-model="valueTime" type="daterange"  range-separator="至" start-placeholder="开始日期" 
-							end-placeholder="结束日期" value-format="yyyy-MM-dd" @change="handleTime">
+							end-placeholder="结束日期" value-format="yyyy-MM-dd">
 						</el-date-picker>
-					</div>
-				</el-col>
-				<el-col :span="1">
-					<el-button type="warning" size="medium" class="btnStyle" @click="search">查询</el-button>		
-				</el-col>
+					</div>			
 			</el-row>
 			
 			<div class="flex-wrap flex-horizontal mt-10 numBox">
@@ -32,10 +27,10 @@
 			
 			<el-row type="flex" align="middle" class="headBox mt-10"> 
 				<el-col :span="6">
-					<div class="font-16">数据明细：<span v-if="valueTime!=null">（{{this.begin}}至{{this.end}}）</span></div>
+					<div class="font-14">数据明细：<span v-if="valueTime!=null">（{{valueTime[0]}}至{{valueTime[1]}}）</span></div>
 				</el-col>
 				<el-col :span="6" :offset="12" class="tr">
-					<el-button type="warning" size="small" class="btnStyle">导出当前数据</el-button>
+					<el-button type="success" size="small">导出当前数据</el-button>
 				</el-col>
 			</el-row>
 			
@@ -53,8 +48,7 @@
 					</el-table-column>				
 				</el-table>
 				<div class="block page">							    
-				<el-pagination
-					@size-change="handleSizeChange"
+				<el-pagination					
 					@current-change="handleCurrentChange"
 					:current-page.sync="currentPage"
 					:page-size="10"							    
@@ -76,33 +70,20 @@
 				tablebegin:{},
 				tableend:{},
 		        currentPage:1,
-				valueTime:'',
-				total:0,
-				begin:'',
-				end:''
+				valueTime:[],
+				total:10
+				
 			}
 		},
-		methods:{
-			handleSizeChange(val) {
-	        console.log(`每页 ${val} 条`);
-	      },
+		methods:{		
 	      handleCurrentChange(val) {
-	      	this.serviceInfo(this.currentPage,this.begin,this.end);
-		  },
-		  search(v) {
-			this.serviceInfo(this.currentPage,this.begin, this.end);
-		  },	
-		  handleTime(v){//日期
-			console.log(v);
-			this.begin = v[0];
-			this.end = v[1];	
-		  },
-		  serviceInfo(pageNo){
-			var pageNo = pageNo || "";
+	      	this.serviceInfo({pageNo:val,begin:this.valueTime[0],end:this.valueTime[1]});
+		  },		 
+		  serviceInfo({pageNo=1,begin='',end=''}={}){			
 			this.$get('reportform/serviceInfo',{
 				pageNo: pageNo,
-				begin:this.begin,
-				end:this.end
+				begin:begin,
+				end:end
 			}).then(data=>{
 				this.tableData=data.page.datas;
 				this.tableDatas=data.serviceCount;
@@ -112,8 +93,16 @@
 
 		},
 		mounted(){
-		this.serviceInfo(1,this.begin,this.end);
+			this.serviceInfo();
+	  },
+	  watch:{
+	  	valueTime(newVal,oldVal){
+	  		if(newVal){
+	  			this.serviceInfo({begin:newVal[0],end:newVal[1]});
+	  			this.currentPage=1;
+	  		}
 	  	}
+	  }
 	}
 </script>
 

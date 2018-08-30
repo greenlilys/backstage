@@ -14,6 +14,9 @@ import Joinapply from '@/components/shop/Joinapply'
 import Joindetail from '@/components/shop/Joindetail'
 import Shopactive from '@/components/shop/Shopactive'
 import Editactive from '@/components/shop/Editactive'
+import AddShopNotice from '@/components/shop/AddShopNotice'
+import Shopnoticelist from '@/components/shop/Shopnoticelist'
+import ShopUpdNotice from '@/components/shop/ShopUpdNotice'
 
 import Userlist from '@/components/user/Userlist'
 import Userdetail from '@/components/user/Userdetail'
@@ -37,6 +40,7 @@ import Pikingrecord from '@/components/battery/Pikingrecord'
 import Addorder from '@/components/battery/Addorder'
 import Subtractorder from '@/components/battery/Subtractorder'
 
+//资金
 import Deposit from '@/components/money/Deposit'
 import Rebate from '@/components/money/Rebate'
 import Rent from '@/components/money/Rent'
@@ -47,11 +51,13 @@ import Ensure from '@/components/money/Ensure'
 import Getapply from '@/components/money/Getapply'
 import Getapplyrecord from '@/components/money/Getapplyrecord'
 
+//统计
 import Useramount from '@/components/amount/Useramount'
 import Shopscore from '@/components/amount/Shopscore'
-import Businessscore from '@/components/amount/Businessscore'
 import Pushuser from '@/components/amount/Pushuser'
+import Businessscore from '@/components/amount/Businessscore'
 
+//设置
 import Seting from '@/components/seting/Seting'
 import Batterymanage from '@/components/seting/Batterymanage'
 import Problorm from '@/components/seting/Problorm'
@@ -62,14 +68,15 @@ import Updatebattery from '@/components/seting/Updatebattery'
 import Updateaccount from '@/components/seting/Updateaccount'
 import UpdateProblorm from '@/components/seting/UpdateProblorm'
 import Problormlist from '@/components/seting/Problormlist'
+
+//营销
 import Addactivity from '@/components/marketing/activity/Addactivity'
 import Listactivity from '@/components/marketing/activity/Listactivity'
-import AddShopNotice from '@/components/shop/AddShopNotice'
-import Shopnoticelist from '@/components/shop/Shopnoticelist'
-import ShopUpdNotice from '@/components/shop/ShopUpdNotice'
 import PlatformNoticeList from '@/components/marketing/notice/PlatformNoticeList'
 import AddPlatformNotice from '@/components/marketing/notice/AddPlatformNotice'
 import PlatformUpdNotice from '@/components/marketing/notice/PlatformUpdNotice'
+
+
 Vue.use(Router)
 
 export default new Router({

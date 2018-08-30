@@ -93,6 +93,7 @@ align-items: center;
 .tc{text-align: center;}
 .tr{text-align: right;}
 .fonttitle{color:#FF6600;font-size:15px;}
+.fonttitle span{display:inline-block;border-top:1px dotted #FF6600;}
 .mt-10{
 	margin-top:10px;
 }

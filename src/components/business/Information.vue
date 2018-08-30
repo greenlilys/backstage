@@ -2,9 +2,10 @@
 <template>
 	<div class="infomation">
 		<div class="mainContent">	
-		<el-row>
-			<el-form ref="form" :model="form" label-width="140px">
-			<el-col :span="10">				
+		<el-row>			
+			<el-col :span="9">
+				<el-form ref="form" :model="form" label-width="140px">
+				<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">基本信息</div><span class="flex-con"></span></h5>
 					<el-form-item label="运营商名称：">
 						<el-input v-model="form.name"></el-input>
 					</el-form-item>
@@ -43,7 +44,8 @@
 								</el-date-picker>
 							</div>
 						</template>
-					</el-form-item>					
+					</el-form-item>	
+					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">经营资质</div><span class="flex-con"></span></h5>
 					<el-form-item label="法人姓名：">
 						<el-input v-model="form.legalperson"></el-input>
 					</el-form-item>
@@ -67,9 +69,7 @@
 						<el-dialog :visible.sync="dialogVisible">
 						  <img width="100%" :src="dialogImageUrl" alt="">
 						</el-dialog>
-					</el-form-item>
-			</el-col>
-			<el-col :span="10" :offset="1">
+					</el-form-item>			
 				<el-form-item label="营业执照照片（最多一张）：">
 							<el-upload
 						 class="uploadBox"
@@ -88,6 +88,7 @@
 						  <img width="100%" :src="dialogImageUrl" alt="">
 						</el-dialog>
 					</el-form-item>	
+					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">运营商结算账户</div><span class="flex-con"></span></h5>
 						<el-form-item label="收款账户类型：">
 							<el-radio-group v-model="form.acctype">
 								<el-radio  :label="0">银行卡</el-radio>
@@ -116,9 +117,9 @@
 							<el-button type="success" @click="onSubmit">保存</el-button>
 						</el-row>
 					</el-form-item>
-					
+				</el-form>
 			</el-col>
-			</el-form>
+			
 		</el-row>
 		</div>
 	</div>

@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="hf headBox">
-							<el-row class="font-18 mb-10">
+							<el-row class="font-16 mb-10">
 								<el-col :span="6">
 									<span class="fontYellow">运营商等级设置</span>
 								</el-col>														

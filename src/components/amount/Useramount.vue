@@ -5,13 +5,16 @@
 				<h1 class="font-20 tc fontYellow">{{registernum.register}}</h1>
 				<p class="font-16 mt-10 tc">注册用户</p>
 			</div>
+			<div class="contentBox flex-con" v-for="item in stocknum" :key="item.id">
+					<h1 class="font-20 tc fontYellow">{{item.num}}</h1>
+					<p class="font-16 tc mt-10">{{item.mode}}</p>
+			</div>		
+		</div>
+
+		<div class="flex-wrap flex-horizontal headBox">
 			<div class="contentBox flex-con">
-				<h1 class="font-20 tc fontYellow">{{stocknum.six}}</h1>
-				<p class="font-16 tc mt-10">60V20A安装用户</p>
-			</div>
-			<div class="contentBox flex-con">
-				<h1 class="font-20 tc fontYellow">{{stocknum.seven}}</h1>
-				<p class="font-16 mt-10 tc">72V20A安装用户</p>
+				<h1 class="font-20 tc fontYellow">{{usernum.num}}</h1>
+				<p class="font-16 mt-10 tc">在租用户</p>
 			</div>
 			<div class="contentBox flex-con">
 				<h1 class="font-20 tc fontYellow">{{setMealsnum.monthlyrent}}</h1>
@@ -25,7 +28,6 @@
 				<h1 class="font-20 tc fontYellow">{{setMealsnum.annualrent}}</h1>
 				<p class="font-16 mt-10 tc">续租-年租</p>
 			</div>
-			
 		</div>
 	</div>
 </template>
@@ -37,7 +39,8 @@
 				stock:{},
 				registernum:{},
 				stocknum:{},
-				setMealsnum:{}
+				setMealsnum:{},
+				usernum:{}
       }
     },
     methods:{
@@ -48,6 +51,7 @@
 				this.registernum =	data.registernum;
 				this.stocknum = data.stocknum;
 				this.setMealsnum = data.setMealsnum;
+					this.usernum = data.usernum;
 			})
 		}
 		},

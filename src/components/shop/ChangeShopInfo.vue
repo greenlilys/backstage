@@ -3,7 +3,8 @@
 	<div>	
 	<div class="bw hf changeInfo">
 		<el-row>
-			<el-col :span="12">
+			<el-col :span="9">
+				<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">基本信息</div><span class="flex-con"></span></h5>
 				<el-form ref="form" :model="form" label-width="140px">
 					<el-form-item label="店主姓名：">
 						<el-input v-model="form.contactname"></el-input>
@@ -14,6 +15,7 @@
 					<el-form-item label="身份证号码：">
 						<el-input v-model="form.contactno"></el-input>
 					</el-form-item>
+					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">店铺信息</div><span class="flex-con"></span></h5>
 					<el-form-item label="店铺名称：">
 						<el-input v-model="form.shopName"></el-input>
 					</el-form-item>
@@ -47,6 +49,7 @@
 							</div>
 						</template>
 					</el-form-item>
+					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">店铺端账号</div><span class="flex-con"></span></h5>
 					<el-form-item label="手机账号：">
 						<el-input v-model="form.username" disabled></el-input>
 					</el-form-item>
@@ -56,11 +59,12 @@
 						  <el-radio  label="1">禁用</el-radio>
 						</el-radio-group>
 					</el-form-item>
+					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">店铺配货</div><span class="flex-con"></span></h5>
 					<el-form-item label="配货数量：">	
 								<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="name" label="电池套餐名称" width="200" align="center">
+									<el-table-column prop="name" label="电池套餐名称" align="center">
 									</el-table-column>
-									<el-table-column prop="mode" label="电池型号" width="130" align="center">
+									<el-table-column prop="mode" label="电池型号" align="center">
 									</el-table-column>
 									<el-table-column prop="groupnum" label="套餐电池数量" align="center">
 									</el-table-column>
@@ -69,11 +73,11 @@
 								</el-table>							
 						
 					</el-form-item>
-
+					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">保证金/配货成本</div><span class="flex-con"></span></h5>
 					<el-form-item label="已缴保证金（￥）：">						
 						<el-input v-model="form.platbond" placeholder="请输入内容"></el-input>								
 					</el-form-item>
-
+					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">所属运营商</div><span class="flex-con"></span></h5>
 					<el-form-item label="所属运营商：">
 						<template>
 							<el-select v-model="oname" placeholder="请选择" @change="handled(oname)">

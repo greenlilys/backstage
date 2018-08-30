@@ -16,8 +16,7 @@
 							</template>
 							<template>
 								<div class="block page">							    
-							    <el-pagination
-							      @size-change="handleSizeChange"
+							    <el-pagination							
 							      @current-change="handleCurrentChange"
 							      :current-page.sync="currentPage"
 							      :page-size="10"							    
@@ -35,13 +34,13 @@
 				return {
 					tableData: [],
 					currentPage:1,
-					total:0
+					total:0,
+					begin:'',
+					end:''
 				}
 			},
 			methods:{
-				handleSizeChange(val) {
-						console.log(`每页 ${val} 条`);
-				},
+				
 				cellStyle({row, column, rowIndex, columnIndex}){
 					if(columnIndex === 2){ //指定坐标
 						return 'color:#FF6600'
@@ -50,37 +49,46 @@
 					}
 		  		},
 				handleCurrentChange(val) {
-				this.depositList(val,1,this.begin,this.end);
+				this.depositList({pageNo:val});
 				},
-					depositList(pageNo){
-				var pageNo = pageNo || "";
-				this.$get('capital/depositPay',{
-					pageNo: pageNo,
-					category : 1,
-					begin:this.begin,
-					end:this.end
-				}).then(data=>{
-					var arr = data.datas;
-					for(var i = 0, len = arr.length; i < len; i++) {
-						//支付方式
-						if(arr[i].paymode == 0) {
-							arr[i].paymodes = "支付宝"
-						} else if(arr[i].paymode == 1){
-							arr[i].paymodes = "微信"
-						} else{
-							arr[i].paymodes = "钱包支付"
+				depositList({pageNo=1,category=1,begin=this.begin,end=this.end}={}){					
+					this.$get('capital/depositPay',{
+						pageNo:pageNo,
+						category:category,
+						begin:begin,
+						end:end
+					}).then(data=>{
+						var arr = data.datas;
+						for(var i = 0, len = arr.length; i < len; i++) {
+							//支付方式
+							if(arr[i].paymode == 0) {
+								arr[i].paymodes = "支付宝"
+							} else if(arr[i].paymode == 1){
+								arr[i].paymodes = "微信"
+							} else{
+								arr[i].paymodes = "钱包支付"
+							}
+							arr[i].deposits="￥"+arr[i].deposit
 						}
-						arr[i].deposits="￥"+arr[i].deposit
-					}
-					this.tableData=arr;
-					this.total = Number(data.totalCount);
-				});
+						this.tableData=arr;
+						this.total = Number(data.totalCount);
+					});
 				}
 			},
-			props:['begin','end'],
+			props:['valueTime'],
 			mounted(){
-			this.depositList(1,1,this.begin,this.end);
-				}
+				this.depositList();
+			},
+			watch:{
+			valueTime:function(newVal,oldVal){					
+					if(newVal){						
+						this.depositList({pageNo:1,begin:newVal[0],end:newVal[1]});
+						this.currentPage = 1;
+						this.begin = newVal[0];
+						this.end = newVal[1];
+					}
+			}
+		}
 		}
 </script>
 

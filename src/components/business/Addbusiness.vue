@@ -4,7 +4,9 @@
 		<div class="addBusiness hf">
 		<el-row>
 			<el-form ref="form" :model="form" label-width="140px">
-			<el-col :span="9">				
+			<el-col :span="9">
+				<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">基本信息</div><span class="flex-con"></span></h5>
+				
 					<el-form-item label="运营商名称：">
 						<el-input v-model="form.name" clearable></el-input>
 					</el-form-item>
@@ -31,7 +33,7 @@
 							</div>
 						</template>
 					</el-form-item>
-					
+					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">经营资质</div><span class="flex-con"></span></h5>
 					<el-form-item label="法人姓名：">
 						<el-input v-model="form.legalperson" clearable></el-input>
 					</el-form-item>
@@ -75,6 +77,7 @@
 							  <img width="100%" :src="dialogImageUrl" alt="">
 							</el-dialog>
 					</el-form-item>
+					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">运营商账号</div><span class="flex-con"></span></h5>
 					<el-form-item label="运营商账号：">
 						<el-input v-model="form.username" clearable></el-input>
 					</el-form-item>
@@ -84,9 +87,7 @@
 					<el-form-item label="确认密码：">
 						<el-input v-model="password2" @change="confirmSecond" clearable></el-input>
 					</el-form-item>
-					
-			</el-col>
-			<el-col :span="14" :offset="1">				
+					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">运营商级别</div><span class="flex-con"></span></h5>
 					<el-form-item label="运营商级别：">						
 							<el-radio-group v-model="form.radio1"  @change = "handleRadio1">
 								<template v-for="item in operLevellist">
@@ -95,7 +96,10 @@
 							</el-radio-group>
 						<div v-if=" curid != '' ">代理费用：{{form.agencyfee}}&nbsp;&nbsp;&nbsp;&nbsp;分润比例：{{form.ratio}}</div>
 					</el-form-item>
-						<el-form-item label="收款账户类型：">
+					
+					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">运营商结算账户</div><span class="flex-con"></span></h5>
+					<p class="font-14 fontYellow mb-10">运营商收益返利结算的收款账户。</p>
+					<el-form-item label="收款账户类型：">
 						<template>
 							<el-radio-group v-model="form.radio2"  @change = "handleRadio2">
 								<el-radio  label="0">银行卡</el-radio>
@@ -119,53 +123,44 @@
 							<el-input v-model="form.Zfbacc" clearable></el-input>
 						</el-form-item>
 					</template>
-					
-					<template v-for="items in battery">
-						<el-form-item :label="items.mode +'：' ">					
-							<el-row>
-								<el-col :span="12">
-									<el-form-item label="换电费（元）：" label-width="120px">
-										<div>
-											<input class="oinput" v-model="items.powerrates" placeholder="" type="text" />											
-											<span class="ospan">平台换电费：{{items.powerrate}}</span>
-										</div>										
-									</el-form-item>
-								</el-col>
-	
-								<el-col :span="12">
-									<el-form-item label="月租（元）：" label-width="120px">
-										<div>
-											<input class="oinput" v-model="items.monthrents" placeholder="" type="text" />											
-											<span class="ospan">平台月租：{{items.monthrent}}</span>
-										</div>	
-									</el-form-item>
-								</el-col>
+					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">服务费用</div><span class="flex-con"></span></h5>
+					<p class="font-14 fontYellow mb-10">服务费根据运营区域可进行单独设定，不得低于平台基础定价。</p>
+					<template v-for="items in battery">									
+									<div class="modebox tc font-16">{{items.mode}}</div>
+									<div class="inputboxs flex-wrap flex-vertical flex-align-center">	
+										<el-form-item label="换电费（元）：" label-width="120px">
+											<div>
+												<input class="oinput" v-model="items.powerrates" placeholder="" type="text" />											
+												<span class="ospan">平台换电费：{{items.powerrate}}</span>
+											</div>										
+										</el-form-item>
+									
+										<el-form-item label="月租（元）：" label-width="120px">
+											<div>
+												<input class="oinput" v-model="items.monthrents" placeholder="" type="text" />											
+												<span class="ospan">平台月租：{{items.monthrent}}</span>
+											</div>	
+										</el-form-item>
+									
 								
-							</el-row>
-							<el-row class="mt-10">
-								
-								<el-col :span="12">
-									<el-form-item label="季租（元）：" label-width="120px">
-										<div>
-											<input class="oinput" v-model="items.quarterrents" placeholder="" type="text" />											
-											<span class="ospan">平台季租：{{items.quarterrent}}</span>
-										</div>
-									</el-form-item>
-								</el-col>
-								<el-col :span="12">
-									<el-form-item label="年租（元）：" label-width="120px">
-										<div>
-											<input class="oinput" v-model="items.annualrents" placeholder="" type="text" />											
-											<span class="ospan">平台年租：{{items.annualrent}}</span>
-										</div>
-									</el-form-item>
-								</el-col>
-							</el-row>
-	
-						</el-form-item>
+										<el-form-item label="季租（元）：" label-width="120px">
+											<div>
+												<input class="oinput" v-model="items.quarterrents" placeholder="" type="text" />											
+												<span class="ospan">平台季租：{{items.quarterrent}}</span>
+											</div>
+										</el-form-item>
+									
+										<el-form-item label="年租（元）：" label-width="120px">
+											<div>
+												<input class="oinput" v-model="items.annualrents" placeholder="" type="text" />											
+												<span class="ospan">平台年租：{{items.annualrent}}</span>
+											</div>
+										</el-form-item>
+									</div>
 					</template>
-					<p class="font-14 fontYellow tr mb-20">服务费根据运营区域可进行单独设定，不得低于平台基础定价。</p>
-					<el-form-item label="运营区域：">						
+					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">运营区域</div><span class="flex-con"></span></h5>
+					<p class="font-14 fontYellow mb-10">同一区域的网点归运营商维护，获取收益进行分润。</p>
+					<el-form-item label="添加运营区域：">						
 						<v-distpicker @selected="onSelecteArea"></v-distpicker>						
 						<el-tag
 						  :key="tag"
@@ -180,13 +175,7 @@
 						<el-row class="mt-20">
 							<el-button type="success" @click="submitForm">保存</el-button>
 						</el-row>
-					</el-form-item>		
-					<el-form-item>
-						
-					
-						
 					</el-form-item>	
-					
 			</el-col>
 			</el-form>
 		</el-row>
@@ -424,7 +413,9 @@
 	.el-tag { margin-right: 4px;} 
 	
 	.oinput{color:#606266;font-size:inherit;height:40px;line-height:40px;outline:none;padding:0 15px;
-	border:1px solid #dcdfe6;background-image:none;background-color:#fff;border-radius:4px;box-sizing:border-box;width:120px;}
+	border:1px solid #dcdfe6;background-image:none;background-color:#fff;border-radius:4px;box-sizing:border-box;width:50%;}
 	.ospan{color:#606266;font-size:inherit;height:40px;line-height:40px;padding:0 15px;} 
 	
+	.inputboxs{padding:20px 0;}
+	.modebox{height:30px;line-height: 30px;background:#E9EEF3;}
 </style>

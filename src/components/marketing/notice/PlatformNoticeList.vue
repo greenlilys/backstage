@@ -4,7 +4,7 @@
 			<el-row class="contentBox" type="flex" align="middle">
 				<el-col :span="6" :offset="18" class="tr">
 					<router-link to='/Main/AddPlatformNotice'>
-						<el-button type="warning" size="small" class="btnStyle">+&nbsp;添加公告</el-button>	
+						<el-button type="success" size="small">+&nbsp;添加公告</el-button>	
 					</router-link>	
 				</el-col>
 			</el-row>
@@ -31,8 +31,7 @@
 								</el-table>
 							
 								<div class="block page">							    
-								    <el-pagination
-								      @size-change="handleSizeChange"
+								    <el-pagination								     
 								      @current-change="handleCurrentChange"
 								      :current-page.sync="currentPage"
 								      :page-size="10"							    
@@ -62,9 +61,7 @@
 			};
 		},
 		methods: {
-			handleSizeChange(val) {
-	        console.log(`每页 ${val} 条`);
-	        },
+		
 	        handleCurrentChange(val) {
 	        this.getProblormList(val);
 			},

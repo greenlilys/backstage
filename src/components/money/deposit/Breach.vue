@@ -17,8 +17,7 @@
 							</template>
 							<template>
 								<div class="block page">							    
-							    <el-pagination
-							      @size-change="handleSizeChange"
+							    <el-pagination							     
 							      @current-change="handleCurrentChange"
 							      :current-page.sync="currentPage"
 							      :page-size="10"							    
@@ -36,13 +35,12 @@
 			return {
 				tableData: [],
 				currentPage:1,
-				total:0
+				total:0,
+				begin:'',
+				end:''
 			}
 		},
-		methods:{
-		  handleSizeChange(val) {
-	        console.log(`每页 ${val} 条`);
-		  },
+		methods:{		  
 		  cellStyle({row, column, rowIndex, columnIndex}){
 					if(columnIndex === 4){ //指定坐标
 						return 'color:#FF6600'
@@ -51,13 +49,9 @@
 					}
 		  },
 	      handleCurrentChange(val) {
-			this.defaultList(val,this.begin,this.end);
+			this.defaultList({pageNo:val});
 		  },
-	  	  defaultList(pageNo,begin,end){
-			var pageNo = pageNo || "";
-			var begin = this.begin;
-			var end = this.end
-			console.log(begin+end)
+	  	  defaultList({pageNo=1,begin=this.begin,end=this.end}={}){
 			this.$get('capital/defaultLog',{
 				pageNo: pageNo,
 				begin:begin,
@@ -80,13 +74,24 @@
 			});
 		  }
 		},
-		props:['begin','end'],	
+		props:['valueTime'],	
 		mounted(){
-			this.defaultList(1,this.begin,this.end);
+			this.defaultList();
 		},
-		created(){	  	
-		  
-	 	}
+		watch: {
+			valueTime(newVal, oldVal) {
+				if(newVal) {
+					this.defaultList({
+						begin: newVal[0],
+						end: newVal[1]
+					});
+					this.currentPage = 1;
+					this.begin = newVal[0];
+					this.end = newVal[1];
+				}
+			}
+		}
+		
 	}
 </script>
 

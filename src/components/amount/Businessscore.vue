@@ -17,7 +17,7 @@
 			</div>
 			<el-row type="flex" align="middle" class="headBox mt-10"> 
 				<el-col :span="12" :offset="12" class="tr">
-					<el-button type="warning" size="small" class="btnStyle">导出当前数据</el-button>
+					<el-button type="success" size="small">导出当前数据</el-button>
 				</el-col>
 			</el-row>
 			
