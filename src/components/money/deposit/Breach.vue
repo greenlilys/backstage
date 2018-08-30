@@ -1,7 +1,7 @@
 <template>
 	<div class="mt-10">
 		<template>
-								<el-table :data="tableData" style="width: 100%;">
+								<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
 									<el-table-column prop="username" label="用户账号" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="names" label="租用电池类型" width="" align="center">
@@ -10,7 +10,7 @@
 									</el-table-column>
 									<el-table-column prop="types" label="违约原因" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="amount" label="违约扣除押金" width="" align="center">
+									<el-table-column prop="amounts" label="违约扣除押金" width="" align="center">
 									</el-table-column>
 									
 								</el-table>
@@ -21,9 +21,9 @@
 							      @size-change="handleSizeChange"
 							      @current-change="handleCurrentChange"
 							      :current-page.sync="currentPage"
-							      :page-size="8"							    
+							      :page-size="10"							    
 							      layout="total, prev, pager, next"
-							      :total="100">
+							      :total="total">
 							    </el-pagination>
 							 	 </div>
 							</template>		
@@ -42,16 +42,26 @@
 		methods:{
 		  handleSizeChange(val) {
 	        console.log(`每页 ${val} 条`);
-	      },
+		  },
+		  cellStyle({row, column, rowIndex, columnIndex}){
+					if(columnIndex === 4){ //指定坐标
+						return 'color:#FF6600'
+					}else{
+						return ''
+					}
+		  },
 	      handleCurrentChange(val) {
 			this.defaultList(val,this.begin,this.end);
 		  },
-	  	  defaultList(pageNo){
+	  	  defaultList(pageNo,begin,end){
 			var pageNo = pageNo || "";
+			var begin = this.begin;
+			var end = this.end
+			console.log(begin+end)
 			this.$get('capital/defaultLog',{
 				pageNo: pageNo,
-				begin:this.begin,
-				end:this.end
+				begin:begin,
+				end:end
 			}).then(data=>{
 				var arr = data.datas;
 				for(var i = 0, len = arr.length; i < len; i++) {
@@ -63,16 +73,20 @@
 					}else{
 						arr[i].types="电池损坏"
 					}
+					arr[i].amounts="￥"+arr[i].amount
 				}
 				this.tableData=arr;
 				this.total = Number(data.totalCount);
 			});
 		  }
 		},
-		props:['begin','end'],
+		props:['begin','end'],	
 		mounted(){
-		this.defaultList(1,this.begin,this.end);
-	  	}
+			this.defaultList(1,this.begin,this.end);
+		},
+		created(){	  	
+		  
+	 	}
 	}
 </script>
 

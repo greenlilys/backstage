@@ -1,7 +1,7 @@
 <template>
 	<div class="mt-10" id="order">					
 							<template>
-								<el-table :data="tableData" style="width: 100%;">
+								<el-table :data="tableData" style="width: 100%;"  :cell-style="cellStyle">
 									<el-table-column prop="no" label="预约编号" width="200" align="center">
 									</el-table-column>
 									<el-table-column prop="types" label="预约类型" width="200" align="center">
@@ -46,6 +46,13 @@
 			handleSizeChange(val) {
 				console.log(`每页 ${val} 条`);
 			},
+			cellStyle({row, column, rowIndex, columnIndex}){
+					if(columnIndex === 3){ //指定坐标
+						return 'color:#FF6600'
+					}else{
+						return ''
+					}
+		 	},
 			handleCurrentChange(val) {
 				this.getShopServiceList(val, this.id);				
 			},
@@ -65,7 +72,11 @@
 						} else {
 							arr[i].types = "退租"
 						}
-						arr[i].costs = "¥" + arr[i].cost
+						if(arr[i].paymode == 3){
+							arr[i].costs=arr[i].cost;
+						}else{
+							arr[i].costs="￥"+arr[i].cost;
+						}
 					}
 					this.tableData = arr;
 					this.total = Number(data.totalCount);

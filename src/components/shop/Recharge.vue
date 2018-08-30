@@ -1,12 +1,12 @@
 <template>
 	<div class="mt-10">					
 							<template>
-								<el-table :data="tableData" style="width: 100%;">
+								<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
 									<el-table-column prop="addtime" label="钱包充值时间" width="160" align="center">
 									</el-table-column>
-									<el-table-column prop="amount" label="充值金额" width="" align="center">
+									<el-table-column prop="amounts" label="充值金额" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="balance" label="钱包金额" align="center">
+									<el-table-column prop="balances" label="钱包金额" align="center">
 									</el-table-column>
 									<el-table-column prop="remark" label="充值说明" align="center">
 									</el-table-column>								
@@ -41,7 +41,16 @@
       methods:{
 	      handleSizeChange(val) {
 	        console.log(`每页 ${val} 条`);
-	      },
+				},
+				cellStyle({row, column, rowIndex, columnIndex}){
+					if(columnIndex === 1){ //指定坐标
+						return 'color:#FF6600'
+					}else if(columnIndex === 2){
+						return 'color:#FF6600'
+					}else{
+						return ''
+					}
+				},
 	      handleCurrentChange(val) {
 					this.getShopServiceList(val,this.id)
 	        //console.log(`当前页: ${val}`);
@@ -53,7 +62,12 @@
 						id:id
 					}).then(data=>{
 					var arr = data.datas;
-	    		this.tableData = arr;
+					for(var i = 0, len = arr.length; i < len; i++) {
+						arr[i].amounts="￥"+arr[i].amount;
+						arr[i].balances="￥"+arr[i].balance;
+					}
+					this.tableData = arr;
+					
 	    		this.total= Number(data.totalCount);
 	    		})
 	      },

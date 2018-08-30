@@ -1,7 +1,7 @@
 <template>
 	<div class="mt-10">
 		<template>
-								<el-table :data="tableData" style="width: 100%;">
+								<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
 									<el-table-column prop="retime" label="退租时间" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="reno" label="退租预约" width="" align="center">
@@ -14,7 +14,7 @@
 									</el-table-column>
 									<el-table-column prop="leaseterms" label="当前租期类型" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="reamount" label="退还租金" width="" align="center">
+									<el-table-column prop="reamounts" label="退还租金" width="" align="center">
 									</el-table-column>
 									
 								</el-table>
@@ -47,6 +47,13 @@
 			handleSizeChange(val) {
 				console.log(`每页 ${val} 条`);
 			},
+			 cellStyle({row, column, rowIndex, columnIndex}){
+					if(columnIndex === 6){ //指定坐标
+						return 'color:#FF6600'
+					}else{
+						return ''
+					}
+		    },
 			handleCurrentChange(val) {
 			this.rentList(val,1,this.begin,this.end);
 			},
@@ -77,6 +84,7 @@
 					} else{
 						arr[i].leaseterms = "年租"
 					}
+					arr[i].reamounts="￥"+arr[i].reamount
 				}
 				this.tableData=arr;
 				this.total = Number(data.totalCount);

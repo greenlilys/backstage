@@ -4,7 +4,7 @@
 			<Head class="headHeight"></Head>
 			<div class="flex-wrap flex-horizontal mainBox flex-con">
 				<Aside></Aside>
-				<div class="flex-con contentBoxs flex-wrap flex-vertical">
+				<div class="flex-con flex-wrap flex-vertical">
 					<Navbar></Navbar>
 					<router-view class="mainview bgHui flex-con"></router-view>
 				</div>				
@@ -35,10 +35,13 @@
 	}
 </script>
 <style>
-	.main,.mainContent {height: 100%;}
-	.mainBox{width:100%;}
-	.contentBoxs{height:100%;}
+	.main,.mainContent {
+		height: 100%;
+		
+		}	
+	.mainBox{width:100%;}	
 	.headHeight{height:50px}
-	.mainview{height:100%;width:100%;box-sizing: border-box;padding-top: 10px;padding-left: 10px;padding-right: 10px;}
+	.mainview{
+	width:100%;box-sizing: border-box;padding-top: 10px;padding-left: 10px;padding-right: 10px;}
 
 </style>

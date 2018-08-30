@@ -9,7 +9,7 @@
 					</el-col>				
 			</el-row>
 			<div class="mainlist flex-con mt-10 bw contentBox">
-				<el-table :data="tableData" style="width: 100%;">
+				<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
 					<el-table-column prop="no" label="运营商编号" width="" align="center">
 					</el-table-column>
 					<el-table-column prop="name" label="运营商名称" width="" align="center">
@@ -20,7 +20,7 @@
 					</el-table-column>
 					<el-table-column prop="contactcellphonename" label="联系人/联系电话" width="" align="center">
 					</el-table-column>
-					<el-table-column prop="rebate" label="返利账户余额" width="" align="center">
+					<el-table-column prop="rebates" label="返利账户余额" width="" align="center">
 					</el-table-column>
 					<el-table-column prop="acctypeZfbacc" label="结算账户" width="" align="center">
 					</el-table-column>
@@ -54,7 +54,7 @@
 						{{this.name}}
 					</el-form-item>
 					<el-form-item label="返利账户余额：" :label-width="formLabelWidth">
-						{{this.rebate}}
+						￥{{this.rebate}}
 					</el-form-item>
 					<el-form-item label="结算账户：" :label-width="formLabelWidth">
 						{{this.acctypeZfbacc}}
@@ -106,6 +106,13 @@
 			handleCurrentChange(val) {
 			this.Ooperlist(this.currentPage,this.find);
 			},
+			cellStyle({row, column, rowIndex, columnIndex}){
+					if(columnIndex === 5){ //指定坐标
+						return 'color:#FF6600'
+					}else{
+						return ''
+					}
+		 	 },
 			Shment(index,row){
 				this.currentId=row.id;
 				this.name=row.name;
@@ -133,6 +140,7 @@
 						arr[i].acctypes="支付宝"
 					}
 					arr[i].acctypeZfbacc=arr[i].acctypes+arr[i].Zfbacc;
+					arr[i].rebates="￥"+arr[i].rebate;
 				}
 				this.tableData=arr;
 				this.total = Number(data.totalCount);

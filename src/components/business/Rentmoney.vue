@@ -26,7 +26,13 @@
 		</template>
 		<template>
 			<div class="block page">
-				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage1" :page-size="8" layout="total, prev, pager, next" :total="100">
+				<el-pagination 
+					@size-change="handleSizeChange" 
+					@current-change="handleCurrentChange" 
+					:current-page.sync="currentPage" 
+					:page-size="10" 
+					layout="total, prev, pager, next" 
+					:total="totalCount">
 				</el-pagination>
 			</div>
 		</template>
@@ -36,33 +42,9 @@
 export default {
 		data() {
 			return {
-				tableData: [{
-					date: '2016',
-					name: '王小虎',
-					address: '上海市普陀区金沙江路 1518 弄',
-					money: 50.00,
-					action: '查看详情'
-				}, {
-					date: '2016',
-					name: '王小虎',
-					address: '上海市普陀区金沙江路 1517 弄',
-					money: 50.00,
-					action: '查看详情'
-				}, {
-					date: '2016',
-					name: '王小虎',
-					address: '上海市普陀区金沙江路 1519 弄',
-					money: 50.00,
-					action: '查看详情'
-				}, {
-					date: '2016',
-					name: '王小虎',
-					address: '上海市普陀区金沙江路 1516 弄',
-					money: 50.00,
-					action: '查看详情'
-				}],
-		
-				currentPage1: 2
+				tableData: [],		
+				currentPage: 1,
+				totalCount:100
 				
 			};
 		},
@@ -71,11 +53,24 @@ export default {
 				console.log(`每页 ${val} 条`);
 			},
 			handleCurrentChange(val) {
-				console.log(`当前页: ${val}`);
+				
+			},
+			getAllRenew({id=this.id}={}){
+				this.$get('operProfit/getAllRenew',{
+					id:id
+				}).then(data=>{
+					this.tableData = data.datas;
+					this.totalCount = data.totalCount;
+				})
 			}
+			
 		
 		
-		}
+		},
+		mounted(){
+			this.getAllRenew();
+		},
+		props:['id']
 	}
 </script>
 

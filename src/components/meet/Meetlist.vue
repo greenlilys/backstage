@@ -29,7 +29,7 @@
 			</el-row>
 		<div class="listDetail mt-10 flex-con">					
 							<template>
-								<el-table :data="tableData" style="width: 100%;">
+								<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
 									<el-table-column prop="no" label="预约编号" width="" align="center">
 									</el-table-column>									
 									<el-table-column prop="types" label="预约类型" width="" align="center">
@@ -38,7 +38,7 @@
 									</el-table-column>
 									<el-table-column prop="paymodes" label="支付方式" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="cost" label="支付金额（积分）" width="" align="center">
+									<el-table-column prop="costs" label="支付金额（积分）" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="states" label="预约状态" width="" align="center">
 									</el-table-column>
@@ -95,7 +95,13 @@
 			handleCurrentChange(val) {
 				this.getSelectList(this.find,this.radio1,this.radio2,val);
 			},
-
+			cellStyle({row, column, rowIndex, columnIndex}){
+					if(columnIndex === 4){ //指定坐标
+						return 'color:#FF6600'
+					}else{
+						return ''
+					}
+		 	},
 			navdetail() {
 				if(this.radio == 1) {
 					this.$router.push('/Meetlist/Installdetail')
@@ -154,6 +160,12 @@
 							tableData[i].paymodes = "--"
 							
 						}
+						if(tableData[i].paymode == 3){
+							tableData[i].costs=tableData[i].cost;
+						}else{
+							tableData[i].costs="￥"+tableData[i].cost;
+						}
+						
 						switch(tableData[i].state){
 							case 0:
 							tableData[i].states = "预约中"

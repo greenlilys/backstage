@@ -7,62 +7,41 @@
 			<el-col :span="11">	
 				<h2 class="fontYellow font-18 subTitle">基本信息</h2>
 					<el-form-item label="员工姓名：">
-						<el-input v-model="form.name"></el-input>
+						<el-input v-model="form.nickname"></el-input>
 					</el-form-item>
 					<el-form-item label="手机：">
-						<el-input v-model="form.name"></el-input>
+						<el-input v-model="form.phone"></el-input>
 					</el-form-item>
 					<el-form-item label="职务：">
-						<el-input v-model="form.name"></el-input>
+						<el-input v-model="form.job"></el-input>
 					</el-form-item>
 					<el-form-item label="QQ：">
-						<el-input v-model="form.name"></el-input>
+						<el-input v-model="form.qq"></el-input>
 					</el-form-item>
 					<el-form-item label="微信：">
-						<el-input v-model="form.name"></el-input>
+						<el-input v-model="form.wechat"></el-input>
 					</el-form-item>
 				<h2 class="fontYellow font-18 subTitle">员工账号</h2>
 					<el-form-item label="员工账号：">
-						<el-input v-model="form.name"></el-input>
+						<el-input v-model="form.username"></el-input>
 					</el-form-item>
 						
 					<el-form-item label="密码：">
-						<el-input v-model="form.name"></el-input>
+						<el-input type="password" v-model="form.password"></el-input>
 					</el-form-item>
 					<el-form-item label="确认密码：">
-						<el-input v-model="form.name"></el-input>
+						<el-input type="password" v-model="form.passwords"></el-input>
 					</el-form-item>
 					
-					<el-form-item label="员工账号：">
-						<el-input v-model="form.name">
-							<el-button slot="append" @click="setCode">重设密码</el-button>	
-						</el-input>
-					</el-form-item>	
-					<el-form-item label="账号状态：">
-						<template>
-							<el-radio v-model="radio1" label="1">上架</el-radio>
-							<el-radio v-model="radio1" label="2">下架</el-radio>					
-						</template>
-					</el-form-item>	
 					<h2 class="fontYellow font-18 subTitle">员工权限</h2>
 					<el-form-item label="">
-						<el-checkbox-group v-model="checkList">
-						    <el-checkbox label="网点管理"></el-checkbox>
-						    <el-checkbox label="用户管理"></el-checkbox>
-						    <el-checkbox label="商城"></el-checkbox>	
-						    <el-checkbox label="电池管理"></el-checkbox>	
-						    <el-checkbox label="预约管理"></el-checkbox>	
-						    <el-checkbox label="资金管理"></el-checkbox>	
-						    <el-checkbox label="统计"></el-checkbox>	
-						    <el-checkbox label="设置"></el-checkbox>	
-						  </el-checkbox-group>
-					</el-form-item>
-					
-					
-						
+						<el-checkbox-group v-model="checkLists">
+						    <el-checkbox :label="item.id"  v-for="item in checkList" :key="item.value">{{item.name}}</el-checkbox>
+						</el-checkbox-group>
+					</el-form-item>	
 					<el-form-item>
 						<el-row>
-							<el-button type="primary" class="btnStyle" @click="submitForm('ruleForm2')">保存</el-button>
+							<el-button type="warning" class="btnStyle" @click="addStaff()">保存</el-button>
 						</el-row>
 					</el-form-item>
 			</el-col>
@@ -79,23 +58,18 @@
 		data() {
 			return {
 				form: {
-					name: '88888',
-					region: '',
-					date1: '',
-					date2: '',
-					delivery: false,
-					type: [],
-					resource: '',
-					desc: '',
-					perimg:'002.png'
+					nickname: '',
+					phone: '',
+					job: '',
+					qq: '',
+					wechat: '',
+					username: '',
+					password: '',
+					passwords: ''
 				},
-				
-				checkList:['网点管理'],
-				radio1:'2'
-				
-
+				checkList:[],
+				checkLists:[]
 			}
-
 		},
 		methods: {
 		
@@ -104,14 +78,37 @@
 			},
 			setCode(){
 				console.log("555");
-			}
-			   
+			},
+			addStaff(){ 
+				var list = this.checkLists;
+				console.log(list) ;
+				this.$post('staffaccount/addStaff',{
+					nickname:this.form.nickname,
+					phone:this.form.phone,
+					job:this.form.job,
+					qq:this.form.qq,
+					wechat:this.form.wechat,
+					username:this.form.username,
+					password:this.form.password,
+					passwords:this.form.passwords,
+					resourcesid:this.checkLists
+				}).then(data=>{
+					this.$ye();
+					this.$router.push('/Main/Personaccount');
+				})
+			},
+			StaffList(){    
+				this.$get('staffaccount/skipAdd',{
+				}).then(data=>{
+					this.checkList=data;
+				})
+			},
+
 		},
 		components: {
-			
 		},
-		mounted: function() {
-
+		mounted(){
+			this.StaffList();
 		}
 
 	}

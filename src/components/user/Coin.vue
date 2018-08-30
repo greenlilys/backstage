@@ -1,7 +1,7 @@
 <template>
 	<div class="mt-10">
 		<template>
-								<el-table :data="tableData" style="width: 100%;">
+								<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
 									<el-table-column prop="addTime" label="积分变动时间" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="categorys" label="变动类型" width="" align="center">
@@ -40,7 +40,16 @@
 		methods:{
 			 handleSizeChange(val) {
 	        console.log(`每页 ${val} 条`);
-	      },
+		  },
+		  cellStyle({row, column, rowIndex, columnIndex}){
+					if(columnIndex === 2){ //指定坐标
+						return 'color:#FF6600'
+					}else if(columnIndex === 3){
+						return 'color:#FF6600'
+					}else{
+						return ''
+					}
+		  },
 	      handleCurrentChange(val) {
 	      	let id = this.id;
 	        this.getIntegralList(id,val);

@@ -10,7 +10,7 @@
 			</el-row>
 			<div class="mainlist flex-con mt-10 bw contentBox">
 				<template>
-					<el-table :data="tableData" style="width: 100%;">
+					<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
 						<el-table-column prop="no" label="提现申请编号" width="" align="center">
 						</el-table-column>
 						<el-table-column prop="username" label="提现账户" width="" align="center">
@@ -21,7 +21,7 @@
 						</el-table-column>
 						<el-table-column prop="addtime" label="申请提现时间" width="" align="center">
 						</el-table-column>
-						<el-table-column prop="amount" label="申请提现金额" width="" align="center">
+						<el-table-column prop="amounts" label="申请提现金额" width="" align="center">
 						</el-table-column>
 						<el-table-column prop="typea" label="提现账户" width="" align="center">
 						</el-table-column>
@@ -61,10 +61,10 @@
 						{{info.addtime}}
 					</el-form-item>
 					<el-form-item label="提现金额：" :label-width="formLabelWidth">
-						{{info.amount}}
+						￥{{info.amount}}
 					</el-form-item>
 					<el-form-item label="账户余额：" :label-width="formLabelWidth">
-						{{info.balances}}
+						￥{{info.balances}}
 					</el-form-item>
 					<el-form-item label="提现方式：" :label-width="formLabelWidth">
 						{{info.typea}}
@@ -120,6 +120,17 @@
 			handleSizeChange(val) {
 				console.log(`每页 ${val} 条`);
 			},
+			cellStyle({row, column, rowIndex, columnIndex}){
+			    if(columnIndex === 5){ //指定坐标
+			        return 'color:#FF6600'
+			    }else if(columnIndex === 7){
+			        return 'color:#FF6600'
+			    }else if(columnIndex === 3){
+			        return 'color:#FF6600'
+			    }else{
+			    	return ''
+			    }
+			},
 			handleCurrentChange(val) {
 				this.cashList(val);
 			},
@@ -157,6 +168,7 @@
 						}else if(arr[i].shopid!=null){
 							arr[i].usertype="加盟网点"
 						}
+						arr[i].amounts="￥"+arr[i].amount
 					}
 					this.tableData=arr;
 					this.total = Number(data.totalCount);

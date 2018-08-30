@@ -58,7 +58,18 @@ import Problorm from '@/components/seting/Problorm'
 import Personaccount from '@/components/seting/Personaccount'
 import Addbattery from '@/components/seting/Addbattery'
 import Creataccount from '@/components/seting/Creataccount'
-
+import Updatebattery from '@/components/seting/Updatebattery'
+import Updateaccount from '@/components/seting/Updateaccount'
+import UpdateProblorm from '@/components/seting/UpdateProblorm'
+import Problormlist from '@/components/seting/Problormlist'
+import Addactivity from '@/components/marketing/activity/Addactivity'
+import Listactivity from '@/components/marketing/activity/Listactivity'
+import AddShopNotice from '@/components/shop/AddShopNotice'
+import Shopnoticelist from '@/components/shop/Shopnoticelist'
+import ShopUpdNotice from '@/components/shop/ShopUpdNotice'
+import PlatformNoticeList from '@/components/marketing/notice/PlatformNoticeList'
+import AddPlatformNotice from '@/components/marketing/notice/AddPlatformNotice'
+import PlatformUpdNotice from '@/components/marketing/notice/PlatformUpdNotice'
 Vue.use(Router)
 
 export default new Router({
@@ -115,8 +126,8 @@ export default new Router({
 					component: Shopactive
 				},
 				{
-						path: 'Editactive',
-						component: Editactive
+					path: 'Editactive',
+					component: Editactive
 				},
 				{
 					path: 'Userlist',
@@ -271,10 +282,55 @@ export default new Router({
 				{
 					path: 'Creataccount',
 					component: Creataccount
-				}
-				
-				
-				
+				},
+				{
+					path: 'Updatebattery',
+					component: Updatebattery
+				},
+				{
+					path: 'Updateaccount',
+					component: Updateaccount	
+				},
+				{
+					path: 'Problormlist',
+					component: Problormlist	
+				},
+				{
+					path: 'UpdateProblorm',
+					component: UpdateProblorm	
+				},
+				{
+					path: 'Addactivity',
+					component: Addactivity	
+				},
+				{
+					path: 'Listactivity',
+					component: Listactivity	
+				},
+				{
+					path: 'AddShopNotice',
+					component: AddShopNotice
+				},
+				{
+					path: 'Shopnoticelist',
+					component: Shopnoticelist
+				},
+				{
+					path: 'ShopUpdNotice',
+					component: ShopUpdNotice
+				},
+				{
+					path: 'PlatformNoticeList',
+					component: PlatformNoticeList
+				},
+				{
+					path: 'AddPlatformNotice',
+					component: AddPlatformNotice
+				},
+				{
+					path: 'PlatformUpdNotice',
+					component: PlatformUpdNotice
+				},	
 			]
 			
 		},

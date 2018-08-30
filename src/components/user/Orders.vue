@@ -1,14 +1,14 @@
 <template>
 	<div class="mt-10">
 		<template>
-								<el-table :data="tableData" style="width: 100%;">
+								<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
 									<el-table-column prop="no" label="预约编号" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="types" label="预约类型" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="addtime" label="预约时间" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="cost" label="支付金额（积分）"width="230" align="center">
+									<el-table-column prop="cost" label="支付金额（积分）" width="230" align="center">
 									</el-table-column>
 									<el-table-column prop="paymodes" label="支付方式" width="" align="center">
 									</el-table-column>
@@ -57,7 +57,14 @@
 		methods:{
 			handleSizeChange(val) {
 		        console.log(`每页 ${val} 条`);
-		    },
+			},
+			cellStyle({row, column, rowIndex, columnIndex}){
+					if(columnIndex === 3){ //指定坐标
+						return 'color:#FF6600'
+					}else{
+						return ''
+					}
+			},
 		    handleCurrentChange(val) {
 		    	var id = this.id;
 		      	this.getServiceList(id,val);
@@ -102,7 +109,11 @@
 							tableData[i].paymodes = "--"
 							
 						}
-						
+						if(tableData[i].paymode==3){
+							tableData[i].cost=tableData[i].cost
+						}else{
+							tableData[i].cost="￥"+tableData[i].cost
+						}
 						if(!tableData[i].paymentno){
 							tableData[i].paymentnos = "--"
 						}else{

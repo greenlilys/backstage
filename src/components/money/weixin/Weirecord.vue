@@ -13,7 +13,7 @@
 				</el-table-column>
 				<el-table-column prop="outtradeno" label="支付订单号" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="total_fee" label="支付金额" width="" align="center">
+				<el-table-column prop="total_fees" label="支付金额" width="" align="center">
 				</el-table-column>
 				<el-table-column prop="body" label="订单类型" width="" align="center">
 				</el-table-column>
@@ -77,6 +77,7 @@
 						}else if(arr[i].cusername!=""){
 							arr[i].scusername= arr[i].cusername
 						}
+						arr[i].total_fees="￥"+arr[i].total_fee;
 					}
 				this.tableData=arr;
 				this.total = Number(data.totalCount);

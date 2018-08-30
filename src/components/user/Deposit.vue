@@ -1,14 +1,14 @@
 <template>
 	<div class="mt-10">
 		<template>
-								<el-table :data="tableData" style="width: 100%;">
+								<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
 									<el-table-column prop="addTime" label="押金变动时间" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="categorys" label="变动类型" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="balance" label="金额" width="" align="center">
+									<el-table-column prop="deposits" label="金额" width="" align="center">
 									</el-table-column>								
-									<el-table-column prop="balance" label="押金余额" width="" align="center">
+									<el-table-column prop="balances" label="押金余额" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="paymodes" label="支付方式" width="" align="center">
 									</el-table-column>
@@ -44,7 +44,16 @@
 		methods:{
 			 handleSizeChange(val) {
 	        console.log(`每页 ${val} 条`);
-	      },
+		  },
+		  cellStyle({row, column, rowIndex, columnIndex}){
+					if(columnIndex === 2){ //指定坐标
+						return 'color:#FF6600'
+					}else if(columnIndex === 3){
+						return 'color:#FF6600'
+					}else{
+						return ''
+					}
+		  },
 	      handleCurrentChange(val) {
 	        console.log(`当前页: ${val}`);
 	      },
@@ -89,7 +98,8 @@
 							default:
 							tableData[i].categorys = "--";
 						}
-						
+						tableData[i].balances="￥"+tableData[i].balance;
+						tableData[i].deposits="￥"+tableData[i].deposit;
 					}
 					this.tableData = tableData;
 				})

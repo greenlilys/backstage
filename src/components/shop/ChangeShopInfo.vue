@@ -99,7 +99,7 @@
 <script>
 	import Vue from 'vue'
 	//省市县选择器
-	import VDistpicker  from 'v-distpicker'
+	import Distpicker from 'v-distpicker'
 
 	export default {
 		data() {
@@ -187,7 +187,7 @@
 			this.id = this.form.id = this.$route.query.id;			
 		},
 		components: {
-			VDistpicker 
+			'v-distpicker': Distpicker
 		},
 		mounted: function() {
 			this.getShopDetail(this.id);

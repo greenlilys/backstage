@@ -5,15 +5,14 @@
 					<img src="../../assets/images/001.png"/>
 					<div class="leftName flex-wrap flex-vertical flex-justify-around"> 
 						<div><span class="font-18 fw6">{{shopInfo.name}}</span><span class="font-14">网点编号：{{shopInfo.no}}</span></div>
-						<div class="star"><img v-for="item in scores" :key="item.value"  src="../../assets/images/002.png"/><img v-if="shopInfo.score%2 !=0" src="../../assets/images/003.png"/></div>
-						
+						<div class="star"><img v-for="item in scores" :key="item.value"  src="../../assets/images/002.png"/><img v-if="shopInfo.score%2 !=0" src="../../assets/images/003.png"/></div>						
 					</div>
 				</div>
 				<div class="baseCenter">
 					<div class="font-14">所属运营商：{{shopInfo.oname}}（{{shopInfo.ono}}）</div>
 				</div>
 				<div class=" flex-wrap flex-horizontal flex-align-center flex-justify-end baseRight font-14">
-					<div class="stage"><span>网点状态：</span><span>{{shopInfo.isonline == 1? "已下线" : "上线中"}}</span></div>
+					<div class="stage"><span>网点状态：</span><span>{{shopInfo.isonline == 0? "已下线" : "上线中"}}</span></div>
 					<el-button type="success" size="small" class="mr-10" @click="handles(shopInfo.isonline)" >{{shopInfo.isonline == 0 ? goonline : downline}}</el-button>
 					<router-link :to="{path:'/Main/ChangeShopInfo',query:{id:id}}">
 						<el-button type="success" size="small">查看/修改网点信息</el-button>
@@ -33,22 +32,22 @@
 				<div class="tc ">
 					<h1 class="font-16 colorYellow">电池库存</h1>
 					<div class="font-14 mt-10"><span v-for="item in shopInfo.batteryList" :key="item.value">{{item.mode}}&nbsp;&nbsp;{{item.stocknum}}/{{item.distrinum}}&nbsp;&nbsp;&nbsp;</span></div>
-					<el-button type="success" size="small" class="mt-10" @click="repleniShment">+&nbsp;补货记录</el-button>	
+					<!-- <el-button type="success" size="small" class="mt-10" @click="repleniShment">+&nbsp;补货记录</el-button>	 -->
 				</div>
 				<div class="tc">
 					<h1 class="font-16 colorYellow">配货成本</h1>
-					<h2 class="font-14 mt-20 ">￥{{shopInfo.costdistribute}}</h2>
+					<h2 class="fontYellow font-14 mt-20 ">￥{{shopInfo.costdistribute}}</h2>
 				</div>
 				<div class="tc">
 					<h1 class="font-16 colorYellow">钱包余额</h1>
-					<div class="font-14 mt-10">￥{{shopInfo.wallet}}</div>
+					<div class="fontYellow font-14 mt-10">￥{{shopInfo.wallet}}</div>
 					<el-button type="success" size="small" class="mt-10" @click="recharge">充&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;值</el-button>
 					<el-button type="success" size="small" class="mt-10" @click="walletDebit">扣&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;款</el-button>
 				</div>
 				<div class="tc">
 					<h1 class="font-16 colorYellow">退换回收电池</h1>
 					<div class="font-14 mt-10"><span v-for="item in shopInfo.batteryList" :key="item.value"><label v-if="item.returnnum>0">{{item.mode}}&nbsp;&nbsp;{{item.returnnum}}&nbsp;&nbsp;&nbsp;</label></span></div>
-					<el-button type="success" size="small" class="mt-10" @click="recovery">+&nbsp;回收记录</el-button>	
+					<!-- <el-button type="success" size="small" class="mt-10" @click="recovery">+&nbsp;回收记录</el-button>	 -->
 				</div>
 			</div>
 			
@@ -101,9 +100,6 @@
 							<el-col :span="20" class="mt-10" v-for="item in repleni.list" :key="item.value">
 								<span>{{item.mode}}</span>
 								<template>
-									<el-input v-show="false" v-model="item.batteryid"></el-input>
-									<el-input v-show="false" v-model="item.id"></el-input>
-									<el-input v-show="false" v-model="item.returnnum"></el-input> 
 									<el-input-number v-model="item.replenilist"  @change="handleChange" :min="1" :max="10" label="电池"></el-input-number>
 								</template>
 							</el-col>
@@ -128,9 +124,6 @@
 							<el-col :span="20" class="mt-10" v-for="item in recover.list" :key="item.value">
 								<span>{{item.mode}}</span>
 								<template>
-									<el-input v-show="false" v-model="item.batteryid"></el-input>
-									<el-input v-show="false" v-model="item.id"></el-input>
-									<el-input v-show="false" v-model="item.returnnum"></el-input>
 									<el-input-number v-model="item.returnnum"  @change="handleChange" :min="1" :max="10" label="电池"></el-input-number>
 								</template>
 							</el-col>
@@ -363,25 +356,16 @@
 			})
 		},
 		confirmRepleni(){
-		var shopid = this.id;
 		var supplyTime =this.form2.replenitime;
-		var batterylist = this.repleni.list;
-		var battery = [];
-		for(var j = 0, lens = batterylist.length; j < lens; j++) {
-			battery.push(batterylist[j].batteryid)
-			battery.push(batterylist[j].id)
-			battery.push(batterylist[j].replenilist)
-		}
-		Console.log(battery);
-		battery=JSON.stringfy(battery);
+		let batterylist = JSON.stringify(this.repleni.list);
 		if(supplyTime==null || supplyTime==""){
 			this.$message.info("请输入补货时间");
 			return false;
 		}else{
 			this.$post('battery/putReplenish',{
-			shopid:shopid,
+			shopid:this.id,
 			supplyTime:supplyTime,
-			battery:battery
+			battery:batterylist
 			}).then(data=>{
 				this.dialogFormVisible2 = false;			     				     		
 				this.joinShopDetail(this.id)
@@ -391,27 +375,16 @@
 			}
 		},
 		confirmRecovery(){
-		var shopid = this.id;
 		var supplyTime =this.form3.recoverytime;
-		var batterylist = this.recover.list;
-		var batteryIds = [];
-		var shopBatteryIds = [];
-		var batteryNums = [];
-		for(var j = 0, lens = batterylist.length; j < lens; j++) {
-			batteryIds.push(batterylist[j].batteryid)
-			shopBatteryIds.push(batterylist[j].id)
-			batteryNums.push(batterylist[j].returnnum)
-		}
+		let batterylist = JSON.stringify(this.recover.list);
 		if(supplyTime==null || supplyTime==""){
 			this.$message.info("请输入回收时间");
 			return false;
 		}else{
-			axios.post('battery/putRecovery',{
-			shopid:shopid,
+			this.$post('battery/putRecovery',{
+			shopid:this.id,
 			supplyTime:supplyTime,
-			batteryId:batteryIds,
-			shopBatteryId:shopBatteryIds,
-			batteryNum:batteryNums
+			battery:batterylist
 			}).then(data=>{
 				this.dialogFormVisible3 = false;			     				     		
 				this.joinShopDetail(this.id)

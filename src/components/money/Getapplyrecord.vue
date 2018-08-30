@@ -7,8 +7,8 @@
 				<template>
 					<el-radio-group v-model="radio" @change="handleRedio">
 					<el-radio  label="">全部</el-radio>
-					<el-radio  label="1">提现成功</el-radio>
-					<el-radio  label="2">提现失败</el-radio>		
+					<el-radio  label="0">提现成功</el-radio>
+					<el-radio  label="1">提现失败</el-radio>		
 					</el-radio-group>			
 				</template>
 			</el-col>
@@ -20,16 +20,16 @@
 			</el-row>
 			<div class="mainlist flex-con mt-10 bw contentBox">
 				<template>
-					<el-table :data="tableData" style="width: 100%;" >
+					<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle" >
 						<el-table-column prop="no" label="申请编号" width="" align="center">
 						</el-table-column>
 						<el-table-column prop="onames" label="提现代理商" width="" align="center">
 						</el-table-column>
-						<el-table-column prop="balance" label="钱包余额" width="" align="center">
+						<el-table-column prop="balances" label="钱包余额" width="" align="center">
 						</el-table-column>
 						<el-table-column prop="addtime" label="申请提现时间" width="" align="center">
 						</el-table-column>
-						<el-table-column prop="amount" label="申请提现金额" width="" align="center">
+						<el-table-column prop="amounts" label="申请提现金额" width="" align="center">
 						</el-table-column>
 						<el-table-column prop="types" label="提现方式" width="" align="center">
 						</el-table-column>
@@ -82,6 +82,15 @@
 			handleSizeChange(val) {
 				console.log(`每页 ${val} 条`);
 			},
+			cellStyle({row, column, rowIndex, columnIndex}){
+			    if(columnIndex === 2){ //指定坐标
+			        return 'color:#FF6600'
+			    }else if(columnIndex === 4){
+			        return 'color:#FF6600'
+			    }else{
+			    	return ''
+			    }
+			},
 			handleCurrentChange(v) {
 				this.cashList(v, this.find,this.radio)
 			},	    	
@@ -119,6 +128,9 @@
 						}else if(arr[i].shopid!=null){
 							arr[i].onames=	arr[i].oname
 						}
+						arr[i].amounts="￥"+arr[i].amount
+						arr[i].balances="￥"+arr[i].balance
+						
 					}
 					this.tableData=arr;
 					this.total = Number(data.totalCount);

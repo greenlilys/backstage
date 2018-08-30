@@ -6,18 +6,21 @@
 							<el-form-item label="充值/扣款密码：">												
 							</el-form-item>
 							<el-form-item label="设定密码：">
-								<el-input v-model="form.name" placeholder="555"></el-input>						
+								<el-input type="password" v-model="form.platformpass" placeholder=""></el-input>						
 							</el-form-item>	
 							<el-form-item label="确认密码：">
-								<el-input v-model="form.name" placeholder="555"></el-input>						
+								<el-input type="password" v-model="form.platformpasss" placeholder=""></el-input>						
 							</el-form-item>
 							<el-form-item label="输入验证码：">
-								<el-input v-model="form.name" placeholder="555">
-									<el-button slot="append" @click="getCode">获取验证码</el-button>									
+								<el-input v-model="form.code" placeholder="">
+									<el-button slot="append" @click="getCode">
+										<span v-if="sendMsgDisabled">{{time+'秒后重新发送'}}</span>
+ 										<span v-if="!sendMsgDisabled">发送验证码</span>
+									</el-button>									
 								</el-input>						
 							</el-form-item>
 							<el-form-item label="">
-								<el-button type="primary" class="btnStyle" @click="submitForm('ruleForm2')">确定</el-button>				
+								<el-button type="success" size="small" @click="submitForm()">保&nbsp;&nbsp;&nbsp;&nbsp;存</el-button>				
 							</el-form-item>	
 					</el-col>
 				</el-row>
@@ -33,40 +36,43 @@
 	export default {
     data() {
       return {
-       
         form: {
-					name: '88888',
-					region: '',
-					date1: '',
-					date2: '',
-					delivery: false,
-					type: [],
-					resource: '',
-					desc: ''
-				},
-				tableData: [{
-		            date: '2016-05-02',
-		            name: '王小虎',
-		            address: '1518 ',
-		            money:50.00,
-		            action:'查看详情'
-		          }, {
-		            date: '2016-05-04',
-		            name: '王小虎',
-		            address: ' 1517',
-		            money:50.00,
-		            action:'查看详情'
-		          }]
-      }
+			platformpass:'',
+			platformpasss:''	
+		},
+		time: 60, // 发送验证码倒计时
+   		sendMsgDisabled: false
+	  }
     },
     methods: {
-     getCode(){//点击获得验证码
-     	console.log("获得验证码")
-     }
-    }
-  }
+		getCode(){//点击获得验证码
+			this.$post('set/sendSms',{
+			}).then(data=>{
+			let me = this;
+			me.sendMsgDisabled = true;
+			let interval = window.setInterval(function() {
+			if ((me.time--) <= 0) {
+			me.time = 60;
+			me.sendMsgDisabled = false;
+			window.clearInterval(interval);
+			}
+			}, 1000);
+			this.$ye();
+			})
+		},
+		submitForm(){
+			this.$post('set/updateSet',{
+			dateType:4,
+			platformpass:this.form.platformpass,
+			platformpasss:this.form.platformpasss,
+			smsCode:this.form.code
+			}).then(data=>{
+			this.$ye();
+			})
+		}
+		}
+	}
 </script>
-
 <style scoped>
 
 </style>

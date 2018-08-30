@@ -13,7 +13,7 @@
 				</el-table-column>
 				<el-table-column prop="outtradeno" label="支付订单号" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="totalfee" label="支付金额" width="" align="center">
+				<el-table-column prop="totalfees" label="支付金额" width="" align="center">
 				</el-table-column>
 				<el-table-column prop="ordertypes" label="订单类型" width="" align="center">
 				</el-table-column>
@@ -111,6 +111,7 @@
 							default:
 							arr[i].ordertypes = "--"
 						}
+						arr[i].totalfees="￥"+arr[i].totalfee;
 					}
 				this.tableData=arr;
 				this.total = Number(data.totalCount);

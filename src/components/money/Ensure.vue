@@ -7,14 +7,14 @@
 			</div>
 			<div class="mainlist flex-con mt-10 bw contentBox">
 								<template>
-									<el-table :data="platBonds" style="width: 100%;">
+									<el-table :data="platBonds" style="width: 100%;" :cell-style="cellStyle">
 										<el-table-column prop="no" label="网点编号" width="" align="center">
 										</el-table-column>
 										<el-table-column prop="name" label="网点名称" width="" align="center">
 										</el-table-column>
 										<el-table-column prop="username" label="网点账号" width="" align="center">
 										</el-table-column>
-										<el-table-column prop="platbond" label="保证金" width="" align="center">
+										<el-table-column prop="platbonds" label="保证金" width="" align="center">
 										</el-table-column>
 										<el-table-column prop="paytime" label="付款时间" width="" align="center">
 										</el-table-column>
@@ -70,7 +70,14 @@
 		methods:{
 		handleSizeChange(val) {
 	        console.log(`每页 ${val} 条`);
-	    },
+		},
+		cellStyle({row, column, rowIndex, columnIndex}){
+					if(columnIndex === 3){ //指定坐标
+						return 'color:#FF6600'
+					}else{
+						return ''
+					}
+		  },
 	    handleCurrentChange(val) {
 			this.platBondList(val);
 		},
@@ -95,6 +102,7 @@
 					} else{
 						arr[i].paymodes = "钱包支付"
 					}
+					arr[i].platbonds="￥"+arr[i].platbond;
 				}
 				this.platBonds=arr;
 				this.total = Number(data.totalCount);

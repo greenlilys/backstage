@@ -1,12 +1,12 @@
 <template>
 	<div class="mt-10">
 		<template>
-								<el-table :data="tableData" style="width: 100%;">
+								<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
 									<el-table-column prop="username" label="用户账号" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="addTime" label="赎回时间" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="deposit" label="赎回金额" width="" align="center">
+									<el-table-column prop="deposits" label="赎回金额" width="" align="center">
 									</el-table-column>
 									
 								</el-table>
@@ -38,7 +38,14 @@
 		methods:{
 		  handleSizeChange(val) {
 	        console.log(`每页 ${val} 条`);
-	      },
+			},
+			cellStyle({row, column, rowIndex, columnIndex}){
+					if(columnIndex === 2){ //指定坐标
+						return 'color:#FF6600'
+					}else{
+						return ''
+					}
+		  },
 	    handleCurrentChange(val) {
 			this.depositList(val,11,this.begin,this.end);
 		  },
@@ -60,6 +67,7 @@
 					} else{
 						arr[i].paymodes = "钱包支付"
 					}
+					arr[i].deposits="￥"+arr[i].deposit
 				}
 				this.tableData=arr;
 				this.total = Number(data.totalCount);

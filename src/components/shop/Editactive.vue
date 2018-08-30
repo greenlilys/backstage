@@ -43,7 +43,7 @@
 </script>
 
 <style scoped>
-	.mainContent{background:#fff;padding:10px 20px 0;}
+	.mainContent{background:#fff;padding:10px 20px 0;box-sizing: border-box;}
 	.mainContent h1{font-size:18px;line-height: 30px;;}
 	.mainContent p{line-height: 20px;}
 	

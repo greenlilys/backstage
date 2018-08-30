@@ -146,7 +146,7 @@
 <style scoped>
 
 .tabItem{width:100%;margin:0 auto;}
-.tabItem li{;height:140px;background:#fff;margin-right:10px;}
+.tabItem li{;height:120px;background:#fff;margin-right:10px;}
 .tabItem li:nth-child(4){margin-right:0;}
 .tabItem li span:nth-child(2){font-size:38px;color:#FF6600;margin-top:20px;}
 .tabItem li span:nth-child(1){	font-size:16px;	font-weight:bold;margin-top:10px;}
@@ -159,5 +159,5 @@
 
 #main{width:100%;margin:0 auto 0;background:#fff;}
 .tabCard ul{background: #fff; border: 1px solid #ebf0f4;}
-.tabCard ul li{list-style: none;float: left;text-align: center;color: #000;width: 60px;}
+.tabCard ul li{list-style: none;float: left;text-align: center;color: #000;width: 60px;cursor:pointer;}
 </style>

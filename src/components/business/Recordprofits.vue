@@ -4,17 +4,16 @@
 		<el-row class="joinshop" type="flex" align="middle">
 			<el-col :span="8">
 				  <div>
-				  	<span style="padding-left:10px;">服务类型：&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				  	<span class="ml-10 font-14">服务类型：&nbsp;&nbsp;&nbsp;&nbsp;</span>
 				    <el-radio-group v-model="radio4" size="small" @change="changeHandler">
 				      <el-radio-button label="换电分润" ></el-radio-button>
 				      <el-radio-button label="租金分润"></el-radio-button>
 				      <el-radio-button label="救援分润"></el-radio-button>
 				    </el-radio-group>
-				  </div>
-				
+				  </div>				
 			</el-col>
 
-			<el-col :span="8" :offset="8" style="text-align:right;">
+			<el-col :span="8" :offset="8" class="tr">
 				   <div class="block">    
 				    <el-date-picker
 				     @change="changeTime"
@@ -29,7 +28,7 @@
 			</el-col>
 
 		</el-row>
-		<component v-bind:is="current"></component>
+		<component v-bind:is="current" :searchTime="searchTime" :id="id"></component>
 		
 	</div>
 </template>
@@ -45,7 +44,8 @@
 				
 				radio4:'换电分润',
 				value6:'',
-				current:'Changemoney'
+				current:'Changemoney',
+				searchTime:[]
 			};
 		},
 		methods: {
@@ -56,10 +56,10 @@
 				console.log(`当前页: ${val}`);
 			},
 			navAddshop() {
-				this.$router.push('/Shoplist/Addshop');
+				
 			},
 			navShopdetail() {
-				this.$router.push('/Shoplist/Shopdetail');
+				
 			},
 			changeHandler(value){
 				switch(value)
@@ -78,6 +78,7 @@
 				
 			},
 			changeTime(value){
+				this.searchTime = value;
 				console.log(value)
 			}
 		},
@@ -85,7 +86,8 @@
 			Changemoney,
 			Rentmoney,
 			Helpmoney
-		}
+		},
+		props:['id']
 	}
 </script>
 <style scoped>

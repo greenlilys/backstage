@@ -16,13 +16,13 @@
 	import Pushset from '@/components/seting/setings/Pushset'
 	import Getset from '@/components/seting/setings/Getset'
 	import Bibiset from '@/components/seting/setings/Bibiset'
-	
+	import Reportloss from '@/components/seting/setings/Reportloss'
 	export default {
     name: '',
     data(){
       return{
-          tabItem:['服务设置','提现设置','天牛币设置','救援设置','充值/扣款密码设置'],
-        	tabComponents:['Serviceset','Getset','Bibiset','Helpset','Pushset'],
+          tabItem:['服务设置','提现设置','天牛币设置','救援设置','报损项设置','充值/扣款密码设置'],
+        	tabComponents:['Serviceset','Getset','Bibiset','Helpset','Reportloss','Pushset'],
         	current:'Serviceset',
         	currentI:'0'
       }
@@ -38,8 +38,8 @@
     	Getset,
     	Bibiset,
     	Helpset,
-    	Pushset
-    	
+			Pushset,
+			Reportloss	
     }
   }
 

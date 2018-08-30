@@ -10,11 +10,12 @@ var serverconfig = {
   /*服务器后台地址*/
   // 'serviceIP': 'http://www.tianniu.net.cn/',
   /*测试服务器地址*/
-  'serviceIP': 'http://192.168.0.220:8080/',
+'serviceIP': 'http://192.168.0.102:8088/'  
 };
 // 接口请求地址、后缀
 var http_api = {
-  agent: 'platform/'
+agent: 'platform/'
+//agent:'longicorn-admin-platform/platform'
 };
 // 后端 接口请求地址
 var url_api = {
@@ -32,7 +33,9 @@ axios.defaults.baseURL = GLOBALconfig.agent_api;
 var loadingInstance;
 axios.interceptors.request.use(
   config => { 
-  	loadingInstance = Loading.service({});  
+  	loadingInstance = Loading.service({
+  		background:'rgba(0,0,0,0)'
+  	});
 
 	if(config.method == 'get'){
 		console.log(config.params);

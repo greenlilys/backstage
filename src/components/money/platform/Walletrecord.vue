@@ -8,12 +8,12 @@
 				</el-col>				
 		</el-row>
 		<div class="flex-con pr">
-			<el-table :data="tableData" style="width: 100%;">
+			<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
 					<el-table-column prop="scusername" label="用户账户" width="" align="center">
 					</el-table-column>
 					<el-table-column prop="types" label="操作类型" width="" align="center">
 					</el-table-column>
-					<el-table-column prop="amount" label="支付金额" width="" align="center">
+					<el-table-column prop="amounts" label="支付金额" width="" align="center">
 					</el-table-column>
 					<el-table-column prop="remark" label="操作备注" width="" align="center">
 					</el-table-column>
@@ -50,7 +50,14 @@
 		methods:{
 		  handleSizeChange(val) {
 	        console.log(`每页 ${val} 条`);
-	      },
+				},
+			cellStyle({row, column, rowIndex, columnIndex}){
+					if(columnIndex === 2){ //指定坐标
+						return 'color:#FF6600'
+					}else{
+						return ''
+					}
+		  },
 	    handleCurrentChange(val) {
 			this.shopWalletList(val,this.find);
 		  },
@@ -72,6 +79,7 @@
 						}else if(arr[i].cusername!=""){
 							arr[i].scusername= arr[i].cusername
 						}
+						arr[i].amounts="￥"+arr[i].amount;
 					}
 				this.tableData=arr;
 				this.total = Number(data.totalCount);

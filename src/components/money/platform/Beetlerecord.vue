@@ -8,7 +8,7 @@
 				</el-col>				
 		</el-row>
 		<div class="flex-con pr">
-			<el-table :data="tableData" style="width: 100%;">
+			<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
 					<el-table-column prop="username" label="用户账户" width="" align="center">
 					</el-table-column>
 					<el-table-column prop="types" label="操作类型" width="" align="center">
@@ -49,7 +49,14 @@
 		methods:{
 		  handleSizeChange(val) {
 	        console.log(`每页 ${val} 条`);
-	      },
+				},
+			cellStyle({row, column, rowIndex, columnIndex}){
+					if(columnIndex === 2){ //指定坐标
+						return 'color:#FF6600'
+					}else{
+						return ''
+					}
+		  },
 	    handleCurrentChange(val) {
 			this.selectCustBeetleList(val,this.find);
 		  },

@@ -1,14 +1,14 @@
 <template>
 	<div class="mt-10">					
 							<template>
-								<el-table :data="tableData" style="width: 100%;">
+								<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
 									<el-table-column prop="addtime" label="钱包变动时间" width="160" align="center">
 									</el-table-column>
 									<el-table-column prop="categorys" label="变动类型" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="amount" label="金额" align="center">
+									<el-table-column prop="amounts" label="金额" align="center">
 									</el-table-column>
-									<el-table-column prop="balance" label="钱包余额" align="center">
+									<el-table-column prop="balances" label="钱包余额" align="center">
 									</el-table-column>								
 									
 								</el-table>
@@ -40,7 +40,16 @@
       methods:{
 	      handleSizeChange(val) {
 	        console.log(`每页 ${val} 条`);
-	      },
+		  },
+		  cellStyle({row, column, rowIndex, columnIndex}){
+				if(columnIndex === 2){ //指定坐标
+					return 'color:#FF6600'
+				}else if(columnIndex === 3){
+					return 'color:#FF6600'
+				}else{
+					return ''
+				}
+			},
 	      handleCurrentChange(val) {
 					this.getShopwalletList(val,this.id)
 	        //console.log(`当前页: ${val}`);
@@ -149,7 +158,10 @@
 							break;
 							default:
 							tableData[i].categorys = "--"
-						}}
+						}
+						tableData[i].amounts="￥"+tableData[i].amount;
+						tableData[i].balances="￥"+tableData[i].balance;
+				}
 	    		this.tableData = tableData;
 	    		this.total= Number(data.totalCount);
 	    	})

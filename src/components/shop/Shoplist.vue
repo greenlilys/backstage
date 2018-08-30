@@ -1,4 +1,5 @@
 <template>
+	<div>
 	<div class="hf flex-wrap flex-vertical">
 		<el-row class="contentBox" type="flex" align="middle">
 			<el-col :span="6">
@@ -47,7 +48,11 @@
 									</el-table-column>
 									<el-table-column prop="operatorNo" label="所属运营商" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="Inventorydistribution" label="库存/配货" width="110" align="center">
+
+									<el-table-column label="库存/配货" width="120" align="center">
+										<template slot-scope="scope">						
+											<div v-for="item in scope.row.batterysd">{{item}}</div>
+										</template>
 									</el-table-column>
 									<el-table-column prop="platbond" label="保证金" width="" align="center">
 									</el-table-column>
@@ -82,7 +87,8 @@
 				</el-row>					
 				<Dialogue :textContent="textContent" :dialogVisible="dialogVisible" v-on:confirm="confirmIsuse" v-on:cancel="canceluse"></Dialogue>
 				<Dialogue :textContent="textContent" :dialogVisible="dialogVisibles" v-on:confirm="confirmIsonline" v-on:cancel="canceluse"></Dialogue>		
-	</div>		
+	</div>	
+	</div>
 </template>
 <script>
 	
@@ -139,20 +145,16 @@ export default {
 					} else {
 						arr[i].statuss = "已禁用"
 					}
-					//电池库存/配货
-					var battery = arr[i].batteryList;
-					arr[i].Inventorydistribution = "";
-					for(var j = 0, lens = battery.length; j < lens; j++) {
-						if(battery[j].stocknum >=10){	
-							arr[i].Inventorydistribution += battery[j].mode+ battery[j].stocknum + "/" + battery[j].distrinum;
+					if(arr[i].battery){
+							if(arr[i].battery.includes(';')){
+								arr[i].batterysd = arr[i].battery.split(';');
+							}else{
+								arr[i].batterysd = [];
+								arr[i].batterysd.push(arr[i].battery);
+							}
 						}else{
-							arr[i].Inventorydistribution += battery[j].mode + "        "+ battery[j].stocknum + " / " + battery[j].distrinum;
+							arr[i].batterysd = [];
 						}
-					}
-					//电池库存
-					if(arr[i].batteryList.length == 0) {
-						arr[i].Inventorydistribution = "--";
-					}
 					//上线状态
 					if(arr[i].isonline == 1) {
 						arr[i].isonlines = "已上线"

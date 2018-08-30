@@ -1,5 +1,5 @@
 <template>
-	<div class="aside">	
+	<div class="aside" :style="{height:caoheight + 'px'}" ref="haside">	
 		<div class="worktable font-14">
 				<router-link to='/Main/Worktable'><i class="header-icon el-icon-info iconWidth"></i>工作台</router-link>
 		</div>
@@ -11,8 +11,7 @@
 						</template>
 						<div class="item font-14 subitem pl40"><router-link to='/Main/Shoplist'>网点列表</router-link></div>
 						<div class="item font-14 subitem pl40"><router-link to='/Main/Joinapply'>加盟申请</router-link></div>
-						<div class="item font-14 subitem pl40"><router-link to='/Main/Shopactive'>网点活动</router-link></div>
-						<div class="item font-14 subitem pl40">平台公告</div>
+						<div class="item font-14 subitem pl40"><router-link to='/Main/Shopnoticelist'>网点公告</router-link></div>
 			</el-collapse-item>
 						
 			<el-collapse-item>
@@ -52,7 +51,7 @@
 			
 			<el-collapse-item>
 						<template slot="title">
-							<span class="oneTitle pl20"><i class="header-icon el-icon-info iconWidth"></i>电池</span>
+							<span class="oneTitle pl20"><i class="header-icon el-icon-info iconWidth"></i>产品</span>
 						</template>						
 						<div class="item font-14 subitem pl40"><router-link to='/Main/Pikingrecord'>运营商配货记录</router-link></div>
 						<div class="item font-14 subitem pl40"><router-link to='/Main/Addorder'>运营商增配订单</router-link></div>
@@ -76,6 +75,16 @@
 			
 			<el-collapse-item>
 						<template slot="title">
+							<span class="oneTitle pl20"><i class="header-icon el-icon-info iconWidth"></i>营销</span>
+						</template>
+				
+						<div class="item font-14 subitem pl40"><router-link to='/Main/PlatformNoticeList'>平台公告</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Main/Listactivity'>平台活动</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Main/Businessscore'>运营商活动</router-link></div>
+			</el-collapse-item>
+
+			<el-collapse-item>
+						<template slot="title">
 							<span class="oneTitle pl20"><i class="header-icon el-icon-info iconWidth"></i>统计</span>
 						</template>
 						
@@ -90,9 +99,9 @@
 							<span class="oneTitle pl20"><i class="header-icon el-icon-info iconWidth"></i>设置</span>
 						</template>
 						<div class="item font-14 subitem pl40"><router-link to='/Main/Seting'>业务设置-服务设置</router-link></div>
-						<div class="item font-14 subitem pl40"><router-link to='/Main/Batterymanage'>电池管理</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Main/Batterymanage'>产品管理</router-link></div>
 						<div class="item font-14 subitem pl40"><router-link to='/Main/Personaccount'>员工账号管理</router-link></div>
-						<div class="item font-14 subitem pl40"><router-link to='/Main/Problorm'>常见问题</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Main/Problormlist'>常见问题</router-link></div>
 			</el-collapse-item>
 		</el-collapse>
 	</div>
@@ -103,19 +112,29 @@
 		name: '',
 		data() {
 			return {
-
+				caoheight:''
 			}
 		},
 		methods: {
-
+			handleScroll(){
+				if(document.documentElement && document.documentElement.clientHeight){
+					this.caoheight = document.documentElement.clientHeight + document.documentElement.scrollTop - 50;
+				}else if(document.body && document.body.clientHeight){
+					this.caoheight = document.body.clientHeight + document.body.scrollTop - 50;
+				}
+				
+			}
+		},
+		mounted(){
+			window.addEventListener('scroll', this.handleScroll)
 		},
 		components: {
-
+			
 		}
 	}
 </script>
 <style scope>
-		.aside {width: 13%;box-sizing: border-box;height:100%;background:#273135;}
+		.aside {width: 13%;background:#273135;}
 		.aside a{display:inline-block;width:100%;color:#B7C6CC;}
 		.box {width: 10%;}		
 		.worktable{height:42px;line-height: 42px;background:#273135;color:#B7C6CC;padding-left:20px;}

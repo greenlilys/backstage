@@ -8,7 +8,7 @@
 				</el-col>				
 		</el-row>
 		<div class="pr flex-con">
-								<el-table :data="tableData" style="width: 100%;">
+								<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
 									<el-table-column prop="addtime" label="结算时间" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="remark" label="结算项" width="" align="center">
@@ -17,7 +17,7 @@
 									</el-table-column>
 									<el-table-column prop="name" label="运营商名称" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="rebate" label="结算金额" width="" align="center">
+									<el-table-column prop="rebates" label="结算金额" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="acctypes" label="结算方式" width="" align="center">
 									</el-table-column>
@@ -58,6 +58,13 @@
 			handleSizeChange(val) {
 			console.log(`每页 ${val} 条`);
 			},
+			cellStyle({row, column, rowIndex, columnIndex}){
+					if(columnIndex === 4){ //指定坐标
+						return 'color:#FF6600'
+					}else{
+						return ''
+					}
+		    },
 			handleCurrentChange(val) {
 			this.Ooperlist(this.currentPage,this.find);
 			},
@@ -84,6 +91,7 @@
 						arr[i].acctypes="支付宝"
 					}
 					arr[i].acctypeZfbacc=arr[i].acctypes+arr[i].Zfbacc;
+					arr[i].rebates="￥"+arr[i].rebate;
 				}
 				this.tableData=arr;
 				this.total = Number(data.totalCount);

@@ -1,7 +1,7 @@
 <template>
 	<div class="mt-10">					
 							<template>
-								<el-table :data="tableData" style="width: 100%;">
+								<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
 									<el-table-column prop="nickname" label="会员名称" width="160" align="center">
 									</el-table-column>
 									<el-table-column prop="username" label="会员账号" width="" align="center">
@@ -40,7 +40,14 @@
       methods:{
 	      handleSizeChange(val) {
 	        console.log(`每页 ${val} 条`);
-	      },
+				},
+				cellStyle({row, column, rowIndex, columnIndex}){
+					if(columnIndex === 3){ //指定坐标
+						return 'color:#FF6600'
+					}else{
+						return ''
+					}
+				},
 	      handleCurrentChange(val) {
 					this.getShopServiceList(val,this.id)
 	        //console.log(`当前页: ${val}`);

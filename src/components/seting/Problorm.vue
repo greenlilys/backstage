@@ -9,7 +9,7 @@
 							  type="textarea"
 							  :rows="2"
 							  placeholder="请输入内容"
-							  v-model="textarea1">
+							  v-model="form.title">
 							</el-input>
 						</el-form-item>
 						<el-form-item label="回答：">
@@ -17,12 +17,12 @@
 							  type="textarea"
 							  :rows="2"
 							  placeholder="请输入内容"
-							  v-model="textarea2">
+							  v-model="form.content">
 							</el-input>
 						</el-form-item>
 						<el-form-item>
 						<el-row>
-							<el-button type="primary" class="btnStyle" @click="submitForm('ruleForm2')">保存</el-button>
+							<el-button type="warning" class="btnStyle" @click="addproblem()">保存</el-button>
 						</el-row>
 					</el-form-item>
 					</el-form>
@@ -33,12 +33,26 @@
 </template>
 
 <script>
+
 	export default{
 		data(){
 			return{
-				textarea1:'',
-				textarea2:''
+				form:{
+					title:'',
+					content:''
+				}
 			}
+		},
+		methods: {
+			addproblem(){    
+				this.$post('problem/addCommonProblem',{
+					title:this.form.title,
+					content:this.form.content
+				}).then(data=>{
+					this.$ye();
+					this.$router.push('/Main/Problormlist');
+				})
+			}   
 		}
 	}
 </script>

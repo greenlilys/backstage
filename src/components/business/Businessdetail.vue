@@ -1,5 +1,6 @@
 <template>
-	<div class="flex-wrap flex-vertical businessDetail v-cloak">
+	<div>
+	<div class="flex-wrap flex-vertical businessDetail hf v-cloak">
 		<div class="flex-wrap flex-horizontal topBox">
 			<div class="infoBox">
 					<div class="nameBox font-18">{{info.name}}（{{info.no}}）</div>
@@ -19,7 +20,7 @@
 				<p class="tc font-16">电池</p>
 				<div class="flex-wrap flex-horizontal flex-justify-around mt-20">
 					<template v-for="item in info.batteryList">
-						<div><p class="tc font-16">{{item.mode}}</p><p class="tc font-20 fontYellow">{{item.distrinum}}</p></div>
+						<div><p class="tc font-16">{{item.mode}}</p><p class="tc font-20 fontYellow mt-10">{{item.distrinum}}</p></div>
 					</template>									
 				</div>
 			</div>
@@ -37,16 +38,20 @@
 			</div>
 		</div>
 		
-		<div class="mt-10 mainContent flex-con">
+		<div class="mt-10 mainContent flex-con flex-wrap flex-vertical">
 			<div class="tabCard flex-wrap flex-horizontal">				
 				<div v-for="(v,i) in tabItem" @click="changeItem(v,i)" v-bind:class="{actived : i == currentI}">{{v}}</div>
-			</div>	
-			<keep-alive>
-				<component v-bind:is="current" :id="id"></component>
-			</keep-alive>
+			</div>
+			<div class="flex-con">
+				<!--<keep-alive>-->
+					<component v-bind:is="current" :id="id" :username="username" :levelid="levelid"></component>
+				<!--</keep-alive>-->
+			</div>
+			
 			
 		</div>
 		<Dialogue :textContent="textContent" :dialogVisible="dialogVisible"  v-on:confirm="confirmset" v-on:cancel="canceluse"></Dialogue>
+	</div>
 	</div>
 </template>
 
@@ -56,72 +61,74 @@
 	import Recordprofits from '@/components/business/Recordprofits'
 	import Information from '@/components/business/Information'
 	import Operatorsetting from '@/components/business/Operatorsetting'
-	
-	import Dialogue from '@/components/common/Dialogue'
-	
-	export default {
-		data(){
-			return{
-				tabItem:['运营区域/网点','服务定价','分润记录','信息管理','运营设置'],
-	        	tabComponents:['Developarea','Serviceprice','Recordprofits','Information','Operatorsetting'],
-	        	current:'Developarea',
-	        	currentI:'0',	        
-		        find:'',
-		        id:'',
-		        info:[],
-		        nouse:'禁用',
-	       		canuse:"启用",
-	       		textContent:'',
-	       		dialogVisible:false
-			}
-			
-		},
-		methods:{
-			changeItem(v,i){
-		      	this.currentI = i;
-		      	this.current = this.tabComponents[i];
-		    },
-		    getOperdetail({id=this.id}={}){		    	
-		    	this.$get('operAdmin/getOper',{
-		    		id:id
-		    	}).then(data=>{
-		    		this.info = data;
-		    	})
-		    },
-		    handleDelete(index,row){//禁用启用按钮	      	
-	      	this.currentStatus = row.status;
-	      	this.currentId = row.id;
-	      	this.dialogVisible = true;
-	      	this.textContent = row.status == 0? "确认禁用该用户吗？" :"确认启用该用户吗？";
-	      	this.title = "提示";
 
-	     },
-	     setUse(){	     	
-	     	this.textContent = this.info.status == 0? "确认禁用该运营商吗？" : "确认启用该运营商吗？"
-	     	this.dialogVisible = true;	     	
-	     },
-	      canceluse(){//取消或者关闭
-	      	this.dialogVisible = false;
-	      },
-	      confirmset({id=this.id,status=this.info.status==0? 1 : 0}={}){//设置状态
-	      	this.$post('operAdmin/updateStatus',{
-	      		id:id,
-	      		status:status
-	      	}).then(data=>{
-	      		this.$ye();
-	      		this.dialogVisible = false;
-	      		this.getOperdetail();
-	      	})
-	      }
-	    
+	import Dialogue from '@/components/common/Dialogue'
+
+	export default {
+		data() {
+			return {
+				tabItem: ['运营区域/网点', '服务定价', '分润记录', '信息管理', '运营设置'],
+				tabComponents: ['Developarea', 'Serviceprice', 'Recordprofits', 'Information', 'Operatorsetting'],
+				current: 'Developarea',
+				currentI: '0',
+				find: '',
+				id: '',
+				info: [],
+				nouse: '禁用',
+				canuse: "启用",
+				textContent: '',
+				dialogVisible: false,			
+				username:'',//运营商账号-传给运营商设置页面
+				levelid:''//运营商当前级别ID-传给运营商设置页面
+			}
+
 		},
-		created(){
+		methods: {
+			changeItem(v, i) { //选项卡切换
+				this.currentI = i;
+				this.current = this.tabComponents[i];
+			},
+			getOperdetail({
+				id = this.id
+			} = {}) { //获取运营商详情	    	
+				this.$get('operAdmin/getOper', {
+					id: id
+				}).then(data => {
+					this.info = data;				
+					this.username = data.username;
+					this.levelid = {levelid:data.levelid};
+				})
+			},
+
+			setUse() {
+				this.textContent = this.info.status == 0 ? "确认禁用该运营商吗？" : "确认启用该运营商吗？"
+				this.dialogVisible = true;
+			},
+			canceluse() {
+				this.dialogVisible = false;
+			},
+			confirmset({
+				id = this.id,
+				status = this.info.status == 0 ? 1 : 0
+			} = {}) {
+				this.$post('operAdmin/updateStatus', {
+					id: id,
+					status: status
+				}).then(data => {
+					this.$ye();
+					this.dialogVisible = false;
+					this.getOperdetail();
+				})
+			}
+
+		},
+		created() {
 			this.id = this.$route.query.id;
 		},
-		mounted(){
+		mounted() {
 			this.getOperdetail();
 		},
-		components:{
+		components: {
 			Developarea,
 			Serviceprice,
 			Recordprofits,
@@ -135,15 +142,11 @@
 <style scoped>	
 	.businessDetail .infoBox{width:30%;background:#fff;padding:10px 20px 0;margin-right:10px;}
 	.businessDetail .nameBox{line-height: 32px;}
-	.businessDetail .topBox{height:130px;}
-	.businessDetail .imgBox{width:30%;text-align:center;}
-	.businessDetail .imgBox img{display:inline-block;width:80px;height:80px;border-radius:50%;}
+	.businessDetail .topBox{height:130px;}	
 	.businessDetail .rightInfo p{line-height: 22px;font-size:14px;}
 	.businessDetail .itemBox{background:#fff;margin-right:10px;padding:10px 20px;}
 	.businessDetail div.itemBox:nth-child(5){margin-right:0;}	
 	.businessDetail .mainContent{background:#fff;padding:10px;position:relative;}
-	.businessDetail .tabCard{background:#fff;border-top:2px solid #FF9900;border-bottom:1px solid #EBF0F4;}
-	.businessDetail .tabCard div{font-size:16px;line-height: 26px;padding:10px 20px;background:#fff;cursor: pointer;}
-	.businessDetail .tabCard .actived{background:#FF9900;color:#fff;}
+
 	
 </style>

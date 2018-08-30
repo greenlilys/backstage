@@ -14,12 +14,12 @@
 											<el-input v-model="scope.row.name" required="required" placeholder="请输入内容" ></el-input>
 										</template>
 									</el-table-column>
-									<el-table-column label="代理费用" width="" align="center">
+									<el-table-column label="代理费用（￥）" width="" align="center">
 										<template slot-scope="scope">
 											<el-input v-model="scope.row.agencyfee" required="required" placeholder="请输入内容"></el-input>
 										</template>
 									</el-table-column>
-									<el-table-column prop="ratio" label="网点营收分润" width="" align="center">
+									<el-table-column prop="ratio" label="网点营收分润（%）" width="" align="center">
 										<template slot-scope="scope">
 											<el-input v-model="scope.row.ratio" required="required" placeholder="请输入内容"></el-input>
 										</template>
@@ -62,7 +62,8 @@
 				})
 			},
 			deleteRow(index,row){//删除
-				row.type = "del";			
+				row.type = "del";	
+				this.submitForm();
 			},		
 			addOperLevel(){//添加
 				let obj = {
@@ -77,6 +78,7 @@
 			submitForm(){//保存
 				
 				let arr = JSON.stringify(this.tableData);
+				console.log(arr);
 				this.$post('operLevel/add',{
 					level:arr
 				}).then(data=>{

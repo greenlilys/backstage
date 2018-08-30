@@ -1,12 +1,12 @@
 <template>
 	<div class="mt-10">
 		<template>
-								<el-table :data="tableData" style="width: 100%;">
+								<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
 									<el-table-column prop="addTime" label="起租/续租时间" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="leaseterms" label="租期类型" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="amount" label="租金" width="" align="center">
+									<el-table-column prop="amounts" label="租金" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="paymodes" label="支付方式" width="" align="center">
 									</el-table-column>
@@ -44,7 +44,14 @@
 		methods:{
 			handleSizeChange(val) {
 		        console.log(`每页 ${val} 条`);
-		    },
+			},
+			cellStyle({row, column, rowIndex, columnIndex}){
+					if(columnIndex === 2){ //指定坐标
+						return 'color:#FF6600'
+					}else{
+						return ''
+					}
+			},
 		    handleCurrentChange(val) {
 		    	var id = this.id;
 		      	this.getRenewList(id,val);
@@ -86,7 +93,7 @@
 							default:
 							tableData[i].paymodes = "--";
 						}
-
+						tableData[i].amounts="￥"+tableData[i].amount;
 					}
 					this.tableData = tableData;
 			})

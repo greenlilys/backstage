@@ -1,9 +1,10 @@
 <template>	
+	<div>
 		
 	<div class="flex-wrap flex-vertical">		
 		<div class="flex-wrap flex-horizontal flex-justify-between joindetail">
 			<div class="joinHead">
-				<h1 class="fontYellow font-16">店铺加盟申请</h1>
+				<h1 class="fonttitle">店铺加盟申请</h1>
 				<p>申请时间：{{tableData.addTime}}</p>
 				<p>店铺状态：<span class="fontYellow">{{tableData.auditstatuss}}</span></p>
 				<p>保证金：{{tableData.ispayfees}}</p>
@@ -33,14 +34,17 @@
 		</div>
 		
 		<div class="persionInfo mt-10">
-			<h1 class="fontYellow font-16">基本信息</h1>
+			<h1 class="fonttitle">基本信息</h1>
 			<p>店主姓名：{{tableData.contactname}}</p>
 			<p>联系电话：{{tableData.contactcellphone}}</p>
-			<p>身份证号码：{{tableData.contactno}}</p>
+			<p>身份证号码：</p>
+			<div class="shenfen">
+				<img :src="tableData.contactID" alt="" />
+			</div>
 		</div>
 		
 		<div class="shopInfo mt-10">
-			<h1 class="fontYellow font-16">店铺信息</h1>
+			<h1 class="fonttitle">店铺信息</h1>
 			<p>店铺名称：{{tableData.name}}</p>
 			<p>店铺所在地区：{{tableData.provincename}}{{tableData.cityname}}{{tableData.countyname}}</p>
 			<p>店铺详细地址：{{tableData.address}}</p>
@@ -49,7 +53,7 @@
 			<p>店铺经营面积：{{tableData.operatarea}}<sup>㎡</sup></p>
 		</div>
 		
-		<div class="shopPhoto mt-10 flex-wrap flex-horizontal flex-con">
+		<div class="shopPhoto mt-10 flex-wrap flex-horizontal">
 			<div class="flex-con">
 				<p>营业执照</p>
 				<div><img :src="tableData.businesslicense" alt="" /></div>
@@ -57,11 +61,15 @@
 			<div class="flex-con">
 				<p>门头照片</p>
 				<div><img :src="tableData.photo" alt="" /></div>
-			</div>
-			
-			<div class="flex-con">
+			</div>						
+		</div>
+		
+		<div>
+			<div class="shopPhoto">
 				<p>店内照片</p>
-				<div v-for="item in imgUrl" :key="item.value" :value="item.id"><img :src="item.url" alt="" /></div>
+				<div class="flex-wrap flex-horizontal dianphoto">
+					<div v-for="item in imgUrl" :key="item.value" :value="item.id" class="imgboxs"><img :src="item.url" alt="" /></div>
+				</div>				
 			</div>
 		</div>
 
@@ -80,6 +88,7 @@
 		<Dialogue :textContent="textContent" :dialogVisible="dialogVisible" v-on:confirm="Adopt" v-on:cancel="canceluse"></Dialogue>
 		<Dialogue :textContent="textContent" :dialogVisible="dialogVisibles" v-on:confirm="confirmIsonline" v-on:cancel="canceluse"></Dialogue>
 	</div>
+	</div>
 </template>
 
 <script>
@@ -95,11 +104,15 @@
 		  dialogVisible:false,//禁用启用提示框	       
 		  textContent:'',//提示框文本
 		  dialogFormVisible: false,
-		  dialogVisibless:false,//上线提示框       
+		      
 		  form: {	          
 	          auditreason:''//拒绝理由   
 		  },
-		  flag:false
+		  flag:false,
+		  formLabelWidth:'120px',
+		  currentStatus:'',//上线提示框
+		  dialogVisibles:false
+		  
       }
     },
     methods:{
@@ -115,7 +128,7 @@
 					if(batteryList!=null){
 					for(var j = 0,lens=batteryList.length;j<lens;j++){
 						arr.Inventorydistribution += '\n';
-						arr.Inventorydistribution+= batteryList[j].mode +"锂电池 "+ batteryList[j].distrinum + "组                ";
+						arr.Inventorydistribution+= batteryList[j].mode +"锂电池 "+ batteryList[j].distrinum + "组";
 					}}
 					//支付方式+支付单号
 					if(arr.paymode == 0 && arr.paymode!=null){
@@ -166,11 +179,12 @@
 	      	this.id = id;
 	      	this.dialogFormVisible = true;
 		}, 
-		handless(id,isonline){//上下线按钮	      	
-	      	this.currentStatus = isonline;
+		handless(id,isonline){//上下线按钮	  
+			console.log(isonline)			
+	      	this.currentStatus = isonline;	    
 	      	this.currentId = id;
-	      	this.dialogVisible = true;
-	      	this.textContent = isonline == 0? "确认下线该网点吗？" :"确认上线该网点吗？"
+	      	this.dialogVisibles = true;
+	      	this.textContent = isonline == 0? "确认上线该网点吗？" :"确认下线该网点吗？"
 		  },
 		Adopt(){	      	
 	      	this.$post('shop/examineOk',{
@@ -179,11 +193,12 @@
 			this.dialogVisible = false;
 			this.flag = false;
 			this.$ye();
-			this.getParams ()
-    		this.getShopApplyListDetail(this.id,this.nickName)
+			this.getParams ();
+    		this.getShopApplyListDetail(this.id,this.nickName);
 			})	
 		},
-		Notadopt(){	      	
+		Notadopt(){
+			console.log(8888)
 	      	this.$post('shop/examineNo',{
 				id:this.id,
 				auditreason:this.form.auditreason
@@ -195,24 +210,24 @@
     		this.getShopApplyListDetail(this.id,this.nickName)
 			})	
 		},
-		confirmIsonline(){//确认上下线
-	       var online = this.currentOnline == 1;
+		confirmIsonline(){//确认上下线			
+			console.log(8888)
+			var online = this.currentStatus == 0 ? 1 : 0;	     
 	       var id = this.currentId;
 	       this.$post('shop/updateShopOnline',{
 	      		id:id,
 	      		isonline:online
 	      	}).then(data=>{
-	      		this.dialogVisible = false;
+	      		this.dialogVisibles = false;
 				this.$ye();
 				this.getShopApplyListDetail(this.id,this.nickName)
 	      	})
 	      },
 	      canceluse(){//取消或者关闭
-	      	this.dialogVisible = false;
+	      	this.dialogVisibles = false;
 	      }
     },
-    ceeated(){
-    },
+   
     mounted(){
 		this.getParams ()
     	this.getShopApplyListDetail(this.id,this.nickName)
@@ -233,5 +248,7 @@
 	h1.fontYellow{line-height: 26px;}
 	.joinight{width:20%;}
 	.joinight .fontYellow{text-align: justify;}
-	.shopPhoto img{display:block;width:50%;height:300px;margin-top:10px;}
+	.shopPhoto img,.shenfen img{display:block;width:auto;height:240px;margin-top:10px;}
+	.dianphoto{flex-wrap:wrap;}
+	.imgboxs{margin-right:10px;}
 </style>
