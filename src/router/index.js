@@ -79,8 +79,7 @@ import PlatformUpdNotice from '@/components/marketing/notice/PlatformUpdNotice'
 
 Vue.use(Router)
 
-export default new Router({
-	mode: 'history',
+export default new Router({	
 	routes: [
 		{
 			path: '/',

@@ -39,9 +39,9 @@
 					
 					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">员工权限</div><span class="flex-con"></span></h5>
 					<el-form-item>
-						<el-checkbox-group v-model="form.checkList">
+						<el-checkbox-group v-model="checkbox">
 						    <!-- <el-checkbox v-for="item in form.resourceList" :checked="item.isChecks" :key="item.id" class="check-lef">{{item.name}}</el-checkbox> -->
-							<el-checkbox v-for="item in form.resourceList" :checked="item.isChecks" :key="item.id" class="check-lef">{{item.name}}</el-checkbox>
+							<el-checkbox :label="item.id" v-for="item in form.resourceList" :key="item.value" class="check-lef">{{item.name}}</el-checkbox>
 							<!-- <el-checkbox :label="item.id"  v-for="item in checkList" :key="item.value" class="check-lef">{{item.name}}</el-checkbox> -->
 						  </el-checkbox-group>
 					</el-form-item>		
@@ -76,6 +76,7 @@
 	export default {
 		data() {
 			return {
+				checkbox:[],
 				navtitle:'设置>员工账号管理>管理',
 				formLabelWidth: '120px',
 				form: {
@@ -92,7 +93,8 @@
 			handleChange(value) {
 				console.log(value);
 			},
-			getStaff(id){	      	
+			getStaff(id){	  
+				var that=this;    	
 	        	this.$get('staffaccount/staffInfo',{
 					id:this.id					
 				}).then(data=>{
@@ -106,14 +108,26 @@
 						}
 						
 					}
+					console.log(check);
+					this.form =check
+					console.log("---------"+check)
+					//
+					var list=[];
+					for(var i=0;i<data.resourceList.length;i++){
+						if(!data.resourceList[i].isCheck){
+							list.push(data.resourceList[i].id)
+						}
+					}
+					that.checkbox=list;
 					this.form =check;							
+
 				})
             },
             StaffList(){    
 				this.$get('staffaccount/skipAdd',{
 				}).then(data=>{
+					console.log(data);
 					this.checkList=data;
-					
 				})
 			},
             submitForm(){
@@ -126,7 +140,7 @@
 					wechat:this.form.wechat,
 					username:this.form.username,
 					status:this.form.status,
-					resourcesid:this.checkList
+					resourcesid:this.checkbox
                 }).then(data=>{
 					this.$ye();
                 })

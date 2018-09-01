@@ -99,6 +99,7 @@
 			StaffList(){    
 				this.$get('staffaccount/skipAdd',{
 				}).then(data=>{
+					console.log(data)
 					this.checkList=data;
 				})
 			},
