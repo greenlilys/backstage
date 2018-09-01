@@ -12,7 +12,9 @@
 									</el-table-column>
 									<el-table-column prop="action" label="操作" align="center">
 										<template slot-scope="scope">
-											<el-button type="warning" size="mini" class="btnStyle">详情</el-button>
+											<router-link :to="{path:'/Main/Meetdetail',query:{id:scope.row.id}}">
+												<el-button type="warning" class="btnStyle" size="mini">详情</el-button>
+											</router-link>											
 									    </template>
 									</el-table-column>
 								</el-table>

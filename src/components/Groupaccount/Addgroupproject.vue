@@ -128,6 +128,7 @@
 	export default {
 		data() {
 			return {
+				navtitle:'团购账号>团购项目>添加团购项目',
 				form: {
 					name: '88888',
 					region: '',
@@ -191,7 +192,7 @@
 			'v-distpicker': Distpicker
 		},
 		mounted: function() {
-
+			this.$sendTitle(this.navtitle);
 		}
 
 	}

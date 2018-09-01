@@ -78,6 +78,7 @@
 	export default {
 		data() {
 			return {
+				navtitle:'预约>预约列表',
 				tableData: [],
 				totalCount: 10,
 				radio1: "",
@@ -205,6 +206,7 @@
 		},
 		mounted(){
 			this.getSelectList(this.find,this.radio1,this.radio2,1);
+			this.$sendTitle(this.navtitle);
 		}
 	}
 </script>

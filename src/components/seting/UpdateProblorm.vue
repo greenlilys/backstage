@@ -22,7 +22,7 @@
 						</el-form-item>
 						<el-form-item>
 						<el-row>
-							<el-button type="warning" class="btnStyle" @click="updateProblem()">保存</el-button>
+							<el-button type="success" @click="updateProblem()">保存</el-button>
 						</el-row>
 					</el-form-item>
 					</el-form>
@@ -37,6 +37,7 @@
 	export default{
 		data(){
 			return{
+				navtitle:'设置>常见问题>修改',
                 id:'',
                 form:{}
 			}
@@ -63,7 +64,10 @@
         },
         method(){
 			this.getProblorm(this.id);
-        },
+		},
+		mounted:function(){
+			this.$sendTitle(this.navtitle);
+		},
         created(){	  	
           this.id = this.$route.query.id;
           this.getProblorm(this.id);

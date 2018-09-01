@@ -51,6 +51,7 @@
 	export default {
       data() {
         return {
+			navtitle:'资金>押金-缴纳记录',
         	tabItem:['押金缴纳记录','滞纳金记录','已缴纳滞纳金记录','押金赎回记录','违约记录'],
         	tabComponents:['Deposit','Late','Paylate','Getback','Breach'],
         	current:'Deposit',
@@ -87,6 +88,7 @@
 	
 	  mounted(){
 		this.depositStatist();
+		this.$sendTitle(this.navtitle);
 	  },
       components:{
       	Deposit,

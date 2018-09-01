@@ -80,7 +80,7 @@
 			    </el-form>
 				<div slot="footer" class="dialog-footer">
 					<el-button @click="dialogFormVisible = false">取 消</el-button>
-					<el-button type="primary" @click="updateActivity">确 定</el-button>
+					<el-button type="success" @click="updateActivity">确 定</el-button>
 				</div>
 			</el-dialog>
 
@@ -122,7 +122,7 @@
 			    </el-form>
 				<div slot="footer" class="dialog-footer">
 					<el-button @click="dialogFormVisible1 = false">取 消</el-button>
-					<el-button type="primary" @click="addBeetleSet">确 定</el-button>
+					<el-button type="success" @click="addBeetleSet">确 定</el-button>
 				</div>
 			</el-dialog>
 
@@ -166,7 +166,7 @@
 			    </el-form>
 				<div slot="footer" class="dialog-footer">
 					<el-button @click="dialogFormVisible2 = false">取 消</el-button>
-					<el-button type="primary" @click="addLeasetermSet">确 定</el-button>
+					<el-button type="success" @click="addLeasetermSet">确 定</el-button>
 				</div>
 			</el-dialog>
 
@@ -192,11 +192,11 @@
 			    </el-form>
 				<div slot="footer" class="dialog-footer">
 					<el-button @click="dialogFormVisible3 = false">取 消</el-button>
-					<el-button type="primary" @click="addTenancydays">确 定</el-button>
+					<el-button type="success" @click="addTenancydays">确 定</el-button>
 				</div>
 			</el-dialog>
 
-            <el-dialog title="充值天牛币打折" :visible.sync="dialogFormVisible4" width="40%">
+            <el-dialog title="充值天牛币打折" :visible.sync="dialogFormVisible4" width="30%">
 				<el-form ref="form" :model="form1" label-width="180px">	
                        <el-form-item label="打折一阶段A：">
 							<el-input v-model="form1.oneDiscountA" placeholder="请填写整数"></el-input>						
@@ -234,7 +234,7 @@
 			    </el-form>
 				<div slot="footer" class="dialog-footer">
 					<el-button @click="dialogFormVisible4 = false">取 消</el-button>
-					<el-button type="primary" @click="addBeetleSetDiscount">确 定</el-button>
+					<el-button type="success" @click="addBeetleSetDiscount">确 定</el-button>
 				</div>
 			</el-dialog>
 	</div>
@@ -245,6 +245,7 @@
 	export default{
 		data(){
 			return{
+                navtitle:'营销>平台活动',
 				tableData: [],
 		        currentPage:1,
                 total:0,
@@ -526,7 +527,8 @@
 	      }
 		},
 		mounted(){
-		    this.Activitylist(1);
+            this.Activitylist(1);
+            this.$sendTitle(this.navtitle);
         },
         created(){
             this.Activitylist(this.currentPage);

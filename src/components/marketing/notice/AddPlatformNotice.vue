@@ -73,6 +73,7 @@
 	export default{
 		data(){
 			return{
+				navtitle:'营销>平台公告>添加',
                 dialogVisible: false,
                 dialogImageUrl: '',
                 fileList:[],
@@ -130,6 +131,7 @@
         },
         mounted: function() {
 			this.actionAddress = this.$GLOBALconfig.agent_api + 'n/attach/uploadFile;';	
+			this.$sendTitle(this.navtitle);
 		}
 	}
 </script>

@@ -1,10 +1,11 @@
 <template>
 	<div>
-			<el-form ref="form" :model="form" label-width="290px">
+			<el-form ref="form" :model="form" label-width="290px"  class="hf flex-wrap flex-vertical">
 			<el-row class="contentBox">
 				<el-col :span="10">
-						<el-form-item label="天牛币价值：">												
-						</el-form-item>
+						<!-- <el-form-item label="天牛币价值：">												
+						</el-form-item> -->
+						<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">天牛币价值</div><span class="flex-con"></span></h5>
 						<el-form-item label="1元兑换天牛币数量：">
 							<el-input v-model="form.integralunit" placeholder=""></el-input>						
 						</el-form-item>						
@@ -12,8 +13,9 @@
 			</el-row>
 			<el-row class="mt-10 contentBox">
 				<el-col :span="10">
-						<el-form-item label="天牛币发放：">												
-						</el-form-item>
+						<!-- <el-form-item label="天牛币发放：">												
+						</el-form-item> -->
+						<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">天牛币发放</div><span class="flex-con"></span></h5>
 						<el-form-item label="用户预约服务评分获取数量/次：">
 							<el-input v-model="form.evaluate" placeholder=""></el-input>						
 						</el-form-item>
@@ -29,8 +31,9 @@
 			</el-row>
 			<el-row class="mt-10 contentBox">
 				<el-col :span="10">
-						<el-form-item label="签到设置：">												
-						</el-form-item>
+						<!-- <el-form-item label="签到设置：">												
+						</el-form-item> -->
+						<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">签到设置</div><span class="flex-con"></span></h5>
 						<el-form-item label="签到赠送天牛币数量：">
 							<el-input v-model="form.signgive" placeholder=""></el-input>						
 						</el-form-item>
@@ -39,9 +42,10 @@
 						</el-form-item>
 				</el-col>
 			</el-row>
-			<el-row class="mt-10 contentBox">
+			<el-row class="mt-10 contentBox flex-con">
 				<el-col :span="10">
-						<el-form-item label="生日活动设置：">
+					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">生日活动设置</div><span class="flex-con"></span></h5>
+						<el-form-item label="">
 							<template>
 								<el-radio-group v-model="form.isbirthdayopen">
 									<el-radio :label="0">未开启</el-radio>

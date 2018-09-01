@@ -12,12 +12,11 @@
 					<div class="font-14">所属运营商：{{shopInfo.oname}}（{{shopInfo.ono}}）</div>
 				</div>
 				<div class=" flex-wrap flex-horizontal flex-align-center flex-justify-end baseRight font-14">
-					<div class="stage"><span>网点状态：</span><span>{{shopInfo.isonline == 0? "已下线" : "上线中"}}</span></div>
+					<div class="stage"><span>网点状态：</span><span>{{shopInfo.isonline == 1? "已下线" : "上线中"}}</span></div>
 					<el-button type="success" size="small" class="mr-10" @click="handles(shopInfo.isonline)" >{{shopInfo.isonline == 0 ? goonline : downline}}</el-button>
 					<router-link :to="{path:'/Main/ChangeShopInfo',query:{id:id}}">
 						<el-button type="success" size="small">查看/修改网点信息</el-button>
 					</router-link>
-						
 				</div>
 			</div>	
 			
@@ -47,7 +46,7 @@
 				<div class="tc">
 					<h1 class="font-16 colorYellow">退换回收电池</h1>
 					<div class="font-14 mt-10"><span v-for="item in shopInfo.batteryList" :key="item.value"><label v-if="item.returnnum>0">{{item.mode}}&nbsp;&nbsp;{{item.returnnum}}&nbsp;&nbsp;&nbsp;</label></span></div>
-					<!-- <el-button type="success" size="small" class="mt-10" @click="recovery">+&nbsp;回收记录</el-button>	 -->
+					
 				</div>
 			</div>
 			
@@ -69,7 +68,7 @@
 			  </el-form>
 			  <div slot="footer" class="dialog-footer">
 			    <el-button @click="dialogFormVisible = false">取 消</el-button>
-			    <el-button type="primary" @click="confirmRecharge">确 定</el-button>
+			    <el-button type="success" @click="confirmRecharge">确 定</el-button>
 			  </div>
 			</el-dialog>
 			
@@ -84,7 +83,7 @@
 				</el-form>
 				<div slot="footer" class="dialog-footer">
 					<el-button @click="dialogFormVisible1 = false">取 消</el-button>
-					<el-button type="primary" @click="confirmDebit">确 定</el-button>
+					<el-button type="success" @click="confirmDebit">确 定</el-button>
 				</div>
 			</el-dialog>
 
@@ -108,7 +107,7 @@
 				</el-form>
 				<div slot="footer" class="dialog-footer">
 					<el-button @click="dialogFormVisible2 = false">取 消</el-button>
-					<el-button type="primary" @click="confirmRepleni">确 定</el-button>
+					<el-button type="success" @click="confirmRepleni">确 定</el-button>
 				</div>
 			</el-dialog>
 			
@@ -132,7 +131,7 @@
 				</el-form>
 				<div slot="footer" class="dialog-footer">
 					<el-button @click="dialogFormVisible3 = false">取 消</el-button>
-					<el-button type="primary" @click="confirmRecovery">确 定</el-button>
+					<el-button type="success" @click="confirmRecovery">确 定</el-button>
 				</div>
 			</el-dialog>
 			
@@ -159,6 +158,7 @@
 	export default {
       data() {
         return {
+        	navtitle:'网点>加盟网点详情',
 			formLabelWidth: '120px',
 			formLabelWidths: '90px',
         	tabItem:['预约服务记录','补货记录','配货记录','钱包记录','钱包充值记录','会员','退还电池回收记录','救援服务记录'],
@@ -375,29 +375,30 @@
 			}
 		},
 		confirmRecovery(){
-		var supplyTime =this.form3.recoverytime;
-		let batterylist = JSON.stringify(this.recover.list);
-		if(supplyTime==null || supplyTime==""){
-			this.$message.info("请输入回收时间");
-			return false;
-		}else{
-			this.$post('battery/putRecovery',{
-			shopid:this.id,
-			supplyTime:supplyTime,
-			battery:batterylist
-			}).then(data=>{
-				this.dialogFormVisible3 = false;			     				     		
-				this.joinShopDetail(this.id)
-				this.$ye('添加回收记录');	
-			})
-		}
+			var supplyTime =this.form3.recoverytime;
+			let batterylist = JSON.stringify(this.recover.list);
+			if(supplyTime==null || supplyTime==""){
+				this.$message.info("请输入回收时间");
+				return false;
+			}else{
+				this.$post('battery/putRecovery',{
+				shopid:this.id,
+				supplyTime:supplyTime,
+				battery:batterylist
+				}).then(data=>{
+					this.dialogFormVisible3 = false;			     				     		
+					this.joinShopDetail(this.id)
+					this.$ye('添加回收记录');	
+				})
+			}
 		}
 	  },
 	  created(){	  	
 	  	this.id = this.$route.query.id;
 	  },
 	  mounted(){
-		this.joinShopDetail(this.id)
+		this.joinShopDetail(this.id);
+		this.$sendTitle(this.navtitle);
 	  },
       components:{
 		Dialogue,

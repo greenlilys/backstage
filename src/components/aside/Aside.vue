@@ -117,6 +117,7 @@
 		},
 		methods: {
 			handleScroll(){
+				document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
 				if(document.documentElement && document.documentElement.clientHeight){
 					this.caoheight = document.documentElement.clientHeight + document.documentElement.scrollTop - 50;
 				}else if(document.body && document.body.clientHeight){

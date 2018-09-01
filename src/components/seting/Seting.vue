@@ -21,7 +21,8 @@
     name: '',
     data(){
       return{
-          tabItem:['服务设置','提现设置','天牛币设置','救援设置','报损项设置','充值/扣款密码设置'],
+		    navtitle:'设置>业务设置-服务设置',
+            tabItem:['服务设置','提现设置','天牛币设置','救援设置','报损项设置','充值/扣款密码设置'],
         	tabComponents:['Serviceset','Getset','Bibiset','Helpset','Reportloss','Pushset'],
         	current:'Serviceset',
         	currentI:'0'
@@ -32,7 +33,10 @@
 	      	this.currentI = i;
 	      	this.current = this.tabComponents[i];
 	      }
-    },
+		},
+		mounted:function(){
+			this.$sendTitle(this.navtitle);
+		},
     components:{
     	Serviceset,
     	Getset,

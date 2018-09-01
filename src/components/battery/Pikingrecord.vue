@@ -53,6 +53,7 @@
     name: '',
     data(){
       return{
+		  navtitle:'产品>运营商配货记录',
           tableData: [],				
 					currentPage:1,
 					total:0,
@@ -89,6 +90,7 @@
 		mounted(){
 		this.serviceStatis();
 		this.serviceStatisList(1);
+		this.$sendTitle(this.navtitle);
 	  },
     components:{
     	

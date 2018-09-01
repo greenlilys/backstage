@@ -37,6 +37,7 @@
 	export default{
 		data(){
 			return{
+				navtitle:'网点公告>修改网点公告',
                 id:'',
                 form:{}
 			}
@@ -58,11 +59,12 @@
 				}).then(data=>{
 					this.form = data;
 			})
-			},
+			}
              
         },
-        method(){
+        mounted(){
 			this.getProblorm(this.id);
+			this.$sendTitle(this.navtitle);
         },
         created(){	  	
           this.id = this.$route.query.id;

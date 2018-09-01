@@ -98,6 +98,7 @@ export default {
 	name: '',
 	data() {
 		return {
+			navtitle:'网点>网点列表',
 			radio1: '',
 			nickName: '',
 			tableData: [],
@@ -224,11 +225,10 @@ export default {
 			this.dialogVisibles = false;
 		}
 		},
-		ceeated() {
-			
-		},
+		
 		mounted() {
-			this.getShopList(1, this.radio1, this.nickName)
+			this.getShopList(1, this.radio1, this.nickName);
+			this.$sendTitle(this.navtitle);
 		},
 		components: {
 			Dialogue

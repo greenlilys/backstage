@@ -39,6 +39,7 @@
 	export default{
 		data(){
 			return{
+				navtitle:'网点公告>添加网点公告',
 				form:{
 					title:'',
 					content:''
@@ -55,6 +56,9 @@
 					this.$router.push('/Main/Shopnoticelist');
 				})
 			}   
+		},
+		mounted(){
+			this.$sendTitle(this.navtitle);
 		}
 	}
 </script>

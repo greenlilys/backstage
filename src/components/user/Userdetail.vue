@@ -124,6 +124,7 @@
 	export default {
 		data(){
 			return{
+				navtitle:'用户>用户列表>详情',
 				formLabelWidth: '120px',
 				tabItem:['预约记录','租期记录','押金记录','钱包记录','天牛币记录','会员'],
 	        	tabComponents:['Orders','Rent','Deposit','Purse','Coin','Members'],
@@ -277,6 +278,7 @@
 		},
 		mounted(){						
 			this.getUserInfo();
+			this.$sendTitle(this.navtitle);
 		},
 		components:{
 			Orders,

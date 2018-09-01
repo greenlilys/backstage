@@ -89,7 +89,7 @@
 
 					<el-form-item>
 						<el-row>
-							<el-button type="warning" @click="submitForm">保存</el-button>
+							<el-button type="success">保存</el-button>
 						</el-row>
 					</el-form-item>
 				</el-form>
@@ -108,6 +108,7 @@
 	export default {
 		data() {
 			return {
+				navtitle:'网点>加盟网点详情>修改网点信息',
 				id:"",//网点id
 				form: {},
 				tableData:[],
@@ -196,6 +197,7 @@
 		mounted: function() {
 			this.getShopDetail(this.id);
 			this.getAll(100);
+			this.$sendTitle(this.navtitle);
 		}
 
 	}

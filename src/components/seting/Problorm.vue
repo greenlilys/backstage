@@ -22,7 +22,7 @@
 						</el-form-item>
 						<el-form-item>
 						<el-row>
-							<el-button type="warning" class="btnStyle" @click="addproblem()">保存</el-button>
+							<el-button type="success" @click="addproblem()">保存</el-button>
 						</el-row>
 					</el-form-item>
 					</el-form>
@@ -37,6 +37,7 @@
 	export default{
 		data(){
 			return{
+				navtitle:'设置>常见问题>添加问题',
 				form:{
 					title:'',
 					content:''
@@ -53,6 +54,9 @@
 					this.$router.push('/Main/Problormlist');
 				})
 			}   
+		},
+		mounted:function(){
+			this.$sendTitle(this.navtitle);
 		}
 	}
 </script>

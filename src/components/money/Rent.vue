@@ -37,6 +37,7 @@
 	export default {
 		data() {
 			return {
+				navtitle:'资金>租金-租金纪录',
 				tabItem: ['租金记录', '退租记录'],
 				tabComponents: ['Rentrecord', 'Backrecord'],
 				current: 'Rentrecord',
@@ -68,6 +69,7 @@
 		},
 		mounted() {
 			this.renewStatist();
+			this.$sendTitle(this.navtitle);
 		},
 		watch: {
 			valueTime(newVal, oldVal) {

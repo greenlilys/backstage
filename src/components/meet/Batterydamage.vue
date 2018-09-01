@@ -64,6 +64,7 @@
 	export default {
 		data() {
 			return {
+				navtitle:'预约>电池报损',
 				radio1:'',
 				tableData: [],	
 				currentPage1:1
@@ -110,6 +111,7 @@
 		},
 		mounted(){
 			this.getDamageList(1,this.radio1);
+			this.$sendTitle(this.navtitle);
 		}
 	}
 </script>

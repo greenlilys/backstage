@@ -39,9 +39,11 @@
 </template>
 
 <script>
+
 	export default{
 		data(){
 			return {
+				navtitle:'用户>天牛币记录',
 				tableData: [],
 		         currentPage1:1,
 		         totalCount:10
@@ -129,6 +131,7 @@
 		},
 		mounted(){
 			this.getCustBeetleList(1);
+			this.$sendTitle(this.navtitle);
 		}
 	}
 </script>

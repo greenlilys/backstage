@@ -1,10 +1,10 @@
 <template>
 	<div class="helpset">
-			<el-form ref="form" :model="form" label-width="200px">
-				<el-row class="mt-10 contentBox">
+			<el-form ref="form" :model="form" label-width="0" class="hf flex-wrap flex-vertical">
+				<el-row class="mt-10 contentBox  flex-con">
 					<el-col :span="12">
-							<span class="font-16 fontYellow">电池报损项(电池损坏默认扣减对应产品的全额押金)</span>
-							<el-form-item label="">
+							<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">电池报损项(电池损坏默认扣减对应产品的全额押金)</div><span class="flex-con"></span></h5>
+							<el-form-item label="" class="mar-top">
 									<el-table :data="batteRyreport" border style="width: 100%;">
 										<el-table-column label="报损项" width="" align="center">
 											<template slot-scope="scope">
@@ -32,13 +32,12 @@
 									</el-table>
 							</el-form-item>				
 							<el-form-item label="">
-								<el-button type="warning"  size="small" @click="addRepair">+添加报损项</el-button>	
+								<el-button type="success"  size="small" @click="addRepair">+添加报损项</el-button>	
                                 <el-button type="success" size="small" @click="editForms">保&nbsp;&nbsp;&nbsp;&nbsp;存</el-button>	
 							</el-form-item>
-
 							
-                            <span class="font-16 fontYellow">电动车报损项(电池损坏默认扣减对应产品的全额押金)</span>
-							<el-form-item label="">
+							<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">电动车报损项(电池损坏默认扣减对应产品的全额押金)</div><span class="flex-con"></span></h5>
+							<el-form-item label="" class="mar-top">
 									<el-table :data="tramReport" border style="width: 100%;">
 										<el-table-column label="报损项" width="" align="center">
 											<template slot-scope="scope">
@@ -68,7 +67,7 @@
 									</el-table>
 							</el-form-item>				
 							<el-form-item label="">
-								<el-button type="warning"  size="small" @click="addRepairs">+添加报损项</el-button>
+								<el-button type="success"  size="small" @click="addRepairs">+添加报损项</el-button>
 								<el-button type="success" size="small" @click="editForm">保&nbsp;&nbsp;&nbsp;&nbsp;存</el-button>			
 							</el-form-item>								
 					</el-col>
@@ -155,5 +154,5 @@
   }
 </script>
 <style scoped>
-
+.mar-top{margin-top: 10px }
 </style>

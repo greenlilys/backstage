@@ -112,6 +112,7 @@
 	export default {
 		data() {
 			return {
+				navtitle:'网点>网点列表>添加网点',
 				id:"",//网点id
 				form: {},
 				valueTime:[],//加盟有效期	
@@ -204,6 +205,7 @@
 		mounted: function() {
 			this.getOperator();
 			this.getBattery();
+			this.$sendTitle(this.navtitle);
 			
 		}
 

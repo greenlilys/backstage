@@ -18,6 +18,7 @@
 	export default {
       data(){
 			return {
+				navtitle:'资金>平台操作记录',
 				tabItem:['平台钱包操作记录','平台天牛币记录'],
 	        	tabComponents:['Walletrecord','Beetlerecord'],
 	        	current:'Walletrecord',
@@ -30,7 +31,10 @@
 	      	this.current = this.tabComponents[i];
 	      }
 	     
-      },
+	  },
+	  mounted:function(){
+		  this.$sendTitle(this.navtitle);
+	  },
       components:{
       	Walletrecord,
       	Beetlerecord

@@ -1,7 +1,9 @@
 <template>
 	<div class="main">		
 		<div class="mainContent flex-wrap flex-vertical">
+		<keep-alive>
 			<Head class="headHeight"></Head>
+		</keep-alive>			
 			<div class="flex-wrap flex-horizontal mainBox flex-con">
 				<Aside></Aside>
 				<div class="flex-con flex-wrap flex-vertical">

@@ -81,6 +81,7 @@
 	export default {
 		data() {
 			return {
+				navtitle:'团购账号>团购项目',
 				 tableData: [{
             date: '2016',
             name: '王小虎',
@@ -126,6 +127,9 @@
 	      	this.$router.push('/Groupproject/Groupprojectdetail')
 	      }
 	     
+		},
+		mounted:function(){
+			this.$sendTitle(this.navtitle);
 		}
 	}
 </script>

@@ -36,6 +36,7 @@
 	export default {
 		data() {
 			return {
+				navtitle:'统计>推荐用户',
 				tableData: [],
 				currentPage: 1,
 				valueTime: [],
@@ -77,6 +78,7 @@
 		},
 		mounted() {
 			this.Recommendlist();
+			this.$sendTitle(this.navtitle);
 		},
 		watch: {
 			valueTime(newVal, oldVal) {

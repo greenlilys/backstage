@@ -63,6 +63,7 @@
 	export default {
 		data() {
 			return {
+				navtitle:'团购账号>账号管理',
 				 tableData: [{
             date: '2016',
             name: '王小虎',
@@ -101,6 +102,9 @@
 	        console.log(`当前页: ${val}`);
 	      }
 	     
+		},
+		mounted:function(){
+			this.$sendTitle(this.navtitle);
 		}
 	}
 </script>

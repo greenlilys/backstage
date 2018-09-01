@@ -1,8 +1,24 @@
 <template>
-	<div class="nav font-14">网点->网点列表->加盟网点详情</div>
+	<div class="nav font-14">{{navtitle}}</div>
 </template>
 
 <script>
+	export default{
+		data(){
+			return{
+				navtitle:''
+			}
+		},
+		methods:{
+			
+		},
+		mounted(){
+			let self = this;
+			this.$bus.$on('getTitle',function(str){
+				self.navtitle = str;
+			})
+		}
+	}
 </script>
 
 <style>

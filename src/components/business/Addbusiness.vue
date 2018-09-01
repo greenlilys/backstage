@@ -5,7 +5,7 @@
 		<el-row>
 			<el-form ref="form" :model="form" label-width="140px">
 			<el-col :span="9">
-				<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">基本信息</div><span class="flex-con"></span></h5>
+				<h5 class="fonttitle mb-10 flex-wrap flex-horizontal flex-align-center"><div class="pr-10">基本信息</div><span class="flex-con"></span></h5>
 				
 					<el-form-item label="运营商名称：">
 						<el-input v-model="form.name" clearable></el-input>
@@ -33,7 +33,7 @@
 							</div>
 						</template>
 					</el-form-item>
-					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">经营资质</div><span class="flex-con"></span></h5>
+					<h5 class="fonttitle mb-10 flex-wrap flex-horizontal flex-align-center"><div class="pr-10">经营资质</div><span class="flex-con"></span></h5>
 					<el-form-item label="法人姓名：">
 						<el-input v-model="form.legalperson" clearable></el-input>
 					</el-form-item>
@@ -77,7 +77,7 @@
 							  <img width="100%" :src="dialogImageUrl" alt="">
 							</el-dialog>
 					</el-form-item>
-					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">运营商账号</div><span class="flex-con"></span></h5>
+					<h5 class="fonttitle mb-10 flex-wrap flex-horizontal flex-align-center"><div class="pr-10">运营商账号</div><span class="flex-con"></span></h5>
 					<el-form-item label="运营商账号：">
 						<el-input v-model="form.username" clearable></el-input>
 					</el-form-item>
@@ -87,18 +87,18 @@
 					<el-form-item label="确认密码：">
 						<el-input v-model="password2" @change="confirmSecond" clearable></el-input>
 					</el-form-item>
-					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">运营商级别</div><span class="flex-con"></span></h5>
+					<h5 class="fonttitle mb-10 flex-wrap flex-horizontal flex-align-center"><div class="pr-10">运营商级别</div><span class="flex-con"></span></h5>
 					<el-form-item label="运营商级别：">						
 							<el-radio-group v-model="form.radio1"  @change = "handleRadio1">
 								<template v-for="item in operLevellist">
 									<el-radio  :label="item.id" :key="item.id">{{item.name}}</el-radio>
 								</template>								
 							</el-radio-group>
-						<div v-if=" curid != '' ">代理费用：{{form.agencyfee}}&nbsp;&nbsp;&nbsp;&nbsp;分润比例：{{form.ratio}}</div>
+						<div v-if=" curid != '' ">代理费用（￥）：{{form.agencyfee}}&nbsp;&nbsp;&nbsp;&nbsp;分润比例（%）：{{form.ratio}}</div>
 					</el-form-item>
 					
 					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">运营商结算账户</div><span class="flex-con"></span></h5>
-					<p class="font-14 fontYellow mb-10">运营商收益返利结算的收款账户。</p>
+					<p class="font-14 fontYellow mb-20">运营商收益返利结算的收款账户。</p>
 					<el-form-item label="收款账户类型：">
 						<template>
 							<el-radio-group v-model="form.radio2"  @change = "handleRadio2">
@@ -124,7 +124,7 @@
 						</el-form-item>
 					</template>
 					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">服务费用</div><span class="flex-con"></span></h5>
-					<p class="font-14 fontYellow mb-10">服务费根据运营区域可进行单独设定，不得低于平台基础定价。</p>
+					<p class="font-14 fontYellow mb-20">服务费根据运营区域可进行单独设定，不得低于平台基础定价。</p>
 					<template v-for="items in battery">									
 									<div class="modebox tc font-16">{{items.mode}}</div>
 									<div class="inputboxs flex-wrap flex-vertical flex-align-center">	
@@ -159,7 +159,7 @@
 									</div>
 					</template>
 					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">运营区域</div><span class="flex-con"></span></h5>
-					<p class="font-14 fontYellow mb-10">同一区域的网点归运营商维护，获取收益进行分润。</p>
+					<p class="font-14 fontYellow mb-20">同一区域的网点归运营商维护，获取收益进行分润。</p>
 					<el-form-item label="添加运营区域：">						
 						<v-distpicker @selected="onSelecteArea"></v-distpicker>						
 						<el-tag
@@ -190,7 +190,7 @@
 	export default {
 		data() {
 			return {
-
+				navtitle:'运营商>运营商列表>添加运营商',
 				form: {
 					region: [], //运营区域
 					battery:[],
@@ -386,7 +386,7 @@
 			this.actionAddress = this.$GLOBALconfig.agent_api + 'n/attach/uploadFile;';
 			this.getOperLevel();
 			this.getBattery();	
-			
+			this.$sendTitle(this.navtitle);
 			
 		},
 		watch:{
@@ -417,5 +417,6 @@
 	.ospan{color:#606266;font-size:inherit;height:40px;line-height:40px;padding:0 15px;} 
 	
 	.inputboxs{padding:20px 0;}
-	.modebox{height:30px;line-height: 30px;background:#E9EEF3;}
+	.modebox{height:30px;line-height: 30px;background:#E9EEF3;}	
+	 .el-radio,.el-radio+.el-radio{margin-left:0;padding:10px 0;}
 </style>

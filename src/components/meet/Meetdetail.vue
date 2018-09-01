@@ -3,7 +3,7 @@
 	<div class="flex-wrap flex-vertical">		
 		
 			<div class="shopInfo">
-				<h1 class="fontYellow">预约信息</h1>
+				<h1 class="fonttitle">预约信息</h1>
 				<p>预约编号：<span>{{meetData.no}}</span> </p>
 				<p>预约类型：<span>{{meetData.types}}</span></p>
 				<p>预约时间： <span>{{meetData.addtime}}</span> </p>
@@ -12,7 +12,7 @@
 			</div>
 			
 			<div class="shopInfo mt-10">
-				<h1 class="fontYellow">预约用户信息</h1>
+				<h1 class="fonttitle">预约用户信息</h1>
 				<p>预约用户：<span>{{meetData.username}}</span> </p>
 				<p>电池套餐：<span>{{meetData.batteryname}}</span> </p>
 				<p v-if="meetData.type == 1? true :false">换电费/积分：{{meetData.cost}}</p>
@@ -20,7 +20,7 @@
 			</div>
 		
 		<div class="shopInfo mt-10">
-			<h1 class="fontYellow">服务网点信息</h1>
+			<h1 class="fonttitle">服务网点信息</h1>
 			<p>网点编号：{{meetData.shopno}}</p>
 			<p>网点名称：{{meetData.name}}</p>
 			<p>地址：{{meetData.cityname + meetData.countyname +meetData.address}}</p>
@@ -28,11 +28,11 @@
 		</div>
 		
 		<div class="shopInfo mt-10">
-			<h1 class="fontYellow">用户评价</h1>
+			<h1 class="fonttitle">用户评价</h1>
 			<p>{{meetData.score}}分</p>			
 		</div>
 		<div class="shopInfo mt-10">
-			<h1 class="fontYellow">异常情况：</h1>
+			<h1 class="fonttitle">异常情况：</h1>
 			<p>异常情况：{{meetData.stated}}</p>
 			<p v-if="meetData.type == 2? true :false">报损情况：{{meetData.reviewstates}}</p>
 		</div>
@@ -46,6 +46,7 @@
 		name:'',
 		data(){
 			return{
+				navtitle:'预约>预约列表>详情',
 				id:'',
 				meetData:{}
 			}
@@ -144,6 +145,7 @@
 		},
 		mounted(){
 			this.getMeetdetail(this.id);
+			this.$sendTitle(this.navtitle);
 		}
 	}
 </script>
@@ -152,5 +154,5 @@
 	.shopInfo,.shopPhoto{background:#fff;padding:10px 20px;}	
 	p{line-height:22px;font-size:14px;}
 	.shopPhoto img{display:block;width:58%;margin-top:10px;}
-	.shopInfo h1{line-height:26px; font-size:16px;}
+	.shopInfo h1{line-height:26px;}
 </style>

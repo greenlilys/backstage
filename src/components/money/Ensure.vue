@@ -58,6 +58,7 @@
 		name: '',
 		data(){
 			return {
+				navtitle:'资金>保证金',
 				platBonds: [],
 				currentPage:1,
 				total:0,
@@ -133,6 +134,7 @@
 		mounted(){
 		this.platBondStatistics();
 		this.platBondList(1);
+		this.$sendTitle(this.navtitle);
 		},
 		components: {
 			Dialogue

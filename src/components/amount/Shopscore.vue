@@ -65,6 +65,7 @@
 	export default{
 		data(){
 			return{
+				navtitle:'统计>网点业绩',
 				tableData: [],
 				tableDatas: {},
 				tablebegin:{},
@@ -94,6 +95,7 @@
 		},
 		mounted(){
 			this.serviceInfo();
+			this.$sendTitle(this.navtitle);
 	  },
 	  watch:{
 	  	valueTime(newVal,oldVal){

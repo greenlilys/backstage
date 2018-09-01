@@ -53,6 +53,7 @@
 	export default{
 		data(){
 			return{
+				navtitle:'统计>运营商业绩',
 				tableData: [],
 				tableDatas: {},
 				tablebegin:{},
@@ -88,6 +89,7 @@
 		},
 		mounted(){
 		this.serviceInfo(1);
+		this.$sendTitle(this.navtitle);
 	  	}
 	}
 </script>

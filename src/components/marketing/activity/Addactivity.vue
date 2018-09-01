@@ -33,7 +33,7 @@
 					</el-form-item>
 					<el-form-item>
 						<el-row>		
-							<el-button type="warning" class="btnStyle" @click="addActivity()">保存</el-button>
+							<el-button type="success" @click="addActivity()">保存</el-button>
 						</el-row>
 					</el-form-item>
 			    </el-col>
@@ -48,6 +48,7 @@
 	export default {
 		data() {
 			return {
+				navtitle:'营销>平台活动>添加活动',
                 options: [{
                 value: '1',
                 label: '充值天牛币送天牛币'
@@ -93,6 +94,9 @@
 					this.$router.push('/Main/Listactivity');
 				})
 			}   
+		},
+		mounted:function(){
+			this.$sendTitle(this.navtitle);
 		}
 	}
 </script>

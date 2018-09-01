@@ -53,6 +53,7 @@
 	export default{
 		data(){
 			return{
+				navtitle:'团购账号>团购项目>详情',
 				tabItem:['项目子帐号','支付记录'],
 	        	tabComponents:['Subaccount','Payrecord'],
 	        	current:'Subaccount',
@@ -70,6 +71,9 @@
 		components:{
 			Subaccount,
 			Payrecord
+		},
+		mounted:function(){
+			this.$sendTitle(this.navtitle);
 		}
 	}
 </script>

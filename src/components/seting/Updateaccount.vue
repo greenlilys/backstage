@@ -4,8 +4,8 @@
 		<div class="mainContent">
 		<el-row>
 			<el-form ref="form" :model="form" label-width="140px">
-			<el-col :span="11">	
-				<h2 class="fontYellow font-18 subTitle">基本信息</h2>
+			<el-col :span="9">				
+				<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">基本信息</div><span class="flex-con"></span></h5>
 					<el-form-item label="员工姓名：">
 						<el-input v-model="form.nickname"></el-input>
 					</el-form-item>
@@ -21,7 +21,8 @@
 					<el-form-item label="微信：">
 						<el-input v-model="form.wechat"></el-input>
 					</el-form-item>
-				    <h2 class="fontYellow font-18 subTitle">员工账号</h2>
+				    
+					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">员工账号</div><span class="flex-con"></span></h5>
 					<el-form-item label="员工账号：">
 						<el-input v-model="form.username" :disabled="true">
 							<el-button slot="append" @click="setCode">重设密码</el-button>	
@@ -35,15 +36,18 @@
 							</template>
 						</el-radio-group>
 					</el-form-item>	
-					<h2 class="fontYellow font-18 subTitle">员工权限</h2>
+					
+					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">员工权限</div><span class="flex-con"></span></h5>
 					<el-form-item>
 						<el-checkbox-group v-model="form.checkList">
-						    <el-checkbox v-for="item in form.resourceList" :checked="item.isChecks" :key="item.id">{{item.name}}</el-checkbox>
+						    <!-- <el-checkbox v-for="item in form.resourceList" :checked="item.isChecks" :key="item.id" class="check-lef">{{item.name}}</el-checkbox> -->
+							<el-checkbox v-for="item in form.resourceList" :checked="item.isChecks" :key="item.id" class="check-lef">{{item.name}}</el-checkbox>
+							<!-- <el-checkbox :label="item.id"  v-for="item in checkList" :key="item.value" class="check-lef">{{item.name}}</el-checkbox> -->
 						  </el-checkbox-group>
 					</el-form-item>		
 					<el-form-item>
 						<el-row>
-							<el-button type="warning" class="btnStyle" @click="submitForm()">保存</el-button>
+							<el-button type="success" @click="submitForm()">保存</el-button>
 						</el-row>
 					</el-form-item>
 			</el-col>
@@ -61,7 +65,7 @@
 				</el-form>
 				<div slot="footer" class="dialog-footer">
 					<el-button @click="dialogFormVisible = false">取 消</el-button>
-					<el-button type="primary" @click="updataPass">确 定</el-button>
+					<el-button type="success" @click="updataPass">确 定</el-button>
 				</div>
 			</el-dialog>
 	</div>
@@ -72,6 +76,7 @@
 	export default {
 		data() {
 			return {
+				navtitle:'设置>员工账号管理>管理',
 				formLabelWidth: '120px',
 				form: {
 				},
@@ -99,10 +104,9 @@
 						}else{
 							check[i].isChecks=false;
 						}
-						console.log("---------"+check[i].isChecks)
+						
 					}
-					this.form =check
-					console.log("---------"+check)			
+					this.form =check;							
 				})
             },
             StaffList(){    
@@ -148,7 +152,8 @@
 		},
 		mounted(){
 			this.StaffList();
-			this.getStaff(this.id);            
+			this.getStaff(this.id);     
+			this.$sendTitle(this.navtitle);       
 		}
 
 	}
@@ -159,4 +164,8 @@
 	.addBusiness .mainContent{background:#fff;padding:10px 20px 0;}
     /*输入框下间距样式重置*/
 	.el-form-item {	margin-bottom: 10px;}
+	.check-lef{
+		margin-left: 0 !important;
+		margin-right: 30px !important
+		}
 </style>

@@ -49,6 +49,7 @@
 	export default {
 		data() {
 			return {
+				navtitle:'运营商>运营商设置',
 				 tableData: []
 
 			};
@@ -90,6 +91,7 @@
 		},
 		mounted(){
 			this.getOperLevellist();
+			this.$sendTitle(this.navtitle);
 		},
 		components:{
 			Dialogue

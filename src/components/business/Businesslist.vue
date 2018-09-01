@@ -81,6 +81,7 @@
 	export default {
 		data() {
 			return {
+				navtitle:'运营商>运营商列表',
 				tableData: [],
 				radio1: '',
 				find: '',
@@ -178,6 +179,7 @@
 		},
 		mounted() {
 			this.getOperlist(); //初始化列表
+			this.$sendTitle(this.navtitle);
 		},
 		components: {
 			Dialogue

@@ -1,20 +1,21 @@
 
 import axios from 'axios'
-import { Message } from 'element-ui'
-import { Loading } from 'element-ui'
+import { Message,Loading } from 'element-ui'
 import qs from 'qs'
 import router from '../../router/index'
+import Vue from 'vue'
 // 全局配置对象
 export var GLOBALconfig = {};
 var serverconfig = {
   /*服务器后台地址*/
   // 'serviceIP': 'http://www.tianniu.net.cn/',
   /*测试服务器地址*/
-'serviceIP': 'http://192.168.0.102:8088/'  
+//'serviceIP': 'http://192.168.0.102:8080/'
+'serviceIP': 'http://192.168.0.220:8080/'  
 };
 // 接口请求地址、后缀
 var http_api = {
-agent: 'platform/'
+ agent: 'platform/'
 //agent:'longicorn-admin-platform/platform'
 };
 // 后端 接口请求地址
@@ -60,14 +61,13 @@ axios.interceptors.response.use(
 	  	console.log(res.data);	 
 	  	
 	  	if(res.data.code == 1007){
-	  		console.log("登录超时");
-	  		
-			Message({
-		  		type:'error',
-		  		message:res.data.code + res.data.message
-		  	})
-			router.replace({path:'/Sign'});
-  		return false;
+	  		console.log("登录超时");	  		
+				Message({
+			  		type:'error',
+			  		message:res.data.code + res.data.message
+			  	})
+				router.replace({path:'/Sign'});
+	  		return false;
   	}
   	if(res.data.code != 1){
   		console.log("返回状态不是1");
@@ -203,3 +203,11 @@ export function httpGet(url,params){
  * 输入金额正则验证
  */
   export let exp = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
+    
+  export let bus = new Vue();
+  
+  
+  export function sendTitle(str) {
+				this.$bus.$emit('getTitle', str);
+	}
+

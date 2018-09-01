@@ -43,9 +43,9 @@
 				<div v-for="(v,i) in tabItem" @click="changeItem(v,i)" v-bind:class="{actived : i == currentI}">{{v}}</div>
 			</div>
 			<div class="flex-con">
-				<!--<keep-alive>-->
+				<keep-alive>
 					<component v-bind:is="current" :id="id" :username="username" :levelid="levelid"></component>
-				<!--</keep-alive>-->
+				</keep-alive>
 			</div>
 			
 			
@@ -67,6 +67,7 @@
 	export default {
 		data() {
 			return {
+				navtitle:'运营商>运营商列表>详情',
 				tabItem: ['运营区域/网点', '服务定价', '分润记录', '信息管理', '运营设置'],
 				tabComponents: ['Developarea', 'Serviceprice', 'Recordprofits', 'Information', 'Operatorsetting'],
 				current: 'Developarea',
@@ -127,6 +128,7 @@
 		},
 		mounted() {
 			this.getOperdetail();
+			this.$sendTitle(this.navtitle);
 		},
 		components: {
 			Developarea,

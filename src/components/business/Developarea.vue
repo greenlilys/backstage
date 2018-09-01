@@ -48,7 +48,10 @@
 				</el-table-column>
 				<el-table-column prop="action" label="操作" width="" align="center">
 					<template slot-scope="scope">
-						<el-button type="warning" size="mini" class="btnStyle" @click="Shopdetail">详情</el-button>
+						<router-link :to="{path:'/Main/Shopdetail',query:{ id:scope.row.id}}">
+							<el-button type="warning" size="mini" class="btnStyle">详情</el-button>
+						</router-link>
+						
 					</template>
 				</el-table-column>
 			</el-table>
@@ -153,10 +156,8 @@
 					}
 					
 				})
-			},
-			Shopdetail() {
-				
 			}
+			
 		},
 		mounted(){
 			if(this.id){

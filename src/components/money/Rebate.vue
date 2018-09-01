@@ -19,6 +19,7 @@
 	export default {
       data(){
 			return {
+				navtitle:'资金>运营商返利结算',
 				tabItem:['运营商返利结算','结算记录'],
 	        	tabComponents:['Businessrebate','Rebaterecord'],
 	        	current:'Businessrebate',
@@ -31,7 +32,10 @@
 	      	this.current = this.tabComponents[i];
 	      }
 	     
-      },
+	  },
+	  mounted:function(){
+		  this.$sendTitle(this.navtitle);
+	  },
       components:{
       	Businessrebate,
       	Rebaterecord

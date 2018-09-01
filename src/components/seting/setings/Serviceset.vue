@@ -12,8 +12,8 @@
 		<div class="flex-con">
 			<el-form ref="form" :model="form" label-width="270px" class="hf flex-wrap flex-vertical">
 				<el-row class="mt-10 contentBox">
-					<el-col :span="10">
-						<el-form-item label="安装预约服务完成后返利：">
+					<el-col :span="9">					
+						<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">安装预约服务完成后返利</div><span class="flex-con"></span></h5>
 						</el-form-item>
 						<el-form-item label="月租返利（元）：">
 							<el-input v-model="form.installmonth" placeholder=""></el-input>
@@ -28,8 +28,8 @@
 				</el-row>
 
 				<el-row class="mt-10 contentBox">
-					<el-col :span="10">
-						<el-form-item label="网点服务返利：">
+					<el-col :span="9">					
+							<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">网点服务返利</div><span class="flex-con"></span></h5>
 						</el-form-item>
 						<el-form-item label="用户续租后网点返利（元）：">
 							<el-input v-model="form.shoprenew" placeholder=""></el-input>
@@ -47,8 +47,8 @@
 				</el-row>
 
 				<el-row class="mt-10 contentBox flex-con">
-					<el-col :span="10">
-						<el-form-item label="网点加盟保证金设置：">
+					<el-col :span="9">						
+							<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">网点加盟保证金设置</div><span class="flex-con"></span></h5>
 						</el-form-item>
 						<el-form-item label="加盟保证金（元/网点）：">
 							<el-input v-model="form.platbond" placeholder=""></el-input>

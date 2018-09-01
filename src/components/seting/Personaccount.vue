@@ -4,7 +4,7 @@
 			<el-row class="contentBox" type="flex" align="middle">
 				<el-col :span="6" :offset="18" class="tr">	
 					<router-link to='/Main/Creataccount'>
-						<el-button type="warning" size="small" class="btnStyle">+&nbsp;创建员工账号</el-button>	
+						<el-button type="success" size="small">+&nbsp;创建员工账号</el-button>	
 					</router-link>
 				</el-col>
 			</el-row>
@@ -53,6 +53,7 @@
 	export default {
 		data() {
 			return {
+				navtitle:'设置>员工账号管理',
 				tableData: [],
 				currentPage:1,
 				total:0,
@@ -115,6 +116,9 @@
 		},
 		method(){
 				this.getStaffList(1);
+		},
+		mounted:function(){
+			this.$sendTitle(this.navtitle);
 		},
 		created(){
 				this.getStaffList(1);

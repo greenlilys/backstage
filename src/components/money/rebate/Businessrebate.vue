@@ -8,7 +8,7 @@
 						</el-input>
 					</el-col>				
 			</el-row>
-			<div class="mainlist flex-con mt-10 bw contentBox">
+			<div class="pr flex-con">
 				<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
 					<el-table-column prop="no" label="运营商编号" width="" align="center">
 					</el-table-column>

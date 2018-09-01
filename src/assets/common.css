@@ -92,7 +92,7 @@ align-items: center;
 .fw6{font-weight:600;}
 .tc{text-align: center;}
 .tr{text-align: right;}
-.fonttitle{color:#FF6600;font-size:15px;}
+.fonttitle{color:#FF6600;font-size:14px;}
 .fonttitle span{display:inline-block;border-top:1px dotted #FF6600;}
 .mt-10{
 	margin-top:10px;
@@ -176,7 +176,10 @@ align-items: center;
 .tabCard .actived{background:#F29000;color:#fff;}
 
  /*小标题样式*/
- .subTitle{line-height: 30px;}
- 
+ .subTitle{line-height: 30px;} 
  .row {margin: 0;}
+ 
+ .el-radio,.el-radio+.el-radio{margin:0 20px 0 0;}
+
+
  

@@ -50,6 +50,7 @@
 	export default {
 		data() {
 			return {
+				navtitle:'营销>平台公告',
 				tableData: [],
 				currentPage:1,
 				total:0,
@@ -99,6 +100,9 @@
 		created(){
 			this.getProblormList(this.currentPage);
 		}, 
+		mounted:function(){
+			this.$sendTitle(this.navtitle);
+		},
 		components:{
     	Dialogue
         }

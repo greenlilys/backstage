@@ -33,6 +33,7 @@
 	export default {
       data() {
         return {
+			navtitle:'资金>钱包/天牛币记录-网点钱包',
         	tabItem:['网点钱包','用户钱包'],
         	tabComponents:['Shopmoney','Usermoney'],
         	current:'Shopmoney',
@@ -54,6 +55,7 @@
 		},
 	  mounted(){
 			this.renewStatist(this.begin,this.end);
+			this.$sendTitle(this.navtitle);
 	  },
 	  created(){	  	
 			this.begin = this.$route.query.begin;

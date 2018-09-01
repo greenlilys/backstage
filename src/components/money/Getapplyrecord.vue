@@ -67,6 +67,7 @@
 	export default {
       data(){
 			return {
+				navtitle:'资金>提现记录',
 				tableData: [],
 		        currentPage:1,
 				radios:'',
@@ -140,6 +141,7 @@
 	  },
 	  mounted(){
 		this.cashList();
+		this.$sendTitle(this.navtitle);
 	  },
       components:{
       

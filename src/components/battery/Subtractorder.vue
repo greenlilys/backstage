@@ -4,7 +4,7 @@
 		
 		<el-row class="row" type="flex" align="middle">
 			<el-col :span="7">
-				订单状态：
+				<span class="font-14">订单状态：</span>
 					 <el-radio-group v-model="radio" @change="handleRedio">
 						<el-radio  label="">全部</el-radio>
 						<el-radio  label="0">待处理</el-radio>
@@ -69,26 +69,26 @@
 			</div>
 		</div>
 		<el-dialog title="确认接受退货并进行退款？" :visible.sync="dialogFormVisibles" width="30%">
-				<div class="font-16 tl">
-					<span>确认后：</span>
+				<div class="font-14">
+					<div class="mb-10">确认后：</div>
 					<div>1.该订单中的退货数量从对应运营商配货数量中减少；</div>
 					<div>2.该订单中的退还金额从配货成本余额中扣除；</div>
-					<el-input v-model="paymentno" placeholder="请输入转账单号" clearable></el-input>
-					<span class="font-15 fontYellow">请在确定退货回收完成、完成退款后，再进行确认操作。</span>
+					<el-input v-model="paymentno" class="mt-10" placeholder="请输入转账单号" clearable></el-input>
+					<div class="fontYellow mt-10">请在确定退货回收完成、完成退款后，再进行确认操作。</div>
 				</div>
 				<div slot="footer" class="dialog-footer">
 					<el-button @click="dialogFormVisibles = false">取 消</el-button>
-					<el-button type="primary" @click="confirmIsuses">确 定</el-button>
+					<el-button type="success" @click="confirmIsuses">确 定</el-button>
 				</div>
 		</el-dialog>
 		<el-dialog title="确认不接受本订单退货？" :visible.sync="dialogFormVisible" width="30%">
-				<div class="font-16 tl">
-					<div align="center">确认后，该订单失效。</div>
-					<span class="font-15 fontYellow">若运营商的退货要求不符合平台要求，请进行确认操作。</span>
+				<div class="font-14">
+					<div class="mb-10">确认后，该订单失效。</div>
+					<div class="fontYellow">若运营商的退货要求不符合平台要求，请进行确认操作。</div>
 				</div>
 				<div slot="footer" class="dialog-footer">
 					<el-button @click="dialogFormVisible = false">取 消</el-button>
-					<el-button type="primary" @click="confirmIsuse">确 定</el-button>
+					<el-button type="success" @click="confirmIsuse">确 定</el-button>
 				</div>
 		</el-dialog>
 	</div>
@@ -99,6 +99,7 @@
 	export default {
       data(){
 			return {
+				navtitle:'产品>运营商减少配订单',
 				tableData: [],
 		        currentPage:1,
 				radio:'',
@@ -207,6 +208,7 @@
 	  },
 	  mounted(){
 		this.AddBattery(1,this.find,this.radio);
+		this.$sendTitle(this.navtitle);
 	  },
       components:{
 		  Dialogue

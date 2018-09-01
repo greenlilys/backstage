@@ -90,7 +90,7 @@
 				</el-form>
 				<div slot="footer" class="dialog-footer">
 					<el-button @click="dialogFormVisible = false">取 消</el-button>
-					<el-button type="primary" @click="confirmIsuse">确 定</el-button>
+					<el-button type="success" @click="confirmIsuse">确 定</el-button>
 				</div>
 			</el-dialog>
 	</div>
@@ -100,6 +100,7 @@
 	export default{
 		data(){
 			return {
+				navtitle:'资金>提现申请',
 				tableData: [],
 				currentPage:1,
 				total:0,
@@ -220,6 +221,7 @@
 		},
 		mounted(){
 		this.cashList(1,this.find,0);
+		this.$sendTitle(this.navtitle);
 		},
       	components:{
 			Dialogue
@@ -229,4 +231,8 @@
 
 <style scoped>
 	.mainlist{position:relative;}
+	/*.el-form-item{margin-bottom:10px;}*/
+	form.el-form div.el-form-item:nth-child(1),div.el-form-item:nth-child(2),div.el-form-item:nth-child(3),div.el-form-item:nth-child(4)
+	,div.el-form-item:nth-child(5),div.el-form-item:nth-child(6),div.el-form-item:nth-child(7){margin-bottom:0;}
+	
 </style>

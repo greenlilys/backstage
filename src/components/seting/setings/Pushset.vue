@@ -1,10 +1,9 @@
 <template>
 	<div class="helpset">
-			<el-form ref="form" :model="form" label-width="200px">
-				<el-row class="contentBox">
-					<el-col :span="10">
-							<el-form-item label="充值/扣款密码：">												
-							</el-form-item>
+			<el-form ref="form" :model="form" label-width="100px" class="hf flex-wrap flex-vertical">
+				<el-row class="contentBox flex-con">
+					<el-col :span="9">							
+							<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">充值/扣款密码</div><span class="flex-con"></span></h5>
 							<el-form-item label="设定密码：">
 								<el-input type="password" v-model="form.platformpass" placeholder=""></el-input>						
 							</el-form-item>	
@@ -74,5 +73,5 @@
 	}
 </script>
 <style scoped>
-
+	
 </style>

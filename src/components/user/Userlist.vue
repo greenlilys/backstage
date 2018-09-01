@@ -140,11 +140,11 @@
 </template>
 <script>
 	import Dialogue from '@/components/common/Dialogue'
-	
 	export default {
     name: '',
     data(){
       return{
+		  navtitle:'用户>用户列表',
           radio1:2,//押金查询
           radio2:2,//租期查询
           
@@ -341,7 +341,8 @@
     	
     },
     mounted (){
-    	this.getUserList(1,this.radio1,this.radio2,this.find)
+		this.getUserList(1,this.radio1,this.radio2,this.find);
+		this.$sendTitle(this.navtitle);
     },
     components:{
     	Dialogue

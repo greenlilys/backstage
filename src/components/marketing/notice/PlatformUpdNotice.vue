@@ -75,6 +75,7 @@
 	export default{
 		data(){
 			return{
+				navtitle:'营销>平台公告>修改',
                 dialogVisible: false,
                 dialogImageUrl: '',
                 fileList:[],
@@ -168,7 +169,8 @@
         },
         mounted() {
             this.actionAddress = this.$GLOBALconfig.agent_api + 'n/attach/uploadFile;';
-            this.problemDetails(this.id);
+			this.problemDetails(this.id);
+			this.$sendTitle(this.navtitle);
         },
         created(){	  	
           this.id = this.$route.query.id;          

@@ -8,134 +8,120 @@
 					</el-input>
 				</div>
 			</el-col>
-			
+
 		</el-row>
-		
-		<div class="pr bw mt-10 flex-con contentBox">					
-							<template>
-								<el-table :data="tableData" style="width: 100%;">
-								
-									<el-table-column prop="no" label="店铺名称" width="" align="center">
-									</el-table-column>
-									<el-table-column prop="username" label="店铺账号" width="" align="center">
-									</el-table-column>
-									<el-table-column prop="address" label="店铺地址" width="300" align="center">
-									</el-table-column>
-									<el-table-column prop="contactnameiphone" label="联系人" width="" align="center">
-									</el-table-column>
-									<el-table-column prop="addTime" label="申请加盟时间" width="" align="center">
-									</el-table-column>
-									<el-table-column prop="auditstatus" label="审核状态" width="" align="center">
-									</el-table-column>
-									<el-table-column prop="ispayfee" label="保证金支付状态" width="" align="center">
-									</el-table-column>
-									<el-table-column prop="action" label="操作" align="center">
-									    <template slot-scope="scope">
-												<router-link :to="{path:'/Main/Joindetail',query:{ id:scope.row.id}}" >
-									    		<el-button type="warning" size="mini" class="btnStyle">详情</el-button>
-									    	</router-link>
-											
-									    </template>
-									</el-table-column>
-								</el-table>
-							</template>
-							<template>
-								<div class="block page">							    
-							    <el-pagination
-							      @size-change="handleSizeChange"
-							      @current-change="handleCurrentChange"
-							      :current-page.sync="currentPage"
-							      :page-size="10"							    
-							      layout="total, prev, pager, next"
-							      :total="total"> 
-							    </el-pagination>
-							 	 </div>
-							</template>								
+
+		<div class="pr bw mt-10 flex-con contentBox">
+			<template>
+				<el-table :data="tableData" style="width: 100%;">
+
+					<el-table-column prop="no" label="店铺名称" width="" align="center">
+					</el-table-column>
+					<el-table-column prop="username" label="店铺账号" width="" align="center">
+					</el-table-column>
+					<el-table-column prop="address" label="店铺地址" width="300" align="center">
+					</el-table-column>
+					<el-table-column prop="contactnameiphone" label="联系人" width="" align="center">
+					</el-table-column>
+					<el-table-column prop="addTime" label="申请加盟时间" width="" align="center">
+					</el-table-column>
+					<el-table-column prop="auditstatus" label="审核状态" width="" align="center">
+					</el-table-column>
+					<el-table-column prop="ispayfee" label="保证金支付状态" width="" align="center">
+					</el-table-column>
+					<el-table-column prop="action" label="操作" align="center">
+						<template slot-scope="scope">
+							<router-link :to="{path:'/Main/Joindetail',query:{ id:scope.row.id}}">
+								<el-button type="warning" size="mini" class="btnStyle">详情</el-button>
+							</router-link>
+
+						</template>
+					</el-table-column>
+				</el-table>
+			</template>
+			<template>
+				<div class="block page">
+					<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage" :page-size="10" layout="total, prev, pager, next" :total="total">
+					</el-pagination>
+				</div>
+			</template>
 		</div>
 	</div>
 </template>
 
 <script>
 	export default {
-    name: '',
-    data(){
-      return{
-        nickName:'',
-		tableData: [],
-		currentPage:1,
-		total:0 
-      }
-    },
-    methods:{
-     	 handleSizeChange(val) {
-	        console.log(`每页 ${val} 条`);
-	      },
-	      handleCurrentChange(v) {
-	      	this.getShopApplyList(v,this.nickName)
-	      },
-	      getShopApplyList(pageNo,radio1,nickName){
-					var pageNo = pageNo || "";
-							nickName = nickName || "";
-		      this.$get('shop/applyShopList',{
-						pageNo:pageNo,
-						nickName:nickName
-					}).then(data=>{
+		name: '',
+		data() {
+			return {
+				navtitle:'网点>加盟申请',
+				nickName: '',
+				tableData: [],
+				currentPage: 1,
+				total: 0
+			}
+		},
+		methods: {
+			handleSizeChange(val) {
+				console.log(`每页 ${val} 条`);
+			},
+			handleCurrentChange(v) {
+				this.getShopApplyList(v, this.nickName)
+			},
+			getShopApplyList(pageNo, radio1, nickName) {
+				var pageNo = pageNo || "";
+				nickName = nickName || "";
+				this.$get('shop/applyShopList', {
+					pageNo: pageNo,
+					nickName: nickName
+				}).then(data => {
 					var arr = data.datas;
-	    		for(var i = 0,len=arr.length;i<len;i++){
-	    			//店铺地址
+					for(var i = 0, len = arr.length; i < len; i++) {
+						//店铺地址
 						arr[i].address = arr[i].provincename + arr[i].address;
 						//联系人
 						arr[i].contactnameiphone = arr[i].contactname + arr[i].contactcellphone;
-	
+
 						//审核状态
-	    			if(arr[i].auditstatus == 0){
-	    				arr[i].auditstatus = "等待审核"
-	    			}else if(arr[i].auditstatus == 1){
-	    				arr[i].auditstatus = "审核不通过"
-						}else{
+						if(arr[i].auditstatus == 0) {
+							arr[i].auditstatus = "等待审核"
+						} else if(arr[i].auditstatus == 1) {
+							arr[i].auditstatus = "审核不通过"
+						} else {
 							arr[i].auditstatus = "审核通过"
 						}
 						//支付状态
-	    			if(arr[i].ispayfee == 0){
-	    				arr[i].ispayfee = "未支付"
-						}else{
+						if(arr[i].ispayfee == 0) {
+							arr[i].ispayfee = "未支付"
+						} else {
 							arr[i].ispayfee = "已支付"
 						}
-						
-	    		}
-	    		this.tableData = arr;
-	    		this.total= Number(data.totalCount);
-	    		})
-	      },
-	      prevClick(v){
-					this.getShopApplyList(1,this.nickName)
-					this.currentPage = 1;
-	      },
-	      nextClick(v){	
-					this.getShopApplyList(1,this.nickName)
-					this.currentPage = 1;
-				},
-				search(v){	      	
-	      	this.getShopApplyList(this.currentPage,this.nickName)
-				}
-    },
-    ceeated(){
-    	
-    },
-    mounted(){
-    	this.getShopApplyList(1,this.nickName)
-    },
-    components:{
-    	
-    }
-  }
 
+					}
+					this.tableData = arr;
+					this.total = Number(data.totalCount);
+				})
+			},
+			prevClick(v) {
+				this.getShopApplyList(1, this.nickName)
+				this.currentPage = 1;
+			},
+			nextClick(v) {
+				this.getShopApplyList(1, this.nickName)
+				this.currentPage = 1;
+			},
+			search(v) {
+				this.getShopApplyList(this.currentPage, this.nickName)
+			}
+		},
+
+		mounted() {
+			this.getShopApplyList(1, this.nickName);
+			this.$sendTitle(this.navtitle);
+		}
+	}
 </script>
 
 <style scoped>
-		
-	
-	
-	
-	
+
 </style>

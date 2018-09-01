@@ -4,7 +4,7 @@
 			<el-row class="contentBox" type="flex" align="middle">
 				<el-col :span="6" :offset="18" class="tr">
 					<router-link to='/Main/Problorm'>
-						<el-button type="warning" size="small" class="btnStyle">+&nbsp;添加问题</el-button>	
+						<el-button type="success" size="small">+&nbsp;添加问题</el-button>	
 					</router-link>	
 				</el-col>
 			</el-row>
@@ -46,6 +46,7 @@
 	export default {
 		data() {
 			return {
+				navtitle:'设置>常见问题',
 				tableData: [],
 				currentPage:1,
 				total:0,
@@ -97,6 +98,9 @@
 		created(){
 			this.getProblormList(this.currentPage);
 		}, 
+		mounted:function(){
+			this.$sendTitle(this.navtitle);
+		},
 		components:{
     	Dialogue
         }

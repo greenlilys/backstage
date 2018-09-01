@@ -4,7 +4,7 @@
 		
 		<el-row class="row" type="flex" align="middle">
 			<el-col :span="7">
-				订单状态：
+					<span class="font-14">订单状态：</span>
 					 <el-radio-group v-model="radio" @change="handleRedio">
 						<el-radio  label="">全部</el-radio>
 						<el-radio  label="0">待配货</el-radio>
@@ -70,14 +70,15 @@
 		</div>
 		<el-dialog title="确认已完成配货？" :visible.sync="dialogFormVisible" width="30%">
 				<div class="font-16 tl">
-					<span>确认后：</span>
-					<div>1.该配货订单中的配货数量添加至对应运营商配货数量；</div>
-					<div>2.本配货订单中的配货金额添加至对应运营商配货成本余额；</div>
-					<span class="font-15 fontYellow">请在核对配货单据后，进行确认。</span>
+					<div class="font-14 mb-10">确认后：</div>
+					<div class="font-14">1.该配货订单中的配货数量添加至对应运营商配货数量；<br/>
+						2.本配货订单中的配货金额添加至对应运营商配货成本余额；
+					</div>					
+					<div class="font-14 mt-10 fontYellow">请在核对配货单据后，进行确认。</div>
 				</div>
 				<div slot="footer" class="dialog-footer">
 					<el-button @click="dialogFormVisible = false">取 消</el-button>
-					<el-button type="primary" @click="confirmIsuse">确 定</el-button>
+					<el-button type="success" @click="confirmIsuse">确 定</el-button>
 				</div>
 		</el-dialog>
 	</div>
@@ -88,6 +89,7 @@
 	export default {
       data(){
 			return {
+				navtitle:'产品>运营商增配订单',
 				tableData: [],
 		        currentPage:1,
 				radio:'',
@@ -179,6 +181,7 @@
 	  },
 	  mounted(){
 		this.AddBattery(1,this.find,this.radio);
+		this.$sendTitle(this.navtitle);
 	  },
       components:{
 		  Dialogue

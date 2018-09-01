@@ -1,10 +1,9 @@
 <template>
 	<div class="helpset">
-			<el-form ref="form" :model="form" label-width="200px">
+			<el-form ref="form" :model="form" label-width="174px"  class="hf flex-wrap flex-vertical">
 				<el-row class="contentBox">
-					<el-col :span="10">
-							<el-form-item label="救援价格：">												
-							</el-form-item>
+					<el-col :span="9">							
+							<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">救援价格</div><span class="flex-con"></span></h5>
 							<el-form-item label="救援起步价（含1公里）：">
 									<el-input v-model="form.prices" placeholder=""></el-input>					
 							</el-form-item>	
@@ -21,10 +20,9 @@
 							</el-form-item>	
 					</el-col>
 				</el-row>
-				<el-row class="mt-10 contentBox">
-					<el-col :span="10">
-							<el-form-item label="救援维修项：">									
-							</el-form-item>
+				<el-row class="mt-10 contentBox flex-con">
+					<el-col :span="9">							
+							<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">救援维修项</div><span class="flex-con"></span></h5>
 							<el-form-item label="">
 									<el-table :data="tableData" border style="width: 100%;">
 										<el-table-column label="救援类型" width="" align="center">
@@ -45,7 +43,7 @@
 									</el-table>
 							</el-form-item>				
 							<el-form-item label="">
-								<el-button type="warning"  size="small" @click="addRepair">+添加救援维修项</el-button>
+								<el-button type="success"  size="small" @click="addRepair">+添加救援维修项</el-button>
 								<el-button type="success" size="small" @click="editForm">保&nbsp;&nbsp;&nbsp;&nbsp;存</el-button>				
 							</el-form-item>	
 													

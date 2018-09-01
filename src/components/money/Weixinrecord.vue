@@ -18,6 +18,7 @@
 	export default {
       data(){
 			return {
+				navtitle:'资金>微信/支付宝记录',
 				tabItem:['微信支付记录','支付宝支付记录'],
 	        	tabComponents:['Weirecord','Zhirecord'],
 	        	current:'Weirecord',
@@ -30,7 +31,10 @@
 	      	this.current = this.tabComponents[i];
 	      }
 	     
-      },
+	  },
+	  mounted:function(){
+		  this.$sendTitle(this.navtitle);
+	  },
       components:{
       	Weirecord,
       	Zhirecord

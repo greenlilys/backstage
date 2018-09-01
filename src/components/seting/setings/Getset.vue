@@ -1,13 +1,9 @@
 <template>
 	<div>
-		
-	
-		
-			<el-form ref="form" :model="form" label-width="270px">
-			<el-row class="contentBox">
-				<el-col :span="10">
-						<el-form-item label="加盟网点钱包提现设定：">												
-						</el-form-item>
+			<el-form ref="form" :model="form" label-width="200px" class="hf flex-wrap flex-vertical">
+			<el-row class="contentBox" ref='smaDom'>
+				<el-col :span="9">					
+						<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">加盟网点钱包提现设定</div><span class="flex-con"></span></h5>
 						<el-form-item label="单笔最低提现额度（￥）：">
 							<el-input v-model="form.shopminamount" placeholder=""></el-input>						
 						</el-form-item>
@@ -19,10 +15,9 @@
 						</el-form-item>
 				</el-col>
 			</el-row>
-			<el-row class="mt-10 contentBox">
-				<el-col :span="10">
-						<el-form-item label="普通用户钱包提现设定：">												
-						</el-form-item>
+			<el-row class="mt-10 contentBox flex-con">
+				<el-col :span="9">						
+						<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">普通用户钱包提现设定</div><span class="flex-con"></span></h5>
 						<el-form-item label="单笔最低提现额度（￥）：">
 							<el-input v-model="form.cusminamount" placeholder=""></el-input>						
 						</el-form-item>
@@ -35,13 +30,9 @@
 						<el-form-item label="">
 						<el-button type="success" size="small" @click="submitForm()">保&nbsp;&nbsp;&nbsp;&nbsp;存</el-button>		
 						</el-form-item>	
-				
 				</el-col>
 			</el-row>
 			</el-form>
-		
-		
-		
 	</div>
 </template>
 
@@ -77,7 +68,7 @@
 	},
 	method(){
 		this.SettingMap();
-		},
+	},
 	created(){	  	
 		this.SettingMap();
 	}

@@ -64,6 +64,7 @@
 	export default {
 		data() {
 			return {
+				navtitle:'设置>产品管理',
 				tableData: [],
 				currentPage:1,
 				total:0,
@@ -153,6 +154,9 @@
 		},
 	  method(){
 				this.getBatteryList(1);
+		},
+		mounted:function(){
+			this.$sendTitle(this.navtitle);
 		},
 		created(){
 				this.getBatteryList(1);

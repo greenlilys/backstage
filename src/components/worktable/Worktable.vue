@@ -21,13 +21,11 @@
 	</div>
 </template>
 <script>
-	import Register from '@/components/workTable/Register'
-	import Install from '@/components/workTable/Install'
-	import Change from '@/components/workTable/Change'
-	import Cancel from '@/components/workTable/Cancel'
+
 	export default {
 		data() {
 			return {
+				navtitle:'工作台',
 				tabItem:['注册','安装','换电','退租'],
 				currentI:0,
 				buttonList:['本周','本月'],
@@ -62,13 +60,14 @@
 				}
 				this.$get('main/info',{
 				dataType:this.dataType,
-				timeType:this.timeType,
+				timeType:this.timeType				
 				}).then((data)=>{
-
 					this.registerNum  = data.registerToday;
 					this.installNum = data.today.installCount;
 					this.replaceNum = data.today.replaceCount;
 					this.retireNum = data.today.returnCount;
+					this.sendname(data.nickname);
+					
 					for(var key in data.foldlineDiagram){
 						var date = new Date(data.foldlineDiagram[key].dateValue);
 //						console.log((date.getMonth()+1) + "-" + date.getDate());
@@ -130,16 +129,18 @@
 					myChart.setOption(option)
 				})
 			},
+			sendname(nickname){
+				this.$bus.$emit('getname',nickname);
+			},
 			isActive(timeType){
 				this.buttonInx = timeType;
 				this.changeItem(this.currentI,this.buttonInx);
 			}
 		},
-		components: {
-			
-		},
+		
 		mounted() {
 			this.changeItem(0,0);
+			this.$sendTitle(this.navtitle);
 		}
 	}
 </script>
