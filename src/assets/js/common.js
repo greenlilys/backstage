@@ -11,7 +11,7 @@ var serverconfig = {
   // 'serviceIP': 'http://www.tianniu.net.cn/',
   /*测试服务器地址*/
 //'serviceIP': 'http://192.168.0.102:8080/'
-'serviceIP': 'http://192.168.0.220:8080/'  
+'serviceIP': 'http://192.168.0.110:8080/'  
 };
 // 接口请求地址、后缀
 var http_api = {
