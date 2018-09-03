@@ -12,7 +12,7 @@
 									<el-radio :label="item.id" :key="item.id">{{item.name}}</el-radio>
 								</template>
 							</el-radio-group>
-							<div v-if=" levelid.levelid != '' ">代理费用代理费用（￥）：{{form.agencyfee}}&nbsp;&nbsp;&nbsp;&nbsp;分润比例（%）：{{form.ratio}}</div>
+							<div v-if=" levelid.levelid != '' ">代理费用（￥）：{{form.agencyfee}}&nbsp;&nbsp;&nbsp;&nbsp;分润比例（%）：{{form.ratio}}</div>
 						</el-form-item>
 						<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">运营区域</div><span class="flex-con"></span></h5>
 						<el-form-item label="运营区域：">
