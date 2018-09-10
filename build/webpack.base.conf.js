@@ -15,6 +15,7 @@ module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
     app: './src/main.js'
+//  mains:'./src/mains.js'
   },
   output: {
     path: config.build.assetsRoot,

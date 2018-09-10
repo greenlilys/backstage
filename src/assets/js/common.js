@@ -9,18 +9,25 @@ export var GLOBALconfig = {};
 var serverconfig = {
   /*服务器后台地址*/
   // 'serviceIP': 'http://www.tianniu.net.cn/',
-  /*测试服务器地址*/
-//'serviceIP': 'http://192.168.0.102:8080/'
-'serviceIP': 'http://192.168.0.101:8088/'  
+  /*天牛平台测试服务器地址*/
+//'serviceIP': 'http://192.168.0.220:8080/'
+'serviceIP': 'http://192.168.0.105:8080/'
+//运营商后台测试服务器地址
+//'serviceIP': 'http://192.168.0.100:8088/'  
+
 };
 // 接口请求地址、后缀
 var http_api = {
- agent: 'platform/'
-//agent:'longicorn-admin-platform/platform'
+	//天牛平台虚拟目录
+   agent: 'platform/',
+ //运营商平台虚拟目录
+// agent: 'oper/'
+
 };
 // 后端 接口请求地址
 var url_api = {
-  agent: serverconfig.serviceIP + http_api.agent // 网点端 api
+	// 网点端 api
+  agent: serverconfig.serviceIP + http_api.agent 
 };
 // 暴露全局变量作用
 GLOBALconfig.agent_api = url_api.agent; //API 请求地址
@@ -34,22 +41,22 @@ axios.defaults.baseURL = GLOBALconfig.agent_api;
 var loadingInstance;
 axios.interceptors.request.use(
   config => { 
-  	loadingInstance = Loading.service({
-  		background:'rgba(0,0,0,0)'
-  	});
-
-	if(config.method == 'get'){
-		console.log(config.params);
-	}else{
-		console.log(config);
-	}
+	  	loadingInstance = Loading.service({
+	  		background:'rgba(0,0,0,0)'
+	  	});
+	
+			if(config.method == 'get'){
+				console.log(config.params);
+			}else{
+				console.log(config);
+			}
   	
-    return config;
+    	return config;
   },
   error => { 
-  	loadingInstance.close(); 
-  	Message.error({message: '加载超时'});
-    return Promise.reject(err);
+	  	loadingInstance.close(); 
+	  	Message.error({message: '加载超时'});
+	    return Promise.reject(err);
   }
 );
 
@@ -68,22 +75,20 @@ axios.interceptors.response.use(
 			  	})
 				router.replace({path:'/Sign'});
 	  		return false;
-  	}
-  	if(res.data.code != 1){
-  		console.log("返回状态不是1");
-			Message({
-		  		type:'error',
-		  		message:"错误："+res.data.code + "错误信息："+res.data.message
-		  	})
-  		return false;
-  	}  	
-  	
-    return res;
+	  	}
+	  	if(res.data.code != 1){
+	  		console.log("返回code不是1");
+				Message({
+			  		type:'error',
+			  		message:"错误："+res.data.code + "错误信息："+res.data.message
+			  	})
+	  		return false;
+	  	}
+	    return res;
   },
   error => { 
   	loadingInstance.close();
-		if(error && error.response){
-			
+		if(error && error.response){			
 					switch(error.response.status){
 					case 400:
 				  error.message = '400：请求错误'
@@ -210,4 +215,8 @@ export function httpGet(url,params){
   export function sendTitle(str) {
 				this.$bus.$emit('getTitle', str);
 	}
+  
+  
+
+
 

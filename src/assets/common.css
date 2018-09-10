@@ -74,6 +74,18 @@ align-items: center;
 .flex-justify-end{
 	justify-content: flex-end;
 }
+.fw6{font-weight:600;}
+.tc{text-align: center;}
+.tr{text-align: right;}
+.fonttitle{color:#FF6600;font-size:14px;}
+.fonttitle span{display:inline-block;border-top:1px dotted #FF6600;}
+.hf{height:100%;}
+.bw{background:#fff;}
+.boxborder{box-sizing: border-box;}
+.contentinside{padding:0 10px 10px;}
+.paddinglist{padding:10px 10px 70px;}
+.p-10{padding:10px;}
+.pb-0{padding-bottom:0;}
 .font-12{
 	font-size:12px;
 }
@@ -89,11 +101,7 @@ align-items: center;
 .font-20{
 	font-size:20px;
 }
-.fw6{font-weight:600;}
-.tc{text-align: center;}
-.tr{text-align: right;}
-.fonttitle{color:#FF6600;font-size:14px;}
-.fonttitle span{display:inline-block;border-top:1px dotted #FF6600;}
+
 .mt-10{
 	margin-top:10px;
 }
@@ -138,10 +146,11 @@ align-items: center;
 }
 
 
-.scro{overflow-y: scroll;}
+
 .btnStyle{background:#E48700;}
 .page{position:absolute;right:0;bottom:20px;}
 .pr{position:relative;}
+
 
 /*列表样式重置*/
 .el-table td{padding:6px 0;}
@@ -157,20 +166,8 @@ align-items: center;
 /*省市县选择器样式重置*/
 .distpicker-address-wrapper select{width:28%;}
 
-.outsideBox{background:#fff;height:100%;padding:10px;}
-
-.outsideBox2{background:#fff;padding:10px;}
-.headBox{background:#fff;padding:10px;}
-
-.outsideBox1{height:100%;}
-.hf{height:100%;}
-
-.bw{background:#fff;}
-.contentBox{padding:10px;background:#fff;box-sizing: border-box;}
-
-
 /*选项卡样式*/
-.conBottom{width:100%;padding:10px;background:#fff;position:relative;box-sizing: border-box;}
+.conBottom{width:100%;background:#fff;position:relative;box-sizing: border-box;}
 .tabCard{background:#fff;border-top:2px solid #FF9900;border-bottom:1px solid #EBF0F4;}
 .tabCard div{font-size:16px;line-height: 26px;padding:10px 20px;background:#fff;cursor: pointer;}
 .tabCard .actived{background:#F29000;color:#fff;}
