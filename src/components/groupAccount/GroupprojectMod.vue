@@ -280,7 +280,6 @@
 				this.$get('/battery/selectList',{putway:0}).then(data=>{
 					console.log(data)
 					that.options=data.datas;
-					that.form.batteryid=data.datas[0].id
 				})
 			},
 			sleectType(data){

@@ -3,7 +3,7 @@
 		<div class="flex-wrap flex-vertical hf">
 			<el-row  class="p-10 boxborder bw" type="flex" align="middle">
 				<el-col :span="6">
-					<el-input placeholder="请输入内容" v-model="find" class="input-with-select" clearable>
+					<el-input placeholder="请输入内容" v-model="find" class="input-with-select" clearable @keyup.enter.native='search'>
 						<el-button slot="append" icon="el-icon-search" @click="search">筛选</el-button>
 					</el-input>
 				</el-col>				
@@ -37,8 +37,7 @@
 				</template>
 				<template>
 					<div class="block page">							    
-					<el-pagination
-						@size-change="handleSizeChange"
+					<el-pagination					
 						@current-change="handleCurrentChange"
 						:current-page.sync="currentPage"
 						:page-size="10"							    
@@ -117,11 +116,8 @@
 	        	},
 			}
 		},
-		methods:{
-			handleSizeChange(val) {
-				console.log(`每页 ${val} 条`);
-			},
-			cellStyle({row, column, rowIndex, columnIndex}){
+		methods:{			
+			cellStyle({row, column, rowIndex, columnIndex}){//字体颜色
 			    if(columnIndex === 5){ //指定坐标
 			        return 'color:#FF6600'
 			    }else if(columnIndex === 7){
@@ -132,21 +128,19 @@
 			    	return ''
 			    }
 			},
-			handleCurrentChange(val) {
-				this.cashList(val);
+			handleCurrentChange(val) {//翻页
+				this.cashList({pageNo:val});
 			},
-			Shment(index,row){
+			Shment(index,row){//立刻处理
 				this.currentId=row.id;
 			 	this.cashInfo(this.currentId);
 				this.dialogFormVisible = true;
 			},
-			cashList(pageNo,find){
-				var pageNo = pageNo || "";
-				var find = this.find || "";
+			cashList({pageNo=1,no=this.find,result=0}={}){//提现申请列表				
 				this.$get('capital/cashList',{
 					pageNo: pageNo,
-					no: find,
-					result:0
+					no: no,
+					result:result
 				}).then(data=>{
 					var arr = data.datas;
 					for(var i = 0, len = arr.length; i < len; i++) {
@@ -175,10 +169,11 @@
 					this.total = Number(data.totalCount);
 				});
 			},
-			search(v) {
-			this.cashList(this.currentPage, this.find)
+			search(v) {//搜索
+				this.cashList();
+				this.currentPage=1;
 			},	
-			cashInfo(id){			
+			cashInfo(id){//提现处理信息			
 				this.$get('capital/cashInfo',{
 					id:this.currentId
 				}).then(data=>{
@@ -196,7 +191,6 @@
 						arr.usertype="加盟网点"
 					}
 					this.info=arr;
-
 				})
 			},
 			confirmIsuse() { //处理提现
@@ -212,7 +206,7 @@
 				}).then(data => {
 					this.dialogFormVisible = false;
 					this.$ye();
-					this.cashList(this.currentPage, this.find)
+					this.cashList();
 				})
 			},
 			canceluse() { //取消或者关闭
@@ -220,8 +214,8 @@
 			}
 		},
 		mounted(){
-		this.cashList(1,this.find,0);
-		this.$sendTitle(this.navtitle);
+			this.cashList();
+			this.$sendTitle(this.navtitle);
 		},
       	components:{
 			Dialogue

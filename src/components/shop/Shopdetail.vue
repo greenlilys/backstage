@@ -12,11 +12,11 @@
 					<div class="font-14">所属运营商：{{shopInfo.oname}}（{{shopInfo.ono}}）</div>
 				</div>
 				<div class=" flex-wrap flex-horizontal flex-align-center flex-justify-end baseRight font-14">
-					<div class="stage"><span>网点状态：</span><span>{{shopInfo.isonline == 1? "已下线" : "上线中"}}</span></div>
+					<div class="stage"><span>网点状态：</span><span>{{shopInfo.isonline == 1? "上线中" : "已下线"}}</span></div>
 					<el-button type="success" size="small" class="mr-10" @click="handles(shopInfo.isonline)" >{{shopInfo.isonline == 0 ? goonline : downline}}</el-button>
 					<router-link :to="{path:'/Main/ChangeShopInfo',query:{id:id}}">
 						<el-button type="success" size="small">查看/修改网点信息</el-button>
-					</router-link>
+					</router-link> 
 				</div>
 			</div>	
 			
@@ -29,9 +29,10 @@
 
 				</div>
 				<div class="tc ">
-					<h1 class="font-16 colorYellow">电池库存</h1>
-					<div class="font-14 mt-10"><span v-for="item in shopInfo.batteryList" :key="item.value">{{item.mode}}&nbsp;&nbsp;{{item.stocknum}}/{{item.distrinum}}&nbsp;&nbsp;&nbsp;</span></div>
-					
+					<h1 class="font-16 colorYellow">产品库存</h1>
+					<div class="font-14 mt-10"><div v-for="item in shopInfo.batteryList" :key="item.value" class="flex-wrap flex-horizontal flex-justify-between">
+						<span class="ml-20">{{item.mode}}</span> <span class="mr-20">{{item.stocknum}}/{{item.distrinum}}</span></div>
+					</div>					
 				</div>
 				<div class="tc">
 					<h1 class="font-16 colorYellow">配货成本</h1>

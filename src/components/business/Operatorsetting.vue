@@ -1,18 +1,17 @@
-
 <template>
 	<div class="operatorSetting">
 		<div class="mainContent">
-			<el-row>				
-					<el-col :span="9">						
-						<el-form ref="form" :model="form" label-width="110px">
+			<el-row>
+				<el-col :span="9">
+					<el-form ref="form" :model="form" label-width="110px">
 						<h5 class="fonttitle mb-10 flex-wrap flex-horizontal flex-align-center"><div class="pr-10">运营商级别</div><span class="flex-con"></span></h5>
 						<el-form-item label="运营商级别：">
-							<el-radio-group v-model="levelid.levelid" @change="handleRadio1">
+							<el-radio-group v-model="setLevelid" @change="handleRadio1">
 								<template v-for="item in operLevellist">
 									<el-radio :label="item.id" :key="item.id">{{item.name}}</el-radio>
 								</template>
 							</el-radio-group>
-							<div v-if=" levelid.levelid != '' ">代理费用（￥）：{{form.agencyfee}}&nbsp;&nbsp;&nbsp;&nbsp;分润比例（%）：{{form.ratio}}</div>
+							<div v-if=" setLevelid != '' ">代理费用（￥）：{{agencyfee}}&nbsp;&nbsp;&nbsp;&nbsp;分润比例（%）：{{ratio}}</div>
 						</el-form-item>
 						<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">运营区域</div><span class="flex-con"></span></h5>
 						<el-form-item label="运营区域：">
@@ -32,7 +31,6 @@
 									</el-input>
 								</el-col>
 							</el-row>
-
 						</el-form-item>
 
 						<el-form-item>
@@ -40,25 +38,25 @@
 								<el-button type="success" @click="submitForm">保存</el-button>
 							</el-row>
 						</el-form-item>
-						</el-form>
-					</el-col>
-				
+					</el-form>
+				</el-col>
+
 			</el-row>
 		</div>
 		<el-dialog title="重置密码" :visible.sync="dialogFormVisible" width="30%">
-			  <el-form :model="formword">
-			    <el-form-item label="密码：" :label-width="formLabelWidth">			    	
-			    	<el-input v-model="formword.oneword" placeholder="请输入内容" clearable></el-input>
-			    </el-form-item>
-			    <el-form-item label="确认密码：" :label-width="formLabelWidth">
-			     	<el-input v-model="formword.twoword" placeholder="请输入内容" clearable></el-input>
-			    </el-form-item>			 
-			  </el-form>
-			  <div slot="footer" class="dialog-footer">
-			    <el-button @click="dialogFormVisible = false">取 消</el-button>
-			    <el-button type="success" @click="confirmd">确 定</el-button>
-			  </div>
-			</el-dialog>
+			<el-form :model="formword">
+				<el-form-item label="密码：" :label-width="formLabelWidth">
+					<el-input v-model="formword.oneword" placeholder="请输入内容" clearable></el-input>
+				</el-form-item>
+				<el-form-item label="确认密码：" :label-width="formLabelWidth">
+					<el-input v-model="formword.twoword" placeholder="请输入内容" clearable></el-input>
+				</el-form-item>
+			</el-form>
+			<div slot="footer" class="dialog-footer">
+				<el-button @click="dialogFormVisible = false">取 消</el-button>
+				<el-button type="success" @click="confirmd">确 定</el-button>
+			</div>
+		</el-dialog>
 	</div>
 </template>
 
@@ -68,15 +66,19 @@
 	export default {
 		data() {
 			return {
-				form: {},				
-				formword: {
-					oneword: '',
-					twoword: ''
-				},				
+				form: {					
+				},
+				agencyfee:'',
+				ratio:"",
+				formword: {					
+					oneword:'',
+					twoword:''					
+				},
 				dynamicTags: [],
-				operLevellist: [],				
+				operLevellist: [],
 				dialogFormVisible: false,
-				formLabelWidth: '120px'			
+				formLabelWidth: '120px',
+				setLevelid:''
 			}
 
 		},
@@ -87,13 +89,12 @@
 
 			submitForm({
 				id = this.id,
-				levelid=this.levelid.levelid,
-				agencyfee=this.form.agencyfee
+				levelid = this.setLevelid,
+				agencyfee = this.agencyfee
 			} = {}) { //保存
-				
 				let dynamicTags = this.dynamicTags;
 				let region = [];
-				for(let i =0,len=dynamicTags.length;i<len;i++){
+				for(let i = 0, len = dynamicTags.length; i < len; i++) {
 					let obj = {};
 					let arr = dynamicTags[i].split('、');
 					obj.provincename = arr[0];
@@ -104,10 +105,10 @@
 				let regions = JSON.stringify(region);
 				console.log(regions)
 				this.$post('operRegion/update', {
-					id:id,
-					levelid:levelid,
-					agencyfee:agencyfee,
-					region:regions
+					id: id,
+					levelid: levelid,
+					agencyfee: agencyfee,
+					region: regions
 				}).then(data => {
 					this.$ye();
 				})
@@ -118,7 +119,7 @@
 					this.dynamicTags.push(tag);
 				}
 				console.log(data.province.value + ' 、 ' + data.city.value + ' 、 ' + data.area.value)
-			
+
 			},
 			getOperRegion({
 				id = this.id
@@ -134,29 +135,27 @@
 						arr.push(str);
 					}
 					this.dynamicTags = arr;
-
 				})
 			},
 			getOperLevel() { //获取运营商级别
 				this.$get('operLevel/getAll', {}).then(data => {
 					this.operLevellist = data;
 					if(data.length > 0) { //列表有数据						
-						this.handleRadio1(this.levelid.levelid);
-					} else{
-						this.levelid.levelid ='';
+						this.handleRadio1(this.setLevelid);//选中默认级别
+					} else {
+						this.setLevelid = '';
 					}
 				})
 			},
-			handleRadio1(v) { //选择运营商级别	根据当前id判断当前代理费用和分润
-				this.levelid.levelid = v;
-				let operLevellist = this.operLevellist;
-				for(let i = 0, len = operLevellist.length; i < len; i++) {
+			handleRadio1(v) { //选择运营商级别	根据当前id判断当前代理费用和分润							
+				var operLevellist = this.operLevellist;
+				for(var i = 0, len = operLevellist.length; i < len; i++) {
 					if(operLevellist[i].id == v) {
-						this.form.agencyfee = operLevellist[i].agencyfee;
-						this.form.ratio = operLevellist[i].ratio;
+						this.agencyfee = operLevellist[i].agencyfee;
+						this.ratio = operLevellist[i].ratio;
+						console.log(this.setLevelid, this.agencyfee,this.ratio)
 					}
 				}
-				console.log(this.levelid,this.form.agencyfee)
 			},
 			setpassword() { //重置密码
 				this.dialogFormVisible = true;
@@ -179,17 +178,15 @@
 					this.$ye('重置成功');
 				})
 			}
-
 		},
 		components: {
 			'v-distpicker': Distpicker
 		},
-		mounted: function() {			
-			this.curid = this.levelid;
+		mounted: function() {
+			this.setLevelid = this.levelid;
+			console.log(this.levelid)
 			this.getOperLevel();
 			this.getOperRegion();
-			console.log(this.levelid)
-
 		},
 		props: ['id', 'username','levelid']
 
@@ -197,21 +194,36 @@
 </script>
 
 <style scoped>
-	.el-form-item {	margin-bottom: 10px;}
-	.operatorSetting .mainContent{background:#fff;padding:10px 20px 0;}
+	.el-form-item {
+		margin-bottom: 10px;
+	}
 	
-  .button-new-tag { margin-left: 10px;
-    height: 32px;
-    line-height: 30px;
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-  .input-new-tag {
-    width: 90px;
-    margin-left: 10px;
-    vertical-align: bottom;
-  }
-  .el-tag { margin-right: 4px;} 
-  .el-radio,.el-radio+.el-radio{margin-left:0;padding:10px 0;}
-
+	.operatorSetting .mainContent {
+		background: #fff;
+		padding: 10px 20px 0;
+	}
+	
+	.button-new-tag {
+		margin-left: 10px;
+		height: 32px;
+		line-height: 30px;
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+	
+	.input-new-tag {
+		width: 90px;
+		margin-left: 10px;
+		vertical-align: bottom;
+	}
+	
+	.el-tag {
+		margin-right: 4px;
+	}
+	
+	.el-radio,
+	.el-radio+.el-radio {
+		margin-left: 0;
+		padding: 10px 0;
+	}
 </style>

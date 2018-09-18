@@ -6,7 +6,12 @@
 				</el-table-column>
 				<el-table-column prop="username" label="交租用户" width="" align="center">
 				</el-table-column>
-				<el-table-column prop="mode" label="租用电池类型" width="" align="center">
+				<el-table-column prop="mode" label="租用产品" width="" align="center">
+				</el-table-column>
+				<el-table-column prop="" label="产品信息" width="" align="center">
+					<template slot-scope="scope">
+						<div>{{scope.row.framenum}}&nbsp;&nbsp;{{scope.row.platenum}}</div>
+					</template>
 				</el-table-column>
 				<el-table-column prop="leaseterms" label="租期类型" width="" align="center">
 				</el-table-column>

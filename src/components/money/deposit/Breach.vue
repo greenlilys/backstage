@@ -4,7 +4,7 @@
 								<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
 									<el-table-column prop="username" label="用户账号" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="names" label="租用电池类型" width="" align="center">
+									<el-table-column prop="names" label="租用产品" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="adddate" label="违约时间" width="" align="center">
 									</el-table-column>
@@ -59,7 +59,11 @@
 			}).then(data=>{
 				var arr = data.datas;
 				for(var i = 0, len = arr.length; i < len; i++) {
-					arr[i].names=arr[i].name+"   "+arr[i].groupnum+"组"
+					if(arr[i].name){
+						arr[i].names=arr[i].name+" / "+arr[i].groupnum+"组"
+					}else{
+						arr[i].names="--"
+					}					
 					if(arr[i].type==0){
 						arr[i].types="逾期"
 					}else if(arr[i].type==1){

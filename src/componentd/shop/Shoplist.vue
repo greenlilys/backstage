@@ -15,50 +15,49 @@
 
 			<el-col :span="6">
 				<div>
-					<el-input placeholder="请输入内容" v-model="nickName" class="input-with-select" clearable>
+					<el-input placeholder="请输入内容" v-model="nickName" class="input-with-select" clearable @keyup.enter.native='search'>
 						<el-button slot="append" icon="el-icon-search" @click="search">搜索</el-button>
 					</el-input>
 				</div>
 			</el-col>
-
-			<el-col :span="6" :offset="6" style="text-align:right;">
+			
+			
+			<!--<el-col :span="6" :offset="6" style="text-align:right;">
 				<router-link to='/Main/Addshop'>
 					<el-button type="success" size="medium">+&nbsp;添加网点</el-button>
 				</router-link>
-				
-				
-			</el-col>
+			</el-col>-->
 		</el-row>
 		
 		<el-row class="flex-con bw pr paddinglist">
 				<el-col >			
 							<template>
 								<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="no" label="店铺编号" width="" align="center">
+									<el-table-column prop="no" label="店铺编号" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="name" label="店铺名称" width="130" align="center">
+									<el-table-column prop="name" label="店铺名称" width="130" align="left">
 									</el-table-column>
-									<el-table-column prop="username" label="店铺账号" width="160" align="center">
+									<el-table-column prop="username" label="店铺账号" width="160" align="left">
 									</el-table-column>
-									<el-table-column prop="statuss" label="账号状态" width="" align="center">
+									<el-table-column prop="statuss" label="账号状态" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="addresss" label="店铺地址" width="300" align="center">
+									<el-table-column prop="addresss" label="店铺地址" width="300" align="left">
 									</el-table-column>
-									<el-table-column prop="contactnameiphone" label="联系人"  width="170" align="center">
+									<el-table-column prop="contactnameiphone" label="联系人"  width="170" align="left">
 									</el-table-column>
-									<el-table-column prop="operatorNo" label="所属运营商" width="" align="center">
+									<el-table-column prop="operatorNo" label="所属运营商" width="" align="left">
 									</el-table-column>
 
-									<el-table-column label="库存/配货" width="120" align="center">
+									<el-table-column label="库存/配货" width="120" align="left">
 										<template slot-scope="scope">						
 											<div v-for="item in scope.row.batterysd">{{item}}</div>
 										</template>
 									</el-table-column>
-									<el-table-column prop="platbond" label="保证金" width="" align="center">
+									<el-table-column prop="platbond" label="保证金" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="isonlines" label="上线状态" width="" align="center">
+									<el-table-column prop="isonlines" label="上线状态" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="action" label="操作" width="250" align="center">
+									<el-table-column prop="action" label="操作" width="250" align="left">
 										<template slot-scope="scope">
 													<router-link :to="{path:'/Main/Shopdetail',query:{ id:scope.row.id}}">
 														<el-button type="warning" size="mini" class="btnStyle">详情</el-button>
@@ -89,7 +88,7 @@
 </template>
 <script>
 	
-import Dialogue from '@/components/common/Dialogue'
+import Dialogue from '@/componentd/common/Dialogue'
 
 export default {
 	name: '',
@@ -169,12 +168,8 @@ export default {
 			this.currentPage = 1;
 		},
 		search() {			
-			if(this.nickName){
-				this.getShopList();
-				this.currentPage = 1;
-			}else{
-				this.$fail('请输入搜索内容');
-			}			
+			this.getShopList();
+			this.currentPage = 1;			
 			
 		},
 		handle(index, row) { //禁用启用按钮	      	

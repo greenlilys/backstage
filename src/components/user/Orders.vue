@@ -88,6 +88,12 @@
 							case 2:
 							tableData[i].types = "退租"
 							break;
+							case 3:
+							tableData[i].types = "提车"
+							break;
+							case 4:
+							tableData[i].types = "退车"
+							break;
 							default:
 							tableData[i].types = "--"
 							

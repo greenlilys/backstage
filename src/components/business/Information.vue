@@ -63,6 +63,7 @@
 						  :on-remove="handleRemove"
 						  :onError="uploadError"
 						  :onSuccess="uploadSuccess"
+						  :limit='2'
 						  >
 						  <i class="el-icon-plus"></i>
 						</el-upload>
@@ -81,6 +82,7 @@
 						  :on-remove="handleRemove1"
 						  :onError="uploadError"
 						  :onSuccess="uploadSuccess1"
+						  :limit='1'
 						  >
 						  <i class="el-icon-plus"></i>
 						</el-upload>

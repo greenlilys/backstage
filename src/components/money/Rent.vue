@@ -12,11 +12,11 @@
 			</el-row>
 
 			<div class="p-10 boxborder bw mt-10">
-				<p class="tc font-18">租金收入总额</p>
-				<p class="tc font-20 fontYellow mt-10">
-					<span v-if="renew.amount!=null||renew.reamount!=null ">￥{{renew.amount-renew.reamount}}</span></p>
-				<p class="tc font-20 fontYellow mt-10">
-					<span v-if="renew.amount==null||renew.reamount==null ">￥0</span></p>
+				<p class="tc font-18 p-10">
+					租金收入总额
+					<span v-if="renew.amount!=null||renew.reamount!=null " class="fontYellow font-20">￥{{renew.amount-renew.reamount}}</span>
+					<span v-if="renew.amount==null||renew.reamount==null ">￥0</span>
+				</p>				
 			</div>
 
 			<div class="conBottom paddinglist boxborder mt-10 flex-con">

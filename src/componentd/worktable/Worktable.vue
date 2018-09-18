@@ -1,12 +1,12 @@
 <template>
 	<div>	
-		<div class="flex-wrap flex-vertical hf">
-		
+		<div class="flex-wrap flex-vertical hf">		
 			  	<ul class="tabItem flex-wrap flex-horizontal flex-justify-between">
-						<li class="flex-wrap flex-vertical  flex-align-center flex-con"><span>今日注册</span><span>{{registerNum}}</span></li>
+						<li class="flex-wrap flex-vertical  flex-align-center flex-con"><span>今日注册</span><span>{{registerNum}}</span></li>						
 						<li class="flex-wrap flex-vertical  flex-align-center flex-con"><span>今日安装</span><span>{{installNum}}</span></li>
 						<li class="flex-wrap flex-vertical  flex-align-center flex-con"><span>今日换电</span><span>{{replaceNum}}</span></li>
-						<li class="flex-wrap flex-vertical  flex-align-center flex-con"><span>今日退租</span><span>{{retireNum}}</span></li>					
+						<li class="flex-wrap flex-vertical  flex-align-center flex-con"><span>今日退租</span><span>{{retireNum}}</span></li>	
+						<li class="flex-wrap flex-vertical  flex-align-center flex-con"><span>今日租车</span><span>{{installTramCount}}</span></li>
 				</ul>	
 				<div class="p-10 boxborder bw mt-10">
 					<div class="tabCard clear">					
@@ -26,7 +26,7 @@
 		data() {
 			return {
 				navtitle:'工作台',
-				tabItem:['注册','安装','换电','退租'],
+				tabItem:['注册','安装','换电','退租','租车'],
 				currentI:0,
 				buttonList:['本周','本月'],
 				buttonInx:0,
@@ -35,10 +35,11 @@
 				installNum:0,
 				replaceNum:0,
 				retireNum:0,
+				installTramCount:0,
 				
 				dateValue:[],
 				foldLineValue:[],
-				dataType:0,//3：注册，0：安装，1：换电，2：退租
+				dataType:0,//4：注册，0：安装，1：换电，2：退租
 				timeType:0,//0：本周，1：本月
 			}
 		},
@@ -51,22 +52,25 @@
 				this.currentI = i;
 				this.timeType = j;
 				if (i == 0) {
-					this.dataType = 3;
+					this.dataType = 4;
 				}else if (i == 1) {
 					this.dataType = 0;
 				}else if (i == 2) {
 					this.dataType = 1;
-				}else{
+				}else if(i == 3){
 					this.dataType = 2;
+				}else{
+					this.dataType = 3;
 				}
 				this.$get('main/info',{
 					dataType:this.dataType,
-					timeType:this.timeType				
+					timeType:this.timeType			
 				}).then((data)=>{
 					this.registerNum  = data.registerToday;
 					this.installNum = data.today.installCount;
 					this.replaceNum = data.today.replaceCount;
 					this.retireNum = data.today.returnCount;
+					this.installTramCount = data.today.installTramCount;
 					this.sendname(data.nickname);
 					
 					for(var key in data.foldlineDiagram){
@@ -149,7 +153,7 @@
 
 .tabItem{width:100%;margin:0 auto;}
 .tabItem li{;height:120px;background:#fff;margin-right:10px;}
-.tabItem li:nth-child(4){margin-right:0;}
+.tabItem li:nth-child(5){margin-right:0;}
 .tabItem li span:nth-child(2){font-size:38px;color:#FF6600;margin-top:20px;}
 .tabItem li span:nth-child(1){	font-size:16px;	font-weight:bold;margin-top:10px;}
 .tabItem span{	display:block;}

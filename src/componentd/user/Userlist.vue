@@ -1,18 +1,17 @@
 <template>
 	<div class="flex-wrap flex-vertical">
 
-		<el-row type="flex" align="middle" class="
-				p-10 bw">
+		<el-row type="flex" align="middle" class="p-10 bw">
 			<el-col :span="6">
 				<div>
-					<el-input placeholder="请输入内容" v-model="find" class="input-with-select" clearable>
+					<el-input placeholder="请输入内容" v-model="find" class="input-with-select" clearable @keyup.enter.native='search'>
 						<el-button slot="append" icon="el-icon-search" @click="search">搜索</el-button>
 					</el-input>
 				</div>
 			</el-col>
 			<el-col :span="12" :offset="6" style="text-align:right;">
 				<!--<el-button type="success" size="medium" @click="editRent">修改租期</el-button>-->
-				<el-button type="success" size="medium" @click="sendMessage">群发短信</el-button>
+				<!--<el-button type="success" size="medium" @click="sendMessage">群发短信</el-button>-->
 			</el-col>
 		</el-row>
 
@@ -38,42 +37,45 @@
 					</el-radio-group>
 				</template>
 			</el-col>
-			<el-col :span="4" :offset="8" style="text-align:right;">
+			<!--<el-col :span="4" :offset="8" style="text-align:right;">
 				<el-button type="success" size="small" @click="downExcle">导出当前数据</el-button>
-			</el-col>
+			</el-col>-->
 		</el-row>
 
 		<el-row class="pr flex-con bw paddinglist">
 			<el-col>
 				<template>
 					<el-table :data="tableData" style="width: 100%;">
-						<el-table-column prop="username" label="用户账号" width="110" align="center">
+						<el-table-column prop="username" label="用户账号" width="" align="left">
 						</el-table-column>
-						<el-table-column prop="nicknames" label="用户昵称" width="" align="center">
+						<el-table-column prop="nicknames" label="用户昵称" width="" align="left">
 						</el-table-column>
-						<el-table-column prop="addTime" label="注册时间" width="140" align="center">
+						<el-table-column prop="addTime" label="注册时间" width="" align="left">
 						</el-table-column>
-						<el-table-column prop="address" label="所在区域" width="200" align="center">
+						<el-table-column prop="address" label="所在区域" width="" align="left">
 						</el-table-column>
-						<el-table-column prop="isdeposits" label="押金状态" width="" align="center">
+						<el-table-column prop="isdeposits" label="押金状态" width="" align="left">
 						</el-table-column>
-						<el-table-column prop="deposit" label="押金金额" width="" align="center">
+						<el-table-column prop="deposit" label="押金金额" width="" align="left">
 						</el-table-column>
-						<el-table-column prop="modes" label="电池型号" width="" align="center">
+						<el-table-column prop="modes" label="租用产品" width="" align="left">
 						</el-table-column>
-						<el-table-column prop="isinstalls" label="安装状态" width="" align="center">
+						<el-table-column prop="isinstalls" label="租用状态" width="" align="left">
 						</el-table-column>
-						<el-table-column prop="rentstates" label="租期状态" width="" align="center">
+						<el-table-column prop="rentstates" label="租期状态" width="" align="left">
 						</el-table-column>
-						<el-table-column prop="rent" label="租期" width="180" align="center">
+						<el-table-column  label="租期" width="" align="left">
+							<template slot-scope="scope">
+								<div v-for="value in scope.row.rent">{{value}}</div>
+							</template>
 						</el-table-column>
-						<el-table-column prop="wallet" label="钱包余额" width="" align="center">
+						<el-table-column prop="wallet" label="钱包余额" width="" align="left">
 						</el-table-column>
-						<el-table-column prop="integral" label="天牛币余额" width="100" align="center">
+						<el-table-column prop="integral" label="天牛币余额" width="" align="left">
 						</el-table-column>
-						<el-table-column prop="statusd" label="账户状态" width="" align="center">
+						<el-table-column prop="statusd" label="账户状态" width="" align="left">
 						</el-table-column>
-						<el-table-column prop="" label="操作" width="150" align="center">
+						<el-table-column prop="" label="操作" width="" align="left">
 							<template slot-scope="scope">
 								<router-link :to="{path:'/Main/Userdetail',query:{id:scope.row.id,isdeposit:scope.row.isdeposit}}">
 									<el-button type="warning" size="mini" class="btnStyle">详情</el-button>
@@ -112,7 +114,7 @@
 			  </div>
 			</el-dialog>-->
 
-		<el-dialog title="群发短信" :visible.sync="dialogFormVisible1" width="30%">
+		<!--<el-dialog title="群发短信" :visible.sync="dialogFormVisible1" width="30%">
 			<el-form :model="form1">
 				<el-form-item label="密码：" :label-width="formLabelWidth">
 					<el-input v-model="password" type="password" placeholder="请输入充值金额" clearable @change="RechargePassword"></el-input>
@@ -125,13 +127,13 @@
 				<el-button @click="dialogFormVisible1 = false">取 消</el-button>
 				<el-button type="success" @click="confirmSend" :disabled='isuse'>确 定</el-button>
 			</div>
-		</el-dialog>
+		</el-dialog>-->
 		<Dialogue :textContent="textContent" :dialogVisible="dialogVisible" v-on:confirm="confirmIsuse" v-on:cancel="canceluse"></Dialogue>
 
 	</div>
 </template>
 <script>
-	import Dialogue from '@/components/common/Dialogue'
+	import Dialogue from '@/componentd/common/Dialogue'
 	export default {
 		name: '',
 		data() {
@@ -151,7 +153,7 @@
 					rentDay: '', //租期变化天数
 					remark: ''
 				},
-				dialogFormVisible1: false,
+//				dialogFormVisible1: false,
 				form1: {
 					messageId: '' //短信模板ID        
 				},
@@ -167,13 +169,13 @@
 			}
 		},
 		methods: {
-			downExcle(){
-				 let url = this.$GLOBALconfig.agent_api + 'customer/cusListExcel';				 
-				 let iframe = document.createElement('iframe');
-				  iframe.style.display = 'none';
-				  iframe.src = url;				 
-				  document.body.appendChild(iframe);
-			},
+//			downExcle(){
+//				 let url = this.$GLOBALconfig.agent_api + 'customer/cusListExcel';				 
+//				 let iframe = document.createElement('iframe');
+//				  iframe.style.display = 'none';
+//				  iframe.src = url;				 
+//				  document.body.appendChild(iframe);
+//			},
 			handleCurrentChange(v) { //currentPage 改变时会触发
 				this.getUserList({
 					pageNo: v
@@ -198,8 +200,9 @@
 						} else {
 							arr[i].address = arr[i].provincename + arr[i].cityname + arr[i].countyname;
 						}
-
-						arr[i].rent = arr[i].begindate + "至" + arr[i].duedate;
+						arr[i].rent =[];
+						arr[i].rent[0] = arr[i].begindate ;
+						arr[i].rent[1]=arr[i].duedate;
 						if(arr[i].isdeposit == 0) {
 							arr[i].isdeposits = "未缴纳"
 						} else {
@@ -208,9 +211,17 @@
 
 						if(arr[i].isdeposit == 1) { //如果缴纳押金
 							if(arr[i].isinstall == 0) {
-								arr[i].isinstalls = "已安装"
+								if(arr[i].batteryid == 8){
+									arr[i].isinstalls = "已提车"
+								}else{
+									arr[i].isinstalls = "已安装"
+								}								
 							} else {
-								arr[i].isinstalls = "未安装"
+								if(arr[i].batteryid == 8){
+									arr[i].isinstalls = "未提车"
+								}else{
+									arr[i].isinstalls = "未安装"
+								}								
 							}
 						} else {
 							arr[i].isinstalls = "--"
@@ -273,33 +284,29 @@
 				this.currentPage = 1;
 			},
 			search() {
-				if(this.find) {
-					this.getUserList()
-					this.currentPage = 1;
-				} else {
-					this.$fail('请输入搜索内容')
-				}
+				this.getUserList()
+				this.currentPage = 1;
 
 			},
 
-			sendMessage() { //群发短信按钮
-				this.dialogFormVisible1 = true;
-			},
-			confirmSend() { //确定群发短信
-				var radio1 = this.radio1 == 2 ? "" : this.radio1;
-				var radio2 = this.radio2 == 2 ? "" : this.radio2;
-
-				this.$get('customer/smsNotification', {
-					moid: this.form1.messageId,
-					isdeposit: radio1,
-					isoverdue: radio2,
-					nickName: this.find
-				}).then(data => {
-					this.dialogFormVisible1 = false;
-					this.$ye();
-				})
-
-			},
+//			sendMessage() { 
+//				this.dialogFormVisible1 = true;
+//			},
+//			confirmSend() { 
+//				var radio1 = this.radio1 == 2 ? "" : this.radio1;
+//				var radio2 = this.radio2 == 2 ? "" : this.radio2;
+//
+//				this.$get('customer/smsNotification', {
+//					moid: this.form1.messageId,
+//					isdeposit: radio1,
+//					isoverdue: radio2,
+//					nickName: this.find
+//				}).then(data => {
+//					this.dialogFormVisible1 = false;
+//					this.$ye();
+//				})
+//
+//			},
 			handleDelete(index, row) { //禁用启用按钮	      	
 				this.currentStatus = row.status;
 				this.currentId = row.id;

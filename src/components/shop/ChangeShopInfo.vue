@@ -60,14 +60,14 @@
 						</el-radio-group>
 					</el-form-item>
 					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">店铺配货</div><span class="flex-con"></span></h5>
-					<el-form-item label="配货数量：">	
+					<el-form-item label="">	
 								<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="name" label="电池套餐名称" align="center">
+									<!--<el-table-column prop="name" label="电池套餐名称" align="center">
+									</el-table-column>-->
+									<el-table-column prop="mode" label="产品" align="center">
 									</el-table-column>
-									<el-table-column prop="mode" label="电池型号" align="center">
-									</el-table-column>
-									<el-table-column prop="groupnum" label="套餐电池数量" align="center">
-									</el-table-column>
+									<!--<el-table-column prop="groupnum" label="套餐电池数量" align="center">
+									</el-table-column>-->
 									<el-table-column prop="distrinum" label="配货数量" align="center">
 									</el-table-column>									
 								</el-table>							

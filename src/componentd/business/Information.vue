@@ -63,6 +63,7 @@
 						  :on-remove="handleRemove"
 						  :onError="uploadError"
 						  :onSuccess="uploadSuccess"
+
 						  >
 						  <i class="el-icon-plus"></i>
 						</el-upload>

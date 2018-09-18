@@ -2,15 +2,15 @@
 	<div>					
 							<template>
 								<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
-									<el-table-column prop="addtime" label="钱包充值时间" width="160" align="center">
+									<el-table-column prop="addtime" label="钱包充值时间" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="amounts" label="充值金额" width="" align="center">
+									<el-table-column prop="amounts" label="充值金额" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="balances" label="钱包金额" align="center">
+									<el-table-column prop="balances" label="钱包金额" align="left">
 									</el-table-column>
-									<el-table-column prop="remark" label="充值说明" align="center">
+									<el-table-column prop="remark" label="充值说明" align="left">
 									</el-table-column>								
-									<el-table-column prop="nickname" label="经办人" align="center">
+									<el-table-column prop="nickname" label="经办人" align="left">
 									</el-table-column>	
 								</el-table>
 							</template>

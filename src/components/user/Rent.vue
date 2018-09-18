@@ -4,6 +4,8 @@
 								<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
 									<el-table-column prop="addTime" label="起租/续租时间" width="" align="center">
 									</el-table-column>
+									<el-table-column prop="mode" label="租用产品" width="" align="center">
+									</el-table-column>
 									<el-table-column prop="leaseterms" label="租期类型" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="amounts" label="租金" width="" align="center">
@@ -46,7 +48,7 @@
 		        console.log(`每页 ${val} 条`);
 			},
 			cellStyle({row, column, rowIndex, columnIndex}){
-					if(columnIndex === 2){ //指定坐标
+					if(columnIndex === 3){ //指定坐标
 						return 'color:#FF6600'
 					}else{
 						return ''

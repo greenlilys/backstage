@@ -15,7 +15,7 @@
 
 			<el-col :span="6">
 				<div>
-					<el-input placeholder="请输入内容" v-model="nickName" class="input-with-select" clearable>
+					<el-input placeholder="请输入内容" v-model="nickName" class="input-with-select" clearable @keyup.enter.native='search'>
 						<el-button slot="append" icon="el-icon-search" @click="search">搜索</el-button>
 					</el-input>
 				</div>
@@ -25,8 +25,6 @@
 				<router-link to='/Main/Addshop'>
 					<el-button type="success" size="medium">+&nbsp;添加网点</el-button>
 				</router-link>
-				
-				
 			</el-col>
 		</el-row>
 		
@@ -169,12 +167,8 @@ export default {
 			this.currentPage = 1;
 		},
 		search() {			
-			if(this.nickName){
-				this.getShopList();
-				this.currentPage = 1;
-			}else{
-				this.$fail('请输入搜索内容');
-			}			
+			this.getShopList();
+			this.currentPage = 1;		
 			
 		},
 		handle(index, row) { //禁用启用按钮	      	

@@ -13,7 +13,7 @@
 				</template>
 			</el-col>
 				<el-col :span="6">
-					<el-input placeholder="请输入内容" v-model="find" class="input-with-select" clearable>
+					<el-input placeholder="请输入内容" v-model="find" class="input-with-select" clearable @keyup.enter.native='search'>
 						<el-button slot="append" icon="el-icon-search" @click="search">筛选</el-button>
 					</el-input>
 				</el-col>				

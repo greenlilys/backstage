@@ -1,11 +1,10 @@
 
 <template>
-	<div class="addBusiness">
-		<div class="mainContent">		
+	<div>
+		<div class="hf bw p-10 boxborder">		
 		<el-row>
 			<el-form ref="form" :model="form" label-width="140px">
-			<el-col :span="11">	
-				<!-- <h2 class="fontYellow font-18 subTitle">商品标签</h2> -->
+			<el-col :span="11">				
 				<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">商品标签</div><span class="flex-con"></span></h5>
 					<el-form-item label="套餐名称：">
 						<el-input v-model="form.name"></el-input>
@@ -30,8 +29,7 @@
 						  placeholder="请输入内容"
 						  v-model="form.brief">
 						</el-input>
-					</el-form-item>
-					<!-- <h2 class="fontYellow font-18 subTitle">电池价格</h2> -->
+					</el-form-item>					
 					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">电池价格</div><span class="flex-con"></span></h5>
 					<el-form-item label="配货成本（￥）：">
 						<el-input v-model="form.pickcost"></el-input>
@@ -41,13 +39,11 @@
 					</el-form-item>
 					<el-form-item label="市场售价（￥）：">
 						<el-input v-model="form.marketprice"></el-input>
-					</el-form-item>
-					<!-- <h2 class="fontYellow font-18 subTitle">换电费</h2> -->
+					</el-form-item>				
 					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">换电费</div><span class="flex-con"></span></h5>
 					<el-form-item label="换电费（￥）/次：">
 						<el-input v-model="form.powerrate"></el-input>
-					</el-form-item>
-					<!-- <h2 class="fontYellow font-18 subTitle">租金价格</h2> -->
+					</el-form-item>					
 					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">租金价格</div><span class="flex-con"></span></h5>
 					<el-form-item label="月租（￥）：">
 						<el-input v-model="form.monthrent"></el-input>
@@ -57,8 +53,7 @@
 					</el-form-item>	
 					<el-form-item label="年租（￥）：">
 						<el-input v-model="form.annualrent"></el-input>
-					</el-form-item>	
-					<!-- <h2 class="fontYellow font-18 subTitle">上架状态</h2> -->
+					</el-form-item>						
 					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">上架状态</div><span class="flex-con"></span></h5>
 					<el-form-item label="上架状态：">
                         <template>
@@ -137,8 +132,7 @@
 </script>
 
 <style scoped>	
-	.itemTitle{font-size:18px;line-height: 26px;background:}
-	.addBusiness .mainContent{background:#fff;padding:10px 20px 0;}
+	
     /*输入框下间距样式重置*/
 	.el-form-item {	margin-bottom: 10px;}
 </style>

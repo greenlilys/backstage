@@ -2,21 +2,20 @@
 	<div>
 		<template>
 								<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
-									<el-table-column prop="addtime" label="钱包变动时间" width="" align="center">
+									<el-table-column prop="addtime" label="钱包变动时间" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="categorys" label="变动类型" width="" align="center">
+									<el-table-column prop="categorys" label="变动类型" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="amounts" label="金额（元）" width="" align="center">
+									<el-table-column prop="amounts" label="金额（元）" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="balances" label="钱包余额（元）" width="" align="center">
+									<el-table-column prop="balances" label="钱包余额（元）" width="" align="left">
 									</el-table-column>
 									
 								</el-table>
 							</template>
 							<template>
 								<div class="block page">							    
-							    <el-pagination
-							      @size-change="handleSizeChange"
+							    <el-pagination							   
 							      @current-change="handleCurrentChange"
 							      :current-page.sync="currentPage1"
 							      :page-size="10"							    
@@ -38,9 +37,7 @@
 			}
 		},
 		methods:{
-			 handleSizeChange(val) {
-	        console.log(`每页 ${val} 条`);
-		  },
+			
 		  cellStyle({row, column, rowIndex, columnIndex}){
 					if(columnIndex === 2){ //指定坐标
 						return 'color:#FF6600'

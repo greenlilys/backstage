@@ -16,7 +16,7 @@
 
 			<el-col :span="8" :offset="10">
 				<div>
-					<el-input placeholder="请输入内容" v-model="find" class="input-with-select">
+					<el-input placeholder="请输入内容" v-model="find" class="input-with-select" @keyup.enter.native='searcShop'>
 						<el-button slot="append" icon="el-icon-search" @click="searcShop">搜索</el-button>
 					</el-input>
 				</div>
@@ -95,12 +95,8 @@
 				this.getoperAdmin();
 			},
 			searcShop(){
-				if(this.find){
-					this.getoperAdmin();
-					this.currentPage = 1;
-				}else{
-					this.$fail('请输入搜索内容')
-				}
+				this.getoperAdmin();
+				this.currentPage = 1;
 				
 			},
 			getoperRegion() {//运营区域

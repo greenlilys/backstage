@@ -16,7 +16,7 @@
 
 			<el-col :span="6">
 				<div>
-					<el-input placeholder="请输入内容" v-model="find" clearable  @clear='clear' class="input-with-select">
+					<el-input placeholder="请输入内容" v-model="find" clearable  @clear='clear' class="input-with-select"  @keyup.enter.native='screen'>
 						<el-button slot="append" icon="el-icon-search" @click='screen'>筛选</el-button>
 					</el-input>
 				</div>

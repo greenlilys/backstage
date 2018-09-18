@@ -2,16 +2,18 @@
 	<div >
 		<div class="shopList flex-wrap flex-vertical">		
 			<el-row class="row" type="flex" align="middle">
-				<el-col :span="8">
+				<el-col :span="11">
 					<span class="font-14">预约类型：</span>				
 						 <el-radio-group v-model="radio1" @change="handleChange">
 						 	<el-radio  label="">全部</el-radio>
 							<el-radio  label="0">安装预约</el-radio>
 							<el-radio  label="1">换电预约</el-radio>
 							<el-radio  label="2">退电预约</el-radio>
+							<el-radio  label="3">提车预约</el-radio>
+							<el-radio  label="4">退车预约</el-radio>
 						</el-radio-group>				
 				</el-col>
-				<el-col :span="6">	
+				<el-col :span="5">	
 					<span class="font-14">预约状态：</span>
 					<el-radio-group v-model="radio2" @change="handleChange1">
 						<el-radio  label="">全部</el-radio>
@@ -19,9 +21,9 @@
 						<el-radio  label="3">已取消</el-radio>
 					</el-radio-group>
 				</el-col>
-				<el-col :span="6" :offset="5">
+				<el-col :span="6" :offset="3">
 					<div>
-						<el-input placeholder="请输入内容" v-model="find" class="input-with-select" clearable>
+						<el-input placeholder="请输入内容" v-model="find" class="input-with-select" clearable @keyup.enter.native='search'>
 							<el-button slot="append" icon="el-icon-search" @click="search">筛选</el-button>
 						</el-input>
 					</div>
@@ -30,25 +32,25 @@
 		<div class="listDetail mt-10 flex-con">					
 							<template>
 								<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
-									<el-table-column prop="no" label="预约编号" width="" align="center">
+									<el-table-column prop="no" label="预约编号" width="" align="left">
 									</el-table-column>									
-									<el-table-column prop="types" label="预约类型" width="" align="center">
+									<el-table-column prop="types" label="预约类型" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="username" label="预约用户" width="" align="center">
+									<el-table-column prop="username" label="预约用户" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="paymodes" label="支付方式" width="" align="center">
+									<el-table-column prop="paymodes" label="支付方式" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="costs" label="支付金额（积分）" width="" align="center">
+									<el-table-column prop="costs" label="支付金额（积分）" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="states" label="预约状态" width="" align="center">
+									<el-table-column prop="states" label="预约状态" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="finishtime" label="完成/撤销时间" width="" align="center">
+									<el-table-column prop="finishtime" label="完成/撤销时间" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="shopno" label="网点编号" width="" align="center">
+									<el-table-column prop="shopno" label="网点编号" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="name" label="网点名称" width="" align="center">
+									<el-table-column prop="name" label="网点名称" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="" label="操作" align="center">
+									<el-table-column prop="" label="操作" align="left">
 									    <template slot-scope="scope">
 									    	<router-link :to="{path:'/Main/Meetdetail',query:{id:scope.row.id}}">
 												<el-button type="warning" class="btnStyle" size="mini">详情</el-button>
@@ -122,13 +124,19 @@
 					for(var i = 0,len=tableData.length;i<len;i++){
 						switch(tableData[i].type){
 							case 0:
-							tableData[i].types = "安装"
+							tableData[i].types = "安装预约"
 							break;
 							case 1:
-							tableData[i].types = "更换"
+							tableData[i].types = "更换预约"
 							break;
 							case 2:
-							tableData[i].types = "退租"
+							tableData[i].types = "退租预约"
+							break;
+							case 3:
+							tableData[i].types = "提车预约"
+							break;
+							case 4:
+							tableData[i].types = "退车预约"
 							break;
 							default:
 							tableData[i].types = "--"
@@ -190,12 +198,8 @@
 				})
 			},
 			search(){
-				if(this.find){
-					this.getSelectList(this.find,this.radio1,this.radio2,1);
-					this.currentPage = 1;
-				}else{
-					this.$fail('请输入搜索内容')
-				}
+				this.getSelectList(this.find,this.radio1,this.radio2,1);
+				this.currentPage = 1;
 				
 			}
 

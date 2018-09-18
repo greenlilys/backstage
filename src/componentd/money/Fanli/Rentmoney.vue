@@ -2,7 +2,7 @@
 	<div>
 			<template>
 			<el-table :data="tableData" style="width: 100%;">
-				<el-table-column prop="begintime" label="租金开始时间" width="" align="center">
+				<el-table-column prop="begintime" label="租金开始时间" width="" align="left">
 				</el-table-column>
 				<el-table-column prop="mode" label="租用产品" align="center">
 				</el-table-column>
@@ -13,19 +13,19 @@
 							<div v-if=" scope.row.leaseterm == '2' ">年租</div>
 					</template>
 				</el-table-column>				
-				<el-table-column prop="shopNo" label="服务网点" width="" align="center">
+				<el-table-column prop="shopNo" label="服务网点" width="" align="left">
 				</el-table-column>
-				<el-table-column prop="username" label="用户" width="" align="center">
+				<el-table-column prop="username" label="用户" width="" align="left">
 				</el-table-column>
-				<el-table-column prop="paymode" label="支付方式" width="" align="center">
+				<el-table-column prop="paymode" label="支付方式" width="" align="left">
 				</el-table-column>
-				<el-table-column prop="amount" label="支付金额" width="" align="center">
+				<el-table-column prop="amount" label="支付金额" width="" align="left">
 				</el-table-column>
-				<el-table-column prop="margin" label="平台利润（扣减安装成本后）" width="230" align="center">
+				<el-table-column prop="margin" label="平台利润（扣减安装成本后）" width="" align="left">
 				</el-table-column>
-				<el-table-column prop="profit" label="运营商分润" width="" align="center">
+				<el-table-column prop="profit" label="运营商分润" width="" align="left">
 				</el-table-column>
-				<el-table-column prop="state" label="分润进度" width="" align="center">
+				<el-table-column prop="state" label="分润进度" width="" align="left">
 				</el-table-column>
 			</el-table>
 		</template>
@@ -68,14 +68,12 @@ export default {
 					this.totalCount = data.totalCount;
 				})
 			}
-			
-		
 		
 		},
 		mounted(){
-			this.getAllRenew();
+			this.getAllRenew();		
 		},
-		props:['searchTime','id'],
+		props:['searchTime'],
 		watch:{
 			searchTime:function(newVal,oldVal){
 				this.getAllRenew();

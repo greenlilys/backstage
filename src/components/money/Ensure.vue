@@ -2,8 +2,7 @@
 	<div>
 		<div class="flex-wrap flex-vertical hf">
 			<div class="p-10 bw boxborder">
-				<h1 class="font-18 tc mt-10">保证金总计</h1>
-				<p class="font-20 fontYellow tc mt-10">￥<span>{{platBond}}</span></p>
+				<h1 class="font-18 tc p-10">保证金总计：<span class="font-20 fontYellow">￥{{platBond}}</span></h1>				
 			</div>
 			<div class="paddinglist pr boxborder mt-10 bw flex-con ">
 				<template>

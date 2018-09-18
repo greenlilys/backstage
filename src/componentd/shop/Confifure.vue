@@ -2,27 +2,27 @@
 	<div>					
 							<template>
 								<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="addtime" label="时间" width="" align="center">
+									<el-table-column prop="addtime" label="时间" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="types" label="记录类型" width="" align="center">
+									<el-table-column prop="types" label="记录类型" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="pickno" label="关联配货订单" align="center">
+									<el-table-column prop="pickno" label="关联配货订单" align="left">
 									</el-table-column>
-									<el-table-column prop="" label="配货内容" width="" align="center">
+									<el-table-column prop="" label="配货内容" width="" align="left">
 										<template slot-scope="scope">						
 											<div v-for="item in scope.row.Inventorydistribution">{{item}}</div>
 										</template>										
 									</el-table-column>
-									<el-table-column prop="" label="结算单价" width=""  align="center">
+									<el-table-column prop="" label="结算单价" width=""  align="left">
 										<template slot-scope="scope">						
 											<div v-for="item in scope.row.pickprices">{{item}}</div>
 										</template>	
 									</el-table-column>
-									<el-table-column prop="picktotals" label="总计金额" align="center">
+									<el-table-column prop="picktotals" label="总计金额" align="left">
 									</el-table-column>
-									<el-table-column prop="costdistributes" label="配货成本余额" align="center">
+									<el-table-column prop="costdistributes" label="配货成本余额" align="left">
 									</el-table-column>
-									<el-table-column prop="nickname" label="经办人"  align="center">
+									<el-table-column prop="nickname" label="经办人"  align="left">
 									</el-table-column>									
 								</el-table>
 							</template>

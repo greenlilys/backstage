@@ -4,11 +4,13 @@
 			<div class="flex-wrap flex-horizontal infoBox">
 				<div class="imgBox"> <img src="../../assets/images/001.png" alt="" /> </div>
 				<div class="rightInfo font-14">
-					<p>用户账号：{{userInfo.username}}&nbsp;&nbsp;&nbsp;&nbsp;昵称：{{userInfo.nickname}}</p>								
-					<p>注册时间：{{userInfo.addTime}}&nbsp;&nbsp;推荐人：{{userInfo.referee}}</p>
-					<p>电池型号：{{userInfo.mode}}</p>
-					<p>安装状态：{{isdeposit == 1 ? (userInfo.isinstall == 1? "未安装" : "已安装") : "未安装" }}</p>
-					<p>租期状态：{{isdeposit ==1 && userInfo.isinstall == 0 ? (userInfo.isoverdue==1? "逾期" : "租期中") : "--"}}&nbsp;&nbsp;&nbsp;&nbsp;{{userInfo.duedate}}</p>					
+					<p>昵称：{{userInfo.nickname || '无'}}&nbsp;&nbsp;&nbsp;&nbsp;账号：{{userInfo.username}}&nbsp;&nbsp;推荐人：{{userInfo.referee || '无'}}</p>	
+					<p>身份证：{{userInfo.legalID || '无'}}</p>
+					<!--<p>注册时间：{{userInfo.addTime}}</p>-->
+					<p>租用产品：{{userInfo.mode}}</p>
+					<p>产品信息：{{userInfo.framenum}} / {{userInfo.platenum}}</p>
+					<!--<p>安装状态：{{isdeposit == 1 ? (userInfo.isinstall == 1? "未安装" : "已安装") : "未安装" }}</p>-->
+					<p>当前租期：{{isdeposit ==1 && userInfo.isinstall == 0 ? (userInfo.isoverdue==1? "逾期" : "租期中") : "--"}}&nbsp;&nbsp;&nbsp;&nbsp;{{userInfo.duedate}}</p>					
 				</div>
 			</div>
 			

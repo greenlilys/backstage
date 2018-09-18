@@ -15,7 +15,7 @@
 			
 			<el-col :span="6" :offset="1">
 				<div>
-					<el-input placeholder="请输入内容" v-model="find" class="input-with-select">
+					<el-input placeholder="请输入内容" v-model="find" class="input-with-select" @keyup.enter.native='search'>
 						<el-button slot="append" icon="el-icon-search" @click="search">筛选</el-button>
 					</el-input>
 				</div>

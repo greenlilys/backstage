@@ -132,7 +132,7 @@
 					</el-form-item> -->
 					<el-form-item class="flex-wrap flex-justify-end">
 						<el-row class="mt-20">
-							<el-button type="success" @click="submitForm('form')">创建</el-button>
+							<el-button type="primary" @click="submitForm('form')">创建</el-button>
 						</el-row>
 					</el-form-item>
 			
@@ -277,7 +277,7 @@
 						return false;
 					}
 				});
-			},		
+			},
 			getCell(){
 				var that=this;
 				this.$get('/battery/selectList',{putway:0}).then(data=>{
@@ -315,7 +315,7 @@
 
 	}
 </script>
-
+.
 <style>	
 	.main-all{
 		max-width: 800px

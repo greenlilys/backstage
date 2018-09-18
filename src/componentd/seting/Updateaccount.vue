@@ -47,7 +47,7 @@
 					</el-form-item>		
 					<el-form-item>
 						<el-row>
-							<el-button type="success" @click="submitForm()">保存</el-button>
+							<el-button type="primary" @click="submitForm()">保存</el-button>
 						</el-row>
 					</el-form-item>
 			</el-col>
@@ -65,7 +65,7 @@
 				</el-form>
 				<div slot="footer" class="dialog-footer">
 					<el-button @click="dialogFormVisible = false">取 消</el-button>
-					<el-button type="success" @click="updataPass">确 定</el-button>
+					<el-button type="primary" @click="updataPass">确 定</el-button>
 				</div>
 			</el-dialog>
 	</div>
@@ -93,9 +93,9 @@
 			handleChange(value) {
 				console.log(value);
 			},
-			getStaff(id){	  
+			getStaff(id){	//查询员工信息  
 				var that=this;    	
-	        	this.$get('staffaccount/staffInfo',{
+	        	this.$get('userAdmin/getInfo',{
 					id:this.id					
 				}).then(data=>{
 				
@@ -123,14 +123,14 @@
 
 				})
             },
-            StaffList(){    
-				this.$get('staffaccount/skipAdd',{
+            StaffList(){ //获取员工权限列表   
+				this.$get('userAdmin/skipAdd',{
 				}).then(data=>{
 					console.log(data);
 					this.checkList=data;
 				})
 			},
-            submitForm(){
+            submitForm(){//提交表单
 	      	    this.$post('staffaccount/updateStaff',{
                     id:this.id,
 	      		    nickname:this.form.nickname,
@@ -148,8 +148,8 @@
             setCode(){
 				this.dialogFormVisible = true;
 			},
-			updataPass(){
-				this.$post('staffaccount/updateStaffPass',{
+			updataPass(){//确认修改密码
+				this.$post('userAdmin/updatePass',{
 				id:this.id,
 				password:this.form1.password,
 				passwords:this.form1.passwords

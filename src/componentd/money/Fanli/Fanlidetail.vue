@@ -17,35 +17,33 @@
 				   <div class="block">    
 				    <el-date-picker
 				     @change="changeTime"
-				      v-model="value6"
-				      value-format="timestamp"
+				      v-model="searchTime"				    
 				      type="daterange"
 				      range-separator="至"
 				      start-placeholder="开始日期"
-				      end-placeholder="结束日期">
+				      end-placeholder="结束日期"
+				      value-format="yyyy-MM-dd">
 				    </el-date-picker>
 				  </div>
 			</el-col>
 
 		</el-row>
-		<component v-bind:is="current" :searchTime="searchTime" :id="id"></component>
+		<component v-bind:is="current" :searchTime="searchTime"></component>
 		
 	</div>
 </template>
 
 <script>
-	import Changemoney from '@/components/business/Changemoney'
-	import Rentmoney from '@/components/business/Rentmoney'
-	import Helpmoney from '@/components/business/Helpmoney'
+	import Changemoney from '@/componentd/money/Fanli/Changemoney'
+	import Rentmoney from '@/componentd/money/Fanli/Rentmoney'
+	import Helpmoney from '@/componentd/money/Fanli/Helpmoney'
 	
 	export default {
 		data() {
-			return {
-				
-				radio4:'换电分润',
-				value6:'',
+			return {				
+				radio4:'换电分润',				
 				current:'Changemoney',
-				searchTime:[]
+				searchTime:[]//搜索时间
 			};
 		},
 		methods: {
@@ -68,7 +66,7 @@
 			},
 			changeTime(value){
 				this.searchTime = value;
-				console.log(value)
+				console.log(this.searchTime)
 			}
 		},
 		components:{
@@ -76,7 +74,14 @@
 			Rentmoney,
 			Helpmoney
 		},
-		props:['id']
+		watch:{
+			searchTime:function(newVal,oldVal){
+				if(newVal){
+					this.$emit('sendTime',this.searchTime);
+				}
+			}
+		}
+		
 	}
 </script>
 <style scoped>

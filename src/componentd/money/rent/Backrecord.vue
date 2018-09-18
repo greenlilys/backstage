@@ -2,19 +2,24 @@
 	<div>
 		
 								<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
-									<el-table-column prop="retime" label="退租时间" width="" align="center">
+									<el-table-column prop="retime" label="退租时间" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="reno" label="退租预约" width="" align="center">
+									<el-table-column prop="reno" label="退租预约" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="username" label="退租用户" width="" align="center">
+									<el-table-column prop="username" label="退租用户" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="mode" label="退租电池类型" width="" align="center">
+									<el-table-column prop="mode" label="退租产品" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="endtime" label="租期截止" width="" align="center">
+									<!--<el-table-column prop="" label="产品信息" width="" align="center">
+										<template slot-scope="scope">
+											<div>{{scope.row.framenum}}&nbsp;&nbsp;{{scope.row.platenum}}</div>
+										</template>
+									</el-table-column>-->
+									<el-table-column prop="endtime" label="租期截止" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="leaseterms" label="当前租期类型" width="" align="center">
+									<el-table-column prop="leaseterms" label="当前租期类型" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="reamounts" label="退还租金" width="" align="center">
+									<el-table-column prop="reamounts" label="退还租金" width="" align="left">
 									</el-table-column>									
 								</el-table>
 							
@@ -55,7 +60,7 @@
 				this.rentList({pageNo:val});
 			},
 			rentList({pageNo=1,isrent=1,begin=this.begin,end=this.end}={}){			
-			this.$get('capital/rentList',{
+			this.$get('rent/rentList',{
 				pageNo: pageNo,
 				isrent:isrent ,
 				begin:begin,

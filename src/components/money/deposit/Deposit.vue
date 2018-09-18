@@ -6,7 +6,10 @@
 									</el-table-column>
 									<el-table-column prop="username" label="用户账号" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="names" label="租用电池类型" width="" align="center">
+									<el-table-column prop="" label="租用产品" width="" align="center">
+										<template slot-scope="scope">						
+											<div>{{scope.row.names}}</div>
+										</template>
 									</el-table-column>
 									<el-table-column prop="deposits" label="押金金额" width="" align="center">
 									</el-table-column>
@@ -65,7 +68,12 @@
 			}).then(data=>{
 				var arr = data.datas;
 				for(var i = 0, len = arr.length; i < len; i++) {
-					arr[i].names=arr[i].name+"   "+arr[i].groupnum+"组"
+					if(arr[i].name){
+						arr[i].names=arr[i].name+" / "+arr[i].groupnum+"组"
+					}else{
+						arr[i].names="--"
+					}
+					
 					//支付方式
 					if(arr[i].paymode == 0) {
 						arr[i].paymodes = "支付宝"

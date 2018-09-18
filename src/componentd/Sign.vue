@@ -2,12 +2,12 @@
   	<el-row class="hf">
   		<el-col :span="24" class="bgHui hf flex-wrap flex-vertical flex-justify-center flex-align-center">
         <div class="signBox">
-          		<h3>天牛网管理后台</h3>
+          		<h3>运营商管理后台</h3>
               <el-input v-model="userName" placeholder="请输入用户名" class="marginV-10"></el-input>
               <el-input type="password" v-model="passWord" placeholder="请输入密码" @keyup.enter.native="signBtn()"></el-input>
               <el-checkbox v-model="checked" class="marginV-10" @change="handleCheck">记住用户名</el-checkbox>
               <el-row>
-              	<el-button type="success" class="btn mt-10" @click="signBtn">登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</el-button>
+              	<el-button type="primary" class="btn mt-10" @click="signBtn">登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</el-button>
               </el-row>
         </div>
     </el-col>
@@ -29,7 +29,7 @@
         if(!this.userName || !this.passWord ){
         	this.$message.warning('请输入用户名或密码');
         }else{
-          this.$post('n/login/entry',{
+          this.$post('n/userLogin/signIn',{
                 userName:this.userName,
                 password:this.passWord
           }).then((data)=>{  

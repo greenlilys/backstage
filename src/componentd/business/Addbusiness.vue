@@ -307,7 +307,7 @@
 		      this.$get('battery/selectList',{
 						pageSize:100					
 					}).then(data=>{
-					this.battery= data.datas.reverse();
+					this.battery= data.datas;
 	    		})
 		    },
 		    onSelecteArea(data){//运营区域选择

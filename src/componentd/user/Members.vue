@@ -2,19 +2,18 @@
 	<div>
 		<template>
 								<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="nickname" label="会员名称" width="" align="center">
+									<el-table-column prop="nickname" label="会员名称" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="username" label="会员账号" width="" align="center">
+									<el-table-column prop="username" label="会员账号" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="addtime" label="关联时间" width="" align="center">
+									<el-table-column prop="addtime" label="关联时间" width="" align="left">
 									</el-table-column>
 									
 								</el-table>
 							</template>
 							<template>
 								<div class="block page">							    
-							    <el-pagination
-							      @size-change="handleSizeChange"
+							    <el-pagination							     
 							      @current-change="handleCurrentChange"
 							      :current-page.sync="currentPage1"
 							      :page-size="10"							    
@@ -35,10 +34,7 @@
 		        totalCount:10
 			}
 		},
-		methods:{
-			 handleSizeChange(val) {
-	        console.log(`每页 ${val} 条`);
-	      },
+		methods:{			
 	      handleCurrentChange(val) {
 	      	let id = this.id;
 	        this.getMemberList(id,val);

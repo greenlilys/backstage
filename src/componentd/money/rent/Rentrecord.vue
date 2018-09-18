@@ -2,19 +2,27 @@
 	<div>
 		<template>
 			<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
-				<el-table-column prop="addtime" label="租金支付时间" width="" align="center">
+				<el-table-column prop="addtime" label="租金支付时间" width="" align="left">
 				</el-table-column>
-				<el-table-column prop="username" label="交租用户" width="" align="center">
+				<el-table-column prop="username" label="交租用户" width="" align="left">
 				</el-table-column>
-				<el-table-column prop="mode" label="租用电池类型" width="" align="center">
+				<el-table-column prop="" label="租用产品" width="" align="left">
+					<template slot-scope="scope">
+						<div>{{scope.row.mode}}&nbsp;&nbsp;{{scope.row.platenum}}</div>
+					</template>
 				</el-table-column>
-				<el-table-column prop="leaseterms" label="租期类型" width="" align="center">
+				<!--<el-table-column prop="" label="产品信息" width="" align="center">
+					<template slot-scope="scope">
+						<div>{{scope.row.framenum}}&nbsp;&nbsp;{{scope.row.platenum}}</div>
+					</template>
+				</el-table-column>-->
+				<el-table-column prop="leaseterms" label="租期类型" width="" align="left">
 				</el-table-column>
-				<el-table-column prop="amounts" label="租金/积分金额" width="" align="center">
+				<el-table-column prop="amounts" label="租金/积分金额" width="" align="left">
 				</el-table-column>
-				<el-table-column prop="paymodes" label="支付方式" width="" align="center">
+				<el-table-column prop="paymodes" label="支付方式" width="" align="left">
 				</el-table-column>
-				<el-table-column prop="paymentno" label="支付订单号" width="" align="center">
+				<el-table-column prop="paymentno" label="支付订单号" width="" align="left">
 				</el-table-column>
 
 			</el-table>
@@ -64,12 +72,12 @@
 				begin = this.begin,
 				end = this.end
 			} = {}) {
-				this.$get('capital/rentList', {
+				this.$get('rent/rentList', {
 					pageNo: pageNo,
 					isrent: isrent,
 					begin: begin,
 					end: end
-				}).then(data => {
+				}).then(data => { 
 					var arr = data.datas;
 					for(var i = 0, len = arr.length; i < len; i++) {
 						arr[i].names = arr[i].name + "   " + arr[i].groupnum + "组"

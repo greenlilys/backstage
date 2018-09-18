@@ -2,25 +2,24 @@
 	<div>
 		<template>
 								<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
-									<el-table-column prop="addTime" label="押金变动时间" width="" align="center">
+									<el-table-column prop="addTime" label="押金变动时间" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="categorys" label="变动类型" width="" align="center">
+									<el-table-column prop="categorys" label="变动类型" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="deposits" label="金额" width="" align="center">
+									<el-table-column prop="deposits" label="金额" width="" align="left">
 									</el-table-column>								
-									<el-table-column prop="balances" label="押金余额" width="" align="center">
+									<el-table-column prop="balances" label="押金余额" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="paymodes" label="支付方式" width="" align="center">
+									<el-table-column prop="paymodes" label="支付方式" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="paymentno" label="支付订单号" width="" align="center">
+									<el-table-column prop="paymentno" label="支付订单号" width="" align="left">
 									</el-table-column>
 									
 								</el-table>
 							</template>
 							<template>
 								<div class="block page">							    
-							    <el-pagination
-							      @size-change="handleSizeChange"
+							    <el-pagination							    
 							      @current-change="handleCurrentChange"
 							      :current-page.sync="currentPage1"
 							      :page-size="10"							    
@@ -42,9 +41,7 @@
 			}
 		},
 		methods:{
-			 handleSizeChange(val) {
-	        console.log(`每页 ${val} 条`);
-		  },
+		
 		  cellStyle({row, column, rowIndex, columnIndex}){
 					if(columnIndex === 2){ //指定坐标
 						return 'color:#FF6600'

@@ -18,25 +18,25 @@
 		<div class="paddinglist bw pr mt-10 flex-con">					
 							<template>
 								<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="date" label="预约编号" width="" align="center">
+									<el-table-column prop="no" label="预约编号" width="" align="left">
 									</el-table-column>									
-									<el-table-column prop="name" label="预约类型" width="" align="center">
+									<el-table-column prop="type" label="预约类型" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="name" label="预约用户" width="" align="center">
+									<el-table-column prop="username" label="预约用户" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="name" label="报损网点" width="" align="center">
+									<el-table-column prop="name" label="报损网点" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="name" label="报损时间" width="" align="center">
+									<el-table-column prop="name" label="报损时间" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="name" label="报损照片" width="" align="center">
+									<el-table-column prop="name" label="报损照片" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="name" label="审查结果" width="" align="center">
+									<el-table-column prop="name" label="审查结果" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="name" label="审查时间" width="" align="center">
+									<el-table-column prop="reviewtime" label="审查时间" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="name" label="审查人" width="" align="center">
+									<el-table-column prop="name" label="审查人" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="" label="操作" align="center">
+									<el-table-column prop="" label="操作" align="left">
 									    <template slot-scope="scope">										
 											<el-button type="warning" size="mini" class="btnStyle" @click="openConfirm">提交审查结果</el-button>
 									    </template>
@@ -45,13 +45,12 @@
 							</template>
 							<template>
 								<div class="block page">							    
-							    <el-pagination
-							      @size-change="handleSizeChange"
+							    <el-pagination							     
 							      @current-change="handleCurrentChange"
 							      :current-page.sync="currentPage1"
 							      :page-size="8"							    
 							      layout="total, prev, pager, next"
-							      :total="100">
+							      :total="totalCount">
 							    </el-pagination>
 							 	 </div>
 							</template>								
@@ -67,28 +66,29 @@
 				navtitle:'预约>电池报损',
 				radio1:'',
 				tableData: [],	
+				totalCount:10,
 				currentPage1:1
 				 
 			
 			};
 		},
 		methods: {
-		  handleSizeChange(val) {
-	        console.log(`每页 ${val} 条`);
-	      },
+		  
 	      handleCurrentChange(val) {
-	        console.log(`当前页: ${val}`);
+	       this.getDamageList({pageNo:val});
 	      },
 	   
-	      handleChange(value){
+	      handleChange(){
+	      	this.getDamageList();
+	      	this.currentPage1 = 1;
 	      },
-	      getDamageList(pageNo,reviewstate){
-	      	  reviewstate = reviewstate== ''? '' : reviewstate;
+	      getDamageList({pageNo=1,reviewstate=this.radio1}={},){	      	  
 	      	  this.$get('appointOrder/selectDamageList',{
 	      	  	pageNo:pageNo,
-	      	  	reviewstate:reviewstate
+	      	  	reviewstate:reviewstate	      	  
 	      	  }).then(data=>{
-	      	  	
+	      	  	this.tableData = data.datas;
+	      	  	this.totalCount = data.totalCount;
 	      	  })
 	      },
 	      openConfirm(){
@@ -110,7 +110,7 @@
 	      }	
 		},
 		mounted(){
-			this.getDamageList(1,this.radio1);
+			this.getDamageList();
 			this.$sendTitle(this.navtitle);
 		}
 	}

@@ -14,8 +14,9 @@
 			<div class="shopInfo mt-10">
 				<h1 class="fonttitle">预约用户信息</h1>
 				<p>预约用户：<span>{{meetData.username}}</span> </p>
-				<p>电池套餐：<span>{{meetData.batteryname}}</span> </p>
-				<p v-if="meetData.type == 1? true :false">换电费/积分：{{meetData.cost}}</p>
+				<p>产品：<span>{{meetData.batteryname}}</span> </p>
+				<p v-if="meetData.type == 3 || meetData.type == 4">产品信息：<span>{{meetData.frame}}&nbsp;&nbsp;{{meetData.platenum}}</span> </p>
+				<p v-if="meetData.type == 1? true :false">支付租金：{{meetData.cost}}</p>
 				<p v-if="meetData.type == 1? true :false">支付方式：{{meetData.paymodes}}&nbsp;&nbsp;{{meetData.paymentno}}</p>
 			</div>
 		
@@ -60,13 +61,19 @@
 					this.meetData = meetData;
 						switch(meetData.type){
 							case 0:
-							meetData.types = "安装"
+							meetData.types = "安装预约"
 							break;
 							case 1:
-							meetData.types = "更换"
+							meetData.types = "更换预约"
 							break;
 							case 2:
-							meetData.types = "退租"
+							meetData.types = "退租预约"
+							break;
+							case 3:
+							meetData.types = "提车预约"
+							break;
+							case 4:
+							meetData.types = "退车预约"
 							break;
 							default:
 							meetData.types = "--"

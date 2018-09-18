@@ -25,8 +25,7 @@
 		</template>
 		<template>
 			<div class="block page">
-				<el-pagination 
-					@size-change="handleSizeChange" 
+				<el-pagination 					
 					@current-change="handleCurrentChange" 
 					:current-page.sync="currentPage" 
 					:page-size="10" 
@@ -46,15 +45,13 @@ export default {
 				currentPage: 1				
 			};
 		},
-		methods: {
-			handleSizeChange(val) {
-				console.log(`每页 ${val} 条`);
-			},
+		methods: {			
 			handleCurrentChange(val) {
-				console.log(`当前页: ${val}`);
+				this.getoperProfit({pageNo:val});
 			},
-			getoperProfit({id=this.id,begin=this.searchTime[0] || "",end=this.searchTime[1] || ""}={}){
+			getoperProfit({pageNo=1,id=this.id,begin=this.searchTime[0] || "",end=this.searchTime[1] || ""}={}){
 				this.$get('operProfit/getAllReplace',{
+					pageNo:pageNo,
 					id:id,
 					begin:begin,
 					end:end
@@ -73,6 +70,7 @@ export default {
 		watch:{
 			searchTime:function(newVal,oldVal){
 				this.getoperProfit();
+				this.currentPage=1;
 			},
 			deep:true
 		}

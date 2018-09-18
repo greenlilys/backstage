@@ -39,7 +39,7 @@
 					</el-form-item>	
 					<el-form-item>
 						<el-row>
-							<el-button type="success"  @click="addStaff()">保存</el-button>
+							<el-button type="primary"  @click="addStaff()">保存</el-button>
 						</el-row>
 					</el-form-item>
 			</el-col>
@@ -76,10 +76,10 @@
 			setCode(){
 				console.log("555");
 			},
-			addStaff(){ 
+			addStaff(){ //保存
 				var list = this.checkLists;
 				console.log(list) ;
-				this.$post('staffaccount/addStaff',{
+				this.$post('userAdmin/add',{
 					nickname:this.form.nickname,
 					phone:this.form.phone,
 					job:this.form.job,
@@ -94,8 +94,8 @@
 					this.$router.push('/Main/Personaccount');
 				})
 			},
-			StaffList(){    
-				this.$get('staffaccount/skipAdd',{
+			StaffList(){  //获取权限列表
+				this.$get('userAdmin/skipAdd',{
 				}).then(data=>{
 					console.log(data)
 					this.checkList=data;

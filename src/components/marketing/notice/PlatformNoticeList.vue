@@ -18,7 +18,7 @@
 									</el-table-column>
 									<el-table-column prop="title" label="公告标题" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="addTime" label="发布时间" width="" align="center">
+									<el-table-column prop="addtime" label="发布时间" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="action" label="操作" width="250" align="center">
 									    <template slot-scope="scope">						

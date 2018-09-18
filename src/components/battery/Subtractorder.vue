@@ -10,13 +10,11 @@
 						<el-radio  label="0">待处理</el-radio>
 						<el-radio  label="1">已完成</el-radio>
 						<el-radio  label="2">已驳回</el-radio>
-					</el-radio-group>
-				
-			</el-col>
-			
+					</el-radio-group>				
+			</el-col>			
 			<el-col :span="6" :offset="1">
 				<div>
-					<el-input placeholder="请输入内容" v-model="find" class="input-with-select">
+					<el-input placeholder="请输入内容" v-model="find" class="input-with-select" @keyup.enter.native='search'>
 						<el-button slot="append" icon="el-icon-search" @click="search">筛选</el-button>
 					</el-input>
 				</div>

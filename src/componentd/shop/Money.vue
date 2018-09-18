@@ -2,13 +2,13 @@
 	<div>					
 							<template>
 								<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
-									<el-table-column prop="addtime" label="钱包变动时间" width="160" align="center">
+									<el-table-column prop="addtime" label="钱包变动时间" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="categorys" label="变动类型" width="" align="center">
+									<el-table-column prop="categorys" label="变动类型" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="amounts" label="金额" align="center">
+									<el-table-column prop="amounts" label="金额" align="left">
 									</el-table-column>
-									<el-table-column prop="balances" label="钱包余额" align="center">
+									<el-table-column prop="balances" label="钱包余额" align="left">
 									</el-table-column>								
 									
 								</el-table>

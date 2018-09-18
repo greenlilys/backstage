@@ -17,9 +17,11 @@
 									</el-table-column>
 									<el-table-column prop="groupnums" label="电池数量" width="" align="center">
 									</el-table-column>
-									<el-table-column prop="brief" label="电池说明名称" width="300" align="center">
+									<el-table-column prop="brief" label="电池说明" width="300" align="center">
 									</el-table-column>
 									<el-table-column prop="pickcosts" label="配货成本" width="" align="center">
+									</el-table-column>
+									<el-table-column prop="deposit" label="押金金额" width="" align="center">
 									</el-table-column>
 									<el-table-column prop="powerrates" label="换电费" width="" align="center">
 									</el-table-column>

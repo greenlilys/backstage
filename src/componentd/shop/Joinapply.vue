@@ -3,7 +3,7 @@
 		<el-row class="bw p-10" type="flex" align="middle">
 			<el-col :span="6">
 				<div>
-					<el-input placeholder="请输入内容" v-model="nickName" class="input-with-select" clearable>
+					<el-input placeholder="请输入内容" v-model="nickName" class="input-with-select" clearable @keyup.enter.native='search'>
 						<el-button slot="append" icon="el-icon-search" @click="search">搜索</el-button>
 					</el-input>
 				</div>
@@ -13,21 +13,21 @@
 
 		<div class="pr bw mt-10 flex-con paddinglist boxborder">			
 				<el-table :data="tableData" style="width: 100%;">
-					<el-table-column prop="no" label="店铺名称" width="" align="center">
+					<el-table-column prop="no" label="店铺名称" width="" align="left">
 					</el-table-column>
-					<el-table-column prop="username" label="店铺账号" width="" align="center">
+					<el-table-column prop="username" label="店铺账号" width="" align="left">
 					</el-table-column>
-					<el-table-column prop="address" label="店铺地址" width="300" align="center">
+					<el-table-column prop="address" label="店铺地址" width="300" align="left">
 					</el-table-column>
-					<el-table-column prop="contactnameiphone" label="联系人" width="" align="center">
+					<el-table-column prop="contactnameiphone" label="联系人" width="" align="left">
 					</el-table-column>
-					<el-table-column prop="addTime" label="申请加盟时间" width="" align="center">
+					<el-table-column prop="addtime" label="申请加盟时间" width="" align="left">
 					</el-table-column>
-					<el-table-column prop="auditstatus" label="审核状态" width="" align="center">
+					<el-table-column prop="auditstatus" label="审核状态" width="" align="left">
 					</el-table-column>
-					<el-table-column prop="ispayfee" label="保证金支付状态" width="" align="center">
+					<el-table-column prop="ispayfee" label="保证金支付状态" width="" align="left">
 					</el-table-column>
-					<el-table-column prop="action" label="操作" align="center">
+					<el-table-column prop="action" label="操作" align="left">
 						<template slot-scope="scope">
 							<router-link :to="{path:'/Main/Joindetail',query:{ id:scope.row.id}}">
 								<el-button type="warning" size="mini" class="btnStyle">详情</el-button>
@@ -99,12 +99,8 @@
 			},
 		
 			search() {
-				if(this.nickName){
-					this.getShopApplyList();
-					this.currentPage = 1;
-				}else{
-					this.$fail('请输入搜索内容')
-				}				
+				this.getShopApplyList();
+				this.currentPage = 1;			
 				
 			}
 		},

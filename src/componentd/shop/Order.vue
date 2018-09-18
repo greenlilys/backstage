@@ -2,15 +2,15 @@
 	<div>					
 							<template>
 								<el-table :data="tableData" style="width: 100%;"  :cell-style="cellStyle">
-									<el-table-column prop="no" label="预约编号" width="200" align="center">
+									<el-table-column prop="no" label="预约编号" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="types" label="预约类型" width="200" align="center">
+									<el-table-column prop="types" label="预约类型" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="finishtime" label="完成时间" align="center">
+									<el-table-column prop="finishtime" label="完成时间" align="left">
 									</el-table-column>
-									<el-table-column prop="costs" label="预约服务分润" align="center">
+									<el-table-column prop="costs" label="预约服务分润" align="left">
 									</el-table-column>
-									<el-table-column prop="action" label="操作" align="center">
+									<el-table-column prop="action" label="操作" align="left">
 										<template slot-scope="scope">
 											<router-link :to="{path:'/Main/Meetdetail',query:{id:scope.row.id}}">
 												<el-button type="warning" class="btnStyle" size="mini">详情</el-button>
@@ -21,8 +21,7 @@
 							</template>
 							<template>
 								<div class="block page">							    
-							    <el-pagination
-							      @size-change="handleSizeChange"
+							    <el-pagination							    
 							      @current-change="handleCurrentChange"
 							      :current-page.sync="currentPage"
 							      :page-size="10"							    
@@ -45,9 +44,7 @@
 			}
 		},
 		methods: {
-			handleSizeChange(val) {
-				console.log(`每页 ${val} 条`);
-			},
+			
 			cellStyle({row, column, rowIndex, columnIndex}){
 					if(columnIndex === 3){ //指定坐标
 						return 'color:#FF6600'

@@ -20,15 +20,15 @@
 					</div>
 				</div>
 				<div class="joinight" v-if="flag">
-					<el-button type="success" size="small" class="mt-10" @click="handle(id)">通过审核</el-button>
+					<el-button type="primary" size="small" class="mt-10" @click="handle(id)">通过审核</el-button>
 					<el-button type="danger" size="small" class="mt-10" @click="handles(id)">不予通过</el-button>
 				</div>
 				<div class="joinight" v-if=" tableData.auditstatus==2 && tableData.isonline==0">
-					<el-button type="success" size="small" class="mt-10" @click="handless(tableData.id,tableData.isonline)">店铺上线</el-button>
+					<el-button type="primary" size="small" class="mt-10" @click="handless(tableData.id,tableData.isonline)">店铺上线</el-button>
 				</div>
 				<div class="joinight" v-if=" tableData.auditstatus==2 && tableData.isonline==1">
 					<router-link :to="{path:'/Main/Shopdetail',query:{ id:tableData.id}}">
-						<el-button type="success" size="small" class="mt-10">店铺详情</el-button>
+						<el-button type="primary" size="small" class="mt-10">店铺详情</el-button>
 					</router-link>
 				</div>
 			</div>
@@ -92,7 +92,7 @@
 </template>
 
 <script>
-	import Dialogue from '@/components/common/Dialogue'
+	import Dialogue from '@/componentd/common/Dialogue'
 	export default {
 		name: '',
 		data() {

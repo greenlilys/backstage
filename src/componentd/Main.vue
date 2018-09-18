@@ -16,9 +16,9 @@
 </template>
 <script>
 	
-	import Head from '@/components/Head'
-	import Aside from '@/components/aside/Aside'
-	import Navbar from '@/components/common/Navbar'
+	import Head from '@/componentd/Head'
+	import Aside from '@/componentd/aside/Aside'
+	import Navbar from '@/componentd/common/Navbar'
 	
 	export default {
 		data() {

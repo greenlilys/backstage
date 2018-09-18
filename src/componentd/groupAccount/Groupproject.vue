@@ -14,7 +14,7 @@
 
 			<el-col :span="6">
 				<div>
-					<el-input placeholder="请输入运营商账号、项目名称..." v-model="find" clearable  @clear='clear' class="input-with-select">
+					<el-input placeholder="请输入运营商账号、项目名称..." v-model="find" clearable  @clear='clear' class="input-with-select" @keyup.enter.native='screen'>
 						<el-button slot="append" icon="el-icon-search" @click='screen'>筛选</el-button>
 					</el-input>
 				</div>
@@ -22,7 +22,7 @@
 
 			<el-col :span="6" :offset="5" style="text-align:right;">
 				<router-link to='/Main/Addgroupproject'>
-					<el-button type="success" size="small">+&nbsp;添加团购项目</el-button>
+					<el-button type="primary" size="small">+&nbsp;添加团购项目</el-button>
 				</router-link>			
 				
 			</el-col>

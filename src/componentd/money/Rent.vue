@@ -5,18 +5,22 @@
 
 				<div class="block">
 					<span class="font-14">选择时段：&nbsp;</span>
-					<el-date-picker v-model="valueTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" value-format="yyyy-MM-dd">
+					<el-date-picker 
+						v-model="valueTime" 
+						type="daterange" 
+						range-separator="至" start-placeholder="开始日期" 
+						end-placeholder="结束日期" 
+						value-format="yyyy-MM-dd">
 					</el-date-picker>
 				</div>
 
 			</el-row>
 
 			<div class="p-10 boxborder bw mt-10">
-				<p class="tc font-18">租金收入总额</p>
-				<p class="tc font-20 fontYellow mt-10">
-					<span v-if="renew.amount!=null||renew.reamount!=null ">￥{{renew.amount-renew.reamount}}</span></p>
-				<p class="tc font-20 fontYellow mt-10">
-					<span v-if="renew.amount==null||renew.reamount==null ">￥0</span></p>
+				<p class="tc font-18 mt-10 mb-10">租金收入总额：
+					<span v-if="renew.amount!=null || renew.reamount!=null " class="fontYellow font-20">￥{{renew.amount-renew.reamount}}</span>
+					<span v-if="renew.amount==null || renew.reamount==null " class="fontYellow font-20">￥0</span>
+				</p>			
 			</div>
 
 			<div class="conBottom paddinglist boxborder mt-10 flex-con">
@@ -31,9 +35,9 @@
 </template>
 
 <script>
-	import Rentrecord from '@/components/money/rent/Rentrecord'
-	import Backrecord from '@/components/money/rent/Backrecord'
-
+	import Rentrecord from '@/componentd/money/rent/Rentrecord'
+	import Backrecord from '@/componentd/money/rent/Backrecord'
+	
 	export default {
 		data() {
 			return {
@@ -58,7 +62,7 @@
 				begin = this.begin,
 				end = this.end
 			} = {}) {
-				this.$get('capital/renewStatistics', {
+				this.$get('rent/renewStatistics', {
 					begin: begin,
 					end: end
 				}).then(data => {

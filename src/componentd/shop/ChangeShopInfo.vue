@@ -60,14 +60,14 @@
 						</el-radio-group>
 					</el-form-item>
 					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">店铺配货</div><span class="flex-con"></span></h5>
-					<el-form-item label="配货数量：">	
+					<el-form-item label="">	
 								<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="name" label="电池套餐名称" align="center">
+									<!--<el-table-column prop="name" label="电池套餐名称" align="center">
+									</el-table-column>-->
+									<el-table-column prop="mode" label="产品" align="center">
 									</el-table-column>
-									<el-table-column prop="mode" label="电池型号" align="center">
-									</el-table-column>
-									<el-table-column prop="groupnum" label="套餐电池数量" align="center">
-									</el-table-column>
+									<!--<el-table-column prop="groupnum" label="套餐电池数量" align="center">
+									</el-table-column>-->
 									<el-table-column prop="distrinum" label="配货数量" align="center">
 									</el-table-column>									
 								</el-table>							
@@ -80,16 +80,16 @@
 					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">所属运营商</div><span class="flex-con"></span></h5>
 					<el-form-item label="所属运营商：">
 						<template>
-							<el-select v-model="oname" placeholder="请选择" @change="handled(oname)">
-								<el-option v-for="item in options" :key="item.id" :label="item.name" :value="item.id">
-								</el-option>
+							<el-select v-model="oname" placeholder="请选择">
+								<!--<el-option v-for="item in options" :key="item.id" :label="item.name" :value="item.id">-->
+								<!--</el-option>-->
 							</el-select>
 						</template>
 					</el-form-item>
 
 					<el-form-item>
 						<el-row>
-							<el-button type="success" @click="submitForm">保存</el-button>
+							<el-button type="primary" @click="submitForm">保存</el-button>
 						</el-row>
 					</el-form-item>
 				</el-form>
@@ -113,8 +113,7 @@
 				form: {},
 				tableData:[],
 				status:'0',
-				valueTime:[],//加盟有效期			
-				options: [],	
+				valueTime:[],//加盟有效期
 				oname:'',
 				selects: {}
 				
@@ -123,9 +122,8 @@
 		},
 		methods: {
 			contactno(v){
-				console.log(v)
-				this.form.contactno = v;
-				console.log(this.form.contactno)
+//				console.log(v)
+				this.form.contactno = v;				
 			},
 			handleChange(val) {//启用禁用				
 				this.form.status= val;
@@ -134,20 +132,13 @@
 				this.form.operatorid = val;				
 			},
 			handleTime(v){//加盟有效期
-				console.log(v);
+//				console.log(v);
 				if(v){
 					this.form.signtimebegin = v[0];
 					this.form.signtimeend = v[1];
 				}				
-			},
-			
-			getAll(num){//获取所有运营商
-				this.$get('operAdmin/getAll',{
-						pageSize:num	
-					}).then(data=>{
-					this.options = data.datas;
-	    		})
-			},
+			},			
+
 			onSelected(data) {//省市县
 //				console.log(data.province.value + ' | ' + data.city.value + ' | ' + data.area.value)				
 				this.form.provincename = data.province.value;					
@@ -195,7 +186,7 @@
 				})
 			}
 		},
-		created(){
+		created(){			
 			this.id = this.form.id = this.$route.query.id;			
 		},
 		components: {
@@ -203,7 +194,6 @@
 		},
 		mounted: function() {
 			this.getShopDetail();
-			this.getAll(100);
 			this.$sendTitle(this.navtitle);
 		}
 

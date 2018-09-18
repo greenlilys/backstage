@@ -2,26 +2,25 @@
 	<div>
 			<template>
 			<el-table :data="tableData" style="width: 100%;">
-				<el-table-column prop="paytime" label="救援完成时间" width="" align="center">
+				<el-table-column prop="paytime" label="救援完成时间" width="" align="left">
 				</el-table-column>
-				<el-table-column prop="rescueid" label="救援单号" width="" align="center">
+				<el-table-column prop="rescueid" label="救援单号" width="" align="left">
 				</el-table-column>
-				<el-table-column prop="shopNo" label="救援网点" width="" align="center">
+				<el-table-column prop="shopNo" label="救援网点" width="" align="left">
+				</el-table-column>				
+				<el-table-column prop="username" label="用户" width="" align="left">
 				</el-table-column>
-				
-				<el-table-column prop="username" label="用户" width="" align="center">
+				<el-table-column prop="faulttype" label="救援类型" width="" align="left">
 				</el-table-column>
-				<el-table-column prop="faulttype" label="救援类型" width="" align="center">
+				<el-table-column prop="paymode" label="支付方式" width="" align="left">
 				</el-table-column>
-				<el-table-column prop="paymode" label="支付方式" width="" align="center">
+				<el-table-column prop="amount" label="救援费用" width="" align="left">
 				</el-table-column>
-				<el-table-column prop="amount" label="救援费用" width="" align="center">
+				<el-table-column prop="margin" label="平台利润（扣减网点补贴后）" width="" align="left">
 				</el-table-column>
-				<el-table-column prop="margin" label="平台利润（扣减网点补贴后）" width="230" align="center">
+				<el-table-column prop="profit" label="运营商获取分润" width="" align="left">
 				</el-table-column>
-				<el-table-column prop="profit" label="运营商获取分润" width="" align="center">
-				</el-table-column>
-				<el-table-column prop="state" label="分润进度" width="" align="center">
+				<el-table-column prop="state" label="分润进度" width="" align="left">
 				</el-table-column>
 			</el-table>
 		</template>
@@ -51,9 +50,8 @@ export default {
 			handleCurrentChange(val) {
 				this.getAllRescue({pageNo:val});
 			},
-			getAllRescue({pageNo=1,id=this.id,begin=this.searchTime[0] || "",end=this.searchTime[1] || ""}={}){
-				this.$get('operProfit/getAllRescue',{
-					id:id,
+			getAllRescue({pageNo=1,begin=this.searchTime[0] || "",end=this.searchTime[1] || ""}={}){
+				this.$get('operProfit/getAllRescue',{					
 					pageNo:pageNo,
 					begin:pageNo,
 					end:end
@@ -67,7 +65,7 @@ export default {
 		mounted(){
 			this.getAllRescue();
 		},
-		props:['searchTime','id'],
+		props:['searchTime'],
 		watch:{
 			searchTime:function(newVal,oldVal){
 				this.getAllRescue();

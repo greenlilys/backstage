@@ -7,21 +7,19 @@ import Vue from 'vue'
 // 全局配置对象
 export var GLOBALconfig = {};
 var serverconfig = {
-  /*服务器后台地址*/
-  // 'serviceIP': 'http://www.tianniu.net.cn/',
-  /*天牛平台测试服务器地址*/
-//'serviceIP': 'http://192.168.0.220:8080/'
-'serviceIP': 'http://192.168.0.105:8080/'
-//运营商后台测试服务器地址
-//'serviceIP': 'http://192.168.0.100:8088/'  
-
+	/*服务器后台地址*/
+	// 管理后台
+//   'serviceIP': 'http://test.tianniu.net.cn/',
+  /*测试服务器地址*/
+'serviceIP': 'http://192.168.0.106:8080/'
+ 
 };
 // 接口请求地址、后缀
 var http_api = {
 	//天牛平台虚拟目录
    agent: 'platform/',
- //运营商平台虚拟目录
-// agent: 'oper/'
+//    agent: 'oper/'
+
 
 };
 // 后端 接口请求地址
@@ -30,7 +28,7 @@ var url_api = {
   agent: serverconfig.serviceIP + http_api.agent 
 };
 // 暴露全局变量作用
-GLOBALconfig.agent_api = url_api.agent; //API 请求地址
+GLOBALconfig.agent_api = url_api.agent; //API 请求地址	
 
 axios.defaults.withCredentials = true;//允许cookei跨域
 axios.defaults.timeout = 50000;//请求超时时间

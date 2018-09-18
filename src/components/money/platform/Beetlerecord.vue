@@ -2,7 +2,7 @@
 	<div class="flex-wrap flex-vertical">
 		<el-row  class="p-10 pb-0 boxborder bw" type="flex" align="middle">
 				<el-col :span="6" :offset="18">
-					<el-input placeholder="请输入内容" v-model="find" class="input-with-select" clearable>
+					<el-input placeholder="请输入内容" v-model="find" class="input-with-select" clearable @keyup.enter.native='search'>
 						<el-button slot="append" icon="el-icon-search" @click="search">筛选</el-button>
 					</el-input>
 				</el-col>				
@@ -23,8 +23,7 @@
 					</el-table-column>				
 				</el-table>
 			<div class="block page">							    
-				<el-pagination
-					@size-change="handleSizeChange"
+				<el-pagination					
 					@current-change="handleCurrentChange"
 					:current-page.sync="currentPage"
 					:page-size="10"							    
@@ -46,10 +45,7 @@
 				find:''
 			}
 		},
-		methods:{
-		  handleSizeChange(val) {
-	        console.log(`每页 ${val} 条`);
-				},
+		methods:{	
 			cellStyle({row, column, rowIndex, columnIndex}){
 					if(columnIndex === 2){ //指定坐标
 						return 'color:#FF6600'

@@ -3,7 +3,7 @@
 		<div class="flex-wrap flex-vertical bw hf">
 			<el-row  class="p-10 pb-0 boxborder" type="flex" align="middle">
 					<el-col :span="6" :offset="18">
-						<el-input placeholder="请输入内容" v-model="find" class="input-with-select" clearable>
+						<el-input placeholder="请输入内容" v-model="find" class="input-with-select" clearable @keyup.enter.native='search'>
 							<el-button slot="append" icon="el-icon-search" @click="search">筛选</el-button>
 						</el-input>
 					</el-col>				
@@ -29,14 +29,15 @@
 						<template slot-scope="scope">
 							<router-link :to="{path:'/Main/Businessdetail',query:{id:scope.row.id}}">
 								<el-button type="warning" size="mini" class="btnStyle">详情</el-button>
-							</router-link>										
-							<span v-if="scope.row.rebate!=0.00"><el-button type="warning" size="mini" class="btnStyle" @click="Shment(scope.$index, scope.row)" >提交结算记录</el-button></span>
+							</router-link>
+								<el-button type="warning" size="mini" class="btnStyle" 
+									:disabled='scope.row.rebate!=0.00 ? false :true'
+									@click="Shment(scope.$index, scope.row)" >提交结算记录</el-button>
 						</template>
 					</el-table-column>
 				</el-table>
 				<div class="block page">							    
-					<el-pagination
-						@size-change="handleSizeChange"
+					<el-pagination						
 						@current-change="handleCurrentChange"
 						:current-page.sync="currentPage"
 						:page-size="10"							    
@@ -51,13 +52,16 @@
 						<span class="font-15 fontYellow">·请在完成当月运营商返利打款结算后，添加结算记录</span>
 					</el-form-item>
 					<el-form-item label="运营商：" :label-width="formLabelWidth">
-						{{this.name}}
+						{{name}}
 					</el-form-item>
 					<el-form-item label="返利账户余额：" :label-width="formLabelWidth">
-						￥{{this.rebate}}
+						￥{{rebate}}
 					</el-form-item>
 					<el-form-item label="结算账户：" :label-width="formLabelWidth">
-						{{this.acctypeZfbacc}}
+						{{acctypeZfbacc}}
+					</el-form-item>
+					<el-form-item label="结算金额：" :label-width="formLabelWidth">
+						<el-input v-model="form.money" placeholder="请输入结算金额" clearable></el-input>
 					</el-form-item>
 					<el-form-item label="结算项说明：" :label-width="formLabelWidth">
 						<el-input v-model="form.remark" placeholder="请输入内容" clearable></el-input>
@@ -68,7 +72,7 @@
 				</el-form>
 				<div slot="footer" class="dialog-footer">
 					<el-button @click="dialogFormVisible = false">取 消</el-button>
-					<el-button type="primary" @click="confirmIsuse">确 定</el-button>
+					<el-button type="success" @click="confirmIsuse">确 定</el-button>
 				</div>
 			</el-dialog>						
 		</div>
@@ -88,21 +92,19 @@
 				  formLabelWidth: '120px',
 				  formLabelWidths: '36px',
 				  form:{	//结算
-					paymentno:'',
-					remark:''
+					paymentno:'',//转账单号
+					remark:'',//结算项说明
+					money:''//结算金额
 				  },
 				  currentId:'',
-				  id:'',
-				  money:'',
-				  name:'',
-				  rebate:'',
-				  acctypeZfbacc:''	
+				  id:'',				  
+				  name:'',//运营商
+				  rebate:'',//返利账户余额
+				  acctypeZfbacc:''//结算账户
 			}
 		},
 		methods:{
-			handleSizeChange(val) {
-			console.log(`每页 ${val} 条`);
-			},
+		
 			handleCurrentChange(val) {
 			this.Ooperlist(this.currentPage,this.find);
 			},
@@ -116,8 +118,7 @@
 			Shment(index,row){
 				this.currentId=row.id;
 				this.name=row.name;
-				this.rebate=row.rebate;
-				this.money=row.rebate;
+				this.rebate=row.rebate;				
 				this.acctypeZfbacc=row.acctypeZfbacc;
 			 	this.Ooperlist(this.currentId,this.find);
 				this.dialogFormVisible = true;
@@ -148,7 +149,7 @@
 			},
 			confirmIsuse() { //结算处理
 				var id = this.currentId;
-				var money = this.money;
+				var money = this.form.money;
 				var paymentno =this.form.paymentno;
 				var remark =this.form.remark;
 				this.$post('operExtract/add', {

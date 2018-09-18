@@ -2,13 +2,13 @@
 	<div>					
 							<template>
 								<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
-									<el-table-column prop="nickname" label="会员名称" width="160" align="center">
+									<el-table-column prop="nickname" label="会员名称" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="username" label="会员账号" width="" align="center">
+									<el-table-column prop="username" label="会员账号" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="addtime" label="下单时间" align="center">
+									<el-table-column prop="addtime" label="下单时间" align="left">
 									</el-table-column>
-									<el-table-column prop="refereeinte" label="获得返利" align="center">
+									<el-table-column prop="refereeinte" label="获得返利" align="left">
 									</el-table-column>							
 									
 								</el-table>

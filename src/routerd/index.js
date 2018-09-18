@@ -1,81 +1,53 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Main from '@/components/Main'
-import Sign from '@/components/Sign'
-import Worktable from '@/components/workTable/Worktable'
-import Error from '@/components/error/Error'
+import Main from '@/componentd/Main'
+import Sign from '@/componentd/Sign'
+import Worktable from '@/componentd/workTable/Worktable'
+import Error from '@/componentd/error/Error'
 
-import Shoplist from '@/components/shop/Shoplist'
-import Addshop from '@/components/shop/Addshop'
-import Shopdetail from '@/components/shop/Shopdetail'
-import ChangeShopInfo from '@/components/shop/ChangeShopInfo'
-import Joinapply from '@/components/shop/Joinapply'
-import Joindetail from '@/components/shop/Joindetail'
-import Shopactive from '@/components/shop/Shopactive'
-import Editactive from '@/components/shop/Editactive'
-import AddShopNotice from '@/components/shop/AddShopNotice'
-import Shopnoticelist from '@/components/shop/Shopnoticelist'
-import ShopUpdNotice from '@/components/shop/ShopUpdNotice'
+//网点
+import Shoplist from '@/componentd/shop/Shoplist'
+import Addshop from '@/componentd/shop/Addshop'
+import Shopdetail from '@/componentd/shop/Shopdetail'
+import ChangeShopInfo from '@/componentd/shop/ChangeShopInfo'
+import Joinapply from '@/componentd/shop/Joinapply'
+import Joindetail from '@/componentd/shop/Joindetail'
 
-import Userlist from '@/components/user/Userlist'
-import Userdetail from '@/components/user/Userdetail'
-import Totalcoin from '@/components/user/Totalcoin'
 
-import Businesslist from '@/components/business/Businesslist'
-import Addbusiness from '@/components/business/Addbusiness'
-import Businessdetail from '@/components/business/Businessdetail'
-import Businesssetting from '@/components/business/Businesssetting'
+//用户
+import Userlist from '@/componentd/user/Userlist'
+import Userdetail from '@/componentd/user/Userdetail'
+import Totalcoin from '@/componentd/user/Totalcoin'
 
-import Groupproject from '@/components/Groupaccount/Groupproject'
-import Addgroupproject from '@/components/Groupaccount/Addgroupproject'
-import Groupprojectdetail from '@/components/Groupaccount/Groupprojectdetail'
-import Accountmanage from '@/components/Groupaccount/Accountmanage'
-import GroupprojectMod from '@/components/Groupaccount/GroupprojectMod'
+//团购
+import Groupproject from '@/componentd/Groupaccount/Groupproject'
+import Addgroupproject from '@/componentd/Groupaccount/Addgroupproject'
+import Groupprojectdetail from '@/componentd/Groupaccount/Groupprojectdetail'
+import Accountmanage from '@/componentd/Groupaccount/Accountmanage'
+import GroupprojectMod from '@/componentd/Groupaccount/GroupprojectMod'
 
-import Meetlist from '@/components/meet/Meetlist'
-import Meetdetail from '@/components/meet/Meetdetail'
-import Batterydamage from '@/components/meet/Batterydamage'
+//预约
+import Meetlist from '@/componentd/meet/Meetlist'
+import Meetdetail from '@/componentd/meet/Meetdetail'
+import Batterydamage from '@/componentd/meet/Batterydamage'
 
-import Pikingrecord from '@/components/battery/Pikingrecord'
-import Addorder from '@/components/battery/Addorder'
-import Subtractorder from '@/components/battery/Subtractorder'
-
-//资金
-import Deposit from '@/components/money/Deposit'
-import Rebate from '@/components/money/Rebate'
-import Rent from '@/components/money/Rent'
-import Tablerecord from '@/components/money/Tablerecord'
-import Moneyrecord from '@/components/money/Moneyrecord'
-import Weixinrecord from '@/components/money/Weixinrecord'
-import Ensure from '@/components/money/Ensure'
-import Getapply from '@/components/money/Getapply'
-import Getapplyrecord from '@/components/money/Getapplyrecord'
-
+//资金  
+import Fanli from '@/componentd/money/Fanli'
+import Rent from '@/componentd/money/Rent'
+import Ensure from '@/componentd/money/Ensure'
 //统计
-import Useramount from '@/components/amount/Useramount'
-import Shopscore from '@/components/amount/Shopscore'
-import Pushuser from '@/components/amount/Pushuser'
-import Businessscore from '@/components/amount/Businessscore'
+import Useramount from '@/componentd/amount/Useramount'
+import Shopscore from '@/componentd/amount/Shopscore'
 
 //设置
-import Seting from '@/components/seting/Seting'
-import Batterymanage from '@/components/seting/Batterymanage'
-import Problorm from '@/components/seting/Problorm'
-import Personaccount from '@/components/seting/Personaccount'
-import Addbattery from '@/components/seting/Addbattery'
-import Creataccount from '@/components/seting/Creataccount'
-import Updatebattery from '@/components/seting/Updatebattery'
-import Updateaccount from '@/components/seting/Updateaccount'
-import UpdateProblorm from '@/components/seting/UpdateProblorm'
-import Problormlist from '@/components/seting/Problormlist'
+import Personaccount from '@/componentd/seting/Personaccount'
+import Creataccount from '@/componentd/seting/Creataccount'
+import Updateaccount from '@/componentd/seting/Updateaccount'
 
 //营销
-import Addactivity from '@/components/marketing/activity/Addactivity'
-import Listactivity from '@/components/marketing/activity/Listactivity'
-import PlatformNoticeList from '@/components/marketing/notice/PlatformNoticeList'
-import AddPlatformNotice from '@/components/marketing/notice/AddPlatformNotice'
-import PlatformUpdNotice from '@/components/marketing/notice/PlatformUpdNotice'
+import Listactivity from '@/componentd/marketing/Listactivity'
+import Addactivity from '@/componentd/marketing/Addactivity'
 
 
 Vue.use(Router)
@@ -128,14 +100,7 @@ export default new Router({
 					path: 'Joindetail',
 					component: Joindetail
 				},
-				{
-					path: 'Shopactive',
-					component: Shopactive
-				},
-				{
-					path: 'Editactive',
-					component: Editactive
-				},
+				
 				{
 					path: 'Userlist',
 					component: Userlist
@@ -152,22 +117,7 @@ export default new Router({
 					path: 'Userdetail',
 					component: Userdetail
 				},
-				{
-					path: 'Businesslist',
-					component: Businesslist
-				},
-				{
-					path: 'Addbusiness',
-					component: Addbusiness
-				},
-				{
-					path: 'Businessdetail',
-					component: Businessdetail
-				},
-				{
-					path: 'Businesssetting',
-					component: Businesssetting
-				},
+				
 				{
 					path: 'Groupproject',
 					component: Groupproject
@@ -205,55 +155,22 @@ export default new Router({
 					path: 'Batterydamage',
 					component: Batterydamage
 				},
+				
 				{
-					path: 'Pikingrecord',
-					component: Pikingrecord
-				},
-				{
-					path: 'Addorder',
-					component: Addorder
-				},
-				{
-					path: 'Subtractorder',
-					component: Subtractorder
-				},
-				{
-					path: 'Deposit',
-					component: Deposit
-				},
-				{
-					path: 'Rebate',
-					component: Rebate
-				},
+					path: 'Fanli',
+					component: Fanli
+				},				
+				
 				{
 					path: 'Rent',
 					component: Rent
 				},
-				{
-					path: 'Tablerecord',
-					component: Tablerecord
-				},
-				{
-					path: 'Moneyrecord',
-					component: Moneyrecord
-				},
-		
-				{
-					path: 'Weixinrecord',
-					component: Weixinrecord
-				},
+				
 				{
 					path: 'Ensure',
 					component: Ensure
 				},
-				{
-					path: 'Getapply',
-					component: Getapply
-				},
-				{
-					path: 'Getapplyrecord',
-					component: Getapplyrecord
-				},
+				
 				{
 					path: 'Useramount',
 					component: Useramount
@@ -262,54 +179,22 @@ export default new Router({
 					path: 'Shopscore',
 					component: Shopscore
 				},
-				{
-					path: 'Businessscore',
-					component: Businessscore
-				},
-				{
-					path: 'Pushuser',
-					component: Pushuser
-				},
-				{
-					path: 'Seting',
-					component: Seting
-				},
-				{
-					path: 'Batterymanage',
-					component: Batterymanage
-				},
+				
+
 				{
 					path: 'Personaccount',
 					component: Personaccount
 				},
-				{
-					path: 'Problorm',
-					component: Problorm
-				},
-				{
-					path: 'Addbattery',
-					component: Addbattery
-				},
+
 				{
 					path: 'Creataccount',
 					component: Creataccount
 				},
 				{
-					path: 'Updatebattery',
-					component: Updatebattery
-				},
-				{
 					path: 'Updateaccount',
-					component: Updateaccount	
+					component: Updateaccount
 				},
-				{
-					path: 'Problormlist',
-					component: Problormlist	
-				},
-				{
-					path: 'UpdateProblorm',
-					component: UpdateProblorm	
-				},
+
 				{
 					path: 'Addactivity',
 					component: Addactivity	
@@ -317,31 +202,9 @@ export default new Router({
 				{
 					path: 'Listactivity',
 					component: Listactivity	
-				},
-				{
-					path: 'AddShopNotice',
-					component: AddShopNotice
-				},
-				{
-					path: 'Shopnoticelist',
-					component: Shopnoticelist
-				},
-				{
-					path: 'ShopUpdNotice',
-					component: ShopUpdNotice
-				},
-				{
-					path: 'PlatformNoticeList',
-					component: PlatformNoticeList
-				},
-				{
-					path: 'AddPlatformNotice',
-					component: AddPlatformNotice
-				},
-				{
-					path: 'PlatformUpdNotice',
-					component: PlatformUpdNotice
-				},	
+				}
+			
+				
 			]
 			
 		},

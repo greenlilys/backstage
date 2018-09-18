@@ -5,7 +5,7 @@
 				<div class="infoBox">
 						<div class="nameBox font-18">{{info.name}}（{{info.no}}）</div>
 						<div class="rightInfo">
-							<p>联系人：{{info.contactname}}</p>								
+							<p>联系人：{{info.contactname}}&nbsp;&nbsp;联系电话：{{info.contactcellphone || '无'}}</p>								
 							<p>代理商级别：{{info.levelName}}</p>
 							<p>合约经营周期：{{info.signtimebegin}}&nbsp;&nbsp;至&nbsp;&nbsp;{{info.signtimeend}}</p>									
 						</div>
@@ -17,10 +17,10 @@
 				</div>
 				
 				<div class="itemBox flex-con">
-					<p class="tc font-16">电池</p>
+					<p class="tc font-16">库存</p>
 					<div class="flex-wrap flex-horizontal flex-justify-around mt-20">
-						<template v-for="item in info.batteryList">
-							<div><p class="tc font-16">{{item.mode}}</p><p class="tc font-20 fontYellow mt-10">{{item.distrinum}}</p></div>
+						<template v-for="item in batteryList">
+							<div class="p-10 pb-0"><p class="tc font-16" style="white-space:nowrap;">{{item.mode}}</p><p class="tc font-20 fontYellow mt-10">{{item.distrinum}}</p></div>
 						</template>									
 					</div>
 				</div>
@@ -46,8 +46,7 @@
 					<keep-alive>
 						<component v-bind:is="current" :id="id" :username="username" :levelid="levelid"></component>
 					</keep-alive>
-				</div>
-				
+				</div>				
 				
 			</div>
 			<Dialogue :textContent="textContent" :dialogVisible="dialogVisible"  v-on:confirm="confirmset" v-on:cancel="canceluse"></Dialogue>
@@ -73,10 +72,11 @@
 				current: 'Developarea',
 				currentI: '0',
 				find: '',
-				id: '',
+				id: '',//运营商id
 				info: [],
 				nouse: '禁用',
 				canuse: "启用",
+				batteryList:[],//电池库存
 				textContent: '',
 				dialogVisible: false,			
 				username:'',//运营商账号-传给运营商设置页面
@@ -97,7 +97,15 @@
 				}).then(data => {
 					this.info = data;				
 					this.username = data.username;
-					this.levelid = {levelid:data.levelid};
+					this.levelid = data.levelid;
+//					this.levelid = {levelid:data.levelid};
+				})
+			},
+			getBatteryList(){//库存列表
+				this.$get('operBattery/getAll',{
+					id:this.id
+				}).then(data=>{
+					this.batteryList = data;
 				})
 			},
 
@@ -123,11 +131,13 @@
 			}
 
 		},
+		
 		created() {
 			this.id = this.$route.query.id;
 		},
 		mounted() {
 			this.getOperdetail();
+			this.getBatteryList();
 			this.$sendTitle(this.navtitle);
 		},
 		components: {

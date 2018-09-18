@@ -126,8 +126,14 @@ align-items: center;
 .mr-10{
 	margin-right:10px;
 }
+.mr-20{
+	margin-right:20px;
+}
 .ml-10{
 	margin-left:10px;
+}
+.ml-20{
+	margin-left:20px;
 }
 
 .bgHui{
@@ -169,14 +175,21 @@ align-items: center;
 /*选项卡样式*/
 .conBottom{width:100%;background:#fff;position:relative;box-sizing: border-box;}
 .tabCard{background:#fff;border-top:2px solid #FF9900;border-bottom:1px solid #EBF0F4;}
-.tabCard div{font-size:16px;line-height: 26px;padding:10px 20px;background:#fff;cursor: pointer;}
+.tabCard div{font-size:16px;line-height: 20px;padding:10px 20px;background:#fff;cursor: pointer;}
 .tabCard .actived{background:#F29000;color:#fff;}
 
- /*小标题样式*/
+ /*列表标题样式*/
  .subTitle{line-height: 30px;} 
+ 
  .row {margin: 0;}
  
+ /*单选框右边距重置*/
  .el-radio,.el-radio+.el-radio{margin:0 20px 0 0;}
+ 
+ /*侧边导航点击高亮*/
+ .aside .router-link-active{background:#B7C6CC;color:#252C30;}
+ /*侧边栏样式*/
+ .worktable{height:38px;line-height: 38px;}
 
 
  

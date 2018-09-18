@@ -5,7 +5,7 @@
 				p-10 bw">
 			<el-col :span="6">
 				<div>
-					<el-input placeholder="请输入内容" v-model="find" class="input-with-select" clearable>
+					<el-input placeholder="请输入内容" v-model="find" class="input-with-select" clearable @keyup.enter.native='search'>
 						<el-button slot="append" icon="el-icon-search" @click="search">搜索</el-button>
 					</el-input>
 				</div>
@@ -59,9 +59,9 @@
 						</el-table-column>
 						<el-table-column prop="deposit" label="押金金额" width="" align="center">
 						</el-table-column>
-						<el-table-column prop="modes" label="电池型号" width="" align="center">
+						<el-table-column prop="modes" label="租用产品" width="" align="center">
 						</el-table-column>
-						<el-table-column prop="isinstalls" label="安装状态" width="" align="center">
+						<el-table-column prop="isinstalls" label="租用状态" width="" align="center">
 						</el-table-column>
 						<el-table-column prop="rentstates" label="租期状态" width="" align="center">
 						</el-table-column>
@@ -208,9 +208,17 @@
 
 						if(arr[i].isdeposit == 1) { //如果缴纳押金
 							if(arr[i].isinstall == 0) {
-								arr[i].isinstalls = "已安装"
+								if(arr[i].batteryid == 8){
+									arr[i].isinstalls = "已提车"
+								}else{
+									arr[i].isinstalls = "已安装"
+								}								
 							} else {
-								arr[i].isinstalls = "未安装"
+								if(arr[i].batteryid == 8){
+									arr[i].isinstalls = "未提车"
+								}else{
+									arr[i].isinstalls = "未安装"
+								}								
 							}
 						} else {
 							arr[i].isinstalls = "--"
@@ -273,12 +281,8 @@
 				this.currentPage = 1;
 			},
 			search() {
-				if(this.find) {
-					this.getUserList()
-					this.currentPage = 1;
-				} else {
-					this.$fail('请输入搜索内容')
-				}
+				this.getUserList()
+				this.currentPage = 1;
 
 			},
 

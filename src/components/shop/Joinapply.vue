@@ -3,7 +3,7 @@
 		<el-row class="bw p-10" type="flex" align="middle">
 			<el-col :span="6">
 				<div>
-					<el-input placeholder="请输入内容" v-model="nickName" class="input-with-select" clearable>
+					<el-input placeholder="请输入内容" v-model="nickName" class="input-with-select" clearable @keyup.enter.native='search'>
 						<el-button slot="append" icon="el-icon-search" @click="search">搜索</el-button>
 					</el-input>
 				</div>
@@ -99,12 +99,8 @@
 			},
 		
 			search() {
-				if(this.nickName){
-					this.getShopApplyList();
-					this.currentPage = 1;
-				}else{
-					this.$fail('请输入搜索内容')
-				}				
+				this.getShopApplyList();
+				this.currentPage = 1;			
 				
 			}
 		},

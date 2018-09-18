@@ -4,41 +4,48 @@
 			<div class="flex-wrap flex-horizontal infoBox">
 				<div class="imgBox"> <img src="../../assets/images/001.png" alt="" /> </div>
 				<div class="rightInfo font-14">
-					<p>用户账号：{{userInfo.username}}&nbsp;&nbsp;&nbsp;&nbsp;昵称：{{userInfo.nickname}}</p>								
-					<p>注册时间：{{userInfo.addTime}}&nbsp;&nbsp;推荐人：{{userInfo.referee}}</p>
-					<p>电池型号：{{userInfo.mode}}</p>
-					<p>安装状态：{{isdeposit == 1 ? (userInfo.isinstall == 1? "未安装" : "已安装") : "未安装" }}</p>
-					<p>租期状态：{{isdeposit ==1 && userInfo.isinstall == 0 ? (userInfo.isoverdue==1? "逾期" : "租期中") : "--"}}&nbsp;&nbsp;&nbsp;&nbsp;{{userInfo.duedate}}</p>					
+					<p>账号：{{userInfo.username}}&nbsp;&nbsp;昵称：{{userInfo.nickname || '无'}}&nbsp;&nbsp;&nbsp;&nbsp;推荐人：{{userInfo.referee || '无'}}</p>	
+					<!--<p>身份证：{{userInfo.legalID || '无'}}</p>-->
+					<p>注册时间：{{userInfo.addTime}}</p>
+					<p>电池型号：{{userInfo.mode}} &nbsp;&nbsp;{{userInfo.groupnum}}组</p>
+						<p>安装状态：{{isdeposit == 1 ? (userInfo.isinstall == 1? "未安装" : "已安装") : "未安装" }}</p>
+					<!--<p>电池型号：{{userInfo.framenum}} / {{userInfo.platenum}}</p>-->					
+					<p>当前租期：{{isdeposit ==1 && userInfo.isinstall == 0 ? (userInfo.isoverdue==1? "逾期" : "租期中") : "无"}}&nbsp;&nbsp;&nbsp;&nbsp;
+					<span v-if="isdeposit ==1 && userInfo.isinstall == 0 ? (userInfo.isoverdue==1? false : true) : false">租期：至{{userInfo.duedate}}</span>
+					</p>					
 				</div>
 			</div>
 			
 			<div class="itemBox flex-con">
-				<p class="tc font-16">钱包余额</p>
-				<p class="mt-10 fontYellow font-20 tc">￥{{userInfo.wallet}}</p>
-				<div class="mt-20 tc">
-					<el-button type="success" size="small"  @click="recharge">充值</el-button>
-					<el-button type="success" size="small"  @click="walletDebit">扣款</el-button>
-				</div>
+				<p class="mt-20 tc font-16">钱包余额</p>
+				<p class="mt-20 fontYellow font-20 tc">￥{{userInfo.wallet}}</p>
+				<!--<div class="mt-20 tc">
+					<el-button type="primary" size="small"  @click="recharge">充值</el-button>
+					<el-button type="primary" size="small"  @click="walletDebit">扣款</el-button>
+				</div>-->
 			</div>
 			
 			<div class="itemBox flex-con">
-				<p class="tc font-16">天牛币余额</p>
-				<p class="mt-10 fontYellow font-20 tc">{{userInfo.integral}}</p>
-				<div class="mt-20 tc">
-					<el-button type="success" size="small" @click="tnrecharge">充值</el-button>
-					<el-button type="success" size="small" @click="tnWalletDebit">扣款</el-button>
-				</div>
+				<p class="mt-20 tc font-16">天牛币余额</p>
+				<p class="mt-20 fontYellow font-20 tc">{{userInfo.integral}}</p>
+				<!--<div class="mt-20 tc">
+					<el-button type="primary" size="small" @click="tnrecharge">充值</el-button>
+					<el-button type="primary" size="small" @click="tnWalletDebit">扣款</el-button>
+				</div>-->
 			</div>
 			
 			<div class="itemBox flex-con">
-				<p class="tc font-16">押&nbsp;&nbsp;&nbsp;&nbsp;金</p>
-				<p class="mt-10 fontYellow font-20 tc">￥{{userInfo.deposit}}</p>
-				<p class="font-16 tc mt-20">待缴滞纳金 <span class="fontYellow">￥{{userInfo.unpaidlatefee}}</span></p>
+				<p class="mt-20 tc font-16">押&nbsp;&nbsp;&nbsp;&nbsp;金</p>
+				<p class="mt-20 fontYellow font-20 tc">￥{{userInfo.deposit}}</p>				
+			</div>
+			<div class="itemBox flex-con">
+				<p class="mt-20 tc font-16">待缴滞纳金</p>
+				<p class="mt-20 fontYellow font-20 tc">￥{{userInfo.unpaidlatefee}}</p>				
 			</div>
 			
 			<div class="itemBox flex-con">
-				<p class="tc font-16">换电次数</p>
-				<p class="mt-10 fontYellow font-20 tc">{{userInfo.num}}</p>
+				<p class="mt-20 tc font-16">换电次数</p>
+				<p class="mt-20 fontYellow font-20 tc">{{userInfo.num}}</p>
 			</div>
 		</div>
 		
@@ -124,12 +131,12 @@
 </template>
 
 <script>
-	import Orders from '@/components/user/Orders'
-	import Rent from '@/components/user/Rent'
-	import Deposit from '@/components/user/Deposit'
-	import Purse from '@/components/user/Purse'
-	import Coin from '@/components/user/Coin'
-	import Members from '@/components/user/Members'
+	import Orders from '@/componentd/user/Orders'
+	import Rent from '@/componentd/user/Rent'
+	import Deposit from '@/componentd/user/Deposit'
+	import Purse from '@/componentd/user/Purse'
+	import Coin from '@/componentd/user/Coin'
+	import Members from '@/componentd/user/Members'
 	
 	import {exp} from '@/assets/js/common'
 	
@@ -360,6 +367,6 @@
 	.userDetail .imgBox img{display:inline-block;width:80px;height:80px;border-radius:50%;}
 	.userDetail .rightInfo p{line-height: 22px;margin-right:10px;}
 	.userDetail .itemBox{background:#fff;margin-right:10px;padding:10px 20px;box-sizing: border-box;}
-	.userDetail div.itemBox:nth-child(5){margin-right:0;}	
+	.userDetail div.itemBox:nth-child(6){margin-right:0;}	
 	
 </style>
