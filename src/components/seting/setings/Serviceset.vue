@@ -4,7 +4,7 @@
 			<div class="mb-10">
 				<span class="font-14">预约可选周期：</span>
 				<el-tag v-for="(tag,index) in dynamicTags" :key="tag.value" :disable-transitions="false" @close="handleClose(tag,index)" closable>{{tag.time>=10?tag.time+'分钟':tag.time+'小时'}}</el-tag>
-				<el-input v-if="inputVisible" class="input-new-tag" v-model="time" ref="saveTagInput" size="small" @keyup.enter.native="handleInputConfirm"></el-input>
+				<el-input v-if="inputVisible" class="input-new-tag" v-model="time" ref="saveTagInput" size="small" @keyup.enter.native="handleInputConfirm" @blur="handleInputConfirm"></el-input>
 				<el-button v-else type="success" size="small" class="button-new-tag" @click="showInput">添加可选周期项</el-button>
 			</div>
 		</div>
@@ -91,8 +91,12 @@
 				});
 			},
 			handleInputConfirm() {
-					let time = Number(this.time);
+				let time = Number(this.time);
+				if(time==''){
+					this.inputVisible = false;
+				}else{
 					if(time && typeof time === 'number') {
+						console.log(222);
 						this.$post('set/addAppointTime', {
 							time: time
 						}).then(data => {
@@ -101,11 +105,13 @@
 							this.SettingMaps();
 							this.$ye();
 						})
-					} else {
+					}else{
+						console.log(111);
 						this.$fail('请输入有效数字！');
 						this.inputVisible = false;
 						this.time = '';
 					}
+				}
 			},
 			SettingMap() {
 				this.$get('set/selectSet', {}).then(data => {

@@ -2,7 +2,23 @@
 	<div>
 		<div class="hf flex-wrap flex-vertical">
 			<el-row class="p-10 boxborder bw" type="flex" align="middle">
-				<el-col :span="6" :offset="18" class="tr">
+			<el-col :span="6">
+				 <span class="font-14">上架状态：</span>				
+					<el-radio-group v-model="styleRadio"  @change = "handleRadio">
+						<!-- <el-radio  label="">全部</el-radio> -->
+						<el-radio  label="0">上架</el-radio>
+						<el-radio  label="1">下架</el-radio>	
+					</el-radio-group>				
+			</el-col>
+			<el-col :span="6">
+				 <span class="font-14">类型：</span>				
+					<el-radio-group v-model="Typeradio"  @change = "handleRadioType">
+						<!-- <el-radio  label="">全部</el-radio> -->
+						<el-radio  label="0">电池</el-radio>
+						<el-radio  label="1">电车</el-radio>
+					</el-radio-group>				
+			</el-col>
+				<el-col :span="6" :offset="6" class="tr">
 					<router-link to='/Main/Addbattery'>
 						<el-button type="success" size="small">+&nbsp;添加新电池</el-button>	
 					</router-link>	
@@ -10,54 +26,54 @@
 			</el-row>
 		
 			<div class="paddinglist boxborder pr mt-10 flex-con bw">	
-								<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
-									<el-table-column prop="name" label="套餐名称" width="180" align="center">
-									</el-table-column>
-									<el-table-column prop="mode" label="电池型号" width="" align="center">
-									</el-table-column>
-									<el-table-column prop="groupnums" label="电池数量" width="" align="center">
-									</el-table-column>
-									<el-table-column prop="brief" label="电池说明" width="300" align="center">
-									</el-table-column>
-									<el-table-column prop="pickcosts" label="配货成本" width="" align="center">
-									</el-table-column>
-									<el-table-column prop="deposit" label="押金金额" width="" align="center">
-									</el-table-column>
-									<el-table-column prop="powerrates" label="换电费" width="" align="center">
-									</el-table-column>
-									<el-table-column prop="monthrents" label="月租" width="" align="center">
-									</el-table-column>
-									<el-table-column prop="quarterrents" label="季租" width="" align="center">
-									</el-table-column>
-									<el-table-column prop="annualrents" label="年租" width="" align="center">
-									</el-table-column>
-									<el-table-column prop="putways" label="状态" width="" align="center">
-									</el-table-column>
-									<el-table-column prop="action" label="管理" width="250" align="center">
-									    <template slot-scope="scope">						
-												<router-link :to="{path:'/Main/Updatebattery',query:{id:scope.row.id}}">
-														<el-button type="warning" size="mini" class="btnStyle">管理</el-button>
-												</router-link>
-												<el-button type="warning" size="mini" class="btnStyle" @click="handleDelete(scope.$index, scope.row)" >{{scope.row.putway == 0 ? nouse : canuse}}</el-button>
-												<!-- <el-button type="warning" size="mini" class="btnStyle" @click="handleDeletes(scope.$index, scope.row)">删除</el-button>			         				          -->
-									    </template>
-									</el-table-column>
-								</el-table>
-							
-								<div class="block page">							    
-								    <el-pagination
-								      @size-change="handleSizeChange"
-								      @current-change="handleCurrentChange"
-								      :current-page.sync="currentPage"
-								      :page-size="10"							    
-								      layout="total, prev, pager, next"
-								      :total="total">
-								    </el-pagination>
-							 	</div>						
-						</div>
-				</div>
-				<Dialogue :textContent="textContent" :dialogVisible="dialogVisible"  v-on:confirm="confirmIsuse" v-on:cancel="canceluse"></Dialogue>
-				<!-- <Dialogue :textContent="textContent" :dialogVisible="dialogVisibles"  v-on:confirm="confirmIsuses" v-on:cancel="canceluse"></Dialogue> -->
+				<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
+					<el-table-column prop="name" label="套餐名称" width="180" align="center">
+					</el-table-column>
+					<el-table-column prop="mode" label="电池型号" width="" align="center">
+					</el-table-column>
+					<el-table-column prop="groupnums" label="电池数量" width="" align="center">
+					</el-table-column>
+					<el-table-column prop="plain" label="电池说明" width="300" align="center">
+					</el-table-column>
+					<el-table-column prop="pickcosts" label="配货成本" width="" align="center">
+					</el-table-column>
+					<el-table-column prop="deposit" label="押金金额" width="" align="center">
+					</el-table-column>
+					<el-table-column prop="powerrates" label="换电费" width="" align="center">
+					</el-table-column>
+					<el-table-column prop="monthrents" label="月租" width="" align="center">
+					</el-table-column>
+					<el-table-column prop="quarterrents" label="季租" width="" align="center">
+					</el-table-column>
+					<el-table-column prop="annualrents" label="年租" width="" align="center">
+					</el-table-column>
+					<el-table-column prop="putways" label="状态" width="" align="center">
+					</el-table-column>
+					<el-table-column prop="action" label="管理" width="250" align="center">
+						<template slot-scope="scope">						
+								<router-link :to="{path:'/Main/Updatebattery',query:{id:scope.row.id}}">
+										<el-button type="warning" size="mini" class="btnStyle">管理</el-button>
+								</router-link>
+								<el-button type="warning" size="mini" class="btnStyle" @click="handleDelete(scope.$index, scope.row)" >{{scope.row.putway == 0 ? nouse : canuse}}</el-button>
+								<!-- <el-button type="warning" size="mini" class="btnStyle" @click="handleDeletes(scope.$index, scope.row)">删除</el-button>			         				          -->
+						</template>
+					</el-table-column>
+				</el-table>
+			
+				<div class="block page">							    
+					<el-pagination
+						@size-change="handleSizeChange"
+						@current-change="handleCurrentChange"
+						:current-page.sync="currentPage"
+						:page-size="10"							    
+						layout="total, prev, pager, next"
+						:total="total">
+					</el-pagination>
+				</div>						
+		</div>
+</div>
+<Dialogue :textContent="textContent" :dialogVisible="dialogVisible"  v-on:confirm="confirmIsuse" v-on:cancel="canceluse"></Dialogue>
+<!-- <Dialogue :textContent="textContent" :dialogVisible="dialogVisibles"  v-on:confirm="confirmIsuses" v-on:cancel="canceluse"></Dialogue> -->
 	</div>
 </template>
 
@@ -66,6 +82,8 @@
 	export default {
 		data() {
 			return {
+				styleRadio:'0',
+				Typeradio:'0',
 				navtitle:'设置>产品管理',
 				tableData: [],
 				currentPage:1,
@@ -80,6 +98,14 @@
 			};
 		},
 		methods: {
+			handleRadio(value){
+				console.log(value);
+				this.getBatteryList(this.currentPage,value,this.Typeradio)
+			},
+			handleRadioType(value){
+				console.log(value);
+				this.getBatteryList(this.currentPage,this.styleRadio,value)
+			},
 			 handleSizeChange(val) {
 	        console.log(`每页 ${val} 条`);
 		  },
@@ -91,9 +117,9 @@
 			}
 		  },
 	      handleCurrentChange(val) {
-	        this.getBatteryList(val);
-				},
-				handleDelete(index,row){//上下架按钮	      	
+	        this.getBatteryList(val,this.styleRadio,this.Typeradio);
+		 },
+		handleDelete(index,row){//上下架按钮	      	
 	      	this.currentPutway = row.putway;
 	      	this.currentId = row.id;
 	      	this.dialogVisible = true;
@@ -106,9 +132,11 @@
 				// 	this.textContent = "确认删除电池吗？";
 				// 	this.title = "提示";
 				// },
-				getBatteryList(pageNo){	      	
+		getBatteryList(pageNo,putway,type){	      	
 	      	this.$get('battery/selectList',{
-					pageNo:pageNo					
+					pageNo:pageNo,
+					putway:putway,
+					type:type				
 				}).then(data=>{
 					var arr = data.datas;
 						for(var i = 0,len=arr.length;i<len;i++){
@@ -136,18 +164,18 @@
 	      		putway:putway
 	      	}).then(data=>{
 	      		this.dialogVisible = false;
-	      		this.getBatteryList(this.currentPage);//刷新当前页
+	      		this.getBatteryList(this.currentPage,this.styleRadio,this.Typeradio);//刷新当前页
 	      		this.$ye();
 	      	})   	
 				},
 				// confirmIsuses(){
 				// 	var id = this.currentId;       
-	      // 	this.$post('battery/deleteBattery',{
-	      // 		id:id
-	      // 	}).then(data=>{
-	      // 		this.dialogVisibles = false;
-	      // 		this.getBatteryList(this.currentPage);//刷新当前页
-	      // 		this.$ye();
+				// 	this.$post('battery/deleteBattery',{
+				// 		id:id
+				// 	}).then(data=>{
+				// 		this.dialogVisibles = false;
+				// 		this.getBatteryList(this.currentPage);//刷新当前页
+				// 		this.$ye();
 				// 	})
 				// },
 	      canceluse(){//取消或者关闭
@@ -155,13 +183,13 @@
 	      }
 		},
 	  method(){
-				this.getBatteryList(1);
+				this.getBatteryList(1,this.styleRadio,this.Typeradio);
 		},
 		mounted:function(){
 			this.$sendTitle(this.navtitle);
 		},
 		created(){
-				this.getBatteryList(1);
+				this.getBatteryList(1,this.styleRadio,this.Typeradio);
 		}, 
 		components:{
     	Dialogue

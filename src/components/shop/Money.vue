@@ -30,6 +30,7 @@
 
 <script>
 	export default {
+	  name:'Money',
       data() {
         return {
           tableData: [],
@@ -173,6 +174,9 @@
     	mounted(){
     	this.getShopwalletList(1,this.id)
    	 },
+   	 activated(){   	 	
+   	 	this.getShopwalletList(1,this.id)
+   	 }
   }
 </script>
 

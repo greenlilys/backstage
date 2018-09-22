@@ -22,14 +22,31 @@
 					</el-row>
 					</el-form-item>
 					
-					<el-form-item label="电池说明：">
+					<!-- <el-form-item label="电池说明：">
 						<el-input
 						  type="textarea"
 						  :rows="2"
 						  placeholder="请输入内容"
 						  v-model="form.brief">
 						</el-input>
-					</el-form-item>					
+					</el-form-item>					 -->
+					<el-form-item label="产品说明：">
+						<el-form-item label='续航能力：' label-width="100px">
+							<el-input v-model='form.performance'></el-input>
+						</el-form-item>
+						<el-form-item label='电池重量：' label-width="100px" v-if='!productType'>
+							<el-input v-model="form.weight"></el-input>
+						</el-form-item>
+						<el-form-item label='整车重量：' label-width="100px"  v-else>
+							<el-input v-model="form.weight"></el-input>
+						</el-form-item>
+						<el-form-item label='电芯类型：' label-width="100px" v-if='!productType'>
+							<el-input v-model="form.plain"></el-input>
+						</el-form-item>
+						<el-form-item label='标配电池：' label-width="100px" v-else>
+							<el-input v-model="form.plain"></el-input>
+						</el-form-item>
+					</el-form-item>
 					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">电池价格</div><span class="flex-con"></span></h5>
 					<el-form-item label="配货成本（￥）：">
 						<el-input v-model="form.pickcost"></el-input>
@@ -80,6 +97,7 @@
 	export default {
 		data() {
 			return {
+				productType:0,
 				navtitle:'设置>产品管理>管理',
                 form:{},
                 id:'',
@@ -112,7 +130,10 @@
 					monthrent:this.form.monthrent,
 					quarterrent:this.form.quarterrent,
 					annualrent:this.form.annualrent,
-					putway:this.form.putway
+					putway:this.form.putway,
+					performance:this.form.performance,
+					weight:this.form.weight,
+					plain:this.form.plain
                 }).then(data=>{
 					this.$ye();
 					this.$router.push('/Main/Batterymanage');

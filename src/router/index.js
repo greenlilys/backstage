@@ -33,13 +33,14 @@ import Groupprojectdetail from '@/components/Groupaccount/Groupprojectdetail'
 import Accountmanage from '@/components/Groupaccount/Accountmanage'
 import GroupprojectMod from '@/components/Groupaccount/GroupprojectMod'
 
+// 预约
 import Meetlist from '@/components/meet/Meetlist'
 import Meetdetail from '@/components/meet/Meetdetail'
 import Batterydamage from '@/components/meet/Batterydamage'
-
 import Pikingrecord from '@/components/battery/Pikingrecord'
 import Addorder from '@/components/battery/Addorder'
 import Subtractorder from '@/components/battery/Subtractorder'
+import SosOrder from '@/components/meet/SosOrder'
 
 //资金
 import Deposit from '@/components/money/Deposit'
@@ -106,7 +107,10 @@ export default new Router({
 				},
 				{
 					path: 'Shoplist',
-					component: Shoplist
+					component: Shoplist,
+					meta:{
+						keepAlive:true
+					}
 				},
 				{
 					path: 'Addshop',
@@ -200,7 +204,10 @@ export default new Router({
 					path: 'Meetdetail',
 					component: Meetdetail
 				},
-
+				{
+					path:'SosOrder',
+					component:SosOrder
+				},
 				{
 					path: 'Batterydamage',
 					component: Batterydamage
@@ -349,9 +356,5 @@ export default new Router({
 			path: '*',
 			component: Error
 		}
-		
-		
-	
-
 	]
 })

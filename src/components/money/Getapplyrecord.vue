@@ -23,7 +23,9 @@
 					<el-table :data="tableData" style="width: 100%;" :cell-style="cellStyle">
 						<el-table-column prop="no" label="申请编号" width="" align="center">
 						</el-table-column>
-						<el-table-column prop="onames" label="提现代理商" width="" align="center">
+						<el-table-column prop="onames" label="提现账户" width="" align="center">
+						</el-table-column>
+						<el-table-column prop="onames" label="账户类型" width="" align="center">
 						</el-table-column>
 						<el-table-column prop="balances" label="钱包余额" width="" align="center">
 						</el-table-column>

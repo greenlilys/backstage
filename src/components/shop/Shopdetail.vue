@@ -54,9 +54,12 @@
 			<div class="conBottom mt-10 flex-con paddinglist">						
 				<div class="tabCard flex-wrap flex-horizontal">				
 					<div v-for="(v,i) in tabItem" @click="changeItem(v,i)" v-bind:class="{actived : i == currentI}">{{v}}</div>
-				</div>				
+				</div>
 				
-				<component v-bind:is="current" :id="id"></component>
+				<keep-alive include="Money">				
+					<component :is="current" :id="id"></component>
+				</keep-alive>
+				
 			</div>
 			<el-dialog title="钱包充值" :visible.sync="dialogFormVisible" width="30%">
 			  <el-form :model="form">
@@ -323,23 +326,28 @@
 		     	
 		    },
 		confirmDebit(){//钱包扣款
-		var id = this.id;
-		var amount = Number(this.form1.walletDebit);
-		var remark = this.form.remark;
-		if(!exp.test(amount)){
-			this.$message.info("请输入有效数字，小数点后最多保留两位");
-			return false;
-		}else{
-			this.$post('shop/debit',{
-			id:id,
-			amount:amount,
-			remark:remark
-			}).then(data=>{
-				this.dialogFormVisible1 = false;			     				     		
-				this.joinShopDetail(this.id)
-				this.$ye('扣款成功');	
-			})
-			
+			var id = this.id;
+			var amount = Number(this.form1.walletDebit);
+			var remark = this.form.remark;
+			// shopInfo.wallet
+			if(!exp.test(amount)){
+				this.$message.info("请输入有效数字，小数点后最多保留两位");
+				return false;
+			}else{
+				if(amount>this.shopInfo.wallet){
+					this.$message.info("钱包余额不足，请重新输入");
+				}else{
+					this.$post('shop/debit',{
+						id:id,
+						amount:amount,
+						remark:remark
+					}).then(data=>{
+						this.dialogFormVisible1 = false;			     				     		
+						this.joinShopDetail(this.id)
+						this.$ye('扣款成功');	
+					})
+				}
+				
 			}
 		},
 		pendReplenish(id){			
@@ -412,6 +420,15 @@
       	Exchange,
 		Help
 		
+      },
+      beforeRouteLeave(to,from,next){
+      	console.log(to.path)
+      	if(to.path == '/Main/Shoplist'){
+      		to.meta.keepAlive = true;
+      	}else{
+      		to.meta.keepAlive = false;
+      	}
+      	next();
       }
     }
 </script>

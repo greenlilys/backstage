@@ -45,11 +45,23 @@
 						<template slot="title">
 							<span class="oneTitle pl20"><i class="header-icon el-icon-info iconWidth"></i>资金</span>
 						</template>
+
+						<div class="item font-14 subitem pl40"><router-link to='/Main/Deposit'>押金-缴纳记录</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Main/Rent'>租金-租金纪录</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Main/Moneyrecord'>钱包/天牛币记录</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Main/Ensure'>保证金</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Main/Getapply'>提现申请</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Main/Getapplyrecord'>提现记录</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Main/Rebate'>运营商返利结算</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Main/Weixinrecord'>微信/支付宝记录</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Main/Tablerecord'>平台操作记录</router-link></div>
+
 						<div class="item font-14 subitem"><router-link to='/Main/Fanli' class="pl40">返利记录</router-link></div>
-						<div class="item font-14 subitem"><router-link to='/Main/Rent' class="pl40">租金管理-租金纪录</router-link></div>
+						<!-- <div class="item font-14 subitem"><router-link to='/Main/Rent' class="pl40">租金管理-租金纪录</router-link></div>
 						
 						<div class="item font-14 subitem"><router-link to='/Main/Ensure' class="pl40">保证金</router-link></div>
-						
+						 -->
+
 			</el-collapse-item>
 			
 			<el-collapse-item>

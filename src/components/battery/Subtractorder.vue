@@ -46,8 +46,10 @@
 						</el-table-column>
 						<el-table-column prop="name" label="操作" width="" align="center">
 							<template slot-scope="scope">										
-								<span><el-button type="warning" size="mini" class="btnStyle" @click="Shment(scope.$index, scope.row)" >不予退货</el-button></span>
-								<span><el-button type="warning" size="mini" class="btnStyle" @click="Shments(scope.$index, scope.row)" >退款</el-button></span>
+								<span v-if='!scope.row.orderstate'><el-button type="warning" size="mini" class="btnStyle" @click="Shment(scope.$index, scope.row)">不予退货</el-button></span>
+								<span v-else><el-button type="warning" size="mini" class="btnStyle" @click="Shment(scope.$index, scope.row)" disabled>不予退货</el-button></span>
+								<span v-if='!scope.row.orderstate'><el-button type="warning" size="mini" class="btnStyle" @click="Shments(scope.$index, scope.row)" >退款</el-button></span>
+								<span v-else><el-button type="warning" size="mini" class="btnStyle" @click="Shments(scope.$index, scope.row)" disabled>退款</el-button></span>
 							</template>
 						</el-table-column>
 					</el-table>

@@ -44,9 +44,14 @@
 						<template slot="title">
 							<span class="oneTitle pl20"><i class="header-icon el-icon-info iconWidth"></i>预约</span>
 						</template>
-						<div class="item font-14 subitem"><router-link to='/Main/Meetlist' class="pl40">预约列表</router-link></div>
-						<!--<div class="item font-14 subitem">救援订单</div>-->						
-						<div class="item font-14 subitem"><router-link to='/Main/Batterydamage' class="pl40">电池报损</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Main/Meetlist'>预约列表</router-link></div>
+						<!-- <div class="item font-14 subitem pl40"><router-link to='/Main/SosOrder'>救援订单</router-link></div> -->
+						<div class="item font-14 subitem pl40"><router-link to='/Main/Batterydamage'>电池报损</router-link></div>
+
+						<!-- <div class="item font-14 subitem"><router-link to='/Main/Meetlist' class="pl40">预约列表</router-link></div>
+						<div class="item font-14 subitem">救援订单</div>						
+						<div class="item font-14 subitem"><router-link to='/Main/Batterydamage' class="pl40">电池报损</router-link></div> -->
+
 			</el-collapse-item>
 			
 			<el-collapse-item>
@@ -62,7 +67,18 @@
 						<template slot="title">
 							<span class="oneTitle pl20"><i class="header-icon el-icon-info iconWidth"></i>资金</span>
 						</template>
-						<div class="item font-14 subitem"><router-link to='/Main/Rent' class="pl40">租金-租金纪录</router-link></div>
+
+						<div class="item font-14 subitem pl40"><router-link to='/Main/Deposit'>押金-缴纳记录</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Main/Rent'>租金-租金纪录</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Main/Moneyrecord'>钱包/天牛币记录</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Main/Ensure'>保证金</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Main/Getapply'>提现申请</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Main/Getapplyrecord'>提现记录</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Main/Rebate'>运营商返利结算</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Main/Weixinrecord'>微信/支付宝记录</router-link></div>
+						<div class="item font-14 subitem pl40"><router-link to='/Main/Tablerecord'>平台操作记录</router-link></div>
+
+						<!-- <div class="item font-14 subitem"><router-link to='/Main/Rent' class="pl40">租金-租金纪录</router-link></div>
 						<div class="item font-14 subitem"><router-link to='/Main/Deposit' class="pl40">押金-缴纳记录</router-link></div>
 						<div class="item font-14 subitem"><router-link to='/Main/Moneyrecord' class="pl40">钱包/天牛币纪录-网点钱包</router-link></div>
 						<div class="item font-14 subitem"><router-link to='/Main/Ensure' class="pl40">保证金</router-link></div>
@@ -70,7 +86,8 @@
 						<div class="item font-14 subitem"><router-link to='/Main/Getapplyrecord' class="pl40">提现记录</router-link></div>
 						<div class="item font-14 subitem"><router-link to='/Main/Rebate' class="pl40">运营商返利结算</router-link></div>
 						<div class="item font-14 subitem"><router-link to='/Main/Weixinrecord' class="pl40">微信/支付宝记录</router-link></div>
-						<div class="item font-14 subitem"><router-link to='/Main/Tablerecord' class="pl40">平台操作记录</router-link></div>
+						<div class="item font-14 subitem"><router-link to='/Main/Tablerecord' class="pl40">平台操作记录</router-link></div> -->
+
 			</el-collapse-item>
 			
 			<el-collapse-item>
@@ -135,8 +152,10 @@
 	}
 </script>
 <style scope>
-		.aside {width: 13%;background:#273135;}
-		.aside a{display:inline-block;width:100%;color:#B7C6CC;}
+		/* .aside {width: 13%;background:#273135;} */
+		.aside {width: 230px!important;background:#273135;height: 100%}
+		.aside a{display:inline-block;width:100%;color:#B7C6CC;
+		padding-left:40px  }
 		.box {width: 10%;}		
 		.worktable{background:#273135;color:#B7C6CC;}
 		.iconWidth{width:20px;}
@@ -145,7 +164,7 @@
 		.el-collapse-item__content{color:#B7C6CC;padding-bottom:0;}
 		.el-collapse-item__header{background:#273135;color:#B7C6CC;}
 		.pl20{padding-left:20px;}
-		.pl40{padding-left:40px;}
+		/* .pl40{padding-left:40px;} */
 		.pl20{padding-left:20px;}
 		.pl60{padding-left:60px;}
 		.pl80{padding-left:80px;}

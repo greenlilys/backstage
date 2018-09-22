@@ -48,7 +48,7 @@
 				</template>
 			</div>	
 		</div>
-		<el-dialog title="提现处理" :visible.sync="dialogFormVisible" width="30%">
+		<el-dialog title="提现处理" :visible.sync="dialogFormVisible" width="30%" @close='closeWin'>
 				<el-form :model="form">
 					<el-form-item label="提现账户：" :label-width="formLabelWidth">
 						{{info.username}}
@@ -116,8 +116,19 @@
 	        	},
 			}
 		},
-		methods:{			
-			cellStyle({row, column, rowIndex, columnIndex}){//字体颜色
+		methods:{
+			closeWin(){
+				this.form={
+					handletime:'',
+					result:'',
+					remark:''
+	        	}
+			},
+			handleSizeChange(val) {
+				console.log(`每页 ${val} 条`);
+			},
+			cellStyle({row, column, rowIndex, columnIndex}){
+
 			    if(columnIndex === 5){ //指定坐标
 			        return 'color:#FF6600'
 			    }else if(columnIndex === 7){

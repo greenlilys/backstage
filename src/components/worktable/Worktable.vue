@@ -11,7 +11,7 @@
 				<div class="p-10 boxborder bw mt-10">
 					<div class="tabCard clear">					
 							<div v-for="(item,dataType) in tabItem" @click="changeItem(dataType,timeType)" :class="[currentI == dataType?'actived':'']">{{item}}</div>
-							<ul class="btnStyle mt-10">
+							<ul class="btnStyle" style="margin-top:6px;">
 								<li v-for="(item,timeType) in buttonList" :class="[buttonInx == timeType?'actived':'']" @click="isActive(timeType)">{{item}}</li>
 							</ul>
 					</div>
@@ -29,8 +29,7 @@
 				tabItem:['注册','安装','换电','退租','租车'],
 				currentI:0,
 				buttonList:['本周','本月'],
-				buttonInx:0,
-				
+				buttonInx:0,				
 				registerNum:0,
 				installNum:0,
 				replaceNum:0,
@@ -152,7 +151,7 @@
 <style scoped>
 
 .tabItem{width:100%;margin:0 auto;}
-.tabItem li{;height:120px;background:#fff;margin-right:10px;}
+.tabItem li{height:120px;background:#fff;margin-right:10px;}
 .tabItem li:nth-child(5){margin-right:0;}
 .tabItem li span:nth-child(2){font-size:38px;color:#FF6600;margin-top:20px;}
 .tabItem li span:nth-child(1){	font-size:16px;	font-weight:bold;margin-top:10px;}

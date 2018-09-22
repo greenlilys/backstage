@@ -1,4 +1,5 @@
 <template>
+	
 	<div>
 	<div class="hf flex-wrap flex-vertical">
 		<el-row class="p-10 bw pb-0" type="flex" align="middle">
@@ -32,31 +33,31 @@
 				<el-col >			
 							<template>
 								<el-table :data="tableData" style="width: 100%;">
-									<el-table-column prop="no" label="店铺编号" width="" align="center">
+									<el-table-column prop="no" label="店铺编号" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="name" label="店铺名称" width="130" align="center">
+									<el-table-column prop="name" label="店铺名称" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="username" label="店铺账号" width="160" align="center">
+									<el-table-column prop="username" label="店铺账号" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="statuss" label="账号状态" width="" align="center">
+									<el-table-column prop="statuss" label="账号状态" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="addresss" label="店铺地址" width="300" align="center">
+									<el-table-column prop="addresss" label="店铺地址" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="contactnameiphone" label="联系人"  width="170" align="center">
+									<el-table-column prop="contactnameiphone" label="联系人"  width="" align="left">
 									</el-table-column>
-									<el-table-column prop="operatorNo" label="所属运营商" width="" align="center">
+									<el-table-column prop="operatorNo" label="所属运营商" width="" align="left">
 									</el-table-column>
 
-									<el-table-column label="库存/配货" width="120" align="center">
+									<el-table-column label="库存/配货" width="" align="left">
 										<template slot-scope="scope">						
 											<div v-for="item in scope.row.batterysd">{{item}}</div>
 										</template>
 									</el-table-column>
-									<el-table-column prop="platbond" label="保证金" width="" align="center">
+									<el-table-column prop="platbond" label="保证金" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="isonlines" label="上线状态" width="" align="center">
+									<el-table-column prop="isonlines" label="上线状态" width="" align="left">
 									</el-table-column>
-									<el-table-column prop="action" label="操作" width="250" align="center">
+									<el-table-column prop="action" label="操作" width="220" align="left">
 										<template slot-scope="scope">
 													<router-link :to="{path:'/Main/Shopdetail',query:{ id:scope.row.id}}">
 														<el-button type="warning" size="mini" class="btnStyle">详情</el-button>
@@ -84,6 +85,7 @@
 				<Dialogue :textContent="textContent" :dialogVisible="dialogVisibles" v-on:confirm="confirmIsonline" v-on:cancel="canceluse"></Dialogue>		
 	</div>	
 	</div>
+	
 </template>
 <script>
 	
@@ -218,8 +220,15 @@ export default {
 			this.getShopList();
 			this.$sendTitle(this.navtitle);
 		},
+		activated(){
+			this.getShopList();
+		},
 		components: {
 			Dialogue
+		},
+		beforeRouteLeave(to,from,next){
+			from.meta.keepAlive = false;
+			next();
 		}
 }
 </script>

@@ -5,6 +5,13 @@
 				<h1 class="font-18 tc p-10">保证金总计：<span class="font-20 fontYellow">￥{{platBond}}</span></h1>				
 			</div>
 			<div class="paddinglist pr boxborder mt-10 bw flex-con ">
+				<el-row  class="p-10 boxborder bw" type="flex" align="middle" justify='end'>
+					<el-col :span="6">
+						<el-input placeholder="请输入支付宝订单号" v-model="find" class="input-with-select" clearable @keyup.enter.native='search'>
+							<el-button slot="append" icon="el-icon-search" @click="search">筛选</el-button>
+						</el-input>
+					</el-col>				
+				</el-row>
 				<template>
 					<el-table :data="platBonds" style="width: 100%;" :cell-style="cellStyle">
 						<el-table-column prop="no" label="网点编号" width="" align="center">
@@ -57,12 +64,15 @@
 				total: 0,
 				platBond: '',
 				dialogVisible: false, //解约提示框
-				textContent: '' //提示框文本
+				textContent: '', //提示框文本
+				find:'',
 
 			}
 		},
 		methods: {
-
+			search(){
+				this.platBondList(1,this.find);
+			},
 			cellStyle({
 				row,
 				column,
@@ -81,11 +91,12 @@
 			handle(index, row) { //解约启用按钮	      	
 				this.currentId = row.id;
 				this.dialogVisible = true;
-				this.textContent = "确认要解约该网点吗？"
+				this.textContent = "请在与加盟网点解约，并退还保证金后，进行本次操作。确定后，该加盟网点保证金将从总额中扣除。"
 			},
-			platBondList(pageNo) {
+			platBondList(pageNo,find) {
 				this.$get('capital/platBondList', {
-					pageNo: pageNo
+					pageNo: pageNo,
+					no:find
 				}).then(data => {
 					var arr = data.datas;
 					for(var i = 0, len = arr.length; i < len; i++) {
@@ -117,7 +128,7 @@
 					this.dialogVisible = false;
 					this.$ye();
 					this.platBondStatistics();
-					this.platBondList(this.currentPage);
+					this.platBondList(this.currentPage,this.find);
 				})
 			},
 			canceluse() { //取消或者关闭

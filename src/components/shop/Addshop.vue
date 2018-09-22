@@ -63,10 +63,10 @@
 						<el-input v-model="form.username" clearable></el-input>
 					</el-form-item>
 					<el-form-item label="密码：">
-						<el-input v-model="form.password1" clearable></el-input>
+						<el-input v-model="form.password1" clearable type="password"></el-input>
 					</el-form-item>
 					<el-form-item label="确认密码：">
-						<el-input v-model="form.password2" @change="handleword2" clearable></el-input>
+						<el-input v-model="form.password2" @change="handleword2" clearable type="password"></el-input>
 					</el-form-item>
 					<h5 class="fonttitle flex-wrap flex-horizontal flex-align-center"><div class="pr-10">店铺配货</div><span class="flex-con"></span></h5>
 								
@@ -139,6 +139,7 @@
 					}
 				}
 				let arrs = JSON.stringify(arr);
+				console.log(arrs);
 				console.log(JSON.stringify(arr));
 				console.log(JSON.stringify(this.valueTime));
 				console.log(JSON.stringify(this.form))
@@ -162,7 +163,8 @@
 		  			contactno:this.form.contactno,
 		  			batterylist:arrs
 		  		}).then(data=>{
-		  			this.$ye('保存成功');
+					  this.$ye('保存成功');
+					  this.$router.push('/Main/Shoplist')
 		  		})
 		    },
 		 
@@ -193,8 +195,12 @@
 		      this.$get('battery/selectList',{
 						pageSize:100						
 					}).then(data=>{
+					// this.battery= data.datas;
+					for(var i=0;i<data.datas.length;i++){
+						data.datas[i].num=0;
+					}
 					this.battery= data.datas;
-	    		})
+				});
 		    }
 		  
     	},

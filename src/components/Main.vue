@@ -4,11 +4,15 @@
 		<keep-alive>
 			<Head class="headHeight"></Head>
 		</keep-alive>			
-			<div class="flex-wrap flex-horizontal mainBox flex-con">
+			<!-- <div class="flex-wrap flex-horizontal mainBox flex-con"> -->
+				<div class="flex-wrap flex-horizontal mainBox flex-con">
 				<Aside></Aside>
-				<div class="flex-con flex-wrap flex-vertical">
+				<div class="flex-con flex-wrap flex-vertical aaa">
 					<Navbar></Navbar>
-					<router-view class="mainview bgHui flex-con"></router-view>
+					<keep-alive>					
+						<router-view class="mainview bgHui flex-con" v-if="$route.meta.keepAlive"></router-view>
+					</keep-alive>
+					<router-view class="mainview bgHui flex-con" v-if="!$route.meta.keepAlive"></router-view>
 				</div>				
 			</div>
 		</div>
@@ -45,5 +49,7 @@
 	.headHeight{height:50px}
 	.mainview{
 	width:100%;box-sizing: border-box;padding: 10px 10px 0;}
-
+	.aaa{
+		min-width: 800px;
+	}
 </style>

@@ -58,7 +58,7 @@
 .head li{height:50px;text-align:center;line-height: 50px;color:#fff;}
 .head .tab{	width:5%;cursor:pointer;}
 .tablast{width:10%;}
-.logoBox{	width:13%;height:50px;}
+.logoBox{	width:230px;height:50px;}
 .logo{width:30%;height:auto;}
 .iconbar{font-size:18px;line-height: 47px;padding-left:10px;}
 

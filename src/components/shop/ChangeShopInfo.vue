@@ -191,7 +191,8 @@
 				console.log(form.contactno)
 				this.$post('shop/updateShopDetail',form).then(data=>{
 					this.$ye('保存成功');
-					this.getShopDetail();//重新渲染数据
+					// this.getShopDetail();//重新渲染数据
+					this.$router.push('Shopdetail?id='+this.id);
 				})
 			}
 		},

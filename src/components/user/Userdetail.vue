@@ -54,7 +54,7 @@
 		<el-dialog title="钱包充值" :visible.sync="dialogFormVisible" width="30%">
 			  <el-form :model="form">
 			  	<el-form-item label="密码：" :label-width="formLabelWidth">
-			     	<el-input v-model="password" type="password" placeholder="请输入充值金额" clearable @change="RechargePassword"></el-input>
+			     	<el-input v-model="password" type="password" placeholder="请输入密码" clearable @change="RechargePassword"></el-input>
 			    </el-form-item>
 			    <el-form-item label="充值金额：" :label-width="formLabelWidth">
 			     	<el-input v-model="form.amount" placeholder="请输入充值金额" clearable></el-input>
@@ -72,7 +72,7 @@
 		<el-dialog title="钱包扣款" :visible.sync="dialogFormVisible1" width="30%">
 			  <el-form :model="form1">
 			  	<el-form-item label="密码：" :label-width="formLabelWidth">
-			     	<el-input v-model="password" type="password" placeholder="请输入充值金额" clearable @change="RechargePassword"></el-input>
+			     	<el-input v-model="password" type="password" placeholder="请输入密码" clearable @change="RechargePassword"></el-input>
 			    </el-form-item>
 			    <el-form-item label="扣款金额：" :label-width="formLabelWidth">
 			     	<el-input v-model="form1.amount" placeholder="请输入扣款金额" clearable></el-input>
@@ -90,7 +90,7 @@
 		<el-dialog title="天牛币充值" :visible.sync="dialogFormVisible2" width="30%">
 			  <el-form :model="form2">
 			  	<el-form-item label="密码：" :label-width="formLabelWidth">
-			     	<el-input v-model="password" type="password" placeholder="请输入充值金额" clearable @change="RechargePassword"></el-input>
+			     	<el-input v-model="password" type="password" placeholder="请输入密码" clearable @change="RechargePassword"></el-input>
 			    </el-form-item>
 			    <el-form-item label="充值数量：" :label-width="formLabelWidth">
 			     	<el-input v-model="form2.amount" placeholder="请输入扣款金额" clearable></el-input>
@@ -108,7 +108,7 @@
 		<el-dialog title="天牛币扣减" :visible.sync="dialogFormVisible3" width="30%">
 			  <el-form :model="form3">
 			  	<el-form-item label="密码：" :label-width="formLabelWidth">
-			     	<el-input v-model="password" type="password" placeholder="请输入充值金额" clearable @change="RechargePassword"></el-input>
+			     	<el-input v-model="password" type="password" placeholder="请输入密码" clearable @change="RechargePassword"></el-input>
 			    </el-form-item>
 			    <el-form-item label="扣减数量：" :label-width="formLabelWidth">
 			     	<el-input v-model="form3.amount" placeholder="请输入扣款金额" clearable></el-input>
@@ -143,7 +143,7 @@
 				tabItem:['预约记录','租期记录','押金记录','钱包记录','天牛币记录','会员'],
 	        	tabComponents:['Orders','Rent','Deposit','Purse','Coin','Members'],
 	        	current:'Orders',
-	        	currentI:'0',
+	        	currentI:'',
 	        	userInfo:{},
 	        	id:'',//用户id
 	        	isdeposit:'',//押金状态 1 缴纳 0 未缴纳
@@ -310,6 +310,9 @@
 			this.isdeposit = this.$route.query.isdeposit;
 			this.id = this.$route.query.id;	
 			this.currentI = this.$route.query.currentI || 0;
+			if(this.$route.query.currentI==3){
+				this.current=Purse;
+			}
 		},
 		mounted(){						
 			this.getUserInfo();
