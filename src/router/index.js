@@ -40,7 +40,7 @@ import Batterydamage from '@/components/meet/Batterydamage'
 import Pikingrecord from '@/components/battery/Pikingrecord'
 import Addorder from '@/components/battery/Addorder'
 import Subtractorder from '@/components/battery/Subtractorder'
-import SosOrder from '@/components/meet/SosOrder'
+
 
 //资金
 import Deposit from '@/components/money/Deposit'
@@ -204,10 +204,7 @@ export default new Router({
 					path: 'Meetdetail',
 					component: Meetdetail
 				},
-				{
-					path:'SosOrder',
-					component:SosOrder
-				},
+				
 				{
 					path: 'Batterydamage',
 					component: Batterydamage
